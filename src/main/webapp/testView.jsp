@@ -1,6 +1,6 @@
-<%@page import="moran_data.ProductImgVO"%>
-<%@page import="moran_data.ProductDAO"%>
-<%@page import="moran_data.ProductVO"%>
+<%@page import="kr.co.moran.product.vo.ProductImgVO"%>
+<%@page import="kr.co.moran.product.vo.ProductVO"%>
+<%@page import="kr.co.moran.product.dao.ProductDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -29,7 +29,6 @@
         $(n).html(content);
 	}	
 </script>
-
 <style>
 	.contents {
 		width: 1000px;

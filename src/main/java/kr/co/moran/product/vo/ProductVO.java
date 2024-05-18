@@ -1,4 +1,4 @@
-package moran_data;
+package kr.co.moran.product.vo;
 
 import java.sql.Date;
 

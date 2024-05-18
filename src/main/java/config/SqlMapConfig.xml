@@ -2,6 +2,7 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
   
   <configuration>
   	<properties resource="config/db.properties"/>
@@ -20,5 +21,6 @@
   	
   	<mappers>
   		<mapper resource="mapper/dept.xml"/>
+  		<mapper resource="mapper/product.xml"/>
   	</mappers>
   </configuration>

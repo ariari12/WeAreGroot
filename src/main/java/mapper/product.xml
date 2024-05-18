@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.moran.product">
+	<!-- product -->
+	<select id="selectAll" resultType="kr.co.moran.product.vo.ProductVO">
+		select * from MORANMORAN.PRODUCT
+	</select>
+
+	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.product.vo.ProductVO">
+		select * from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
+	</select>
+
+	<select id="selectById" parameterType="int" resultType="kr.co.moran.product.vo.ProductVO">
+		select * from MORANMORAN.PRODUCT where pd_id = #{id}
+	</select>
+	
+	
+	
+	
+	
+	<!-- product img -->
+	
+	
+</mapper>
