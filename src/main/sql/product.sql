@@ -17,3 +17,5 @@ where pd_id = (select pd_id from MORANMORAN.PRODUCT);
 select * from MORANMORAN.PRODUCT as pd
 	join MORANMORAN.PRODUCT_IMG as pdi
     on pd.pd_id = pdi.pd_id;
+    
+select * from xe.dept;

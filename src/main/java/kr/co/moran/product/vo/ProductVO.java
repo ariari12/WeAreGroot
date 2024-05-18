@@ -13,14 +13,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data @Getter @Setter @ToString
 public class ProductVO {
-	private int id;
+	private int pd_id;
 	private int c_id;
-	private String name;
-	private int price;
-	private String desc;
-	private int quantity;
-	private int wholesals;
-	private int dcRate;
-	private int isMaintain;
-	private Date retetionDate;
+	private String pd_name;
+	private int pd_price;
+	private String pd_desc;
+	private int pd_quantity;
+	private int pd_wholesals;
+	private int pd_dcRate;
+	private int pd_isMaintain;
+	private Date pd_retetionDate;
 }

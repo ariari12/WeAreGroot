@@ -13,22 +13,15 @@ public class testMain {
 	public static void main(String[] args) {
 		try {
 			Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
-
 			SqlSessionFactoryBuilder b = new SqlSessionFactoryBuilder();
-
 			SqlSessionFactory f = b.build(r);
-
 			r.close();
 
 			SqlSession ss = f.openSession(true);
 			System.out.println("ss : " + ss);
-
-			DeptVO vo = ss.selectOne("getDept");
-
+			DeptVO vo = ss.selectOne("kr.co.moran.web.vo.getDept");
 			System.out.println(vo.getDname());
-
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
