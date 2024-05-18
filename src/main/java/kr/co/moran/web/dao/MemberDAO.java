@@ -6,6 +6,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.moran.web.vo.member.MemberVO;
+
 
 
 public class MemberDAO {
@@ -15,10 +17,14 @@ public class MemberDAO {
 			Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
 			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
 			factory = builder.build(r);
+			r.close(); //다른 브랜치도 추가
 		} catch (IOException e) {
 			System.out.println("config.xml 파일을 찾을 수 없습니다.");
 			e.printStackTrace();
 		}
+	}
+	public void insert(MemberVO vo) {
+		
 	}
 	
 }
