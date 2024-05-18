@@ -18,8 +18,8 @@ public class MemberVO {
 	private String mRegdate; // 회원 가입일
 	private String loginType; // 로그인 타입
 	private String mRole; // 관리자 유무
-	private int delStatus;// 정보 상태
-	private String delDate; // 삭제한 날짜
+	private int mDelStatus;// 정보 상태
+	private String mKeepPeriod; // 삭제한 회원 정보 보관 기간
 	
 	//변수명 정보상태, 삭제한 날짜, 관리자 유무 db 칼럼 이름 변경, Date 타입 정하기
 }
