@@ -44,4 +44,23 @@
   			#{aAddr2}
   		)
   	</insert>
+  	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.MemberVO">
+  		SELECT 
+		    m_id AS mId,
+		    m_email AS mEmail,
+		    m_pw AS mPw,
+		    m_name AS mName,
+		    m_img AS mImg,
+		    m_nick AS mNick,
+		    m_phone AS mPhone,
+		    m_regdate AS mRegdate,
+		    m_loginType AS loginType,
+		    m_role AS mRole,
+		    m_delStatus AS mDelStatus,
+		    m_keepPeriod AS mKeepPeriod
+		FROM
+			member
+		WHERE
+			m_email = #{mEmail} AND m_pw = #{mPw}
+  	</select>
   </mapper>
