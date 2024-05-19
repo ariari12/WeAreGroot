@@ -29,11 +29,11 @@
 	 			</tr>
 	 			<tr>
 	 				<th>비밀번호</th>
-	 				<td><input type="password" name="userpw" /></td>
+	 				<td><input type="password" name="pw" /></td>
 	 			</tr>
 				 <tr>
 					<th>비밀번호 입력 확인</th>
-					<td><input type="password" name="userrepw" /></td>
+					<td><input type="password" name="repw" /></td>
 				</tr>
 	 			<tr>
 	 				<th>닉네임</th>

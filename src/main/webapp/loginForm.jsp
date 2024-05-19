@@ -24,7 +24,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">비밀번호</label>
-                                <input type="password" class="form-control" name="userpw" id="password" placeholder="비밀번호를 입력하세요">
+                                <input type="password" class="form-control" name="pw" id="password" placeholder="비밀번호를 입력하세요">
                             </div>
                             <input type="hidden" name="cmd" value="loginOk" />
                             <button type="submit" class="btn btn-primary btn-block">로그인</button>

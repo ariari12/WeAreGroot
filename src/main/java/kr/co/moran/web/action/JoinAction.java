@@ -16,12 +16,12 @@ public class JoinAction implements Action {
 			resp.setContentType("text/html;charset=UTF-8");
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
-			String userPw = req.getParameter("userpw");
-			String userRepw = req.getParameter("userrepw");
+			String pw = req.getParameter("pw");
+			String rePw = req.getParameter("repw");
 			String nickName = req.getParameter("nickname");
 			String phone = req.getParameter("phone");
 			
-			if(!userPw.equals(userRepw) ) {
+			if(!pw.equals(rePw) ) {
 				// 질문 req를 초기화 해주어야 하는가?
 				return "joinForm.jsp";
 			}
@@ -29,7 +29,7 @@ public class JoinAction implements Action {
 			MemberDAO dao = new MemberDAO();
 			vo.setMName(name);
 			vo.setMEmail(email);
-			vo.setMPw(userPw);
+			vo.setMPw(pw);
 			vo.setMNick(nickName);
 			vo.setMPhone(phone);
 			dao.insertMember(vo);
