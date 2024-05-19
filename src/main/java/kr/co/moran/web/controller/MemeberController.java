@@ -12,7 +12,7 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.JoinAction;
 import kr.co.moran.web.action.JoinFormAction;
 
-@WebServlet("/web")
+@WebServlet("/member")
 public class MemeberController extends HttpServlet{
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -31,6 +31,7 @@ public class MemeberController extends HttpServlet{
 		}
 		
 		url = action.execute(req, resp);
+		System.out.println("url = "+url);
 		RequestDispatcher rd = req.getRequestDispatcher(url);
 		rd.forward(req, resp);
 
