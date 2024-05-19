@@ -24,10 +24,14 @@ public class MemeberController extends HttpServlet{
 		Action action = null;
 		if(cmd == null) {			
 			System.out.println("cmd 값 : "+cmd);
-		}else if(cmd.equals("join")) {
+		}else if(cmd.equals("joinForm")) {
 			action = new JoinFormAction();
 		}else if(cmd.equals("joinOk")) {			
 			action = new JoinAction();
+		}else if(cmd.equals("loginForm")) {
+			
+		}else if(cmd.equals("loginOk")) {
+			
 		}
 		
 		url = action.execute(req, resp);
