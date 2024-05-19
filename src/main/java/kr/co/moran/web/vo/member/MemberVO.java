@@ -16,7 +16,7 @@ public class MemberVO {
 	private String mNick; // 회원 닉네임
 	private String mPhone; // 회원 전화번호
 	private String mRegdate; // 회원 가입일
-	private String loginType; // 로그인 타입
+	private String mLoginType; // 로그인 타입
 	private String mRole; // 관리자 유무
 	private int mDelStatus;// 정보 상태
 	private String mKeepPeriod; // 삭제한 회원 정보 보관 기간

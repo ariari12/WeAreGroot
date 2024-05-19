@@ -23,7 +23,7 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
-	public void insert(MemberVO vo) {
+	public void insertMember(MemberVO vo) {
 		
 	}
 	

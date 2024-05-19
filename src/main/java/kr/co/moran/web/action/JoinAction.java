@@ -32,7 +32,7 @@ public class JoinAction implements Action {
 			vo.setMPw(userPw);
 			vo.setMNick(nickName);
 			vo.setMPhone(phone);
-			dao.insert(vo);
+			dao.insertMember(vo);
 			
 			
 		} catch (UnsupportedEncodingException e) {			
