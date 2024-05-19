@@ -11,6 +11,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.JoinAction;
 import kr.co.moran.web.action.JoinFormAction;
+import kr.co.moran.web.action.LoginAction;
+import kr.co.moran.web.action.LoginFormAction;
 
 @WebServlet("/member")
 public class MemeberController extends HttpServlet{
@@ -29,9 +31,9 @@ public class MemeberController extends HttpServlet{
 		}else if(cmd.equals("joinOk")) {			
 			action = new JoinAction();
 		}else if(cmd.equals("loginForm")) {
-			
+			action = new LoginFormAction();
 		}else if(cmd.equals("loginOk")) {
-			
+			action = new LoginAction();
 		}
 		
 		url = action.execute(req, resp);

@@ -19,14 +19,14 @@
                     <div class="card-body">
                         <form action="member" method="post">
                             <div class="mb-3">
-                                <label for="username" class="form-label">아이디</label>
-                                <input type="text" class="form-control" id="username" placeholder="아이디를 입력하세요">
+                                <label for="email" class="form-label">이메일</label>
+                                <input type="text" class="form-control" name="email" id="email" placeholder="이메일을 입력하세요">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">비밀번호</label>
-                                <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
+                                <input type="password" class="form-control" name="userpw" id="password" placeholder="비밀번호를 입력하세요">
                             </div>
-                            <input type="text" name="cmd" value="loginOk" />
+                            <input type="hidden" name="cmd" value="loginOk" />
                             <button type="submit" class="btn btn-primary btn-block">로그인</button>
                         </form>
                     </div>
