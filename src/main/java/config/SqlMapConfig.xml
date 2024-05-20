@@ -20,5 +20,6 @@
   	
   	<mappers>
   		<mapper resource="mapper/dept.xml"/>
+  		<mapper resource="mapper/board.xml"/>
   	</mappers>
   </configuration>
