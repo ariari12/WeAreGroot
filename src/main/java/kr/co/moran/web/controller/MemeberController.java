@@ -51,29 +51,3 @@ public class MemeberController extends HttpServlet{
 		doProcess(req,resp);
 	}
 }
-
-
-// cmd 파라미터 값 가져오기
-//String cmd =req.getParameter("cmd");
-//String url="";
-//Action action = null;
-//if(cmd == null || cmd.equals("list")) {
-//	action = new ListAction();			
-//}else if(cmd.equals("write")) {
-//	action = new WriteFormAction();
-//}else if(cmd.equals("writeOk")) {
-//	action = new WriteAction();
-//}else if(cmd.equals("detail")) {
-//	action = new DetailAction();
-//}else if(cmd.equals("modify")) {
-//	action = new ModifyFormAction();
-//}else if(cmd.equals("modifyOk")) {
-//	action = new ModifyAction();
-//}else if(cmd.equals("delete")) {
-//	action = new DeleteAction();
-//}
-//
-//
-//url = action.execute(req, resp);
-//RequestDispatcher rd = req.getRequestDispatcher(url);
-//rd.forward(req, resp);
