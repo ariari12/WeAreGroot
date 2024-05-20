@@ -56,15 +56,15 @@
 		// System.out.println(v.getDesc());
 	%>
 	<tr>
-		<td><%=v.getPd_id() %></td>
-		<td><%=v.getPd_name() %></td>
-		<td id="<%="product" + v.getPd_id() %>">
+		<td><%=v.getId() %></td>
+		<td><%=v.getName() %></td>
+		<td id="<%="product" + v.getId() %>">
 			<script>
-				convert(<%= v.getPd_description().replace("\n", "").replace("None", "") %>, '<%= "#product" + v.getPd_id() %>');
+			convert(<%= v.getDesc().replace("\n", "").replace("None", "") %>, '<%= "#product" + v.getId() %>');
 			</script>
 		</td>
-		<% 	for(ProductImgVO img : new ProductDAO().piSelsctByPdid(v.getPd_id()) ) { %>
-		<td><img src="<%=img.getPi_img() %>"></td>
+		<% 	for(ProductImgVO img : new ProductDAO().piSelsctByPdid(v.getId()) ) { %>
+		<td><img src="<%=img.getImg() %>"></td>
 		<% } %>
 	</tr>
 		<%

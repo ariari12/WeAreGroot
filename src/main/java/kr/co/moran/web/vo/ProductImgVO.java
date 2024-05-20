@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data @ToString @Getter @Setter
 public class ProductImgVO {
-	private int pd_id;
-	private int pi_no;
-	private String pi_img;
+	private int id;
+	private int no;
+	private String img;
 }

@@ -6,24 +6,65 @@
 <mapper namespace="kr.co.moran.product">
 	<!-- product -->
 	<select id="selectAll" resultType="kr.co.moran.web.vo.ProductVO">
-		select * from MORANMORAN.PRODUCT
+		select 	pd_id as id,
+				c_id as cId,
+				pd_name as name,
+				pd_price as price,
+				pd_description as desc,
+				pd_quantity as quantity,
+				pd_wholesals as wholesals,
+				pd_dcRate as dcRate,
+				pd_isMaintain as isMaintain,
+				pd_retetionDate as retetionDate
+		from MORANMORAN.PRODUCT
 	</select>
 
 	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.web.vo.ProductVO">
-		select * from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
+		select 	pd_id as id,
+				c_id as cId,
+				pd_name as name,
+				pd_price as price,
+				pd_description as desc,
+				pd_quantity as quantity,
+				pd_wholesals as wholesals,
+				pd_dcRate as dcRate,
+				pd_isMaintain as isMaintain,
+				pd_retetionDate as retetionDate 
+		from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
 	</select>
 
 	<select id="selectById" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
-		select * from MORANMORAN.PRODUCT where pd_id = #{id}
+		select 	pd_id as id,
+				c_id as cId,
+				pd_name as name,
+				pd_price as price,
+				pd_description as desc,
+				pd_quantity as quantity,
+				pd_wholesals as wholesals,
+				pd_dcRate as dcRate,
+				pd_isMaintain as isMaintain,
+				pd_retetionDate as retetionDate
+		from MORANMORAN.PRODUCT where pd_id = #{id}
 	</select>
 	
 	<!-- product img -->
 	<select id="selectAllImgById" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
-		select * from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id}
+		select 	pd_id as id,
+				c_id as cId,
+				pd_name as name,
+				pd_price as price,
+				pd_description as desc,
+				pd_quantity as quantity,
+				pd_wholesals as wholesals,
+				pd_dcRate as dcRate,
+				pd_isMaintain as isMaintain,
+				pd_retetionDate as retetionDate
+		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id}
 	</select>
 	
 	<select id="piSelsctBigimgByPdid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
-		select * from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id} and pi_no = 0
+		select pd_id as id, pi_no as no, pi_img as img
+		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id} and pi_no = 0
 	</select>
 	
 	
