@@ -1,12 +1,6 @@
 package kr.co.moran.web.dao;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,11 +8,11 @@ import java.util.Map;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
+import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
-import lombok.Locked.Read;
+import lombok.val;
 
 public class ProductDAO {
 	private SqlSession session;
@@ -39,11 +33,10 @@ public class ProductDAO {
 		}
 	}
 	
-	public List<ProductVO> pdSelectAll() {
+	public int pdTotal() {
 		openSession();
-		List<ProductVO> vos = session.selectList("kr.co.moran.product.selectAll");
-		closeSession();
-		return vos;
+		int cnt = session.selectOne("kr.co.moran.product.selectPdTotal");
+		return cnt;
 	}
 	
 	public List<ProductVO> pdSelectPage(int start, int pageNum) {
@@ -52,32 +45,28 @@ public class ProductDAO {
         map.put("start", start);
         map.put("pageNum", pageNum);
 		List<ProductVO> vos = session.selectList("kr.co.moran.product.selectPage", map);
-		closeSession();
 		return vos;
 	}
 	
 	public ProductVO pdSelsctOne(int no) {
 		openSession();
 		ProductVO v = session.selectOne("kr.co.moran.product.selectById", no);
-		closeSession();
 		return v;
 	}
 	
 	public List<ProductImgVO> piSelsctByPdid(int no) {
 		openSession();
 		List<ProductImgVO> vos = session.selectList("kr.co.moran.product.selectAllImgById", no);
-		closeSession();
 		return vos;
 	}
 	
 	public ProductImgVO piSelsctBigimgByPdid(int pd_id) {
 		openSession();
 		ProductImgVO v = session.selectOne("kr.co.moran.product.piSelsctBigimgByPdid", pd_id);
-		closeSession();
 		return v;
 	}
 	
-	private void closeSession() {
+	public void closeSession() {
 		if(session != null ) {
 			session.close();
 			session = null;
@@ -85,11 +74,17 @@ public class ProductDAO {
 	}
 	
 	public static void main(String[] args) {
-//		new ProductDAO().pdSelectAll().forEach(System.out::println);
-//		new ProductDAO().pdSelectPage(10, 5).forEach(System.out::println);
-//		System.out.println(new ProductDAO().pdSelsctOne(12938));
+		ProductDAO dao = new ProductDAO();
 		
-//		new ProductDAO().piSelsctByPdid(12938).forEach(System.out::println);
-		System.out.println(new ProductDAO().piSelsctBigimgByPdid(12938));
+		dao.pdSelectPage(0, 12).forEach(v -> {
+			System.out.println(v.getId());
+			System.out.println(dao.piSelsctBigimgByPdid(v.getId()).getImg());
+		});
+//		System.out.println(dao.pdSelsctOne(12938));
+		
+//		dao.piSelsctByPdid(12938).forEach(System.out::println);
+//		System.out.println(dao.piSelsctBigimgByPdid(12938));
+		
+		dao.closeSession();
 	}
 }

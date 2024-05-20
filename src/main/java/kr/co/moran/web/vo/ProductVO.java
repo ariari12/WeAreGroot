@@ -17,9 +17,9 @@ public class ProductVO {
 	private int cId;
 	private String name;
 	private int price;
-	private String desc;
+	private String description;
 	private int quantity;
-	private int wholesals;
+	private int wholesale;
 	private int dcRate;
 	private int isMaintain;
 	private Date retetionDate;
