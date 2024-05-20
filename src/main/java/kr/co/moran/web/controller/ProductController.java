@@ -1,4 +1,4 @@
-package kr.co.moran.web.control;
+package kr.co.moran.web.controller;
 
 import java.io.IOException;
 
