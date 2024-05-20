@@ -59,7 +59,8 @@
 		    m_logtype AS mLogtype,
 		    m_admintype AS mAdmintype,
 		    m_is_maintain AS mIsMaintain,
-		    m_retention_period AS mRetentionPeriod
+		    m_retention_period AS mRetentionPeriod,
+		    m_birth as mBirth
 		FROM
 			MEMBER
 		WHERE
