@@ -1,4 +1,4 @@
-package kr.co.moran.product.dao;
+package kr.co.moran.web.dao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,8 +16,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.eclipse.tags.shaded.org.apache.bcel.generic.NEW;
 
-import kr.co.moran.product.vo.ProductImgVO;
-import kr.co.moran.product.vo.ProductVO;
+import kr.co.moran.web.vo.ProductImgVO;
+import kr.co.moran.web.vo.ProductVO;
 import lombok.Locked.Read;
 
 public class ProductDAO {
@@ -63,62 +63,19 @@ public class ProductDAO {
 		return v;
 	}
 	
-//	public List<ProductImgVO> piSelsctByPdid(int no) {
-//		List<ProductImgVO> vos = new ArrayList<ProductImgVO>();
-//		try {
-//			ps = con.prepareStatement(" select * from MORANMORAN.PRODUCT_IMG where pd_id = ? ");
-//			ps.setInt(1, no);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				vos.add(new ProductImgVO(
-//					rs.getInt(1),
-//					rs.getInt(2),
-//					rs.getString(3)
-//				));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return vos;
-//	}
-//	
-//	public List<ProductImgVO> piSelsctByPdid(int pd_id, int pi_id) {
-//		List<ProductImgVO> vos = new ArrayList<ProductImgVO>();
-//		try {
-//			ps = con.prepareStatement(" select * from MORANMORAN.PRODUCT_IMG where pd_id = ? ");
-//			ps.setInt(1, pd_id);
-//			ps.setInt(2, pi_id);
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				vos.add(new ProductImgVO(
-//					rs.getInt(1),
-//					rs.getInt(2),
-//					rs.getString(3)
-//				));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return vos;
-//	}
-//
-//	public List<Object[]> testSelect() {
-//		List<Object[]> vos = new ArrayList<Object[]>();
-//		try {
-//			ps = con.prepareStatement(" select * from MORANMORAN.dept ");
-//			rs = ps.executeQuery();
-//			while (rs.next()) {
-//				vos.add(new Object[] {
-//					rs.getObject(1),
-//					rs.getObject(2),
-//					rs.getObject(3)
-//				});
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		return vos;
-//	}
+	public List<ProductImgVO> piSelsctByPdid(int no) {
+		openSession();
+		List<ProductImgVO> vos = session.selectList("kr.co.moran.product.selectAllImgById", no);
+		closeSession();
+		return vos;
+	}
+	
+	public ProductImgVO piSelsctBigimgByPdid(int pd_id) {
+		openSession();
+		ProductImgVO v = session.selectOne("kr.co.moran.product.piSelsctBigimgByPdid", pd_id);
+		closeSession();
+		return v;
+	}
 	
 	private void closeSession() {
 		if(session != null ) {
@@ -128,8 +85,11 @@ public class ProductDAO {
 	}
 	
 	public static void main(String[] args) {
-		new ProductDAO().pdSelectAll().forEach(System.out::println);
+//		new ProductDAO().pdSelectAll().forEach(System.out::println);
 //		new ProductDAO().pdSelectPage(10, 5).forEach(System.out::println);
 //		System.out.println(new ProductDAO().pdSelsctOne(12938));
+		
+//		new ProductDAO().piSelsctByPdid(12938).forEach(System.out::println);
+		System.out.println(new ProductDAO().piSelsctBigimgByPdid(12938));
 	}
 }

@@ -63,17 +63,23 @@ try:
         xml = xmltodict.parse(r.text) ["response"] ["body"] ["item"]
         
         info = {}
-        info["clCodeNm"] = str(xml["grwhstleCodeNm"]).replace("\"", "''") # 생육형태
-        info["fncltyInfo"] = str(xml["fncltyInfo"]).replace("\"", "''") # 기능성 정보
-        info["speclmanageInfo"] = str(xml["speclmanageInfo"]).replace("\"", "''") # 특별관리 정보
-        info["adviseInfo"] = str(xml["adviseInfo"]).replace("\"", "''") # 조언정보
-        info["watercycleAutumnCodeNm"] = str(xml["watercycleAutumnCodeNm"]).replace("\"", "''") # 물주기 봄
-        info["watercycleSprngCodeNm"] = str(xml["watercycleSprngCodeNm"]).replace("\"", "''") # 물주기 여름
-        info["watercycleSummerCodeNm"] = str(xml["watercycleSummerCodeNm"]).replace("\"", "''") # 물주기 가을
-        info["watercycleWinterCodeNm"] = str(xml["watercycleWinterCodeNm"]).replace("\"", "''") # 물주기 겨울
-        info["managedemanddoCodeNm"] = str(xml["managedemanddoCodeNm"]).replace("\"", "''") # 관리요구도 
-        info["managelevelCodeNm"] = str(xml["managelevelCodeNm"]).replace("\"", "''") # 관리수준
-        info["postngplaceCodeNm"] = str(xml["postngplaceCodeNm"]).replace("\"", "''") # 배치장소 
+        info["clCodeNm"] = str(xml["grwhstleCodeNm"]).replace("\"", "''").replace("\n", "") # 생육형태
+        info["fncltyInfo"] = str(xml["fncltyInfo"]).replace("\"", "''").replace("\n", "") # 기능성 정보
+        info["speclmanageInfo"] = str(xml["speclmanageInfo"]).replace("\"", "''").replace("\n", "") # 특별관리 정보
+        info["adviseInfo"] = str(xml["adviseInfo"]).replace("\"", "''").replace("\n", "") # 조언정보
+        
+        # 물주기 봄, 여름, 가을, 겨울
+        info["watercycleCodeNm"] = "봄:" + str(xml["watercycleAutumnCodeNm"]).replace("\"", "''").replace("\n", "") + "<br>" \
+            + "여름:" + str(xml["watercycleSprngCodeNm"]).replace("\"", "''").replace("\n", "") + "<br>" \
+            + "가을:" + str(xml["watercycleSummerCodeNm"]).replace("\"", "''").replace("\n", "") + "<br>" \
+            + "겨울:" + str(xml["watercycleWinterCodeNm"]).replace("\"", "''").replace("\n", "")
+            
+        # 카테고리 : 2, 가격 : 216867, 수량 : 8, dcrate : 38, 도매 : 134458
+        # ('HY000', '[HY000] [MySQL][ODBC 8.4(w) 드라이버][mysqld-8.0.35]하위 행을 추가하거나 업데이트할 수 없습니다. 외래 키 제약 조건이 실패합니다(`MORANMORAN`.`PRODUCT`, CONSTRAINT `PRODUCT_ibfk_1` FOREIGN KEY (`c_id`) 참조 `CATEGORY` (`c_id`) ON DELETE CASCADE) (1452) (SQLExecDirectW)')
+        
+        info["managedemanddoCodeNm"] = str(xml["managedemanddoCodeNm"]).replace("\"", "''").replace("\n", "") # 관리요구도 
+        info["managelevelCodeNm"] = str(xml["managelevelCodeNm"]).replace("\"", "''").replace("\n", "") # 관리수준
+        info["postngplaceCodeNm"] = str(xml["postngplaceCodeNm"]).replace("\"", "''").replace("\n", "") # 배치장소 
         
         # print(info)
         
@@ -111,7 +117,6 @@ try:
             query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, {cnt}, '{url}') "
             cursor.execute(query)
             cursor.execute('commit') # sqldeveloper에 커밋
-            # print(url)
             cnt += 1
             if cnt >= 3: break
         print("이미지 저장완료 \n")

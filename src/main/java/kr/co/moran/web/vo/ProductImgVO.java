@@ -1,4 +1,4 @@
-package kr.co.moran.product.vo;
+package kr.co.moran.web.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +12,6 @@ import lombok.ToString;
 @Data @ToString @Getter @Setter
 public class ProductImgVO {
 	private int pd_id;
-	private int no;
-	private String img;
+	private int pi_no;
+	private String pi_img;
 }

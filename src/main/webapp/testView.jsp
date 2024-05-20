@@ -1,6 +1,6 @@
-<%@page import="kr.co.moran.product.vo.ProductImgVO"%>
-<%@page import="kr.co.moran.product.vo.ProductVO"%>
-<%@page import="kr.co.moran.product.dao.ProductDAO"%>
+<%@page import="kr.co.moran.web.vo.ProductImgVO"%>
+<%@page import="kr.co.moran.web.vo.ProductVO"%>
+<%@page import="kr.co.moran.web.dao.ProductDAO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -56,15 +56,15 @@
 		// System.out.println(v.getDesc());
 	%>
 	<tr>
-		<td><%=v.getId() %></td>
-		<td><%=v.getName() %></td>
-		<td id="<%="product" + v.getId() %>">
+		<td><%=v.getPd_id() %></td>
+		<td><%=v.getPd_name() %></td>
+		<td id="<%="product" + v.getPd_id() %>">
 			<script>
-				convert(<%= v.getDesc().replace("\n", "").replace("None", "") %>, '<%= "#product" + v.getId() %>');
+				convert(<%= v.getPd_description().replace("\n", "").replace("None", "") %>, '<%= "#product" + v.getPd_id() %>');
 			</script>
 		</td>
-		<% 	for(ProductImgVO img : new ProductDAO().piSelsctByPdid(v.getId()) ) { %>
-		<td><img src="<%=img.getImg() %>"></td>
+		<% 	for(ProductImgVO img : new ProductDAO().piSelsctByPdid(v.getPd_id()) ) { %>
+		<td><img src="<%=img.getPi_img() %>"></td>
 		<% } %>
 	</tr>
 		<%

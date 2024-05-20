@@ -5,23 +5,26 @@
   
 <mapper namespace="kr.co.moran.product">
 	<!-- product -->
-	<select id="selectAll" resultType="kr.co.moran.product.vo.ProductVO">
+	<select id="selectAll" resultType="kr.co.moran.web.vo.ProductVO">
 		select * from MORANMORAN.PRODUCT
 	</select>
 
-	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.product.vo.ProductVO">
+	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.web.vo.ProductVO">
 		select * from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
 	</select>
 
-	<select id="selectById" parameterType="int" resultType="kr.co.moran.product.vo.ProductVO">
+	<select id="selectById" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
 		select * from MORANMORAN.PRODUCT where pd_id = #{id}
 	</select>
 	
-	
-	
-	
-	
 	<!-- product img -->
+	<select id="selectAllImgById" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select * from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id}
+	</select>
+	
+	<select id="piSelsctBigimgByPdid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select * from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id} and pi_no = 0
+	</select>
 	
 	
 </mapper>

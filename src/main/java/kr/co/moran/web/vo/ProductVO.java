@@ -1,4 +1,4 @@
-package kr.co.moran.product.vo;
+package kr.co.moran.web.vo;
 
 import java.sql.Date;
 
@@ -17,7 +17,7 @@ public class ProductVO {
 	private int c_id;
 	private String pd_name;
 	private int pd_price;
-	private String pd_desc;
+	private String pd_description;
 	private int pd_quantity;
 	private int pd_wholesals;
 	private int pd_dcRate;

@@ -62,14 +62,14 @@ try:
         # print(xml)
     
         info = {}
-        info["clCodeNm"] = str(xml["stleSeNm"]).replace("\"", "''") # 생육형태
-        info["flwrInfo"] = str(xml["flwrInfo"]).replace("\"", "''") + " " + str(xml["lfclChngeInfo"]).replace("\"", "''") # 꽃 정보 & 여색변화
-        info["speclmanageInfo"] = str(xml["chartrInfo"]).replace("\"", "''") + " " + str(xml["lighttInfo"]).replace("\"", "''") # 특성 & 광
-        info["adviseInfo"] = str(xml["tipInfo"]).replace("\"", "''") # tip
-        info["watercycleAutumnCodeNm"] = str(xml["waterCycleInfo"]).replace("\"", "''") # 물주기
-        info["managedemanddoCodeNm"] = str(xml["manageDemandNm"]).replace("\"", "''") # 관리요구도
-        info["managelevelCodeNm"] = str(xml["manageLevelNm"]).replace("\"", "''") # 관리수준
-        info["postngplaceCodeNm"] = str(xml["batchPlaceInfo"]).replace("\"", "''") # 배치장소 
+        info["clCodeNm"] = str(xml["stleSeNm"]).replace("\"", "''").replace("\n", "") # 생육형태
+        info["flwrInfo"] = str(xml["flwrInfo"]).replace("\"", "''") + " " + str(xml["lfclChngeInfo"]).replace("\"", "''").replace("\n", "") # 꽃 정보 & 여색변화
+        info["speclmanageInfo"] = str(xml["chartrInfo"]).replace("\"", "''").replace("\n", "") + " " + str(xml["lighttInfo"]).replace("\"", "''").replace("\n", "") # 특성 & 광
+        info["adviseInfo"] = str(xml["tipInfo"]).replace("\"", "''").replace("\n", "") # tip
+        info["watercycleCodeNm"] = str(xml["waterCycleInfo"]).replace("\"", "''").replace("\n", "") # 물주기
+        info["managedemanddoCodeNm"] = str(xml["manageDemandNm"]).replace("\"", "''").replace("\n", "") # 관리요구도
+        info["managelevelCodeNm"] = str(xml["manageLevelNm"]).replace("\"", "''").replace("\n", "") # 관리수준
+        info["postngplaceCodeNm"] = str(xml["batchPlaceInfo"]).replace("\"", "''").replace("\n", "") # 배치장소 
         # print(info)
         
         json_pras = json.loads(json.dumps(info, ensure_ascii=False).replace("'", "''").replace("\n", ""))
