@@ -11,10 +11,13 @@
 </head>
 <body>
 <h2>홈화면</h2>
-<c:if test="${not empty sessionScope.memberVO}">
-    <p>회원 이름, ${sessionScope.memberVO.name}!</p>
+<c:if test="${not empty sessionScope.memberVO}">    
     <p>회원 Email: ${sessionScope.memberVO.email}</p>
+    <p>회원 pw: ${sessionScope.memberVO.pw}</p>
     <!-- 기타 회원 정보 출력 -->
 </c:if>
+
+
+
 </body>
 </html>

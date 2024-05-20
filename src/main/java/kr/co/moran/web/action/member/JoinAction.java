@@ -31,12 +31,12 @@ public class JoinAction implements Action {
 			}
 			MemberVO vo = new MemberVO();
 			MemberDAO dao = new MemberDAO();
-			vo.setMName(name);
-			vo.setMEmail(email);
-			vo.setMPw(pw);
-			vo.setMNick(nickName);
-			vo.setMPhone(phone);
-			vo.setMBirth(birth);
+			vo.setName(name);
+			vo.setEmail(email);
+			vo.setPw(pw);
+			vo.setNick(nickName);
+			vo.setPhone(phone);
+			vo.setBirth(birth);
 			dao.insertMember(vo);
 			
 			

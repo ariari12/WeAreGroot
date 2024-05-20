@@ -13,13 +13,16 @@ public class LoginAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		String email = req.getParameter("email");
-		String password = req.getParameter("password");
+		String password = req.getParameter("pw");
 		MemberDAO dao = new MemberDAO();
 		MemberVO vo=dao.selectMemberByEmailAndPassword(email, password);
-		System.out.println(vo);
+		
 		if(vo!=null) {
+			System.out.println("vo 객체 : "+vo);
 			HttpSession session = req.getSession();
 			session.setAttribute("memberVO", vo);
+			System.out.println(session.getAttribute("memberVO"));
+			
 			return "home.jsp";
 		}
 		return "loginForm.jsp"; //회원 로그인 실패
