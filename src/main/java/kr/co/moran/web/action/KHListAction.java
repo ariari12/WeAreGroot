@@ -13,11 +13,17 @@ public class KHListAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = new BoardDAO();
+		String sort = req.getParameter("sort");
+		
+        List<BoardVO> list;
+        if ("viewCntDesc".equals(sort)) {
+            list = dao.SelectAllKHOrderByViewCntDesc();
+        } else {
+            list = dao.SelectAllKH();
+        }
 
-		List<BoardVO> list = dao.findAll();
-		System.out.println(list);
-		req.setAttribute("list", list);
-		return "views/khlist.jsp";
+        req.setAttribute("list", list);
+        return "views/khlist.jsp";
 	}
 
 }

@@ -34,9 +34,33 @@ public class BoardDAO {
 		
 	}
 	
-	public List<BoardVO> findAll(){
+	public List<BoardVO> SelectAllKH(){
 		SqlSession ss = factory.openSession(true);
-		List<BoardVO> list = ss.selectList("kr.co.moran.board.findAll");
+		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKH");
+		
+		ss.close();
+		return list;
+	}
+	
+	public List<BoardVO> SelectAllKHOrderByViewCntDesc(){
+		SqlSession ss = factory.openSession(true);
+		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc");
+		
+		ss.close();
+		return list;
+	}
+	
+	public List<BoardVO> SelectAllQnA(){
+		SqlSession ss = factory.openSession(true);
+		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnA");
+		
+		ss.close();
+		return list;
+	}
+	
+	public List<BoardVO> SelectAllQnAOrderByViewCntDesc(){
+		SqlSession ss = factory.openSession(true);
+		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc");
 		
 		ss.close();
 		return list;

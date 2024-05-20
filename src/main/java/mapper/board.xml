@@ -2,10 +2,29 @@
 	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.moran.board">
-	<select id="findAll" resultType="kr.co.moran.web.vo.BoardVO">
+	<select id="SelectAllKH" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
 		FROM BOARD
-	</select id="findAll">
+		WHERE b_type = 2
+	</select>
+	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		FROM BOARD
+		WHERE b_type = 2
+		ORDER BY b_view_cnt DESC
+	</select>
+	
+	<select id="SelectAllQnA" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		FROM BOARD
+		WHERE b_type = 1
+	</select>
+	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		FROM BOARD
+		WHERE b_type = 1
+		ORDER BY b_view_cnt DESC
+	</select>
 	
 	
 </mapper>
