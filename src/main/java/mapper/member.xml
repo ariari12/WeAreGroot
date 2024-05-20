@@ -4,35 +4,37 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="kr.co.moran.web.member">
-  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.MemberVO">
-  		INSERT INTO member (
+  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.member.MemberVO">
+  		INSERT INTO MEMBER (
 	      m_email,
 	      m_pw,
 	      m_name,
-	      m_img,
+	      m_profile_img,
 	      m_nick,
 	      m_phone,
 	      m_regdate,
-	      m_login_type,
-	      m_role,
-	      m_del_status,
-	      m_keep_period
+	      m_logtype,
+	      m_admintype,
+	      m_is_maintain,
+	      m_retention_period,
+	      m_birth
 	    ) VALUES (
 	      #{mEmail},
 	      #{mPw},
 	      #{mName},
-	      #{mImg},
+	      #{mProfileImg},
 	      #{mNick},
 	      #{mPhone},
 	      NOW(),
-	      #{mLoginType},
-	      #{mRole},
-	      #{mDelStatus},
-	      #{mKeepPeriod}
+	      0,
+	      #{mAdmintype},
+	      #{mIsMaintain},
+	      #{mRetentionPeriod},
+	      DATE_FORMAT(#{mBirth}, '%Y-%m-%d')
 	    )
   	</insert>
-  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.AddressVO">
-  		INSERT INTO address (
+  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.AddressVO">
+  		INSERT INTO ADDRESS (
   			m_id,
   			a_zipcode,
   			a_addr1,
@@ -44,22 +46,22 @@
   			#{aAddr2}
   		)
   	</insert>
-  	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.MemberVO">
+  	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.member.MemberVO">
   		SELECT 
 		    m_id AS mId,
 		    m_email AS mEmail,
 		    m_pw AS mPw,
 		    m_name AS mName,
-		    m_img AS mImg,
+		    m_profile_img AS mProfileImg,
 		    m_nick AS mNick,
 		    m_phone AS mPhone,
 		    m_regdate AS mRegdate,
-		    m_loginType AS loginType,
-		    m_role AS mRole,
-		    m_delStatus AS mDelStatus,
-		    m_keepPeriod AS mKeepPeriod
+		    m_logtype AS mLogtype,
+		    m_admintype AS mAdmintype,
+		    m_is_maintain AS mIsMaintain,
+		    m_retention_period AS mRetentionPeriod
 		FROM
-			member
+			MEMBER
 		WHERE
 			m_email = #{mEmail} AND m_pw = #{mPw}
   	</select>

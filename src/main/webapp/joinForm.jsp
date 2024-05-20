@@ -47,6 +47,12 @@
 	 					<input type="tel" name="phone" id="" />
 	 				</td>
 	 			</tr>
+				<tr>
+	 				<th>생일</th>
+	 				<td>
+	 					<input type="date" name="birth" id="" />
+	 				</td>
+	 			</tr>
 	 			
 	 			<tr>
 	 				<td colspan="2">	 					

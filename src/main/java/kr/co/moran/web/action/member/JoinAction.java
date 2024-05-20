@@ -2,6 +2,8 @@ package kr.co.moran.web.action.member;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
@@ -21,6 +23,7 @@ public class JoinAction implements Action {
 			String rePw = req.getParameter("repw");
 			String nickName = req.getParameter("nickname");
 			String phone = req.getParameter("phone");
+			String birth = req.getParameter("birth"); 
 			
 			if(!pw.equals(rePw) ) {
 				// 질문 req를 초기화 해주어야 하는가?
@@ -33,6 +36,7 @@ public class JoinAction implements Action {
 			vo.setMPw(pw);
 			vo.setMNick(nickName);
 			vo.setMPhone(phone);
+			vo.setMBirth(birth);
 			dao.insertMember(vo);
 			
 			
@@ -43,7 +47,7 @@ public class JoinAction implements Action {
 		}
 		
 		//성공시 (로그인 전) 메인 화면으로
-		return null;
+		return "home.jsp";
 	}
 
 }
