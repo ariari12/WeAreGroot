@@ -1,9 +1,10 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.member;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.MemberDAO;
 import kr.co.moran.web.vo.member.MemberVO;
 

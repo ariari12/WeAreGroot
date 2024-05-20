@@ -9,10 +9,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.JoinAction;
-import kr.co.moran.web.action.JoinFormAction;
-import kr.co.moran.web.action.LoginAction;
-import kr.co.moran.web.action.LoginFormAction;
+import kr.co.moran.web.action.member.JoinAction;
+import kr.co.moran.web.action.member.JoinFormAction;
+import kr.co.moran.web.action.member.LoginAction;
+import kr.co.moran.web.action.member.LoginFormAction;
 
 @WebServlet("/member")
 public class MemeberController extends HttpServlet{
