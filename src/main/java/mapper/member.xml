@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="kr.co.moran.web.member">
+  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.member.MemberVO">
+  		INSERT INTO MEMBER (
+	      m_email,
+	      m_pw,
+	      m_name,
+	      m_profile_img,
+	      m_nick,
+	      m_phone,
+	      m_regdate,
+	      m_logtype,
+	      m_admintype,
+	      m_is_maintain,
+	      m_retention_period,
+	      m_birth
+	    ) VALUES (
+	      #{email},
+	      #{pw},
+	      #{name},
+	      #{profileImg},
+	      #{nick},
+	      #{phone},
+	      NOW(),
+	      0,
+	      #{admintype},
+	      #{isMaintain},
+	      #{retentionPeriod},
+	      DATE_FORMAT(#{birth}, '%Y-%m-%d')
+	    )
+  	</insert>
+  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.AddressVO">
+  		INSERT INTO ADDRESS (
+  			m_id,
+  			a_zipcode,
+  			a_addr1,
+  			a_addr2
+  		) VALUES (
+  			#{mId},
+  			#{zipcode},
+  			#{addr1},
+  			#{addr2}
+  		)
+  	</insert>
+  	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT 
+		    m_id AS mId,
+		    m_email AS email,
+		    m_pw AS pw,
+		    m_name AS name,
+		    m_profile_img AS profileImg,
+		    m_nick AS nick,
+		    m_phone AS phone,
+		    m_regdate AS regdate,
+		    m_logtype AS logtype,
+		    m_admintype AS admintype,
+		    m_is_maintain AS isMaintain,
+		    m_retention_period AS retentionPeriod,
+		    m_birth as mBirth
+		FROM
+			MEMBER
+		WHERE
+			m_email = #{email} AND m_pw = #{pw}
+  	</select>
+  </mapper>
