@@ -125,14 +125,53 @@
     white-space: nowrap;
 }
 
+/* product categroy */
+div.category {
+  width: 1920px;
+  height: 1026px;
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #e4e4e4;
+}
+
+div.category .overlap-group {
+	margin-bottom: 20px;
+    border-top: 5px solid #6d6d6d;
+}
+
+
+div.category .category-group {
+	display: inline-block;
+	margin-left: 50px;
+	width: 186px;
+}
+
+
+div.category .cateagory-title {
+	text-align: center;
+	font-size: 20px;
+	font-family: "Pretendard Variable-Medium", Helvetica;
+	font-weight: 600;
+	color: #202020;
+	font-size: 18px;
+	letter-spacing: 0;
+	line-height: normal;
+	white-space: nowrap;
+	margin-left: 50px;
+    border-bottom: 2px solid;
+    margin-bottom: 7px;
+}
+
+
+div.category .subcategories {
+	display: inline-block;
+	margin-left: 50px;
+}
+
+
 /* product_list */
 .products {
 	margin-top: 20px;
-}
-
-.products .prd-img {
-	width: 250px;
-	height: 250px;
 }
 
 .products .frame-prd {
@@ -140,6 +179,60 @@
     width: 315px;
 }
 
+.products .prd-img {
+	width: 270px;
+	height: 250px;
+}
+
+.products .prd-desc {
+    width: 270px;
+	padding-top: 10px;
+	padding-left: 15px;
+}
+
+.products .prd-desc .prd-name {
+	margin-left: -10px;
+	width: 270px;
+	font-family: "Pretendard Variable-Medium", Helvetica;
+	font-weight: 600;
+	color: #202020;
+	font-size: 18px;
+	letter-spacing: 0;
+	line-height: normal;
+	white-space: nowrap;
+}
+
+.products .prd-desc .prd-price {
+	width: 270px;
+	font-family: "Pretendard Variable-SemiBold", Helvetica;
+	font-weight: 600;
+	color: #202020;
+	font-size: 18px;
+	letter-spacing: 0;
+	line-height: normal;
+}
+
+.products .prd-desc .prd-price del {
+	text-decoration: line-through;
+}
+
+
 .products .prd-tag {
 	margin-bottom: 20px;
+}
+
+.products .prd-tag .prd-hot {
+	border-radius: 2px;
+  	padding: 1px 4px;
+  	display: inline-flex;
+	gap: 4px;
+ 	background-color: #ff3666;
+}
+
+.products .prd-tag .prd-new {
+	border-radius: 2px;
+  	padding: 1px 4px;
+  	display: inline-flex;
+	gap: 4px;
+ 	background-color: #0075ff;
 }

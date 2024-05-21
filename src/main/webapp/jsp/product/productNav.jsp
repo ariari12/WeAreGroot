@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <link rel="stylesheet" href="resources/css/product.css">
+<script>
+$(() => {
+	$(".all-products").click(() => {
+
+	});
+});
+</script>
+<div id="">
+
+</div>
+
 <div class="prd_nav-group">
     <div class="prd_nav-view">
         <div class="prd_nav-frame">

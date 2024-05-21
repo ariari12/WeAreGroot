@@ -1,0 +1,37 @@
+<%@page import="kr.co.moran.web.dao.CategoryDAO"%>
+<%@page import="kr.co.moran.web.vo.CategoryVO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<link rel="stylesheet" type="text/css" href="../../resources/css/product.css">
+<div class="category">
+
+<%
+	CategoryDAO dao = new CategoryDAO();
+	List<CategoryVO> cts = dao.selectAll();
+	
+	int cnt = 0;
+	for(CategoryVO c : cts) {
+   		if(cnt %5 == 0) { 
+  		%>
+	<div class="overlap-group">
+		<% } %>
+	<div class="category-group">
+		<div class="cateagory-title"><%=c.getName() %></div>
+		<%
+			int a;
+			// List<CategoryVO> subCts = dao.selectAllByCId(c.getCId());
+		%>
+		<div class="subcategories">공기정화식물</div>
+		<div class="subcategories">공기정화식물</div>
+		<div class="subcategories">공기정화식물</div>
+		<div class="subcategories">공기정화식물</div>
+	</div>
+	
+	<% 	cnt++;
+		if (cnt %5 == 0) { %>
+	</div>
+	<% 	}
+	}	%>
+</div>
