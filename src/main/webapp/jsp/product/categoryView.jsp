@@ -23,10 +23,10 @@
 			int a;
 			// List<CategoryVO> subCts = dao.selectAllByCId(c.getCId());
 		%>
-		<div class="subcategories">공기정화식물</div>
-		<div class="subcategories">공기정화식물</div>
-		<div class="subcategories">공기정화식물</div>
-		<div class="subcategories">공기정화식물</div>
+		<div class="subcategories">하위 카테고리1</div>
+		<div class="subcategories">하위 카테고리2</div>
+		<div class="subcategories">하위 카테고리3</div>
+		<div class="subcategories">하위 카테고리4</div>
 	</div>
 	
 	<% 	cnt++;
