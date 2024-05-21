@@ -27,16 +27,17 @@ public class ProductController extends HttpServlet {
 	
 	private void trigger(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String act = req.getParameter("cmd");
+		// System.out.println(act);
 		
 		Action action = null;
 		
 		switch (act == null ? "" : act) {
-			case "list": action = new ListviewAction();
-			case "detail": action = new DetailviewAction();
-			case "1": action = new ListviewAction();
-			case "2": action = new ListviewAction();
-			case "3": action = new ListviewAction();
-			case "4": action = new ListviewAction();
+			case "list": action = new ListviewAction(); break;
+			case "detail": action = new DetailviewAction(); break;
+			case "1": action = new ListviewAction(); break;
+			case "2": action = new ListviewAction(); break;
+			case "3": action = new ListviewAction(); break;
+			case "4": action = new ListviewAction(); break;
 			default: action = new ListviewAction();
 		}
 		

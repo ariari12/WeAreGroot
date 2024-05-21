@@ -48,22 +48,28 @@ public class ProductDAO {
 		return vos;
 	}
 	
-	public ProductVO pdSelsctOne(int no) {
+	public ProductVO pdSelsctOneByPId(int pId) {
 		openSession();
-		ProductVO v = session.selectOne("kr.co.moran.product.selectById", no);
+		ProductVO v = session.selectOne("kr.co.moran.product.selectByPId", pId);
 		return v;
 	}
 	
-	public List<ProductImgVO> piSelsctByPdid(int no) {
+	public List<ProductImgVO> piSelsctByPId(int pId) {
 		openSession();
-		List<ProductImgVO> vos = session.selectList("kr.co.moran.product.selectAllImgById", no);
+		List<ProductImgVO> vos = session.selectList("kr.co.moran.product.selectAllImgByPId", pId);
 		return vos;
 	}
 	
-	public ProductImgVO piSelsctBigimgByPdid(int pd_id) {
+	public ProductImgVO piSelsctBigimgByPId(int pId) {
 		openSession();
-		ProductImgVO v = session.selectOne("kr.co.moran.product.piSelsctBigimgByPdid", pd_id);
+		ProductImgVO v = session.selectOne("kr.co.moran.product.piSelsctBigimgByPid", pId);
 		return v;
+	}
+	
+	public int orderTotalByPid(int pId) {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.orderTotalByPid", pId);
+		return cnt;
 	}
 	
 	public void closeSession() {
@@ -76,10 +82,10 @@ public class ProductDAO {
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
-		dao.pdSelectPage(0, 12).forEach(v -> {
-			System.out.println(v.getId());
-			System.out.println(dao.piSelsctBigimgByPdid(v.getId()).getImg());
-		});
+//		dao.pdSelectPage(0, 12).forEach(v -> {
+//			System.out.println(v.getPId());
+//			System.out.println(dao.piSelsctBigimgByPdid(v.getPId()).getImg());
+//		});
 //		System.out.println(dao.pdSelsctOne(12938));
 		
 //		dao.piSelsctByPdid(12938).forEach(System.out::println);

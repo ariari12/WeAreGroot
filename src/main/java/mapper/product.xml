@@ -6,7 +6,7 @@
 <mapper namespace="kr.co.moran.product">
 	<!-- product -->
 	<select id="selectAll" resultType="kr.co.moran.web.vo.ProductVO">
-		select 	pd_id id,
+		select 	pd_id pId,
 		        c_id cId,
 		        pd_name as name,
 		        pd_price as price,
@@ -20,7 +20,7 @@
 	</select>
 
 	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.web.vo.ProductVO">
-		select 	pd_id as id,
+		select 	pd_id as pId,
 		        c_id as cId,
 		        pd_name as name,
 		        pd_price as price,
@@ -33,8 +33,8 @@
 		from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
 	</select>
 
-	<select id="selectById" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
-		select 	pd_id as id,
+	<select id="selectByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
 		        c_id as cId,
 		        pd_name as name,
 		        pd_price as price,
@@ -44,7 +44,7 @@
 		        pd_dcRate as dcRate,
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
-		from MORANMORAN.PRODUCT where pd_id = #{id}
+		from MORANMORAN.PRODUCT where pd_id = #{pd_id}
 	</select>
 	
 	<select id="selectPdTotal" resultType="int">
@@ -52,14 +52,22 @@
 	</select>
 	
 	<!-- product img -->
-	<select id="selectAllImgById" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
-		select pd_id as id, pi_no as no, pi_img as img
+	<select id="selectAllImgByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select pd_id as pId, pi_no as no, pi_img as img
 		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id}
 	</select>
 	
-	<select id="piSelsctBigimgByPdid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
-		select pd_id as id, pi_no no, pi_img img
+	<select id="piSelsctBigimgByPid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select pd_id as pId, pi_no no, pi_img img
 		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id} and pi_no = 0
+	</select>
+	
+	
+	
+	
+	<!-- order -->
+	<select id="orderTotalByPid" parameterType="int" resultType="int">
+		select count(*) from ORDERS where pd_id = #{pd_id}
 	</select>
 	
 	

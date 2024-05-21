@@ -1,0 +1,138 @@
+@charset "UTF-8";
+.div-wrapper {
+    position: relative;
+    width: 1920px;
+    height: 2437px;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+/* 상품들 */
+.div-wrapper .products {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+    position: absolute;
+    top: 514px;
+    left: 375px;
+}
+
+.div-wrapper .frame-line {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .frame-prd {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .rectangle-wrapper {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 10px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .prd-img {
+    position: relative;
+    width: 271px;
+    height: 271px;
+    margin-top: -0.5px;
+    margin-bottom: -0.5px;
+    margin-left: -0.5px;
+    margin-right: -0.5px;
+    object-fit: cover;
+}
+
+.div-wrapper .frame-8 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .prd-desc {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .prd-name {
+    position: relative;
+    width: 270px;
+    height: 19px;
+    margin-top: -1px;
+    font-family: "Pretendard Variable-Medium", Helvetica;
+    font-weight: 500;
+    color: #202020;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.div-wrapper .prd-img {
+    position: relative;
+    width: 270px;
+    font-family: "Pretendard Variable-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #202020;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.div-wrapper .prd-tag {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 6px;
+    position: relative;
+    flex: 0 0 auto;
+}
+
+.div-wrapper .prd-hot {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 4px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #ff3666;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.div-wrapper .prd-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 4px;
+    position: relative;
+    flex: 0 0 auto;
+    background-color: #0075ff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.page {
+display: inline-flex;
+flex-direction: column;
+align-items: center;
+gap: 30px;
+position: relative;
+}

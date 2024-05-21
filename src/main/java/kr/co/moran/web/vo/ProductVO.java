@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data @Getter @Setter @ToString
 public class ProductVO {
-	private int id;
+	private int pId;
 	private int cId;
 	private String name;
 	private int price;
