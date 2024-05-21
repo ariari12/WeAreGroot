@@ -22,5 +22,6 @@
   	<mappers>
   		<mapper resource="mapper/dept.xml"/>
   		<mapper resource="mapper/product.xml"/>
+  		<mapper resource="mapper/member.xml"/>
   	</mappers>
   </configuration>
