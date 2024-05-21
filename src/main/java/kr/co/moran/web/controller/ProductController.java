@@ -34,10 +34,10 @@ public class ProductController extends HttpServlet {
 		switch (act == null ? "" : act) {
 			case "list": action = new ListviewAction(); break;
 			case "detail": action = new DetailviewAction(); break;
-			case "1": action = new ListviewAction(); break;
-			case "2": action = new ListviewAction(); break;
 			case "latest": action = new ListviewAction(); break;
 			case "popul": action = new ListviewAction(); break;
+			case "1": action = new ListviewAction(); break;
+			case "2": action = new ListviewAction(); break;
 			default: action = new ListviewAction();
 		}
 		

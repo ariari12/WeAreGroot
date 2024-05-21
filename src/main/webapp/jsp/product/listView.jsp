@@ -16,8 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
 <script src="resources/css/product.css"></script>
+<link rel="stylesheet" href="resources/css/common.css">
 <link rel="stylesheet" href="resources/css/product.css">
-
 <script>
 let viewDetails = (no) => {
 	window.location = "./product?cmd=detail&no=" + no;
