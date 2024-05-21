@@ -16,9 +16,9 @@
 		<c:choose>
 			<c:when test="${not empty sessionScope.memberVO}">
 				<div class="row logBar">
-					<a href="">내 정보</a>
-					<a href="">로그아웃</a>
-					<a href="">장바구니</a>
+					<a href="">내 정보(링크 없음)</a>
+					<a href="/moran/member?cmd=logoutOk">로그아웃</a>
+					<a href="">장바구니(링크 없음)</a>
 				</div>				
 			</c:when>
 			<c:otherwise>

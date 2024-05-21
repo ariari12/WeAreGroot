@@ -13,6 +13,7 @@ import kr.co.moran.web.action.member.JoinAction;
 import kr.co.moran.web.action.member.JoinFormAction;
 import kr.co.moran.web.action.member.LoginAction;
 import kr.co.moran.web.action.member.LoginFormAction;
+import kr.co.moran.web.action.member.LogoutAction;
 
 @WebServlet("/member")
 public class MemeberController extends HttpServlet{
@@ -23,6 +24,7 @@ public class MemeberController extends HttpServlet{
 		String cmd = req.getParameter("cmd");
 		System.out.println(cmd); // 콘솔 확인용
 		String url = "";
+		String redirectUrl = "";
 		Action action = null;
 		if(cmd == null) {			
 			System.out.println("cmd 값 : "+cmd);
@@ -34,12 +36,23 @@ public class MemeberController extends HttpServlet{
 			action = new LoginFormAction();
 		}else if(cmd.equals("loginOk")) {
 			action = new LoginAction();
+		}else if(cmd.equals("logoutOk")) {
+			action = new LogoutAction();
 		}
 		
-		url = action.execute(req, resp);
-		System.out.println("url = "+url);
-		RequestDispatcher rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
+		url = action.execute(req, resp);		
+		System.out.println("url = "+url);		
+		if(url.startsWith("redirect:")) {
+			redirectUrl=url.substring("redirect:".length());
+			resp.sendRedirect(redirectUrl);
+		}else {
+			RequestDispatcher rd = req.getRequestDispatcher(url);
+			rd.forward(req, resp);
+		}
+		
+		
+
+		
 
 	}
 	@Override
