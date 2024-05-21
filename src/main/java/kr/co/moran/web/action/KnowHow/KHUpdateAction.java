@@ -1,9 +1,10 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.KnowHow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 
-public class KHWriteAction implements Action {
+public class KHUpdateAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {

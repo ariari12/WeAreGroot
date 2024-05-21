@@ -1,15 +1,15 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.KnowHow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.vo.BoardVO;
 
-public class QnAWriteAction implements Action {
+public class KHWriteAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		
 		BoardVO vo = new BoardVO();
 		BoardDAO dao = new BoardDAO();
 		String title = req.getParameter("title");
@@ -18,9 +18,9 @@ public class QnAWriteAction implements Action {
 		vo.setTitle(title);
 		vo.setContents(contents);
 		
-		dao.insertQnA(vo);
+		dao.insertKH(vo);
 		System.out.println(vo);
-		return "board?cmd=qna";
+		return "board?cmd=kh";
 	}
 
 }

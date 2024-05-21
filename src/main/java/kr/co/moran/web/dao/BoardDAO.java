@@ -65,4 +65,18 @@ public class BoardDAO {
 		ss.close();
 		return list;
 	}
+
+	public void insertQnA(BoardVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.InsertQnA",vo);
+		
+		ss.close();
+	}
+	
+	public void insertKH(BoardVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.InsertKH",vo);
+		
+		ss.close();
+	}
 }

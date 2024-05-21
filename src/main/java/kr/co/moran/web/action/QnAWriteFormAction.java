@@ -8,7 +8,7 @@ public class QnAWriteFormAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		return null;
+		return "views/qnaWriteForm.jsp";
 	}
 
 }

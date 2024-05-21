@@ -3,28 +3,39 @@
 	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.moran.board">
 	<select id="SelectAllKH" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 2
 	</select>
+	
 	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 2
 		ORDER BY b_view_cnt DESC
 	</select>
 	
 	<select id="SelectAllQnA" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 1
 	</select>
+	
 	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id, m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain, b_retention_period 
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 1
 		ORDER BY b_view_cnt DESC
 	</select>
 	
+	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
+		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
+		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 1, 1)
+	</insert>
+	
+	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO">
+		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
+		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 2, 1)
+	</insert>
 	
 </mapper>

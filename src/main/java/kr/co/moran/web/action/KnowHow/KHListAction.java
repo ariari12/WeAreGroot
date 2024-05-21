@@ -1,10 +1,11 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.KnowHow;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.vo.BoardVO;
 
