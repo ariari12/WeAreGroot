@@ -19,18 +19,18 @@
 	      m_retention_period,
 	      m_birth
 	    ) VALUES (
-	      #{mEmail},
-	      #{mPw},
-	      #{mName},
-	      #{mProfileImg},
-	      #{mNick},
-	      #{mPhone},
+	      #{email},
+	      #{pw},
+	      #{name},
+	      #{profileImg},
+	      #{nick},
+	      #{phone},
 	      NOW(),
 	      0,
-	      #{mAdmintype},
-	      #{mIsMaintain},
-	      #{mRetentionPeriod},
-	      DATE_FORMAT(#{mBirth}, '%Y-%m-%d')
+	      #{admintype},
+	      #{isMaintain},
+	      #{retentionPeriod},
+	      DATE_FORMAT(#{birth}, '%Y-%m-%d')
 	    )
   	</insert>
   	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.AddressVO">
@@ -41,28 +41,29 @@
   			a_addr2
   		) VALUES (
   			#{mId},
-  			#{aZipcode},
-  			#{aAddr1},
-  			#{aAddr2}
+  			#{zipcode},
+  			#{addr1},
+  			#{addr2}
   		)
   	</insert>
   	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.member.MemberVO">
   		SELECT 
 		    m_id AS mId,
-		    m_email AS mEmail,
-		    m_pw AS mPw,
-		    m_name AS mName,
-		    m_profile_img AS mProfileImg,
-		    m_nick AS mNick,
-		    m_phone AS mPhone,
-		    m_regdate AS mRegdate,
-		    m_logtype AS mLogtype,
-		    m_admintype AS mAdmintype,
-		    m_is_maintain AS mIsMaintain,
-		    m_retention_period AS mRetentionPeriod
+		    m_email AS email,
+		    m_pw AS pw,
+		    m_name AS name,
+		    m_profile_img AS profileImg,
+		    m_nick AS nick,
+		    m_phone AS phone,
+		    m_regdate AS regdate,
+		    m_logtype AS logtype,
+		    m_admintype AS admintype,
+		    m_is_maintain AS isMaintain,
+		    m_retention_period AS retentionPeriod,
+		    m_birth as mBirth
 		FROM
 			MEMBER
 		WHERE
-			m_email = #{mEmail} AND m_pw = #{mPw}
+			m_email = #{email} AND m_pw = #{pw}
   	</select>
   </mapper>

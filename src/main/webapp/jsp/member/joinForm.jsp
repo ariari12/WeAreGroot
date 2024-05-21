@@ -12,7 +12,7 @@
 </head>
 <body>
 	 <div class="container">
-		<form action="member" method="post">
+		<form action="/moran/member" method="post">
 			<h2>회원가입</h2>
 	 		<table class="table table-striped">
 	 			<tr>

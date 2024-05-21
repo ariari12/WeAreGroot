@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LeaveVO {
 	private int mId; // 회원 고유번호 참조
-	private String lReason; // 탈퇴 이유
-	private String lDate; // 탈퇴한 시간
+	private String reason; // 탈퇴 이유
+	private String date; // 탈퇴한 시간
 
 }

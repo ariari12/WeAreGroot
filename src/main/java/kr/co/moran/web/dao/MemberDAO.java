@@ -29,7 +29,7 @@ public class MemberDAO {
 	}
 	public void insertMember(MemberVO vo) {
 	    try (SqlSession ss = factory.openSession(true)) {
-	        ss.insert("insertMember", vo);
+	        ss.insert("kr.co.moran.web.member.insertMember", vo);
 	        // 자원을 닫을 필요가 없음 try~with~resource
 	        // ss.close
 	    } catch (Exception e) {
@@ -45,8 +45,10 @@ public class MemberDAO {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("email", email);
 			map.put("pw", pw);
+			System.out.println("email : "+map.get("email"));
+			System.out.println("pw : "+map.get("pw"));
 			
-			return ss.selectOne("selectMemberByEmailAndPassword", map);
+			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmailAndPassword", map);
 		}catch (Exception e) {
 	        // 예외 처리
 			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");
