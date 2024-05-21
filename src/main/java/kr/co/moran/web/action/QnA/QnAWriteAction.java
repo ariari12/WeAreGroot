@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.QnA;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -6,18 +6,22 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.vo.BoardVO;
 
-public class KHDetailAction implements Action {
+public class QnAWriteAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		String sbId = req.getParameter("bId");
-		int bId = Integer.parseInt(sbId);
 		
 		BoardVO vo = new BoardVO();
 		BoardDAO dao = new BoardDAO();
-		vo = dao.selectKHBybId(bId);
-		req.setAttribute("vo", vo);
-		return "views/khDetail.jsp";
+		String title = req.getParameter("title");
+		String contents = req.getParameter("contents");
+		
+		vo.setTitle(title);
+		vo.setContents(contents);
+		
+		dao.insertQnA(vo);
+		System.out.println(vo);
+		return "board?cmd=qna";
 	}
 
 }

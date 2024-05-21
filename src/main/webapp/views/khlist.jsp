@@ -31,10 +31,15 @@
 </script>
 </head>
 <body>
-    <c:forEach var="vo" items="${list}">
-        <h5>${vo.title}</h5>
-        <h5>${vo.contents}</h5>
-    </c:forEach>
+	<div class="container">
+	<table class="table">
+		<c:forEach var="vo" items="${list}">
+		<tr>
+			<th><a href="?cmd=khDetail&bId=${vo.getBId() }">${vo.title}</a></th>
+			<td><a href="?cmd=khDetail&bId=${vo.getBId() }">${vo.contents}</a></td>
+		</tr>
+   		 </c:forEach>
+	</table>
 
     <select id="sortSelect">
         <option value="regDate">최신순</option>
@@ -42,6 +47,8 @@
     </select>
     
     <button type="button" onclick="location.href='?cmd=khWrite'">노하우 작성하기</button>
-    <button type="button" onclick="location.href='?cmd=qna'">모두의 QnA로 이동</button>
+    <button type="button" onclick="location.href='?cmd=qna'">모두의 QnA로 이동</button>	
+	</div>
+
 </body>
 </html>

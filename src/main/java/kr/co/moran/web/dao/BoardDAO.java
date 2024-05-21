@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -34,7 +35,7 @@ public class BoardDAO {
 		
 	}
 	
-	public List<BoardVO> SelectAllKH(){
+	public List<BoardVO> selectAllKH(){
 		SqlSession ss = factory.openSession(true);
 		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKH");
 		
@@ -42,7 +43,7 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public List<BoardVO> SelectAllKHOrderByViewCntDesc(){
+	public List<BoardVO> selectAllKHOrderByViewCntDesc(){
 		SqlSession ss = factory.openSession(true);
 		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc");
 		
@@ -50,7 +51,7 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public List<BoardVO> SelectAllQnA(){
+	public List<BoardVO> selectAllQnA(){
 		SqlSession ss = factory.openSession(true);
 		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnA");
 		
@@ -58,7 +59,7 @@ public class BoardDAO {
 		return list;
 	}
 	
-	public List<BoardVO> SelectAllQnAOrderByViewCntDesc(){
+	public List<BoardVO> selectAllQnAOrderByViewCntDesc(){
 		SqlSession ss = factory.openSession(true);
 		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc");
 		
@@ -66,6 +67,22 @@ public class BoardDAO {
 		return list;
 	}
 
+	public BoardVO selectQnABybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		BoardVO vo = ss.selectOne("kr.co.moran.board.SelectQnABybId", bId);
+		
+		ss.close();
+		return vo;
+	}
+	
+	public BoardVO selectKHBybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		BoardVO vo = ss.selectOne("kr.co.moran.board.SelectKHBybId", bId);
+		
+		ss.close();
+		return vo;
+	}
+	
 	public void insertQnA(BoardVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.board.InsertQnA",vo);
@@ -78,5 +95,13 @@ public class BoardDAO {
 		ss.insert("kr.co.moran.board.InsertKH",vo);
 		
 		ss.close();
+	}
+
+	public void modifyKHBybId(@Param("bId") int bId, @Param("title") String title, @Param("contents") String contents) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.ModifyKHBybId");
+		
+		ss.close();
+		
 	}
 }

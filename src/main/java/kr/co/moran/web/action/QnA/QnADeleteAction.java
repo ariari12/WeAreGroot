@@ -1,7 +1,8 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.QnA;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 
 public class QnADeleteAction implements Action {
 

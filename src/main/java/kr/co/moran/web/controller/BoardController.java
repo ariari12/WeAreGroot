@@ -9,20 +9,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.QnADeleteAction;
-import kr.co.moran.web.action.QnADetailAction;
-import kr.co.moran.web.action.QnAListAction;
-import kr.co.moran.web.action.QnAUpdateAction;
-import kr.co.moran.web.action.QnAModifyFormAction;
-import kr.co.moran.web.action.QnAWriteAction;
-import kr.co.moran.web.action.QnAWriteFormAction;
 import kr.co.moran.web.action.KnowHow.KHDeleteAction;
 import kr.co.moran.web.action.KnowHow.KHDetailAction;
 import kr.co.moran.web.action.KnowHow.KHListAction;
 import kr.co.moran.web.action.KnowHow.KHModifyFormAction;
-import kr.co.moran.web.action.KnowHow.KHUpdateAction;
+import kr.co.moran.web.action.KnowHow.KHModifyAction;
 import kr.co.moran.web.action.KnowHow.KHWriteAction;
 import kr.co.moran.web.action.KnowHow.KHWriteFormAction;
+import kr.co.moran.web.action.QnA.QnADeleteAction;
+import kr.co.moran.web.action.QnA.QnADetailAction;
+import kr.co.moran.web.action.QnA.QnAListAction;
+import kr.co.moran.web.action.QnA.QnAModifyFormAction;
+import kr.co.moran.web.action.QnA.QnAModifyAction;
+import kr.co.moran.web.action.QnA.QnAWriteAction;
+import kr.co.moran.web.action.QnA.QnAWriteFormAction;
 
 @WebServlet("/board")
 public class BoardController extends HttpServlet{
@@ -71,7 +71,7 @@ public class BoardController extends HttpServlet{
 		}
 		//qna 삭제확인
 		else if(cmd.equals("qnaModifyOk")) {
-			action = new QnAUpdateAction();
+			action = new QnAModifyAction();
 		}
 		
 		
@@ -101,8 +101,8 @@ public class BoardController extends HttpServlet{
 			action = new KHModifyFormAction();
 		}
 		//노하우 삭제확인
-		else if(cmd.equals("khmodifyOk")) {
-			action = new KHUpdateAction();
+		else if(cmd.equals("khModifyOk")) {
+			action = new KHModifyAction();
 		}
 		
 		url = action.execute(req, resp);

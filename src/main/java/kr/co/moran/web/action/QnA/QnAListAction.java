@@ -1,9 +1,10 @@
-package kr.co.moran.web.action;
+package kr.co.moran.web.action.QnA;
 
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.vo.BoardVO;
 
@@ -17,9 +18,9 @@ public class QnAListAction implements Action {
 		
         List<BoardVO> list;
         if ("viewCntDesc".equals(sort)) {
-            list = dao.SelectAllQnAOrderByViewCntDesc();
+            list = dao.selectAllQnAOrderByViewCntDesc();
         } else {
-            list = dao.SelectAllQnA();
+            list = dao.selectAllQnA();
         }
 
         req.setAttribute("list", list);

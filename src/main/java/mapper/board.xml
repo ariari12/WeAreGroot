@@ -6,6 +6,7 @@
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 2
+		ORDER BY b_regdate
 	</select>
 	
 	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
@@ -19,13 +20,14 @@
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 1
+		ORDER BY b_regdate DESC
 	</select>
 	
 	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_type = 1
-		ORDER BY b_view_cnt DESC
+		ORDER BY b_view_cnt 
 	</select>
 	
 	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
@@ -38,4 +40,22 @@
 		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 2, 1)
 	</insert>
 	
+	<select id="SelectQnABybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_id = #{bId}
+	</select>
+	
+	<select id="SelectKHBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_id = #{bId}
+	</select>
+	
+	<update id="ModifyKHBybId">
+		UPDATE BOARD
+		SET b_title = #{title},
+			b_contents = #{contents}
+		WHERE b_id = #{bId}
+	</update>
 </mapper>

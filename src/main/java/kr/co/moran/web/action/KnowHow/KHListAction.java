@@ -18,9 +18,9 @@ public class KHListAction implements Action {
 		
         List<BoardVO> list;
         if ("viewCntDesc".equals(sort)) {
-            list = dao.SelectAllKHOrderByViewCntDesc();
+            list = dao.selectAllKHOrderByViewCntDesc();
         } else {
-            list = dao.SelectAllKH();
+            list = dao.selectAllKH();
         }
 
         req.setAttribute("list", list);
