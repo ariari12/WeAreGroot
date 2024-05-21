@@ -18,8 +18,6 @@ select * from MORANMORAN.PRODUCT as pd
 	join MORANMORAN.PRODUCT_IMG as pdi
     on pd.pd_id = pdi.pd_id;
     
-select * from xe.dept;
-
 select 	pd_id id,
         c_id cId,
         pd_name name,
@@ -42,16 +40,26 @@ where pi_img = 0;
 
 select count(*) from PRODUCT;
 
-SELECT pd_id FROM PRODUCT;
+SELECT pd_id, pd_created_at FROM PRODUCT;
 
-SELECT pd_id, COUNT(*)
-FROM ORDERS
-WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
-GROUP BY pd_id
-LIMIT 0, 5;
+select * from PRODUCT where pd_id in
+( select pd_id from (
+        SELECT pd_id, COUNT(*) as hit
+        FROM ORDERS
+        WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+        GROUP BY pd_id
+        ORDER BY hit LIMIT 0, 12
+    ) as pop
+);
+
+select * from PRODUCT
+order by pd_created_at desc
+LIMIT 90, 12;
 
 select * from PRODUCT p join ORDERS o on p.pd_id = o.pd_id;
+select * from ORDERS where pd_id = 204869;
 
+-- test insert
 INSERT INTO MORANMORAN.PRODUCT (
     pd_id, c_id, pd_name, pd_price, pd_description,
     pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
@@ -72,4 +80,5 @@ delete from ORDERS where pd_id in (13206, 14687, 204838, 13339, 12966,
 --12974
 --204827
 
+delete from PRODUCT where pd_id = 1;
 

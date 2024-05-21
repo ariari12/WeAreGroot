@@ -164,6 +164,7 @@ div.category .cateagory-title {
 
 
 div.category .subcategories {
+	text-align: center;
 	display: inline-block;
 	margin-left: 50px;
 }
