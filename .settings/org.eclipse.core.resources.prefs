@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/home.jsp=UTF-8
+<<<<<<< HEAD
 encoding//src/main/webapp/jsp/member/joinForm.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/loginForm.jsp=UTF-8
+=======
+encoding//src/main/webapp/joinForm.jsp=UTF-8
+encoding//src/main/webapp/loginForm.jsp=UTF-8
+>>>>>>> branch 'kah' of https://github.com/ariari12/WeAreGroot.git
 encoding/<project>=UTF-8
