@@ -14,3 +14,5 @@ insert into MORANMORAN.CATEGORY values(9, null, '관목형');
 insert into MORANMORAN.CATEGORY values(10, null, '포복형');
 insert into MORANMORAN.CATEGORY values(11, null, '불규칙형');
 insert into MORANMORAN.CATEGORY values(12, null, '탑형');
+
+select * from MORANMORAN.CATEGORY;

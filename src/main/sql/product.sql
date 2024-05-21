@@ -42,4 +42,34 @@ where pi_img = 0;
 
 select count(*) from PRODUCT;
 
-delete from PRODUCT where pd_id > 50;
+SELECT pd_id FROM PRODUCT;
+
+SELECT pd_id, COUNT(*)
+FROM ORDERS
+WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+GROUP BY pd_id
+LIMIT 0, 5;
+
+select * from PRODUCT p join ORDERS o on p.pd_id = o.pd_id;
+
+INSERT INTO MORANMORAN.PRODUCT (
+    pd_id, c_id, pd_name, pd_price, pd_description,
+    pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
+    pd_is_maintain, pd_retention_period)
+VALUES (1, 1, '몰라', 100, '대충 내용', 100, 100, 10, '2024-05-01', 0, null);
+
+delete from ORDERS where pd_id in (13206, 14687, 204838, 13339, 12966,
+204869, 204860, 14697, 12974, 204827);
+
+--13206
+--14687
+--204838
+--13339
+--12966
+--204869
+--204860
+--14697
+--12974
+--204827
+
+

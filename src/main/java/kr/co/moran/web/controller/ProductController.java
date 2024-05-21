@@ -36,8 +36,8 @@ public class ProductController extends HttpServlet {
 			case "detail": action = new DetailviewAction(); break;
 			case "1": action = new ListviewAction(); break;
 			case "2": action = new ListviewAction(); break;
-			case "3": action = new ListviewAction(); break;
-			case "4": action = new ListviewAction(); break;
+			case "latest": action = new ListviewAction(); break;
+			case "popul": action = new ListviewAction(); break;
 			default: action = new ListviewAction();
 		}
 		

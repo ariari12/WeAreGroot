@@ -6,6 +6,7 @@ import xmltodict
 import pyodbc
 import json
 import numpy as np
+from datetime import datetime
 
 try:
     # DB에 연결 (호스트이름 대신 IP주소 가능)
@@ -46,7 +47,7 @@ try:
     moran_category["관목형"] = 9
     moran_category["포복형"] = 10
     moran_category["불규칙형"] = 11
-    moran_category["탑형"] = 14
+    moran_category["탑형"] = 12
     
     for i, j in zip(cntnts_no, cntnts_sj):
         no = i.text
@@ -83,6 +84,8 @@ try:
         quantity = int(np.random.randint(0, 15, 1))
         dcrate = int(np.random.randint(0, 90, 1))
         wholesale = price - int(float(dcrate / 100) * price)
+        month = int(np.random.randint(1, 5, 1))
+        date = int(np.random.randint(1, 21, 1))
         
         cate_gory = 0
         for c in moran_category:
@@ -91,34 +94,34 @@ try:
                 break
         print(cate_gory)
 
-        # query = f"""
-        #     INSERT INTO MORANMORAN.PRODUCT (
-        #         pd_id, c_id, pd_name, pd_price, pd_description,
-        #         pd_quantity, pd_wholesale, pd_dcrate,
-        #         pd_is_maintain, pd_retention_period)
-        #     VALUES ({no}, {}, '{name}', {price}, '{json_desc}', {quantity}, {wholesale}, {dcrate}, 0, NULL)
-        # """
-        # cursor.execute(query)
-        # cursor.execute('commit') # sqldeveloper에 커밋
+        query = f"""
+            INSERT INTO MORANMORAN.PRODUCT (
+                pd_id, c_id, pd_name, pd_price, pd_description,
+                pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
+                pd_is_maintain, pd_retention_period)
+            VALUES ({no}, {cate_gory}, '{name}', {price}, '{json_desc}', {quantity}, {wholesale}, {dcrate}, '2024-{month}-{date}', 0, NULL)
+        """
+        cursor.execute(query)
+        cursor.execute('commit') # sqldeveloper에 커밋
         
         
-        # # Product Img
+        # Product Img
         
-        # img1 = xml["mainImgUrl1"] # main img
-        # img2 = xml["lightImgUrl1"] # 배치전
-        # img3 = xml["lightImgUrl2"] # 6개월 후 발코니 창측
+        img1 = xml["mainImgUrl1"] # main img
+        img2 = xml["lightImgUrl1"] # 배치전
+        img3 = xml["lightImgUrl2"] # 6개월 후 발코니 창측
         
-        # query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 0, '{img1}') "
-        # cursor.execute(query)
-        # query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 1, '{img2}') "
-        # cursor.execute(query)
-        # query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 2, '{img3}') "
-        # cursor.execute(query)
+        query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 0, '{img1}') "
+        cursor.execute(query)
+        query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 1, '{img2}') "
+        cursor.execute(query)
+        query = f" insert into MORANMORAN.PRODUCT_IMG  values ({no}, 2, '{img3}') "
+        cursor.execute(query)
         
-        # cursor.execute('commit') # sqldeveloper에 커밋
+        cursor.execute('commit') # sqldeveloper에 커밋
         
-        # print("이미지 저장완료 \n")
-        # print()
+        print("이미지 저장완료 \n")
+        print()
         
     cursor.close()
     con.close()

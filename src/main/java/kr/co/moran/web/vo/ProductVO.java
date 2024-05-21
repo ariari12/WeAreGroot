@@ -21,6 +21,7 @@ public class ProductVO {
 	private int quantity;
 	private int wholesale;
 	private int dcRate;
+	private Date createDate;
 	private int isMaintain;
 	private Date retetionDate;
 }

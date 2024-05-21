@@ -6,6 +6,7 @@ import xmltodict
 import pyodbc
 import json
 import numpy as np
+from datetime import datetime
 
 try:
     # DB에 연결 (호스트이름 대신 IP주소 가능)
@@ -94,6 +95,8 @@ try:
         quantity = int(np.random.randint(0, 15, 1))
         dcrate = int(np.random.randint(0, 90, 1))
         wholesale = price - int(float(dcrate / 100) * price)
+        month = int(np.random.randint(1, 5, 1))
+        date = int(np.random.randint(1, 21, 1))
         
         cate_gory = 0
         for c in moran_category:
@@ -104,10 +107,10 @@ try:
         
         query = f"""
             INSERT INTO MORANMORAN.PRODUCT (
-                pd_id, c_id, pd_name, pd_price, pd_description, 
-                pd_quantity, pd_wholesale, pd_dcrate,
+                pd_id, c_id, pd_name, pd_price, pd_description,
+                pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
                 pd_is_maintain, pd_retention_period)
-            VALUES ({no}, {cate_gory}, '{name}', {price}, '{json_desc}', {quantity}, {wholesale}, {dcrate}, 0, NULL)
+            VALUES ({no}, {cate_gory}, '{name}', {price}, '{json_desc}', {quantity}, {wholesale}, {dcrate}, '2024-{month}-{date}', 0, NULL)
         """
         cursor.execute(query)
         cursor.execute('commit') # sqldeveloper에 커밋

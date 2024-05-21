@@ -14,6 +14,7 @@
 		        pd_quantity as quantity,
 		        pd_wholesale as wholesale,
 		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
 		from MORANMORAN.PRODUCT
@@ -28,9 +29,11 @@
 		        pd_quantity as quantity,
 		        pd_wholesale as wholesale,
 		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
-		from MORANMORAN.PRODUCT LIMIT #{start}, #{pageNum}
+		from MORANMORAN.PRODUCT
+		LIMIT #{start}, #{pageNum}
 	</select>
 
 	<select id="selectByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
@@ -42,24 +45,48 @@
 		        pd_quantity as quantity,
 		        pd_wholesale as wholesale,
 		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
-		from MORANMORAN.PRODUCT where pd_id = #{pd_id}
+		from MORANMORAN.PRODUCT
+		where pd_id = #{pd_id}
 	</select>
 	
 	<select id="selectPdTotal" resultType="int">
-		select count(*) from MORANMORAN.PRODUCT
+		select count(*)
+		from MORANMORAN.PRODUCT
 	</select>
+	
+	<select id="pdSelectLatest" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from MORANMORAN.PRODUCT
+		ORDER BY createDate desc
+		LIMIT #{start}, #{pageNum}
+	</select>
+	
+	
 	
 	<!-- product img -->
 	<select id="selectAllImgByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
 		select pd_id as pId, pi_no as no, pi_img as img
-		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id}
+		from MORANMORAN.PRODUCT_IMG
+		where pd_id = #{pd_id}
 	</select>
 	
 	<select id="piSelsctBigimgByPid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
 		select pd_id as pId, pi_no no, pi_img img
-		from MORANMORAN.PRODUCT_IMG where pd_id = #{pd_id} and pi_no = 0
+		from MORANMORAN.PRODUCT_IMG
+		where pd_id = #{pd_id} and pi_no = 0
 	</select>
 	
 	
@@ -68,6 +95,29 @@
 	<!-- order -->
 	<select id="orderTotalByPid" parameterType="int" resultType="int">
 		select count(*) from ORDERS where pd_id = #{pd_id}
+	</select>
+	
+	<select id="pdSelectPopByPId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+		select  pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from PRODUCT where pd_id in (
+	        select pd_id from (
+		        SELECT pd_id, COUNT(*) as hit
+		        FROM ORDERS
+		        WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		        GROUP BY pd_id
+		        ORDER BY hit LIMIT #{start}, #{pageNum}
+		    ) as pop
+		)
 	</select>
 	
 	

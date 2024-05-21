@@ -18,80 +18,85 @@
 <script src="resources/css/product.css"></script>
 <link rel="stylesheet" href="resources/css/product.css">
 
+<script>
+let viewDetails = (no) => {
+	window.location = "./product?cmd=detail&no=" + no;
+};
+</script>
+
 </head>
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
-<div class="div-wrapper">
-    <div class="products">
-    <%
-    	ProductDAO dao = new ProductDAO();
-    	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
-    	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
-    	
-   		int cnt = 0;
-    	for(ProductVO v : vos) {
-    		if(cnt == 0) {  %> 
-    		<div class="frame-line"> 
-    		<% } %>
-            <div class="frame-prd" onclick="viewDetails(<%=v.getPId() %>)">
-                <img class="prd-img" src="<%=dao.piSelsctBigimgByPId(v.getPId()).getImg() %>" />
-                 <div class="prd-desc">
-                    <div class="prd-name"><%=v.getName() %></div>
-                    <div class="prd-price"><%=v.getPrice() %> 원</div>
-                    <div class="prd-tag">
-                    <% 	if(hotPIds.contains(v.getPId())) { %>
-                        <div class="prd-hot">인기</div> <% } %>
-                        <div class="prd-new">신상품</div>
-                    </div>
-                </div> 
-            </div>
-      	<% 	cnt++;
-      		if(cnt >= 4) { 
-      		cnt = 0; %>
-      	 </div>
-        <% } %>
-        
-  	<% } %>
-  		    
-	    <div class="page frame-line">
-	    <nav aria-label="Page navigation">
-	  		<ul class="pagination">
-			<%
-				dao.closeSession();
-				int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
-		    	int maxPage = Integer.parseInt(request.getAttribute("maxPage").toString());
-	 			if(currentPage <= 1) { %>
-			    <li class="page-item disabled">
-	      		<span class="page-link">Previous</span>
-		    <% 	} else { %>
-			    <li class="page-item">
-		      		<a class="page-link" href="<%="?page=" + (currentPage -1) %>">Previous</a>
-		      	<% 	} %>
-		      	</li>
-	      	<%
-		    	for(int i = 1; i <= maxPage; i++) {
-			    	if(i == currentPage) { %>
-				    <li class="page-item active" aria-current="page">
-				    	<span class="page-link"><%=i %></span>
-			    <% 	} else { %>
-				    <li class="page-item ">
-				    	<a class="page-link" href="<%="?page=" + i %>"><%=i %></a>
-				    <% 	} %>
-				    </li>
-		        <% }
-		    	if(currentPage == maxPage) { %>
-				<li class="page-item disabled">
-				<span class="page-link">Next</span>
-			<% } else { %>
-				<li class="page-item">
-				<a class="page-link" href="<%="?page=" + (currentPage +1) %>">Next</a>
-				<% } %>
-				</li>
-		  	</ul>
-		</nav>
-	    </div>
-    </div>
-    <jsp:include page="../layout/footer.jsp"></jsp:include>
-</div>
+<jsp:include page="./productNav.jsp"></jsp:include>
+<div class="container products">
+<%
+	ProductDAO dao = new ProductDAO();
+	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
+	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
+	
+	int cnt = 0;
+	for(ProductVO v : vos) {
+		if(cnt == 0) {  %> 
+		<div class="frame-line"> 
+		<% } %>
+        <div class="frame-prd" onclick="viewDetails(<%=v.getPId() %>)">
+            <img class="prd-img" src="<%=dao.piSelsctBigimgByPId(v.getPId()).getImg() %>" />
+             <div class="prd-desc">
+                <div class="prd-name"><%=v.getName() %></div>
+                <div class="prd-price"><%=v.getPrice() %> 원</div>
+                <div class="prd-tag">
+                <% 	if(hotPIds.contains(v.getPId())) { %>
+                    <span class="prd-hot">인기</span> <% } %>
+                    <span class="prd-new">신상품</span>
+                </div>
+            </div> 
+        </div>
+  	<% 	cnt++;
+  		if(cnt >= 4) { 
+  		cnt = 0; %>
+  	 </div>
+    <% } %>
+    
+<% } %>
+    
+ <div class="page frame-line">
+ <nav aria-label="Page navigation">
+	<ul class="pagination">
+<%
+dao.closeSession();
+int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
+  	int maxPage = Integer.parseInt(request.getAttribute("maxPage").toString());
+	if(currentPage <= 1) { %>
+   <li class="page-item disabled">
+   		<span class="page-link">Previous</span>
+  <% 	} else { %>
+   <li class="page-item">
+    		<a class="page-link" href="<%="?page=" + (currentPage -1) %>">Previous</a>
+    	<% 	} %>
+    	</li>
+   	<%
+  	for(int i = 1; i <= maxPage; i++) {
+   	if(i == currentPage) { %>
+    <li class="page-item active" aria-current="page">
+    	<span class="page-link"><%=i %></span>
+   <% 	} else { %>
+    <li class="page-item ">
+    	<a class="page-link" href="<%="?page=" + i %>"><%=i %></a>
+    <% 	} %>
+    </li>
+      <% }
+  	if(currentPage == maxPage) { %>
+<li class="page-item disabled">
+<span class="page-link">Next</span>
+<% } else { %>
+<li class="page-item">
+<a class="page-link" href="<%="?page=" + (currentPage +1) %>">Next</a>
+<% } %>
+		</li>
+  	</ul>
+</nav>
+   </div>
+  </div>
+<jsp:include page="../layout/footer.jsp"></jsp:include>
 </body>
 </html>

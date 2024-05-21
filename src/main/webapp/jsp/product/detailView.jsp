@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <% 
 	Object prdId = request.getParameter("no"); 
-	ProductVO v = new ProductDAO().pdSelsctOne( Integer.parseInt(prdId.toString()) );
+	ProductVO v = new ProductDAO().pdSelsctOneByPId( Integer.parseInt(prdId.toString()) );
 %>
 <title><%=v.getName() %></title>
 <!-- jquery -->

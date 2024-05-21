@@ -101,6 +101,7 @@ CREATE TABLE `MORANMORAN`.`PRODUCT` (
     `pd_quantity`         INT  NULL, -- 재고량
     `pd_wholesale`        INT  NULL, -- 상품 도매가
     `pd_dcrate`           INT  NULL, -- 상품 할인률
+    `pd_created_at`         DATE NULL, -- 상품 등록일
     `pd_is_maintain`      INT  NULL, -- 정보상태
     `pd_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`pd_id`),
@@ -179,6 +180,7 @@ CREATE TABLE `MORANMORAN`.`BOARD` (
     `b_regdate`          DATE NULL, -- 작성일
     `b_view_cnt`         INT  NULL, -- 조회수
     `b_like_cnt`         INT  NULL, -- 좋아요 수
+    `b_type`             INT  NULL, -- 
     `b_is_maintain`      INT  NULL, -- 정보상태
     `b_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`b_id`),
