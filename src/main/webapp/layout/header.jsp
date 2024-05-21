@@ -13,10 +13,22 @@
 </head>
 <body>
 	<header id="header">
-		<div class="row logBar">
-			<a href="/login">로그인</a>
-			<a href="/join">회원가입</a>
-		</div>
+		<c:choose>
+			<c:when test="${not empty sessionScope.memberVO}">
+				<div class="row logBar">
+					<a href="">내 정보</a>
+					<a href="">로그아웃</a>
+					<a href="">장바구니</a>
+				</div>				
+			</c:when>
+			<c:otherwise>
+				<div class="row logBar">
+					<a href="/moran/jsp/member/loginForm.jsp">로그인</a>
+					<a href="/moran/jsp/member/joinForm.jsp">회원가입</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
+		
 		
 		<div class="logoArea">
 			<img src="../resources/img/moranLogo.png" alt="모란모란" width="121.08px" height="40.63px"/>
