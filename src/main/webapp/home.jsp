@@ -10,7 +10,7 @@
 <title>HOME</title>
 </head>
 <body>
-<jsp:include page="/layout/header.jsp"/>
+<jsp:include page="layout/header.jsp"/>
 <div>
 	<h2>홈화면</h2>
 	<c:if test="${not empty sessionScope.memberVO}">    

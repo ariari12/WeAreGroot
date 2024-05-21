@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
       <div class="view">
         <div class="text-wrapper-11">모란모란소개</div>
         <p class="p">대표이사 : 홍길동, 주소 : 서울특별시 모란구 모란동 123, Tel : 1234-5678</p>
