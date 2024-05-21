@@ -20,5 +20,6 @@
   	
   	<mappers>
   		<mapper resource="mapper/member.xml"/>
+  		<mapper resource="mapper/event.xml"/>
   	</mappers>
   </configuration>

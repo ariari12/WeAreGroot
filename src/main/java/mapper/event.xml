@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.moran.web.event">
+
+	<select id="selectEventList" resultType="kr.co.moran.web.vo.EventVO">
+		SELECT e_id, m_id, pd_id, e_title, e_contents, e_writedate, e_start, e_end
+		FROM EVENT
+	</select>
+
+
+</mapper>  
