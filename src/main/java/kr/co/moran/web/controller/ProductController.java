@@ -10,9 +10,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.product.DetailviewAction;
 import kr.co.moran.web.action.product.ListviewAction;
+import kr.co.moran.web.action.product.ModifyAction;
 
 @SuppressWarnings("serial")
-@WebServlet("/product") // prameterName: 'act'
+@WebServlet("/product")
 public class ProductController extends HttpServlet {
 
 	@Override
@@ -34,10 +35,7 @@ public class ProductController extends HttpServlet {
 		switch (act == null ? "" : act) {
 			case "list": action = new ListviewAction(); break;
 			case "detail": action = new DetailviewAction(); break;
-			case "latest": action = new ListviewAction(); break;
-			case "popul": action = new ListviewAction(); break;
-			case "category": action = new ListviewAction(); break;
-			case "2": action = new ListviewAction(); break;
+			case "modify": action = new ModifyAction(); break;
 			default: action = new ListviewAction();
 		}
 		

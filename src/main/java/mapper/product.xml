@@ -52,11 +52,14 @@
 		where pd_id = #{pd_id}
 	</select>
 	
-	<select id="selectPdTotal" resultType="int">
+	<!-- 전체 상품 종류 총 갯수 -->
+	<select id="pdTotal" resultType="int">
 		select count(*)
 		from MORANMORAN.PRODUCT
 	</select>
 	
+	
+	<!-- 최신순 조회 -->
 	<select id="pdSelectLatest" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
 		select 	pd_id as pId,
 		        c_id as cId,
@@ -70,11 +73,20 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
         from MORANMORAN.PRODUCT
+        where DATEDIFF(now(), pd_created_at) &lt; 61
 		ORDER BY createDate desc
 		LIMIT #{start}, #{pageNum}
 	</select>
 	
-	<select id="" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
+	<!-- 최신상퐁 종류 총 갯수 -->
+	<select id="pdLatestTotal" resultType="int">
+		select count(*)
+        from MORANMORAN.PRODUCT
+        where DATEDIFF(now(), pd_created_at) &lt; 61
+	</select>
+	
+	<!-- 카테고리 조회 -->
+	<select id="pdSelectByCId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
 		select 	pd_id as pId,
 		        c_id as cId,
 		        pd_name as name,
@@ -87,9 +99,16 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
         from MORANMORAN.PRODUCT
-        where c_id = #{c_id}
-		ORDER BY createDate desc
+        where c_id = #{C_ID}
+		ORDER BY pd_id
 		LIMIT #{start}, #{pageNum}
+	</select>
+
+	<!-- 카테고리상퐁 종류 총 갯수 -->	
+	<select id="pdcategoryTotal" parameterType="int" resultType="int">
+		select count(*)
+        from MORANMORAN.PRODUCT
+        where c_id = #{C_ID}
 	</select>
 	
 	
@@ -115,6 +134,7 @@
 		select count(*) from ORDERS where pd_id = #{pd_id}
 	</select>
 	
+	<!-- 인기 조회 -->
 	<select id="pdSelectPopByPId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
 		select  pd_id as pId,
 		        c_id as cId,
@@ -127,15 +147,28 @@
 		        pd_created_at as createDate,
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
-        from PRODUCT where pd_id in (
+        from PRODUCT 
+        where pd_id in (
 	        select pd_id from (
 		        SELECT pd_id, COUNT(*) as hit
 		        FROM ORDERS
 		        WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
 		        GROUP BY pd_id
-		        ORDER BY hit LIMIT #{start}, #{pageNum}
+		        ORDER BY hit desc
+		        LIMIT #{start}, #{pageNum}
 		    ) as pop
 		)
+	</select>
+	
+	<!-- 인기 상퐁 종류 총 갯수 -->
+	<select id="pdPopTotal" resultType="int">
+		select count(*)
+		from (
+		    SELECT COUNT(*) as hit
+		    FROM ORDERS
+		    WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		    GROUP BY pd_id
+		) as pop;
 	</select>
 	
 	

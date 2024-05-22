@@ -16,21 +16,119 @@ public class ListviewAction implements Action {
 	private static final int PAGE_QUANTITY = 12;
 	
 	private ProductDAO dao;
+	private List<Integer> hotPIds;
+	private int maxPage;
 	
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		dao = new ProductDAO();
+		hotPIds = new ArrayList<Integer>();
 		
 		// 페이지 수 가져오기 없을 경우 첫 페이지
 		int currentPage = req.getParameter("page") == null ? 0 
 				: Integer.parseInt(req.getParameter("page")) -1;
 		
-		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
-		int maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
+		// 전체 상품 수에서 현재 페이지에 첫 상품의 수
+		int startNum = currentPage * PAGE_QUANTITY;
+//		System.out.println("start: " + startNum);
+				
+		
+		String type = req.getParameter("type");
+		
+		// type에 맞는 상품목록을 가져올 list 선언
+		List<ProductVO> prdlist = new ArrayList<ProductVO>();
 		
 		// 상품리스트 가져오기
-//		System.out.println("start: " + currentPage * PAGE_QUANTITY);
-		List<ProductVO> prdlist = dao.pdSelectPage(currentPage * PAGE_QUANTITY, PAGE_QUANTITY);
+		switch (type == null ? "" : type) {
+			case "latest": prdlist = latestType(startNum, PAGE_QUANTITY); break;
+			case "popul": prdlist = populType(startNum, PAGE_QUANTITY); break;
+			case "category": prdlist = categoryType(startNum, PAGE_QUANTITY,
+				 req.getParameter("category")); break;
+			default: prdlist = noneType(startNum, PAGE_QUANTITY);
+		}
+		
+//		System.out.println(hotPIds);
+		
+		// 속성변수 삽입
+		req.setAttribute("pdList", prdlist);
+		req.setAttribute("currentPage", currentPage +1);
+		req.setAttribute("maxPage", maxPage);
+		req.setAttribute("hotPIds", hotPIds);
+		
+		dao.closeSession(); // db session 종료
+		return "jsp/product/listView.jsp";
+	}
+	
+	
+	
+	// 타입이 없으면 상품리스트 전체가져오기
+	private List<ProductVO> noneType(int start, int pageNum) {		
+		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+		maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
+		
+		List<ProductVO> prdList = dao.pdSelectPage(start, pageNum);
+		if(prdList.size() < 1) {
+			return noneType(0, pageNum);
+		}
+		
+		hitPrdocuts(prdList);
+		return prdList;
+	}
+
+	// 최신 순으로 상품가져오기
+	private List<ProductVO> latestType(int start, int pageNum) {		
+		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+		maxPage = (int) Math.ceil(dao.pdLatestTotal() / PAGE_QUANTITY);
+		
+		List<ProductVO> prdList = dao.pdSelectLatest(start, pageNum);
+		if(prdList.size() < 1) {
+			return noneType(0, pageNum);
+		}
+		
+		hitPrdocuts(prdList);
+		return prdList;
+	}
+
+	// 인기상품 가져오기
+	private List<ProductVO> populType(int start, int pageNum) {		
+		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
+		
+		List<ProductVO> prdList = dao.pdSelectPopByPId(start, pageNum);
+		if(prdList.size() < 1) {
+			return noneType(0, pageNum);
+		}
+		
+		if(start < (3 *12)) {
+			for(ProductVO v : prdList) {
+				hotPIds.add(v.getPId());
+			}
+		}
+		
+		return prdList;
+	}
+
+	// 카테고리 상품 가져오기
+	private List<ProductVO> categoryType(int start, int pageNum, String strCId) {	
+		if(strCId == null) {
+			return noneType(start, pageNum);
+		}
+		
+		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+		maxPage = (int) Math.ceil(dao.pdcategoryTotal() / PAGE_QUANTITY);
+		
+		List<ProductVO> prdList = 
+				dao.pdSelectByCId(start, pageNum, Integer.parseInt(strCId));
+		if(prdList.size() < 1) {
+			return noneType(0, pageNum);
+		}
+		
+		hitPrdocuts(prdList);
+		return prdList;
+	}
+	
+	// 인기순으로 정렬하고 페이지마다 일정 수 만큼 인기순 태그지정
+	private void hitPrdocuts(List<ProductVO> prdlist) {
 		// 인기순 정렬용 리스트
 		Map<Integer, Integer> prdTotals = new HashMap<Integer, Integer>();
 		
@@ -49,23 +147,17 @@ public class ListviewAction implements Action {
 			}
 		});
 		
-		// 인기순 상위 5개 가져오기
-		List<Integer> hotPIds = new ArrayList<Integer>();
-		for (int i = 0; i < 5; i++) {
-			hotPIds.add(keys.get(i));
+		// 인기순 상위 5개 가져오기(인기태그 용)
+		if(keys.size() >= 5) {
+			for (int i = 0; i < 5; i++) {
+				hotPIds.add(keys.get(i));
+			}
 		}
-//		System.out.println(hotPIds);
-		
-		
-		req.setAttribute("pdList", prdlist);
-		req.setAttribute("currentPage", currentPage +1);
-		req.setAttribute("maxPage", maxPage);
-		req.setAttribute("hotPIds", hotPIds);
-		
-		dao.closeSession();
-		return "jsp/product/listView.jsp";
+		else {
+			for(int k : keys) {
+				hotPIds.add(k);
+			}
+		}
 	}
 	
-	
-
 }

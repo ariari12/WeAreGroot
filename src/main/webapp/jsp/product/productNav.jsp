@@ -39,7 +39,11 @@ $(() => {
         </div></div>
         <div class="products-container"><div class="nav-subtitle">
         	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
-        	color: #202020; font-size: 20px;" href="?cmd=popul">이달의 인기상품</a>
+        	color: #202020; font-size: 20px;" href="?cmd=list&type=popul">이달의 인기상품</a>
+       	</div></div>
+        <div class="products-container"><div class="nav-subtitle">
+        	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
+        	color: #202020; font-size: 20px;" href="?cmd=list&type=latest">최신 상품</a>
        	</div></div>
     </div>
 </div>

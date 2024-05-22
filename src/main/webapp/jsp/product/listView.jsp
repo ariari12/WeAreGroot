@@ -68,7 +68,6 @@ let viewDetails = (no) => {
                 	if(differenceInDays < 60) { %>
                     <span class="prd-new">신상품</span>
 				<% } %>
-				
                 <span class="prd-tag-gab"> </span>
                 </div>
             </div> 
@@ -89,13 +88,24 @@ let viewDetails = (no) => {
 				dao.closeSession();
 				int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
 			  	int maxPage = Integer.parseInt(request.getAttribute("maxPage").toString());
+			  	String currentUrl = "?";
+				String queryParam = request.getQueryString();
+			  	if(queryParam != null) {
+			  		if(queryParam.contains("page")) {
+			  			int idx = queryParam.indexOf("page");
+					  	// System.out.println(idx);
+			  			queryParam = queryParam.substring(0, idx -1);
+			  		}
+			  		currentUrl += queryParam + "&";
+			  	}
+			  	// System.out.println(currentUrl);
 				if(currentPage <= 1) { 
 			%>
 		   	<li class="page-item disabled">
 		   		<span class="page-link">Previous</span>
 		  	<% 	} else { %>
 		   	<li class="page-item">
-	   			<a class="page-link" href="<%="?page=" + (currentPage -1) %>">Previous</a>
+	   			<a class="page-link" href="<%=currentUrl + "page=" + (currentPage -1) %>">Previous</a>
 		    	<% 	} %>
 	    	</li>
 		   	<%
@@ -106,17 +116,17 @@ let viewDetails = (no) => {
 		    	<span class="page-link"><%=i %></span>
 		   	<% 	} else { %>
 		    <li class="page-item ">
-		    	<a class="page-link" href="<%="?page=" + i %>"><%=i %></a>
+		    	<a class="page-link" href="<%=currentUrl + "page=" + i %>"><%=i %></a>
 		    <% 	} %>
 		    </li>
 	      	<% 	}
-		  		if(currentPage == maxPage) {
+		  		if(currentPage >= maxPage) {
 			%>
 			<li class="page-item disabled">
 				<span class="page-link">Next</span>
 				<% } else { %>
 				<li class="page-item">
-				<a class="page-link" href="<%="?page=" + (currentPage +1) %>">Next</a>
+				<a class="page-link" href="<%=currentUrl + "page=" + (currentPage +1) %>">Next</a>
 				<% } %>
 			</li>
 		  	</ul>

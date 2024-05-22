@@ -1,3 +1,4 @@
+<%@page import="kr.co.moran.web.vo.member.MemberVO"%>
 <%@page import="kr.co.moran.web.dao.CategoryDAO"%>
 <%@page import="kr.co.moran.web.vo.CategoryVO"%>
 <%@page import="java.util.List"%>
@@ -6,6 +7,15 @@
 
 <div class="category">
 <%
+	MemberVO member = (MemberVO)session.getAttribute("memberVO");
+	// System.out.println("member? " + member);
+	int admin = 0;
+	
+	if(member != null) {
+		admin = Integer.parseInt(member.getAdmintype());
+	}
+	// System.out.println("admin? " + admin);
+
 	CategoryDAO dao = new CategoryDAO();
 	List<CategoryVO> cts = dao.selectAll();
 	
@@ -17,7 +27,7 @@
 		<% } %>
 	<div class="category-group">
 		<div class="cateagory-title">
-			<a href="<%="?cmd=category&category="+ c.getCId() %>"><%=c.getName() %></a>
+			<a href="<%="?cmd=list&type=category&category="+ c.getCId() %>"><%=c.getName() %></a>
 		</div>
 		<%
 			int a;
@@ -36,5 +46,8 @@
 	}	
 	if (cnt %5 != 0) { %>
 	</div>
+	<% } 
+	if(admin >= 1) { %>
+	<a class="btn btn-primary ctg-btn" href="?modify&type=category">카테고리 수정</a>
 	<% } %>
 </div>
