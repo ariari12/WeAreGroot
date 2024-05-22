@@ -22,6 +22,9 @@
         </div>
       </div>
       
+      
+      
+
       <c:choose>
 		<c:when test="${not empty sessionScope.memberVO}">			
 			<div class="frame-wrapper">
@@ -45,6 +48,6 @@
 				</div>
 			</div>
 		</c:otherwise>
-	</c:choose>
+	   </c:choose>
 
 		

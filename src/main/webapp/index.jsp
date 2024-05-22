@@ -54,11 +54,11 @@
               </div>
               <div class="frame-11">
                 <div class="frame-12">
-                  <img class="vector" src="resources//img/vector-4.svg" />
+                  <img class="vector" src="resources/img/vector-4.svg" />
                   <div class="text-wrapper-8">인기</div>
                 </div>
                 <div class="frame-13">
-                  <img class="vector-2" src="resources//img/vector-1.svg" />
+                  <img class="vector-2" src="resources/img/vector-1.svg" />
                   <div class="text-wrapper-8">신상품</div>
                 </div>
               </div>
