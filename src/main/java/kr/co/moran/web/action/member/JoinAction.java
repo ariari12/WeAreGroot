@@ -46,7 +46,7 @@ public class JoinAction implements Action {
 		}
 		
 		//성공시 (로그인 전) 메인 화면으로
-		return "home.jsp";
+		return "index.jsp";
 	}
 
 }
