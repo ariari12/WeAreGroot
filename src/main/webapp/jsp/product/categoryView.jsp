@@ -4,9 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" type="text/css" href="../../resources/css/product.css">
 <div class="category">
-
 <%
 	CategoryDAO dao = new CategoryDAO();
 	List<CategoryVO> cts = dao.selectAll();
@@ -18,7 +16,9 @@
 	<div class="overlap-group">
 		<% } %>
 	<div class="category-group">
-		<div class="cateagory-title"><%=c.getName() %></div>
+		<div class="cateagory-title">
+			<a href="<%="?cmd=category&category="+ c.getCId() %>"><%=c.getName() %></a>
+		</div>
 		<%
 			int a;
 			// List<CategoryVO> subCts = dao.selectAllByCId(c.getCId());
@@ -33,5 +33,8 @@
 		if (cnt %5 == 0) { %>
 	</div>
 	<% 	}
-	}	%>
+	}	
+	if (cnt %5 != 0) { %>
+	</div>
+	<% } %>
 </div>

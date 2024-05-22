@@ -22,7 +22,8 @@ public class LoginAction implements Action {
 			session.setAttribute("memberVO", vo);
 			System.out.println(session.getAttribute("memberVO"));
 			//회원 로그인 성공
-			return "home.jsp";
+			System.out.println("로그인 성공");
+			return "index.jsp";
 		}
 		return "jsp/member/loginForm.jsp";
 	}

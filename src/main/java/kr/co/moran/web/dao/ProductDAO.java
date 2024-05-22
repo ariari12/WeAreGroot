@@ -98,6 +98,10 @@ public class ProductDAO {
 		return vos;
 	}
 	
+	public List<ProductVO> name() {
+		
+	}
+	
 	public void closeSession() {
 		if(session != null ) {
 			session.close();

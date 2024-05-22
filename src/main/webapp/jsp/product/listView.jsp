@@ -16,7 +16,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
-<script src="resources/css/product.css"></script>
+<link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/common.css">
 <link rel="stylesheet" href="resources/css/product.css">
 <script>
@@ -29,6 +29,12 @@ let viewDetails = (no) => {
 <body>
 <jsp:include page="../layout/header.jsp"></jsp:include>
 <jsp:include page="./productNav.jsp"></jsp:include>
+
+<%-- 
+<div class="category-list">
+<jsp:include page="./categoryView.jsp"></jsp:include>
+</div> --%>
+
 <div class="container products">
 <%
 	ProductDAO dao = new ProductDAO();
@@ -55,51 +61,57 @@ let viewDetails = (no) => {
                 <div class="prd-tag">
                 <% 	if(hotPIds.contains(v.getPId())) { %>
                     <span class="prd-hot">인기</span>
-				<% } %>
+                <% } %>
 				<% long differenceInDays = 
 						(long) (System.currentTimeMillis() - v.getCreateDate().getTime())
 							/ (1000 * 60 * 60 * 24);
                 	if(differenceInDays < 60) { %>
                     <span class="prd-new">신상품</span>
 				<% } %>
+				
+                <span class="prd-tag-gab"> </span>
                 </div>
             </div> 
         </div>
-  	<% 	cnt++;
-  		if(cnt >= 4) { 
-  		cnt = 0; %>
-  	 </div>
-    <% } %>
+		<%-- frame-prd end --%>
+	  	<% 	cnt++;
+	  		if(cnt >= 4) { 
+	  		cnt = 0; %>
+  		</div>
+		<% } 
+	} %>
+	<%-- frame-line end --%>
     
-<% } %>
-    
- <div class="page frame-line">
-	 <nav aria-label="Page navigation">
-		<ul class="pagination">
-	<%
-	dao.closeSession();
-	int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
-	  	int maxPage = Integer.parseInt(request.getAttribute("maxPage").toString());
-		if(currentPage <= 1) { %>
-	   <li class="page-item disabled">
-	   		<span class="page-link">Previous</span>
-	  <% 	} else { %>
-	   <li class="page-item">
-	    		<a class="page-link" href="<%="?page=" + (currentPage -1) %>">Previous</a>
-	    	<% 	} %>
+	 <div class="page frame-line">
+		 <nav aria-label="Page navigation">
+			<ul class="pagination">
+			<%
+				dao.closeSession();
+				int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
+			  	int maxPage = Integer.parseInt(request.getAttribute("maxPage").toString());
+				if(currentPage <= 1) { 
+			%>
+		   	<li class="page-item disabled">
+		   		<span class="page-link">Previous</span>
+		  	<% 	} else { %>
+		   	<li class="page-item">
+	   			<a class="page-link" href="<%="?page=" + (currentPage -1) %>">Previous</a>
+		    	<% 	} %>
 	    	</li>
-	   	<%
-	  	for(int i = 1; i <= maxPage; i++) {
-	   	if(i == currentPage) { %>
-	    <li class="page-item active" aria-current="page">
-	    	<span class="page-link"><%=i %></span>
-	   <% 	} else { %>
-	    <li class="page-item ">
-	    	<a class="page-link" href="<%="?page=" + i %>"><%=i %></a>
-	    <% 	} %>
-	    </li>
-	      <% }
-	  	if(currentPage == maxPage) { %>
+		   	<%
+			  	for(int i = 1; i <= maxPage; i++) {
+			   	if(i == currentPage) {
+	   		%>
+		    <li class="page-item active" aria-current="page">
+		    	<span class="page-link"><%=i %></span>
+		   	<% 	} else { %>
+		    <li class="page-item ">
+		    	<a class="page-link" href="<%="?page=" + i %>"><%=i %></a>
+		    <% 	} %>
+		    </li>
+	      	<% 	}
+		  		if(currentPage == maxPage) {
+			%>
 			<li class="page-item disabled">
 				<span class="page-link">Next</span>
 				<% } else { %>
@@ -107,10 +119,12 @@ let viewDetails = (no) => {
 				<a class="page-link" href="<%="?page=" + (currentPage +1) %>">Next</a>
 				<% } %>
 			</li>
-	  	</ul>
-	</nav>
-   </div>
-  </div>
+		  	</ul>
+		</nav>
+	</div>
+</div>
+<%-- product container end --%>
+
 <jsp:include page="../layout/footer.jsp"></jsp:include>
 </body>
 </html>
