@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/common.css">
+<link rel="stylesheet" href="resources/css/globals.css">
 <link rel="stylesheet" href="resources/css/product.css">
 <script>
 let viewDetails = (no) => {

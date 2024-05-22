@@ -112,14 +112,19 @@
     white-space: nowrap;
 }
 
+.category-list {
+    position: absolute;
+    z-index: 2;
+}
+
 /* product categroy */
 div.category {
-
-  width: 1920px;
-  height: 1026px;
-  background-color: #ffffff;
-  border: 2px solid;
-  border-color: #e4e4e4;
+    margin-left: 150px;
+	width: 1920px;
+	height: 400px;
+	background-color: #ffffff;
+	border: 2px solid;
+	border-color: #e4e4e4;
 }
 
 div.category .overlap-group {
@@ -167,6 +172,7 @@ div.category .subcategories {
 
 /* product_list */
 .products {
+    margin-left: 450px;
 	margin-top: 20px;
 }
 

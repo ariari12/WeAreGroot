@@ -130,7 +130,7 @@
         </div>
       </div>
       
-      <jsp:include page="layout/footer.jsp" />
+      <jsp:include page="jsp/layout/footer.jsp" />
     </div>
   </body>
 </html>
