@@ -1,36 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Header</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-</head>
-<body>
-	<header id="header">
-		<div class="row logBar">
-			<a href="/login">로그인</a>
-			<a href="/join">회원가입</a>
-		</div>
+				
+	<img class="header" src="img/header.svg" />
+      <div class="frame-20">
+        <div class="frame-21">
+          <div class="frame-22"><div class="text-wrapper-23">홈</div></div>
+          <div class="frame-23"><div class="text-wrapper-24">커뮤니티</div></div>
+          <div class="frame-23"><div class="text-wrapper-24">스토어</div></div>
+          <div class="frame-23"><div class="text-wrapper-24">공지</div></div>
+          <div class="frame-23">
+            <div class="text-wrapper-24">이벤트</div>
+            <div class="ellipse"></div>
+          </div>
+          <div class="frame-23"><div class="text-wrapper-24">1:1 문의</div></div>
+        </div>
+        <div class="frame-24">
+          <div class="text-wrapper-25">상품 또는 식물 검색하기</div>
+          <div class="union-wrapper"><img class="union" src="img/union.svg" /></div>
+        </div>
+      </div>
+      
+      <c:choose>
+		<c:when test="${not empty sessionScope.memberVO}">			
+			<div class="frame-wrapper">
+				<div class="frame-25">
+					<div class="frame-26"><div class="text-wrapper-26">내 정보(링크 없음)</div></div>
+					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/member?cmd=logoutOk">로그아웃</a></div></div>
+					<div class="frame-26"><div class="text-wrapper-26">장바구니(링크 없음)</div></div>
+				</div>
+			</div>				
+		</c:when>
+		<%-- <c:if test="${not empty sessionScope.memberVO}">    
+	    	<p>회원 Email: ${sessionScope.memberVO.email}</p>
+	    	<p>회원 pw: ${sessionScope.memberVO.pw}</p>
+	    <!-- 기타 회원 정보 출력 -->
+		</c:if> --%>
+		<c:otherwise>
+			<div class="frame-wrapper">
+				<div class="frame-25">
+					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/member?cmd=loginForm">로그인</a></div></div>
+					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/member?cmd=joinForm">회원가입</a></div></div>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
 		
-		<div class="logoArea">
-			<img src="../resources/img/moranLogo.png" alt="모란모란" width="121.08px" height="40.63px"/>
-		</div>
-		<div class="navBar">
-			<ul>
-				<li><a href="/home">홈</a></li>
-				<li><a href="/community">커뮤니티</a></li>
-				<li><a href="/store">스토어</a></li>
-				<li><a href="/notice">공지</a></li>
-				<li><a href="/event">이벤트</a></li>
-				<li><a href="/inquiry">문의</a></li>
-			</ul>
-		</div>
-	</header>
-</body>
-</html>
