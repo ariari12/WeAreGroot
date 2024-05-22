@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 				
-	<img class="header" src="img/header.svg" />
+	<img class="header" src="resources/img/header.svg" />
       <div class="frame-20">
         <div class="frame-21">
-          <div class="frame-22"><div class="text-wrapper-23">홈</div></div>
+          <div class="frame-22"><div class="text-wrapper-23"><a href="index.jsp">홈</a></div></div>
           <div class="frame-23"><div class="text-wrapper-24">커뮤니티</div></div>
           <div class="frame-23"><div class="text-wrapper-24">스토어</div></div>
           <div class="frame-23"><div class="text-wrapper-24">공지</div></div>
@@ -18,7 +18,7 @@
         </div>
         <div class="frame-24">
           <div class="text-wrapper-25">상품 또는 식물 검색하기</div>
-          <div class="union-wrapper"><img class="union" src="img/union.svg" /></div>
+          <div class="union-wrapper"><img class="union" src="resources/img/union.svg" /></div>
         </div>
       </div>
       

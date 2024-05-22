@@ -13,13 +13,6 @@
 
 <body>
 
-	<jsp:include page="/layout/header.jsp"></jsp:include>
 
-	
-	<div class="container">
-		<h1>test</h1>
-	</div>
-	
-	<jsp:include page="/layout/footer.jsp"></jsp:include>
 </body>
 </html>
