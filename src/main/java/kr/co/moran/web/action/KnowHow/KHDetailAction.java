@@ -1,10 +1,14 @@
 package kr.co.moran.web.action.KnowHow;
 
+import java.util.List;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
+import kr.co.moran.web.dao.CommentDAO;
 import kr.co.moran.web.vo.BoardVO;
+import kr.co.moran.web.vo.CommentVO;
 
 public class KHDetailAction implements Action {
 
@@ -13,10 +17,19 @@ public class KHDetailAction implements Action {
 		String sbId = req.getParameter("bId");
 		int bId = Integer.parseInt(sbId);
 		
-		BoardVO vo = new BoardVO();
-		BoardDAO dao = new BoardDAO();
-		vo = dao.selectKHBybId(bId);
-		req.setAttribute("vo", vo);
+		BoardDAO boardDAO = new BoardDAO();
+		CommentDAO commentDAO = new CommentDAO();  
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO = boardDAO.selectKHBybId(bId);
+		
+		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);
+		
+		System.out.println(commentList);
+		
+		req.setAttribute("boardVO", boardVO);
+		req.setAttribute("commentList", commentList);
+		
 		return "views/khDetail.jsp";
 	}
 

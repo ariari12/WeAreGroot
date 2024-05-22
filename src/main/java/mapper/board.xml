@@ -58,4 +58,12 @@
 			b_contents = #{contents}
 		WHERE b_id = #{bId}
 	</update>
+	
+	<update id="ModifyQnABybId">
+		UPDATE BOARD
+		SET b_title = #{title},
+			b_contents = #{contents}
+		WHERE b_id = #{bId}
+	</update>
+	
 </mapper>

@@ -16,14 +16,14 @@ public class KHListAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		String sort = req.getParameter("sort");
 		
-        List<BoardVO> list;
+        List<BoardVO> boardList;
         if ("viewCntDesc".equals(sort)) {
-            list = dao.selectAllKHOrderByViewCntDesc();
+        	boardList = dao.selectAllKHOrderByViewCntDesc();
         } else {
-            list = dao.selectAllKH();
+        	boardList = dao.selectAllKH();
         }
 
-        req.setAttribute("list", list);
+        req.setAttribute("boardList", boardList);
         return "views/khlist.jsp";
 	}
 

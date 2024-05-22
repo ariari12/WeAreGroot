@@ -7,6 +7,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
@@ -99,7 +100,25 @@ public class BoardDAO {
 
 	public void modifyKHBybId(@Param("bId") int bId, @Param("title") String title, @Param("contents") String contents) {
 		SqlSession ss = factory.openSession(true);
-		ss.insert("kr.co.moran.board.ModifyKHBybId");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("bId", bId);
+		params.put("title", title);
+		params.put("contents", contents);
+		
+		ss.update("kr.co.moran.board.ModifyKHBybId", params);
+		
+		ss.close();
+		
+	}
+	
+	public void modifyQnABybId(@Param("bId") int bId, @Param("title") String title, @Param("contents") String contents) {
+		SqlSession ss = factory.openSession(true);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("bId", bId);
+		params.put("title", title);
+		params.put("contents", contents);
+		
+		ss.update("kr.co.moran.board.ModifyQnABybId", params);
 		
 		ss.close();
 		

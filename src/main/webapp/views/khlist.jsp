@@ -33,10 +33,10 @@
 <body>
 	<div class="container">
 	<table class="table">
-		<c:forEach var="vo" items="${list}">
+		<c:forEach var="boardVO" items="${boardList}">
 		<tr>
-			<th><a href="?cmd=khDetail&bId=${vo.getBId() }">${vo.title}</a></th>
-			<td><a href="?cmd=khDetail&bId=${vo.getBId() }">${vo.contents}</a></td>
+			<th><a href="?cmd=khDetail&bId=${boardVO.getBId() }">${boardVO.title}</a></th>
+			<td><a href="?cmd=khDetail&bId=${boardVO.getBId() }">${boardVO.contents}</a></td>
 		</tr>
    		 </c:forEach>
 	</table>
