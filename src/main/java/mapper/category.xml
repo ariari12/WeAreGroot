@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="kr.co.moran.category">
+	<select id="selectAll" resultType="kr.co.moran.web.vo.CategoryVO">
+		select 	c_id as cId, c_name as name, 
+				c_parent_id as cParentId
+		from CATEGORY
+	</select>
+	
+	<select id="selectAllByCId" parameterType="int" resultType="kr.co.moran.web.vo.CategoryVO">
+		select 	c_id as cId, c_name as name, 
+				c_parent_id as cParentId
+		from CATEGORY
+		where c_id = c_parent_id = #{c_parent_id}
+	</select>
+</mapper>

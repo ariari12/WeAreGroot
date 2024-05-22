@@ -36,9 +36,31 @@ public class ProductDAO {
 	// 전체 상품 종류
 	public int pdTotal() {
 		openSession();
-		int cnt = session.selectOne("kr.co.moran.product.selectPdTotal");
+		int cnt = session.selectOne("kr.co.moran.product.pdTotal");
 		return cnt;
 	}
+
+	// 최신상퐁 종류 총 갯수
+	public int pdLatestTotal() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdLatestTotal");
+		return cnt;
+	}
+
+	// 카테고리상퐁 종류 총 갯수
+	public int pdcategoryTotal() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdcategoryTotal");
+		return cnt;
+	}
+
+	// 인기 상퐁 종류 총 갯수
+	public int pdPopTotal() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdPopTotal");
+		return cnt;
+	}
+	
 	
 	// 상품 페이지 조회
 	public List<ProductVO> pdSelectPage(int start, int pageNum) {
@@ -95,6 +117,18 @@ public class ProductDAO {
         map.put("start", start);
         map.put("pageNum", pageNum);
         List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectLatest", map);
+		return vos;
+	}
+	
+	// 카테고리별 조회
+	public List<ProductVO> pdSelectByCId(int start, int pageNum, int cId) {
+		openSession();
+//		System.out.println("C_ID :" + cId);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("start", start);
+		map.put("pageNum", pageNum);
+		map.put("C_ID", cId);
+        List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectByCId", map);
 		return vos;
 	}
 	

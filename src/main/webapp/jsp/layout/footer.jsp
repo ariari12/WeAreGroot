@@ -21,3 +21,4 @@
         <div class="text-wrapper-21">전자금융거래약관</div>
         <div class="text-wrapper-22">개인정보처리방침</div>
       </div>
+

@@ -20,8 +20,9 @@
   	</environments>
   	
   	<mappers>
-  		<mapper resource="mapper/product.xml"/>
   		<mapper resource="mapper/member.xml"/>
   		<mapper resource="mapper/event.xml"/>
+  		<mapper resource="mapper/product.xml"/>
+  		<mapper resource="mapper/category.xml"/>
   	</mappers>
   </configuration>
