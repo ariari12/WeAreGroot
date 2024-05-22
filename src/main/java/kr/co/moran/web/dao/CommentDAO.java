@@ -2,8 +2,11 @@ package kr.co.moran.web.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -48,5 +51,24 @@ public class CommentDAO {
 		
 		ss.close();
 	}
+	
+	public void deleteComment(int cId) {
+		SqlSession ss = factory.openSession(true);
+		ss.delete("kr.co.moran.comment.DeleteComment",cId);
+		
+		ss.close();
+	}
+
+	public void modifyComment(@Param("cId") int cId, @Param("contents") String contents) {
+		SqlSession ss = factory.openSession(true);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("contents", contents);
+		params.put("cId", cId);
+		ss.update("kr.co.moran.comment.ModifyComment", params);
+		
+		ss.close();
+	}
+	
+	
 	
 }

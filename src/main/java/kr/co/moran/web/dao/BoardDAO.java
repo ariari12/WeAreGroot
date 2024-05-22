@@ -123,4 +123,18 @@ public class BoardDAO {
 		ss.close();
 		
 	}
+	
+	public void deleteKHBybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.board.DeleteKHBybId",bId);
+		
+		ss.close();
+	}
+	
+	public void deleteQnABybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.board.DeleteQnABybId",bId);
+		
+		ss.close();
+	}
 }

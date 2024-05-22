@@ -14,6 +14,15 @@
 	<insert id="InsertComment" parameterType="kr.co.moran.web.vo.CommentVO">
 		INSERT INTO COMMENT (b_id, c_contents, c_like_cnt, c_parent_id, c_regdate, m_id) VALUES
 		(#{bId}, #{contents}, 0, NULL, NOW(), #{mId} )
-	
 	</insert>
+	
+	<update id="ModifyComment" >
+		UPDATE COMMENT
+		SET c_contents = #{contents}
+		WHERE c_id = #{cId}
+	</update>
+	
+	<delete id="DeleteComment">
+		DELETE FROM COMMENT WHERE c_id = #{cId}
+	</delete>
 </mapper>
