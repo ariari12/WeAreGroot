@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-				
-	<img class="header" src="resources/img/header.svg" />
+	<div class="header">		
+		<a href="index.jsp"><img  src="resources/img/header.svg"/></a>		
+	</div>
       <div class="frame-20">
         <div class="frame-21">
-          <div class="frame-22"><div class="text-wrapper-23">홈</div></div>
+          <div class="frame-22"><div class="text-wrapper-23"><a href="index.jsp">홈</a></div></div>
           <div class="frame-23"><div class="text-wrapper-24">커뮤니티</div></div>
           <div class="frame-23"><div class="text-wrapper-24">스토어</div></div>
           <div class="frame-23"><div class="text-wrapper-24">공지</div></div>
