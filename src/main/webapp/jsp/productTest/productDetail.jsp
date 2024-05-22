@@ -4,16 +4,16 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../resources/css/globals.css" />
-    <link rel="stylesheet" href="../../resources/css/detail.css" />
+    <link rel="stylesheet" href="resources/css/globals.css" />
+    <link rel="stylesheet" href="resources/css/productDetail.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="../../resources/js/productDetail.js"></script>
+    <script src="resources/js/productDetail.js"></script>
   </head>
   <body>
     <div class="div-wrapper">
-      <img class="header" src="../../resources/img/header.svg" />
+      <img class="header" src="resources/img/header.svg" />
       <div class="frame">
         <div class="div">
           <div class="frame-2"><div class="text-wrapper">홈</div></div>
@@ -28,7 +28,7 @@
         </div>
         <div class="frame-4">
           <div class="text-wrapper-3">상품 또는 식물 검색하기</div>
-          <div class="union-wrapper"><img class="union" src="../../resources/img/union.svg" /></div>
+          <div class="union-wrapper"><img class="union" src="resources/img/union.svg" /></div>
         </div>
       </div>
       <div class="frame-wrapper">
@@ -74,27 +74,27 @@
           <div class="frame-2"><div class="text-wrapper-19">이달의 인기상품</div></div>
         </div>
       </div>
-      <img class="img" src="../../resources/img/rectangle-4.png" />
+      <img class="img" src="resources/img/rectangle-4.png" />
       <div class="text-wrapper-20">꽃기린</div>
       <div class="text-wrapper-21" id="price">100,000원</div>
       <div class="frame-8">
         <div class="frame-9">
-          <img class="img-2" src="../../resources/img/heart.svg" />
+          <img class="img-2" src="resources/img/heart.svg" />
           <div class="text-wrapper-22">1,234개</div>
         </div>
         <div class="frame-9">
-          <img class="img-2" src="../../resources/img/star.svg" />
+          <img class="img-2" src="resources/img/star.svg" />
           <div class="text-wrapper-22">0.0</div>
           <div class="text-wrapper-22">(123)</div>
         </div>
       </div>
       <div class="frame-10">
         <div class="frame-11">
-          <img class="vector" src="../../resources/img/vector.svg" />
+          <img class="vector" src="resources/img/vector.svg" />
           <div class="text-wrapper-23">인기</div>
         </div>
         <div class="frame-12">
-          <img class="vector-2" src="../../resources/img/vector-1.svg" />
+          <img class="vector-2" src="resources/img/vector-1.svg" />
           <div class="text-wrapper-23">신상품</div>
         </div>
       </div>
@@ -110,16 +110,16 @@
         끈적한 진액이 나오는데, 이 진액에는 독성이 있어 알러지 반응을 일으키므로 진액이 직접 손에 닿지 않도록 주의해
         주세요.
       </p>
-      <img class="rectangle-5" src="../../resources/img/rectangle-34626555.png" />
-      <img class="rectangle-6" src="../../resources/img/rectangle-34626556.png" />
-      <img class="rectangle-7" src="../../resources/img/rectangle-34626557.png" />
-      <img class="rectangle-8" src="../../resources/img/rectangle-34626558.png" />
+      <img class="rectangle-5" src="resources/img/rectangle-34626555.png" />
+      <img class="rectangle-6" src="resources/img/rectangle-34626556.png" />
+      <img class="rectangle-7" src="resources/img/rectangle-34626557.png" />
+      <img class="rectangle-8" src="resources/img/rectangle-34626558.png" />
       <div class="overlap-group">
         <div class="frame-13"><div class="text-wrapper-27">장바구니 담기</div></div>
         <div class="frame-14"><div class="text-wrapper-28">바로 구매</div></div>
         <div class="overlap">
           <div class="text-wrapper-29">옵션을 선택하세요</div>
-          <img class="menu-down" src="../../resources/img/menu-down.svg" />
+          <img class="menu-down" src="resources/img/menu-down.svg" />
         </div>
         <div class="text-wrapper-30" id="totalPrice" >100,000원</div>
         <div class="text-wrapper-31">주문금액</div>
@@ -128,8 +128,8 @@
 			<div class="frame-16">
 				<input type="number" class="text-wrapper-33" name="cnt" id="cnt" value="1">
 			</div>
-			<img class="frame-17" id="plus" src="../../resources/img/frame-427321499_1.svg" />
-			<img class="frame-18" id="minus" src="../../resources/img/frame-427321498.svg" />
+			<img class="frame-17" id="plus" src="resources/img/frame-427321499_1.svg" />
+			<img class="frame-18" id="minus" src="resources/img/frame-427321498.svg" />
 		</div>
       </div>
       <div class="frame-19">
@@ -143,10 +143,10 @@
       </div>
       <div class="text-wrapper-35">배송비 3,500원</div>
       <div class="frame-21">
-        <img class="img-2" src="../../resources/img/flower.svg" />
+        <img class="img-2" src="resources/img/flower.svg" />
         <p class="text-wrapper-36">모란모란이 알려드리는 해당 상품 식물 정보, 구매 전후로 꼭 확인해보세요!</p>
       </div>
-      <img class="element" src="../../resources/img/2024-05-17-2-49-1.png" />
+      <img class="element" src="resources/img/2024-05-17-2-49-1.png" />
     </div>
   </body>
 </html>

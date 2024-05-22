@@ -60,8 +60,8 @@ function updatePrice(oper) {
     $('#totalPrice').text(totalPrice);
 
     // +- 버튼 투명도 설정
-    $("#minus").attr("src", cnt == 1 ? "../../resources/img/frame-427321498.svg" : "../../resources/img/frame-427321498_1.svg");
-    $("#plus").attr("src", cnt == 1000 ? "../../resources/img/frame-427321499.svg" : "../../resources/img/frame-427321499_1.svg");
+    $("#minus").attr("src", cnt == 1 ? "resources/img/frame-427321498.svg" : "resources/img/frame-427321498_1.svg");
+    $("#plus").attr("src", cnt == 1000 ? "resources/img/frame-427321499.svg" : "resources/img/frame-427321499_1.svg");
 
 }
 
