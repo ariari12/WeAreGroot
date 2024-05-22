@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>	<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.moran.board">
+	<select id="SelectAllKH" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_type = 2 AND b_is_maintain = 0
+		ORDER BY b_regdate
+	</select>
+	
+	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_type = 2 AND b_is_maintain = 0
+		ORDER BY b_view_cnt DESC
+	</select>
+	
+	<select id="SelectAllQnA" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_type = 1 AND b_is_maintain = 0
+		ORDER BY b_regdate DESC
+	</select>
+	
+	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_type = 1 AND b_is_maintain = 0
+		ORDER BY b_view_cnt 
+	</select>
+	
+	<select id="SelectQnABybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_id = #{bId}
+	</select>
+	
+	<select id="SelectKHBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
+		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD
+		WHERE b_id = #{bId}
+	</select>
+	
+	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
+		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
+		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 1, 0)
+	</insert>
+	
+	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO">
+		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
+		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 2, 0)
+	</insert>
+	
+	<update id="ModifyKHBybId">
+		UPDATE BOARD
+		SET b_title = #{title},
+			b_contents = #{contents}
+		WHERE b_id = #{bId}
+	</update>
+	
+	<update id="ModifyQnABybId">
+		UPDATE BOARD
+		SET b_title = #{title},
+			b_contents = #{contents}
+		WHERE b_id = #{bId}
+	</update>
+	
+	<update id="DeleteKHBybId">
+		UPDATE BOARD
+		SET b_is_maintain = 1, b_retention_period = ADDDATE(date(now()),INTERVAL 6 YEAR)
+		WHERE b_id = ${bId}
+	</update>
+	
+	<update id="DeleteQnABybId">
+		UPDATE BOARD
+		SET b_is_maintain = 1, b_retention_period = ADDDATE(date(now()),INTERVAL 6 YEAR)
+		WHERE b_id = ${bId}
+	</update>
+	
+</mapper>

@@ -19,6 +19,11 @@
   	</environments>
   	
   	<mappers>
+
   		<mapper resource="mapper/member.xml"/>
+  		<mapper resource="mapper/dept.xml"/>
+  		<mapper resource="mapper/board.xml"/>
+  		<mapper resource="mapper/comment.xml"/>
+
   	</mappers>
   </configuration>
