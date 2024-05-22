@@ -30,11 +30,6 @@ let viewDetails = (no) => {
 <jsp:include page="../layout/header.jsp"></jsp:include>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
-<%-- 
-<div class="category-list">
-<jsp:include page="./categoryView.jsp"></jsp:include>
-</div> --%>
-
 <div class="container products">
 <%
 	ProductDAO dao = new ProductDAO();

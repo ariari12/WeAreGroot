@@ -131,8 +131,6 @@
       </div>
       
       <jsp:include page="layout/footer.jsp" />
-		
-	  <jsp:include page="layout/header.jsp" />
     </div>
   </body>
 </html>
