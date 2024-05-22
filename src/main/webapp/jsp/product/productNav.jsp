@@ -3,8 +3,21 @@
 
 <script>
 $(() => {
+	let clickEnable = false;
+	$(".category").hide();
+	
 	$(".prd_nav-categoryframe").click(() => {
-		// $(".category-list").html();
+		clickEnable = !clickEnable;
+		
+		console.log("카테고리 전체 클릭");
+		console.log(clickEnable);
+		
+		if(clickEnable) {
+			$(".category").show();
+		}
+		else {
+			$(".category").hide();
+		}
 	});
 });
 </script>
@@ -20,8 +33,14 @@ $(() => {
             </div>
             <div class="category-list">카테고리 전체</div>
         </div>
-        <div class="products-container"><div class="nav-subtitle">전체 상품</div></div>
-        <div class="products-container"><div class="nav-subtitle">이달의 인기상품</div></div>
+        <div class="products-container"><div class="nav-subtitle">
+        	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
+        	color: #202020; font-size: 20px;" href="?cmd=lsit">전체 상품</a>
+        </div></div>
+        <div class="products-container"><div class="nav-subtitle">
+        	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
+        	color: #202020; font-size: 20px;" href="?cmd=popul">이달의 인기상품</a>
+       	</div></div>
     </div>
 </div>
 

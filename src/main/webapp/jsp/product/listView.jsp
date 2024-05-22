@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +19,7 @@
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/common.css">
+<link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 <link rel="stylesheet" href="resources/css/product.css">
 <script>
@@ -28,7 +30,9 @@ let viewDetails = (no) => {
 
 </head>
 <body>
+<div class="div-wrapper" style="height: 220px; z-index: 3;">
 <jsp:include page="../layout/header.jsp"></jsp:include>
+</div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
 <div class="container products">
@@ -121,6 +125,8 @@ let viewDetails = (no) => {
 </div>
 <%-- product container end --%>
 
+<div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
 <jsp:include page="../layout/footer.jsp"></jsp:include>
+</div>
 </body>
 </html>

@@ -119,15 +119,16 @@
 
 /* product categroy */
 div.category {
-    margin-left: 150px;
 	width: 1920px;
-	height: 400px;
+	height: 500px;
 	background-color: #ffffff;
 	border: 2px solid;
 	border-color: #e4e4e4;
 }
 
 div.category .overlap-group {
+    width: 1300px;
+    margin-left: 350px;
 	margin-bottom: 20px;
     border-top: 5px solid #6d6d6d;
 }
@@ -161,10 +162,10 @@ div.category .cateagory-title>a {
 	font-weight: 600;
 	color: #202020;
 	font-size: 18px;
-    color: black;
 }
 
 div.category .subcategories {
+    margin: 10px;
 	text-align: center;
 	margin-left: 50px;
 }
@@ -172,7 +173,7 @@ div.category .subcategories {
 
 /* product_list */
 .products {
-    margin-left: 450px;
+    margin-left: 365px;
 	margin-top: 20px;
 }
 
