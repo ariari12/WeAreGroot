@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+* {
+    color: #222;
+    /* 기본 글 색상 */
+    font-family: "Nanum Gothic", sans-serif;
+    /* 나눔고딕체 적용 */
+    text-decoration: none;
+    /* 밑줄 제거 */
+    padding: 0;
+    margin: 0;
+
+}
+
+.container{
+	border: 3px solid #000;
+}
+
+
+

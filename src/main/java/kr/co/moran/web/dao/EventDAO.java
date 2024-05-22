@@ -32,7 +32,6 @@ public class EventDAO {
 		List<EventVO> eventList = ss.selectList("selectEventList");
 		ss.close();
 		System.out.println("dao실행");	
-		eventList.forEach(i->System.out.println(i));
 		
 		return eventList;
 	}

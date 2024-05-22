@@ -31,7 +31,7 @@ let viewDetails = (no) => {
 </head>
 <body>
 <div class="div-wrapper" style="height: 220px; z-index: 3;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+	<jsp:include page="../layout/header.jsp"></jsp:include>
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
