@@ -18,10 +18,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
-<link rel="stylesheet" href="resources/css/common.css">
+<!-- <link rel="stylesheet" href="resources/css/common.css"> -->
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
-<link rel="stylesheet" href="resources/css/product.css">
+
 <script>
 let viewDetails = (no) => {
 	window.location = "./product?cmd=detail&no=" + no;
@@ -30,7 +30,7 @@ let viewDetails = (no) => {
 
 </head>
 <body>
-<div class="div-wrapper" style="height: 220px; z-index: 3;">
+<div class="div-wrapper " style="height: 220px; z-index: 3;">
 <jsp:include page="../layout/header.jsp"></jsp:include>
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>

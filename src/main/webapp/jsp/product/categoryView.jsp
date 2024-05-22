@@ -1,5 +1,5 @@
+<%@page import="kr.co.moran.web.dao.ProductDAO"%>
 <%@page import="kr.co.moran.web.vo.member.MemberVO"%>
-<%@page import="kr.co.moran.web.dao.CategoryDAO"%>
 <%@page import="kr.co.moran.web.vo.CategoryVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,7 +16,7 @@
 	}
 	// System.out.println("admin? " + admin);
 
-	CategoryDAO dao = new CategoryDAO();
+	ProductDAO dao = new ProductDAO();
 	List<CategoryVO> cts = dao.selectAll();
 	
 	int cnt = 0;

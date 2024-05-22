@@ -204,6 +204,7 @@ div.category .ctg-btn {
 
 .products .prd-desc .prd-name {
 	margin-left: -10px;
+	margin-bottom: 10px;
 	width: 270px;
 	font-family: "Pretendard Variable-Medium", Helvetica;
 	font-weight: 600;
@@ -230,6 +231,7 @@ div.category .ctg-btn {
 
 
 .products .prd-tag {
+	margin-top: 5px;
 	margin-bottom: 20px;
 }
 

@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 
+import kr.co.moran.web.vo.CategoryVO;
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
 import lombok.val;
@@ -132,6 +133,20 @@ public class ProductDAO {
 		return vos;
 	}
 	
+	// 카테고리 전체 조회
+	public List<CategoryVO> selectAll() {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.selectAll");
+		return vos;
+	}
+
+	// 부무 참조 키로 하위 카테고리 조회
+	public List<CategoryVO> selectSubCategory(int cParentId) {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.selectAllByCId", cParentId);
+		return vos;
+	}
+	
 	public void closeSession() {
 		if(session != null ) {
 			session.close();
@@ -142,6 +157,7 @@ public class ProductDAO {
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
+		// product
 //		dao.pdSelectPage(0, 12).forEach(v -> {
 //			System.out.println(v.getPId());
 //			System.out.println(dao.piSelsctBigimgByPId(v.getPId()).getImg());
@@ -153,6 +169,11 @@ public class ProductDAO {
 		
 //		dao.pdSelectPopByPId(0, 12).forEach(System.out::println);
 //		dao.pdSelectLatest(0, 12).forEach(System.out::println);
+		
+		
+		// category
+//		dao.selectAll().forEach(System.out::println);
+		dao.selectSubCategory(0).forEach(System.out::println);
 		
 		dao.closeSession();
 	}
