@@ -14,7 +14,6 @@ import kr.co.moran.web.action.member.JoinFormAction;
 import kr.co.moran.web.action.member.LoginAction;
 import kr.co.moran.web.action.member.LoginFormAction;
 import kr.co.moran.web.action.member.LogoutAction;
-import kr.co.moran.web.action.member.mailAction;
 
 @WebServlet("/member")
 public class MemeberController extends HttpServlet{
@@ -39,8 +38,6 @@ public class MemeberController extends HttpServlet{
 			action = new LoginAction();
 		}else if(cmd.equals("logoutOk")) {
 			action = new LogoutAction();
-		}else if(cmd.equals("mailOk")) {
-			action = new mailAction();
 		}
 		
 		url = action.execute(req, resp);		
