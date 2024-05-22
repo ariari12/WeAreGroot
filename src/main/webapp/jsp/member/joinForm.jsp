@@ -19,7 +19,7 @@
 	                type : "POST",
 	                url : "/moran/member",
 	                data : {
-	                    cmd : "verifyEmail",
+	                    cmd : "emailOk",
 	                    email : email
 	                },
 	                success : function(response){

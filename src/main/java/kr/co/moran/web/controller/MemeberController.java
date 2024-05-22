@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
+import kr.co.moran.web.action.member.EmailAction;
 import kr.co.moran.web.action.member.JoinAction;
 import kr.co.moran.web.action.member.JoinFormAction;
 import kr.co.moran.web.action.member.LoginAction;
@@ -38,6 +39,8 @@ public class MemeberController extends HttpServlet{
 			action = new LoginAction();
 		}else if(cmd.equals("logoutOk")) {
 			action = new LogoutAction();
+		}else if(cmd.equals("emailOk")) {
+			action = new EmailAction();
 		}
 		
 		url = action.execute(req, resp);		
