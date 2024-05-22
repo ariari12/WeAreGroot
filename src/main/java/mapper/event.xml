@@ -2,12 +2,26 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
   
 <mapper namespace="kr.co.moran.web.event">
 
-	<select id="selectEventList" resultType="kr.co.moran.web.vo.EventVO">
-		SELECT e_id, m_id, pd_id, e_title, e_contents, e_writedate, e_start, e_end
-		FROM EVENT
+<resultMap type="kr.co.moran.web.vo.EventVO" id="eventMap">
+	<result property="eId" column="e_id"/>
+	<result property="title" column="e_title"/>
+	<result property="start" column="e_start"/>
+	<result property="end" column="e_end"/>
+	<collection property="eventImgVO" resultMap="eventImgMap"/>
+</resultMap>
+<resultMap type="kr.co.moran.web.vo.EventImgVO" id="eventImgMap">
+	<result property="eiImg" column="ei_img"/>
+</resultMap>
+	<select id="selectEventList" resultMap="eventMap">
+		SELECT e.e_id, e.e_title, e.e_start, e.e_end, ei.ei_img
+		FROM EVENT AS e
+		LEFT OUTER JOIN EVENT_IMG AS ei
+		ON e.e_id = ei.e_id
 	</select>
 
 
