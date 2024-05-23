@@ -41,6 +41,12 @@ public class MemeberController extends HttpServlet{
 			action = new LogoutAction();
 		}else if(cmd.equals("emailOk")) {
 			action = new EmailAction();
+			System.out.println("action"); //확인해봐야함
+            if (action.equals("emailDuplicated")) {
+                resp.setContentType("text/plain");
+                resp.getWriter().write("emailDuplicated");
+                return;
+            }
 		}
 		
 		url = action.execute(req, resp);

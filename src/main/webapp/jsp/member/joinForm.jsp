@@ -808,14 +808,13 @@
                         email : email
                     },
                     success : function(data){
-                    	data = data.trim();
+                    	data = data.trim();                    	
+                    	if (data == "emailDuplicated") {
+                    		alert("이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.");
+                    	}else{
+                    		alert("이메일 인증번호가 전송이 완료되었습니다");	
+                    	}                    	                    	
                     	
-                    	if (data == ?) {
-                    		
-                    	}
-                    	
-                    	
-                    	alert("이메일 인증번호가 전송이 완료되었습니다");
                     },                    
                     error : function(){
                         alert("이메일 인증 요청에 실패하였습니다. 다시 시도해주세요")

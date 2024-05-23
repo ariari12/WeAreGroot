@@ -36,62 +36,64 @@ public class EmailAction implements Action {
 		MemberVO vo = new MemberVO();
 		vo=dao.selectMemberByEmail(receiver);
 		// 여기서 부터 해야함
-		
-		
-
-		Properties p = new Properties();
-		
-		//네이버 설정
-		p.put("mail.smtp.enable", "true");
-		p.put("mail.smtp.host",HOST);
-		p.put("mail.smtp.auth","true");
-		p.put("mail.smtp.port", PORT);
-		
-		// 보낼 메세지
-		StringBuffer sb = new StringBuffer();		
-		sb.append("<h3> 안녕하세요 </h3>");
-		sb.append("<h3> 가입 인증 메일 입니다. </h3>");
-		String code = ""+(int)(Math.random()*100000);
-		
-		sb.append("<h3> 승인 번호는 "+code+" 입니다 </h3>");
+	    if (vo != null) {
+	        // 이메일이 이미 존재하는 경우
+	        return "emailDuplicated";
+	    } else {
+	    	Properties p = new Properties();
+			
+			//네이버 설정
+			p.put("mail.smtp.enable", "true");
+			p.put("mail.smtp.host",HOST);
+			p.put("mail.smtp.auth","true");
+			p.put("mail.smtp.port", PORT);
+			
+			// 보낼 메세지
+			StringBuffer sb = new StringBuffer();		
+			sb.append("<h3> 안녕하세요 </h3>");
+			sb.append("<h3> 가입 인증 메일 입니다. </h3>");
+			String code = ""+(int)(Math.random()*100000);
+			
+			sb.append("<h3> 승인 번호는 "+code+" 입니다 </h3>");
+					
+			
+			Session sessions = Session.getInstance(p, new Authenticator(){
+				protected PasswordAuthentication getPasswordAuthentication(){
+					return new PasswordAuthentication(USERNAME, PASSWORD);
+				}
+			});
+			
+			System.out.println("sessions : "+sessions);
+			
+			String title = "이메일 인증 번호입니다";
+			
+			Message message = new MimeMessage(sessions);
+			try {
+				//보내는 사람
+				message.setFrom(new InternetAddress(USERNAME, "모란모란", "utf-8"));
 				
-		
-		Session sessions = Session.getInstance(p, new Authenticator(){
-			protected PasswordAuthentication getPasswordAuthentication(){
-				return new PasswordAuthentication(USERNAME, PASSWORD);
+				//받는사람
+				message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+				
+				//제목
+				message.setSubject(title);
+				
+				//내용
+				message.setContent(sb.toString(), "text/html;charset=utf-8");
+				
+				//발송
+				Transport.send(message);
+				req.getSession().setAttribute("emailCode", code);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (MessagingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		});
-		
-		System.out.println("sessions : "+sessions);
-		
-		String title = "이메일 인증 번호입니다";
-		
-		Message message = new MimeMessage(sessions);
-		try {
-			//보내는 사람
-			message.setFrom(new InternetAddress(USERNAME, "모란모란", "utf-8"));
-			
-			//받는사람
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-			
-			//제목
-			message.setSubject(title);
-			
-			//내용
-			message.setContent(sb.toString(), "text/html;charset=utf-8");
-			
-			//발송
-			Transport.send(message);
-			req.getSession().setAttribute("emailCode", code);
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return "/jsp/member/joinForm.jsp";
+
+	        return "/jsp/member/joinForm.jsp";
+	    }
 	}
 
 }
