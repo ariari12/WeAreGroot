@@ -9,15 +9,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.member.JoinAction;
-import kr.co.moran.web.action.member.JoinFormAction;
-import kr.co.moran.web.action.member.LoginAction;
-import kr.co.moran.web.action.member.LoginFormAction;
-import kr.co.moran.web.action.member.LogoutAction;
 import kr.co.moran.web.action.productTest.DetailAction;
+import kr.co.moran.web.action.productTest.ProductListAction;
 
 @WebServlet("/productTest")
-public class productTestController extends HttpServlet{
+public class ProductTestController extends HttpServlet{
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
@@ -26,9 +22,9 @@ public class productTestController extends HttpServlet{
 		String url = "";
 		
 		Action action = null;
-		if(cmd == null) {			
-			System.out.println("cmd 값 : "+cmd);
-		}else if(cmd.equals("detail")) {
+		if(cmd == null || cmd.equals("list")) {
+			action = new ProductListAction();
+		} else if(cmd.equals("detail")) {
 			action = new DetailAction();
 		}
 		

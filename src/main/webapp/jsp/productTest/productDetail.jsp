@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +10,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="resources/js/productDetail.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  	<script src="resources/js/productDetail.js?v=<%=System.currentTimeMillis() %>"></script>
   </head>
   <body>
     <div class="div-wrapper">
@@ -74,9 +76,9 @@
           <div class="frame-2"><div class="text-wrapper-19">이달의 인기상품</div></div>
         </div>
       </div>
-      <img class="img" src="resources/img/rectangle-4.png" />
-      <div class="text-wrapper-20">꽃기린</div>
-      <div class="text-wrapper-21" id="price">100,000원</div>
+      <img class="img" src="${productVO.img}" />
+      <div class="text-wrapper-20">${productVO.name }</div>
+      <div class="text-wrapper-21" id="price">${productVO.price }</div>
       <div class="frame-8">
         <div class="frame-9">
           <img class="img-2" src="resources/img/heart.svg" />
@@ -115,15 +117,15 @@
       <img class="rectangle-7" src="resources/img/rectangle-34626557.png" />
       <img class="rectangle-8" src="resources/img/rectangle-34626558.png" />
       <div class="overlap-group">
-        <div class="frame-13"><div class="text-wrapper-27">장바구니 담기</div></div>
-        <div class="frame-14"><div class="text-wrapper-28">바로 구매</div></div>
+        <div class="frame-13" id="addCart"><div class="text-wrapper-27">장바구니 담기</div></div>
+        <div class="frame-14" id="order"><div class="text-wrapper-28">바로 구매</div></div>
         <div class="overlap">
           <div class="text-wrapper-29">옵션을 선택하세요</div>
           <img class="menu-down" src="resources/img/menu-down.svg" />
         </div>
-        <div class="text-wrapper-30" id="totalPrice" >100,000원</div>
+        <div class="text-wrapper-30" id="totalPrice">${productVO.price }</div>
         <div class="text-wrapper-31">주문금액</div>
-        <p class="text-wrapper-32">(분갈이용 화분 포함) 꽃기린 x1</p>
+        <p class="text-wrapper-32">${productVO.name }x1</p>
         <div class="frame-15">
 			<div class="frame-16">
 				<input type="number" class="text-wrapper-33" name="cnt" id="cnt" value="1">
@@ -148,5 +150,12 @@
       </div>
       <img class="element" src="resources/img/2024-05-17-2-49-1.png" />
     </div>
+    
+    <!-- 수량5 %> -->
+    <c:set var="quantity" value="${productVO.quantity}" />
+    <script type="text/javascript">
+        // JSTL 변수할당
+        let quantity = "${quantity}";
+    </script>
   </body>
 </html>

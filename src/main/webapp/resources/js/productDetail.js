@@ -1,5 +1,11 @@
 $(document).ready(function() {
-    
+	
+	// 처음 페이지로드 했을때 가격 천단위 콤마
+	let p = parseInt($('#price').text()).toLocaleString();
+	let tp = parseInt($('#totalPrice').text()).toLocaleString();
+	$('#price').text(p + '원');
+	$('#totalPrice').text(tp + '원');
+	
     // 수량을 키보드로 변경하였다면
     $('#cnt').keyup(function() { updatePrice(''); });
 
@@ -13,7 +19,7 @@ $(document).ready(function() {
     $('#addCart').on('click', function() { addCart(); })
 
     // 구매하기 버튼
-    $('#addCart').on('click', function() { addCart(); })
+    $('#order').on('click', function() { order(); })
 })
 
 // STR값을 INT로 바꾸는 함수
@@ -37,9 +43,9 @@ function updatePrice(oper) {
     if (cnt < 1) { 
         alert('1개 이상부터 구입이 가능합니다.'); 
         cnt = 1; 
-    } else if (cnt > 1000) { 
-        alert('재고부족 남은 수량 : 1000'); 
-        cnt = 1000; 
+    } else if (cnt > quantity) { 
+        alert('재고부족 남은 수량 : ' + quantity); 
+        cnt = quantity; 
     }
 
     // cnt 값이 null 값이라면 0
@@ -47,7 +53,7 @@ function updatePrice(oper) {
 
     // 문자의 길이에 따라 폰트 
     let fontSize = 18;
-    if (totalPrice.length <= 9)       { fontSize = 30; } 
+    if (totalPrice.length <= 9)       { fontSize = 28; } 
     else if (totalPrice.length == 10) { fontSize = 25; } 
     else if (totalPrice.length == 11) { fontSize = 23; } 
     else if (totalPrice.length >= 12) { fontSize = 20; }
@@ -61,17 +67,64 @@ function updatePrice(oper) {
 
     // +- 버튼 투명도 설정
     $("#minus").attr("src", cnt == 1 ? "resources/img/frame-427321498.svg" : "resources/img/frame-427321498_1.svg");
-    $("#plus").attr("src", cnt == 1000 ? "resources/img/frame-427321499.svg" : "resources/img/frame-427321499_1.svg");
+    $("#plus").attr("src", cnt == quantity ? "resources/img/frame-427321499.svg" : "resources/img/frame-427321499_1.svg");
 
 }
 
 // AJAX 로 장바구니에 담는 함수.
 function addCart() {
-
+	
+	let urlParams = new URLSearchParams(window.location.search);
+	let pId = urlParams.get('pd_id');
+	
+	// USERID 값을 가져와야함.
+	// 임시용 데이터 9
+	let mId = 9;
+	
+	$.ajax({
+		url: './jsp/cart/cart.jsp',
+		type: 'post',
+		data: {
+			mId: 9,
+			pId: pId,
+			cnt: $('#cnt').val(),
+		},
+		success : function(data) {
+			data = data.trim();
+			
+			if (data == 1) {
+				// alert("장바구니 성공!");
+                Toast.fire({
+                    icon: 'success',
+                    title: '장바구니에 상품을 추가하였습니다.'
+                });
+			} else {
+				Toast.fire({
+	                icon: 'error',
+	                title: '장바구니에 상품 추가를 실패하였습니다.'
+                });
+			}	
+		}
+	})
 }
 
 // 구매하기로 넘어가는 함수.
 function order() {
-
+	let urlParams = new URLSearchParams(window.location.search);
+	let pId = urlParams.get('pd_id');
+	let cnt = $('#cnt').val();
+	window.location.href = './order?cmd=detail&pd_id=' + pId + '&cnt=' + cnt;
 }
 
+// 알림창
+let Toast = Swal.mixin({
+	toast: true,
+	position: 'center-center',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})
