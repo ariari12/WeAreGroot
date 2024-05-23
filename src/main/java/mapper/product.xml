@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.moran.product">
+	<!-- product -->
+	<select id="selectAll" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id pId,
+		        c_id cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+		from MORANMORAN.PRODUCT
+	</select>
+
+	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+		from MORANMORAN.PRODUCT
+		LIMIT #{start}, #{pageNum}
+	</select>
+
+	<select id="selectByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+		from MORANMORAN.PRODUCT
+		where pd_id = #{pd_id}
+	</select>
+	
+	<!-- 전체 상품 종류 총 갯수 -->
+	<select id="pdTotal" resultType="int">
+		select count(*)
+		from MORANMORAN.PRODUCT
+	</select>
+	
+	
+	<!-- 최신순 조회 -->
+	<select id="pdSelectLatest" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from MORANMORAN.PRODUCT
+        where DATEDIFF(now(), pd_created_at) &lt; 61
+		ORDER BY createDate desc
+		LIMIT #{start}, #{pageNum}
+	</select>
+	
+	<!-- 최신상퐁 종류 총 갯수 -->
+	<select id="pdLatestTotal" resultType="int">
+		select count(*)
+        from MORANMORAN.PRODUCT
+        where DATEDIFF(now(), pd_created_at) &lt; 61
+	</select>
+	
+	<!-- 카테고리 조회 -->
+	<select id="pdSelectByCId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from MORANMORAN.PRODUCT
+        where c_id = #{C_ID}
+		ORDER BY pd_id
+		LIMIT #{start}, #{pageNum}
+	</select>
+
+	<!-- 카테고리상퐁 종류 총 갯수 -->	
+	<select id="pdcategoryTotal" parameterType="int" resultType="int">
+		select count(*)
+        from MORANMORAN.PRODUCT
+        where c_id = #{C_ID}
+	</select>
+	
+	
+	
+	<!-- product img -->
+	<select id="selectAllImgByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select pd_id as pId, pi_no as no, pi_img as img
+		from MORANMORAN.PRODUCT_IMG
+		where pd_id = #{pd_id}
+	</select>
+	
+	<select id="piSelsctBigimgByPid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
+		select pd_id as pId, pi_no no, pi_img img
+		from MORANMORAN.PRODUCT_IMG
+		where pd_id = #{pd_id} and pi_no = 0
+	</select>
+	
+	
+	
+	
+	<!-- order -->
+	<select id="orderTotalByPid" parameterType="int" resultType="int">
+		select count(*) from ORDERS where pd_id = #{pd_id}
+	</select>
+	
+	<!-- 인기 조회 -->
+	<select id="pdSelectPopByPId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+		select  pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from PRODUCT 
+        where pd_id in (
+	        select pd_id from (
+		        SELECT pd_id, COUNT(*) as hit
+		        FROM ORDERS
+		        WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		        GROUP BY pd_id
+		        ORDER BY hit desc
+		        LIMIT #{start}, #{pageNum}
+		    ) as pop
+		)
+	</select>
+	
+	<!-- 인기 상퐁 종류 총 갯수 -->
+	<select id="pdPopTotal" resultType="int">
+		select count(*)
+		from (
+		    SELECT COUNT(*) as hit
+		    FROM ORDERS
+		    WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		    GROUP BY pd_id
+		) as pop;
+	</select>
+	
+	
+</mapper>
