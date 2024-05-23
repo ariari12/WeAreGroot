@@ -22,6 +22,7 @@ public class MemberVO {
 	private int isMaintain;// 정보 상태
 	private String retentionPeriod; // 삭제한 회원 정보 보관 기간
 	private String birth; // 회원 생일
+	private String gender; // 성별
 	
 	//변수명 정보상태, 삭제한 날짜, 관리자 유무 db 칼럼 이름 변경, Date 타입 정하기
 }

@@ -60,7 +60,8 @@
 		    m_admintype AS admintype,
 		    m_is_maintain AS isMaintain,
 		    m_retention_period AS retentionPeriod,
-		    m_birth as mBirth
+		    m_birth as birth,
+		    m_gender as gender
 		FROM
 			MEMBER
 		WHERE

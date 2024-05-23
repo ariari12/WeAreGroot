@@ -23,6 +23,7 @@ public class JoinAction implements Action {
 			String nickName = req.getParameter("nickname");
 			String phone = req.getParameter("phone");
 			String birth = req.getParameter("birth"); 
+			String gender = req.getParameter("gender"); 
 			
 			if(!pw.equals(rePw) ) {
 				// 질문 req를 초기화 해주어야 하는가?
@@ -36,6 +37,7 @@ public class JoinAction implements Action {
 			vo.setNick(nickName);
 			vo.setPhone(phone);
 			vo.setBirth(birth);
+			vo.setGender(birth);
 			dao.insertMember(vo);
 			
 			
