@@ -31,15 +31,17 @@ public class EventDAO {
 	public List<EventVO> selectEventList(){
 		List<EventVO> eventList = ss.selectList("selectEventList");
 		ss.close();
-		System.out.println("dao실행");	
-		
 		return eventList;
 	}
 	
 	//이벤트상세페이지
-	public void selectEventDetail() {
+	public EventVO selectEventByEid(int eId) {
+		EventVO	evo = ss.selectOne("selectEventByEid", eId);
+		evo.setEventImgVO(ss.selectOne("selectEventImg",eId));
 		
-		
+		System.out.println("EventDAO selectEventByEid 실행\n evo : " + evo.toString());
+		ss.close();
+		return evo;
 	}
 	
 	

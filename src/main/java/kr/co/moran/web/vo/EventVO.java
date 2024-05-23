@@ -2,13 +2,20 @@ package kr.co.moran.web.vo;
 
 import java.sql.Date;
 
+import kr.co.moran.web.vo.member.MemberVO;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventVO {
+
+	@Override
+	public String toString() {
+		return "EventVO [eId=" + eId + ", mId=" + mId + ", pdId=" + pdId + ", title=" + title + ", contents=" + contents
+				+ ", writedate=" + writedate + ", start=" + start + ", end=" + end + ", eventImgVO=" + eventImgVO
+				+ ", memberVO=" + memberVO + "]";
+	}
 
 	private int eId;
 	private int mId;
@@ -20,6 +27,7 @@ public class EventVO {
 	private Date end;
 	
 	private EventImgVO eventImgVO;
+	private MemberVO memberVO;
 	
 	public int geteId() {
 		return eId;
@@ -91,6 +99,14 @@ public class EventVO {
 
 	public void setEventImgVO(EventImgVO eventImgVO) {
 		this.eventImgVO = eventImgVO;
+	}
+
+	public MemberVO getMemberVO() {
+		return memberVO;
+	}
+
+	public void setMemberVO(MemberVO memberVO) {
+		this.memberVO = memberVO;
 	}
 
 

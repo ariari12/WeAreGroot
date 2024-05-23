@@ -1,6 +1,7 @@
 package kr.co.moran.web.action.event;
 
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,9 +18,10 @@ public class EventListAction implements Action {
 		List<EventVO> eventList = edao.selectEventList();
 		if(eventList != null) {
 			req.setAttribute("eList", eventList);
+			
 			return "jsp/event/eventList.jsp";
 		}
-		return "https://m.naver.com";
+		return "redirect:/moran/event";
 	}
 	
 }
