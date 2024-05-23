@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="kr.co.moran.web.productTest">
+  	<select id="selectProductTestGetOne" parameterType="int" resultType="kr.co.moran.web.vo.productTest.ProductVO">		
+		SELECT A.pd_id as id, A.pd_name as name, A.pd_price as price, A.pd_quantity as quantity, B.pi_img as img
+		FROM PRODUCT A, PRODUCT_IMG B
+		WHERE A.pd_id = B.pd_id AND B.pi_no = 0 AND A.pd_id=#{pId};
+  	</select>
+  </mapper>
