@@ -17,7 +17,7 @@
 	// System.out.println("admin? " + admin);
 
 	ProductDAO dao = new ProductDAO();
-	List<CategoryVO> cts = dao.ctSelectAll();
+	List<CategoryVO> cts = dao.ctSelectByParentIdIsNull();
 	
 	int cnt = 0;
 	for(CategoryVO c : cts) {
@@ -31,12 +31,16 @@
 		</div>
 		<%
 			int a;
-			// List<CategoryVO> subCts = dao.selectAllByCId(c.getCId());
+			List<CategoryVO> subCts = dao.ctSelectByParentId(c.getCId());
+			if(subCts.size() > 0) {
+				for(CategoryVO vo : subCts) {
+					%><div class="subcategories">
+						<a style="color: #202020" href="<%="?cmd=list&type=ctg&ctg="+ vo.getCId() %>"><%=vo.getName() %></a>
+					</div>
+					<%
+				}
+			}
 		%>
-		<div class="subcategories">하위 카테고리1</div>
-		<div class="subcategories">하위 카테고리2</div>
-		<div class="subcategories">하위 카테고리3</div>
-		<div class="subcategories">하위 카테고리4</div>
 	</div>
 	
 	<% 	cnt++;
@@ -48,6 +52,9 @@
 	</div>
 	<% } 
 	if(admin >= 1) { %>
-	<a class="btn btn-primary ctg-btn" href="?cmd=modify&type=ctg&ctg=view">카테고리 수정</a>
+	<div class="ctg-btns">
+		<a class="btn btn-primary ctg-btn" href="?cmd=add&type=ctg&ctg=view">카테고리 등록</a>
+		<a class="btn btn-primary ctg-btn" href="?cmd=modify&type=ctg&ctg=view">카테고리 수정</a>
+	</div>
 	<% } %>
 </div>

@@ -1,3 +1,5 @@
+<%@page import="kr.co.moran.web.vo.CategoryVO"%>
+<%@page import="java.util.List"%>
 <%@page import="kr.co.moran.web.vo.member.MemberVO"%>
 <%@page import="java.lang.reflect.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,6 +17,9 @@
 <!-- bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+<!-- sweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
 
@@ -34,31 +39,66 @@
 <% 	} %>
 
 <script>
+	<%-- 사용자가 선택할 때 마다 ajax로 요청 --%>
+	let cId;
 	$(() => {
-	    $("select#masterCtg").on("change", () => {
-	        console.log("선택됨");
-	        let cId = $("select#masterCtg option:selected").val();
+	    $("select#masterCtg").on("click", () => {
+	        console.log("하위 카테고리 가져옴");
+	        cId = $("select#masterCtg option:selected").val();
 	        console.log(cId);
-	        $.ajax({
-	            type: "post",
-	            url: "./product?cmd=modify&type=ctg&ctg=sub&CID=" + cId,
-	            dataType: "json",
-	            success: function (data) {
-	                console.log(data);
-	            }
-	        });
-	    });
-	
-	    $("select#masterCtg").on("change", () => {
-	        console.log("선택됨");
+	        
 	        $.ajax({
 	            type: "post",
 	            url: "./product?cmd=modify&type=ctg&ctg=sub",
+           		data: {"cId" : cId},
 	            dataType: "json",
 	            success: function (data) {
+	            	console.log("성공");
 	                console.log(data);
+	                
+	                if(data.ctgList == null) {
+	                	console.log("ctgList is null");
+	                	$("select#subCtg")
+	                		.html("<option value='null'>카테고리 없음</option>");
+	                }
+	                else {
+	                	subCtgSelects(data.ctgList);
+	                }
+	            },
+	            error: (data, status, err) => {
+	            	console.log("실패");
+	            	console.log(data);
+	            	console.log(err);
 	            }
 	        });
+	    });
+	    
+	    $("input#submit").on("click", () => {
+	        console.log("전송");
+
+	        let cId = $("select#subCtg").val(); // subCtg의 값을 먼저 확인
+	        if (cId === null || cId === "null") { // subCtg 값이 null이면 masterCtg의 값을 사용
+	            cId = $("select#masterCtg").val();
+	        }
+	        
+	        console.log("cId: " + cId); // 확인용 출력
+	        let cParentId = $("select#cParentId option:selected").val();
+	        let ctgName = $("input#ctgName").val();
+	        
+	        console.log("cId: " + cId); // 수정
+	        console.log("cParentId: " + cParentId);
+	        console.log("ctgName: " + ctgName);
+	        
+
+	        
+	        let data = {
+	            "cId" : cId,
+	            "cParentId" : cParentId,
+	            "name" : ctgName
+	        };
+	        
+	        ajaxReq("./product?cmd=modify&type=ctg&ctg=confirm", 
+	                data, "카테고리 수정 완료");
 	    });
 	});
 </script>
@@ -73,41 +113,37 @@
     <div class="cate-block">
         <span class="cate-label">카테고리 선택</span>
         <select name="masterCtg" id="masterCtg">
-            <option value="1">카테1</option>
-            <option value="2">카테2</option>
-            <option value="3">카테3</option>
-            <option value="4">카테4</option>
-            <option value="5">카테5</option>
+       	<% 	// ajax 요청 전 최상위 카테고리 데이터
+       	List<CategoryVO> masterList = (List<CategoryVO>)request.getAttribute("masterList");
+		// ystem.out.println(masterList.toString());
+		for(CategoryVO vo : masterList) {
+       	%>
+            <option value="<%=vo.getCId() %>"><%=vo.getName() %></option>
+		<% 	} %>
         </select>
     </div>
     <div class="cate-block">
         <span class="cate-label">하위 카테고리 선택</span>
         <select name="subCtg" id="subCtg">
-            <option value="">하위1</option>
-            <option value="">하위2</option>
-            <option value="">하위3</option>
-            <option value="">하위4</option>
-            <option value="">하위5</option>
+            <option value='null'>카테고리 없음</option>
         </select>
     </div>
     <div class="cate-block">
         <span class="cate-label">참조할 상위 카테고리 선택</span>
-        <select name="" id="">
-            <option value="">상위1</option>
-            <option value="">상위2</option>
-            <option value="">상위3</option>
-            <option value="">상위4</option>
-            <option value="">상위5</option>
+        <select name="cParentId" id="cParentId">
+        <% for(CategoryVO vo : masterList) { %>
+           	<option value="<%=vo.getCId() %>"><%=vo.getName() %></option>
+		<% 	} %>
         </select>
     </div>
     <div class="cate-block">
         <span class="cate-label">변경할 카테고리 이름</span>
-        <input type="text" name="" id="">
+        <input type="text" name="ctgName" id="ctgName">
     </div>
 
     <div class="cate-button">
-        <input class="btn btn-danger" type="button" value="변경 취소">
-        <input class="btn btn-primary" type="button" value="변경 하기">
+        <a class="btn btn-danger" href="product">변경 취소</a>
+        <input id="submit" class="btn btn-primary" type="button" value="변경 하기" />
     </div>
 </div>
 

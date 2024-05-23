@@ -67,9 +67,6 @@ public class ListviewAction implements Action {
 		maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
 		
 		List<ProductVO> prdList = dao.pdSelectPage(start, pageNum);
-		if(prdList.size() < 1) {
-			return noneType(0, pageNum);
-		}
 		
 		hitPrdocuts(prdList);
 		return prdList;
@@ -81,9 +78,6 @@ public class ListviewAction implements Action {
 		maxPage = (int) Math.ceil(dao.pdLatestTotal() / PAGE_QUANTITY);
 		
 		List<ProductVO> prdList = dao.pdSelectLatest(start, pageNum);
-		if(prdList.size() < 1) {
-			return noneType(0, pageNum);
-		}
 		
 		hitPrdocuts(prdList);
 		return prdList;
@@ -95,9 +89,6 @@ public class ListviewAction implements Action {
 		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
 		
 		List<ProductVO> prdList = dao.pdSelectPopByPId(start, pageNum);
-		if(prdList.size() < 1) {
-			return noneType(0, pageNum);
-		}
 		
 		if(start < (3 *12)) {
 			for(ProductVO v : prdList) {
@@ -119,9 +110,6 @@ public class ListviewAction implements Action {
 		
 		List<ProductVO> prdList = 
 				dao.pdSelectByCId(start, pageNum, Integer.parseInt(strCId));
-		if(prdList.size() < 1) {
-			return noneType(0, pageNum);
-		}
 		
 		hitPrdocuts(prdList);
 		return prdList;

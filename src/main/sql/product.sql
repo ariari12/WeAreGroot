@@ -91,6 +91,7 @@ select * from PRODUCT p join ORDERS o on p.pd_id = o.pd_id;
 -- 주문자 주회
 select * from ORDERS where pd_id = 204869;
 
+-- 카테고리 조회
 select 	pd_id as pId,
         c_id as cId,
         pd_name as name,

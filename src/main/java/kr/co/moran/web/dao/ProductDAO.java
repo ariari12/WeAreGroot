@@ -146,6 +146,16 @@ public class ProductDAO {
 	
 	
 	/* 카테고리 */
+	// insert
+	public void ctAdd(String cParentId, String name) {
+		openSession();
+		Map<String, String> vo = new HashMap<String, String>();
+		vo.put("cParentId", cParentId);
+		vo.put("name", name);
+		session.insert("kr.co.moran.category.ctAdd", vo);
+		session.commit();
+	}
+	
 	// 카테고리 전체 조회
 	public List<CategoryVO> ctSelectAll() {
 		openSession();
@@ -176,13 +186,23 @@ public class ProductDAO {
 	
 	
 	// update
-	public void ctUpdate(CategoryVO vo) {
+	public void ctUpdate(int cId, String cParentId, String name) {
 		openSession();
+		Map<String, Object> vo = new HashMap<String, Object>();
+		vo.put("cId", cId);
+		vo.put("cParentId", cParentId);
+		vo.put("name", name);
 		session.update("kr.co.moran.category.ctUpdate", vo);
-	}	
+		session.commit();
+	}
 	
 	
 	// delete
+	public void ctDelete(int cId) {
+		openSession();
+		session.insert("kr.co.moran.category.ctDelete", cId);
+		session.commit();
+	}
 	
 	public void closeSession() {
 		if(session != null ) {
@@ -210,8 +230,14 @@ public class ProductDAO {
 		
 		
 		// category
+//		dao.ctAdd(null, "test");
+		
+//		dao.ctUpdate(101, null, null);
+		
 //		dao.selectAll().forEach(System.out::println);
 //		dao.ctSelectByParentId(0).forEach(System.out::println);
+		
+//		dao.ctDelete(108);
 		
 		dao.closeSession();
 	}

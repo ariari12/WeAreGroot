@@ -133,6 +133,7 @@ div.category .overlap-group {
     margin-left: 350px;
 	margin-bottom: 20px;
     border-top: 5px solid #6d6d6d;
+    display: flex;
 }
 
 
@@ -172,6 +173,13 @@ div.category .subcategories {
 	text-align: center;
 	margin-left: 50px;
 }
+
+div.category .ctg-btns {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
 div.category .ctg-btn {
     margin-left: 75%;
     text-decoration: none;

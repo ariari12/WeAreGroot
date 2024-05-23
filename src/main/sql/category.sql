@@ -15,6 +15,17 @@ insert into MORANMORAN.CATEGORY values(10, null, '포복형');
 insert into MORANMORAN.CATEGORY values(11, null, '불규칙형');
 insert into MORANMORAN.CATEGORY values(12, null, '탑형');
 
+
+-- 하위 카테고리 테스트
+insert into MORANMORAN.CATEGORY values(101, 1, '하위1');
+insert into MORANMORAN.CATEGORY values(102, 1, '하위2');
+insert into MORANMORAN.CATEGORY values(103, 1, '하위3');
+insert into MORANMORAN.CATEGORY values(104, 1, '하위4');
+
+insert into MORANMORAN.CATEGORY(c_parent_id, c_name)
+values(null, '탑형');
+
+
 use MORANMORAN;
 
 -- select
@@ -24,5 +35,13 @@ where c_parent_id is null;
 
 
 -- update
-update MORANMORAN.CATEGORY set c_parent_id = 0 where c_id = 1;
+update MORANMORAN.CATEGORY set c_parent_id = 1, c_name = '직립-1' where c_id = 101;
 
+-- delete
+delete from CATEGORY where c_id = 105;
+
+delete from CATEGORY where c_id = 8;
+
+-- member
+insert into MEMBER(MEMBER.m_email, MEMBER.m_pw, MEMBER.m_admintype)
+values('a', 'pw', 1);
