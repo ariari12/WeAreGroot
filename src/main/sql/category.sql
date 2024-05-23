@@ -15,6 +15,14 @@ insert into MORANMORAN.CATEGORY values(10, null, '포복형');
 insert into MORANMORAN.CATEGORY values(11, null, '불규칙형');
 insert into MORANMORAN.CATEGORY values(12, null, '탑형');
 
-select * from MORANMORAN.CATEGORY;
+use MORANMORAN;
 
+-- select
+select * from MORANMORAN.CATEGORY;
+select * from CATEGORY
+where c_parent_id is null;
+
+
+-- update
 update MORANMORAN.CATEGORY set c_parent_id = 0 where c_id = 1;
+

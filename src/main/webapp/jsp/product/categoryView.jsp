@@ -17,7 +17,7 @@
 	// System.out.println("admin? " + admin);
 
 	ProductDAO dao = new ProductDAO();
-	List<CategoryVO> cts = dao.selectAll();
+	List<CategoryVO> cts = dao.ctSelectAll();
 	
 	int cnt = 0;
 	for(CategoryVO c : cts) {
@@ -27,7 +27,7 @@
 		<% } %>
 	<div class="category-group">
 		<div class="cateagory-title">
-			<a href="<%="?cmd=list&type=category&category="+ c.getCId() %>"><%=c.getName() %></a>
+			<a href="<%="?cmd=list&type=ctg&ctg="+ c.getCId() %>"><%=c.getName() %></a>
 		</div>
 		<%
 			int a;
@@ -48,6 +48,6 @@
 	</div>
 	<% } 
 	if(admin >= 1) { %>
-	<a class="btn btn-primary ctg-btn" href="?modify&type=category">카테고리 수정</a>
+	<a class="btn btn-primary ctg-btn" href="?cmd=modify&type=ctg&ctg=view">카테고리 수정</a>
 	<% } %>
 </div>

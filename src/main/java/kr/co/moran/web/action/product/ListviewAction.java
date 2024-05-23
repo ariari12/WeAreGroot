@@ -42,8 +42,8 @@ public class ListviewAction implements Action {
 		switch (type == null ? "" : type) {
 			case "latest": prdlist = latestType(startNum, PAGE_QUANTITY); break;
 			case "popul": prdlist = populType(startNum, PAGE_QUANTITY); break;
-			case "category": prdlist = categoryType(startNum, PAGE_QUANTITY,
-				 req.getParameter("category")); break;
+			case "ctg": prdlist = categoryType(startNum, PAGE_QUANTITY,
+				 req.getParameter("ctg")); break;
 			default: prdlist = noneType(startNum, PAGE_QUANTITY);
 		}
 		

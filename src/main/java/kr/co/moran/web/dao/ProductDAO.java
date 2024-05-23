@@ -34,6 +34,10 @@ public class ProductDAO {
 		}
 	}
 	
+
+	/* 상품 */
+	
+	// 상품 종류 수
 	// 전체 상품 종류
 	public int pdTotal() {
 		openSession();
@@ -63,6 +67,7 @@ public class ProductDAO {
 	}
 	
 	
+	// 상품 리스트
 	// 상품 페이지 조회
 	public List<ProductVO> pdSelectPage(int start, int pageNum) {
 		openSession();
@@ -133,19 +138,51 @@ public class ProductDAO {
 		return vos;
 	}
 	
+	// update
+	
+	
+	// delete
+	
+	
+	
+	/* 카테고리 */
 	// 카테고리 전체 조회
-	public List<CategoryVO> selectAll() {
+	public List<CategoryVO> ctSelectAll() {
 		openSession();
-		List<CategoryVO> vos = session.selectList("kr.co.moran.category.selectAll");
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectAll");
+		return vos;
+	}
+	
+	// 하위 카테고리가 없는 최상위 카테고리 조회
+	public List<CategoryVO> ctSelectByParentIdIsNull() {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByParentIdIsNull");
 		return vos;
 	}
 
 	// 부무 참조 키로 하위 카테고리 조회
-	public List<CategoryVO> selectSubCategory(int cParentId) {
+	public List<CategoryVO> ctSelectByParentId(int parentId) {
 		openSession();
-		List<CategoryVO> vos = session.selectList("kr.co.moran.category.selectAllByCId", cParentId);
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByParentId", parentId);
 		return vos;
 	}
+
+	// 부무 참조 키로 하위 카테고리 조회
+	public List<CategoryVO> ctSelectByCId(int cId) {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByCId", cId);
+		return vos;
+	}	
+	
+	
+	// update
+	public void ctUpdate(CategoryVO vo) {
+		openSession();
+		session.update("kr.co.moran.category.ctUpdate", vo);
+	}	
+	
+	
+	// delete
 	
 	public void closeSession() {
 		if(session != null ) {
@@ -154,6 +191,7 @@ public class ProductDAO {
 		}
 	}
 	
+	// test
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
@@ -173,7 +211,7 @@ public class ProductDAO {
 		
 		// category
 //		dao.selectAll().forEach(System.out::println);
-		dao.selectSubCategory(0).forEach(System.out::println);
+//		dao.ctSelectByParentId(0).forEach(System.out::println);
 		
 		dao.closeSession();
 	}

@@ -10,6 +10,8 @@ import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
 
 public class DetailviewAction implements Action {
+	
+	private ProductDAO dao;
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -20,8 +22,11 @@ public class DetailviewAction implements Action {
 		int no = Integer.parseInt(req.getParameter("no"));
 //		System.out.println(no);
 		
-		ProductDAO dao = new ProductDAO();
+		dao = new ProductDAO();
 		ProductVO v = dao.pdSelsctOneByPId(no);
+		if(v == null) {
+			return null;
+		}
 //		System.out.println(v);
 		
 		
