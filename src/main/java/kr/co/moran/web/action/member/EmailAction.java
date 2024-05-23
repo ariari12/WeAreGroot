@@ -40,7 +40,7 @@ public class EmailAction implements Action {
 		// 보낼 메세지
 		StringBuffer sb = new StringBuffer();		
 		sb.append("<h3> 안녕하세요 </h3>");
-		sb.append("<h3> 가입 테스트 메일 입니다. </h3>");
+		sb.append("<h3> 가입 인증 메일 입니다. </h3>");
 		String code = ""+(int)(Math.random()*100000);
 		
 		sb.append("<h3> 승인 번호는 "+code+" 입니다 </h3>");
@@ -80,7 +80,7 @@ public class EmailAction implements Action {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return code; //생성된 이메일인증 코드값 반환 (사용자가 입력한 이메일 인증번호와 같은지 확인해야함)
 	}
 
 }

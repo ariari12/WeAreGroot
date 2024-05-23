@@ -17,7 +17,8 @@
 	      m_admintype,
 	      m_is_maintain,
 	      m_retention_period,
-	      m_birth
+	      m_birth,
+	      m_gender
 	    ) VALUES (
 	      #{email},
 	      #{pw},
@@ -30,7 +31,8 @@
 	      #{admintype},
 	      #{isMaintain},
 	      #{retentionPeriod},
-	      DATE_FORMAT(#{birth}, '%Y-%m-%d')
+	      DATE_FORMAT(#{birth}, '%Y-%m-%d'),
+	      #{gender}
 	    )
   	</insert>
   	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.AddressVO">
