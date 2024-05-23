@@ -808,6 +808,13 @@
                         email : email
                     },
                     success : function(data){
+                    	data = data.trim();
+                    	
+                    	if (data == ?) {
+                    		
+                    	}
+                    	
+                    	
                     	alert("이메일 인증번호가 전송이 완료되었습니다");
                     },                    
                     error : function(){

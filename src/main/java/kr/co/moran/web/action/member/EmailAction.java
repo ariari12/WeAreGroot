@@ -15,6 +15,8 @@ import javax.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
+import kr.co.moran.web.dao.MemberDAO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class EmailAction implements Action {
 	// 보내는 사람 이메일
@@ -30,6 +32,10 @@ public class EmailAction implements Action {
 		
 		String receiver=req.getParameter("email");
 		
+		MemberDAO dao = new MemberDAO();
+		MemberVO vo = new MemberVO();
+		vo=dao.selectMemberByEmail(receiver);
+		// 여기서 부터 해야함
 		
 		
 
