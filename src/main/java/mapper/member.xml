@@ -69,4 +69,26 @@
 		WHERE
 			m_email = #{email} AND m_pw = #{pw}
   	</select>
+  	
+  	<select id="selectMemberByEmail" parameterType="String" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT
+  			m_id AS mId,
+		    m_email AS email,
+		    m_pw AS pw,
+		    m_name AS name,
+		    m_profile_img AS profileImg,
+		    m_nick AS nick,
+		    m_phone AS phone,
+		    m_regdate AS regdate,
+		    m_logtype AS logtype,
+		    m_admintype AS admintype,
+		    m_is_maintain AS isMaintain,
+		    m_retention_period AS retentionPeriod,
+		    m_birth as birth,
+		    m_gender as gender
+		FROM
+			MEMBER
+		WHERE
+			m_email = #{email}
+  	</select>
   </mapper>
