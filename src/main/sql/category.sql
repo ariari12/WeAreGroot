@@ -35,7 +35,7 @@ where c_parent_id is null;
 
 
 -- update
-update MORANMORAN.CATEGORY set c_parent_id = 1, c_name = '직립-1' where c_id = 101;
+update MORANMORAN.CATEGORY set c_name = '직립형' where c_id = 1;
 
 -- delete
 delete from CATEGORY where c_id = 105;

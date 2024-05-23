@@ -65,9 +65,7 @@ public class ListviewAction implements Action {
 	private List<ProductVO> noneType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
-		
 		List<ProductVO> prdList = dao.pdSelectPage(start, pageNum);
-		
 		hitPrdocuts(prdList);
 		return prdList;
 	}
@@ -76,9 +74,7 @@ public class ListviewAction implements Action {
 	private List<ProductVO> latestType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdLatestTotal() / PAGE_QUANTITY);
-		
 		List<ProductVO> prdList = dao.pdSelectLatest(start, pageNum);
-		
 		hitPrdocuts(prdList);
 		return prdList;
 	}
@@ -87,7 +83,6 @@ public class ListviewAction implements Action {
 	private List<ProductVO> populType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
-		
 		List<ProductVO> prdList = dao.pdSelectPopByPId(start, pageNum);
 		
 		if(start < (3 *12)) {
@@ -95,7 +90,6 @@ public class ListviewAction implements Action {
 				hotPIds.add(v.getPId());
 			}
 		}
-		
 		return prdList;
 	}
 
@@ -104,13 +98,10 @@ public class ListviewAction implements Action {
 		if(strCId == null) {
 			return noneType(start, pageNum);
 		}
-		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdcategoryTotal() / PAGE_QUANTITY);
-		
 		List<ProductVO> prdList = 
 				dao.pdSelectByCId(start, pageNum, Integer.parseInt(strCId));
-		
 		hitPrdocuts(prdList);
 		return prdList;
 	}

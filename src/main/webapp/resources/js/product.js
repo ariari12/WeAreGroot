@@ -69,7 +69,7 @@ let unauthorized = () => {
 	sAlert.fire({
 		title: "접근 권한이 없는 사용자입니다.",
 		text: "관리자에게 문의하세요.",
-		icon: "info"
+		icon: "error"
 	});
 	window.location = "./product";
 }
@@ -80,6 +80,8 @@ let subCtgSelects = (list) => {
 		console.log(item);
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
+    options += "<option value='null'>선택 안함</option>";
+    
     // console.log(options);
     $("select#subCtg").html(options);
 }

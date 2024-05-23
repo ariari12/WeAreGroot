@@ -55,6 +55,7 @@
 	<div class="ctg-btns">
 		<a class="btn btn-primary ctg-btn" href="?cmd=add&type=ctg&ctg=view">카테고리 등록</a>
 		<a class="btn btn-primary ctg-btn" href="?cmd=modify&type=ctg&ctg=view">카테고리 수정</a>
+		<a class="btn btn-danger ctg-btn" href="?cmd=delete&type=ctg&ctg=view">카테고리 삭제</a>
 	</div>
 	<% } %>
 </div>

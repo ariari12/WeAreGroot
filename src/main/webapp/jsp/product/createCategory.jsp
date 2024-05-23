@@ -132,6 +132,10 @@
         $("button.ctg-sup-submit").click(() => {
 	        console.log("전송");
 	        let ctgName = $("input#superCtg-name").val();
+	        if(ctgName.length < 2) {
+	        	viweMsg("카테고리 이름은 최소 2글자 이상입니다.");
+	        	return;
+	        }
 	        
 	        let data = {
        			"cParentId" : null,
@@ -147,6 +151,10 @@
 	        console.log("전송");
 	        let cParentId = $("#subCtg").val()
 	        let ctgName = $("input#subCtg-name").val();
+	        if(ctgName.length < 2) {
+	        	viweMsg("카테고리 이름은 최소 2글자 이상입니다.");
+	        	return;
+	        }
 	        
         	let data = {
         			"cParentId" : cParentId,

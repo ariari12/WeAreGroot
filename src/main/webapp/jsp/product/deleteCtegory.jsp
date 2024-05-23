@@ -76,40 +76,28 @@
 	    $("input#submit").on("click", () => {
 	        console.log("전송");
 
-	        let cId = $("select#subCtg").val();
-	        // subCtg 값이 null이면 masterCtg의 값을 사용
-	        if (cId === null || cId === "null") {
-	            cId = $("select#masterCtg").val();
-	        }
-	        let cParentId = $("select#cParentId option:selected").val();
-	        let ctgName = $("input#ctgName").val();
-	        if(ctgName.length < 2) {
-	        	viweMsg("카테고리 이름은 최소 2글자 이상입니다.");
-	        	return;
-	        }
-	        
-	        console.log("cId: " + cId);
-	        console.log("cParentId: " + cParentId);
-	        console.log("ctgName: " + ctgName);
-
-	        let data = {
-	            "cId" : cId,
-	            "cParentId" : cParentId,
-	            "name" : ctgName
+	        let data = { 
+        		"cId" : $("select#subCtg").val(),
+	        	"cParentId" : $("select#masterCtg").val()		
 	        };
-	        ajaxReq("./product?cmd=modify&type=ctg&ctg=confirm", 
-	                data, "카테고리 수정 완료");
+	        ajaxReq("./product?cmd=delete&type=ctg&ctg=del", 
+	                data, "카테고리 삭제 완료");
 	    });
 	});
 </script>
 
 
-<div class="div-wrapper " style="height: 220px; z-index: 3;">
+<div class="div-wrapper " style="height: 220px;">
 <jsp:include page="../layout/header.jsp"></jsp:include>
 </div>
 
 <!-- TODO : 객체 가져오고 반복문 순회 완성하기 -->
 <div class="container category">
+	<div>
+	<div style="font-size: 28px; margin: -54px 0px 50px -43px;">카테고리 삭제</div>
+	<div style="border: 3px solid gray; margin: -37px 0px 38px -62px; width: 755px;"></div>
+	</div>
+	<div style="position: relative; top: 33px; left: 150px;">
     <div class="cate-block">
         <span class="cate-label">카테고리 선택</span>
         <select name="masterCtg" id="masterCtg">
@@ -123,32 +111,16 @@
         </select>
     </div>
     <div class="cate-block">
-       	<span style="color: orange; margin-left: 31px;">※ 선택 안할 시 상위 카테고리로 지정됩니다.</span>
-        <div style="margin-bottom: 5px;"></div>
         <span class="cate-label">하위 카테고리 선택</span>
         <select name="subCtg" id="subCtg">
             <option value='null'>카테고리 없음</option>
         </select>
     </div>
-    <div class="cate-block">
-       	<span style="color: orange; margin-left: 31px;">※ 선택 안할 시 상위 카테고리로 지정됩니다.</span>
-        <div style="margin-bottom: 5px;"></div>
-        <span class="cate-label">참조할 상위 카테고리 선택</span>
-        <select name="cParentId" id="cParentId">
-        <% for(CategoryVO vo : masterList) { %>
-           	<option value="<%=vo.getCId() %>"><%=vo.getName() %></option>
-		<% 	} %>
-           	<option value="null">선택 안함</option>
-        </select>
-    </div>
-    <div class="cate-block">
-        <span class="cate-label">변경할 카테고리 이름</span>
-        <input type="text" name="ctgName" id="ctgName">
-    </div>
-
-    <div class="cate-button">
-        <a class="btn btn-danger" href="product">변경 취소</a>
-        <input id="submit" class="btn btn-primary" type="button" value="변경 하기" />
+	</div>
+	
+    <div class="cate-button" style="margin-top: 115px;">
+        <a class="btn btn-danger" href="product">삭제 취소</a>
+        <input id="submit" class="btn btn-primary" type="button" value="삭제 하기" />
     </div>
 </div>
 
