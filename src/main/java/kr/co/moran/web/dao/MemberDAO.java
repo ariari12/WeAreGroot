@@ -57,7 +57,20 @@ public class MemberDAO {
 	        e.printStackTrace();
 	        return null;
 	    }
-        
-		
+	}
+	public MemberVO selectMemberByEmail(String email) {
+		try (SqlSession ss = factory.openSession(true)) {
+			
+			System.out.println("email : "+email);			
+			
+			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmail", email);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 }
