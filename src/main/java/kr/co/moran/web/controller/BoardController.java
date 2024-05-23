@@ -13,6 +13,8 @@ import kr.co.moran.web.action.KnowHow.KHDeleteAction;
 import kr.co.moran.web.action.KnowHow.KHDetailAction;
 import kr.co.moran.web.action.KnowHow.KHListAction;
 import kr.co.moran.web.action.KnowHow.KHModifyFormAction;
+import kr.co.moran.web.action.KnowHow.KHModifyLikeCntAction;
+import kr.co.moran.web.action.KnowHow.KHModifyViewCntAction;
 import kr.co.moran.web.action.KnowHow.KHModifyAction;
 import kr.co.moran.web.action.KnowHow.KHWriteAction;
 import kr.co.moran.web.action.KnowHow.KHWriteFormAction;
@@ -20,6 +22,8 @@ import kr.co.moran.web.action.QnA.QnADeleteAction;
 import kr.co.moran.web.action.QnA.QnADetailAction;
 import kr.co.moran.web.action.QnA.QnAListAction;
 import kr.co.moran.web.action.QnA.QnAModifyFormAction;
+import kr.co.moran.web.action.QnA.QnAModifyLikeCntAction;
+import kr.co.moran.web.action.QnA.QnAModifyViewCntAction;
 import kr.co.moran.web.action.QnA.QnAModifyAction;
 import kr.co.moran.web.action.QnA.QnAWriteAction;
 import kr.co.moran.web.action.QnA.QnAWriteFormAction;
@@ -73,6 +77,12 @@ public class BoardController extends HttpServlet{
 		else if(cmd.equals("qnaModifyOk")) {
 			action = new QnAModifyAction();
 		}
+		else if(cmd.equals("qnaModifyLikeCnt")) {
+			action = new QnAModifyLikeCntAction();
+		}
+		else if(cmd.equals("qnaModifyViewCnt")) {
+			action = new QnAModifyViewCntAction();
+		}
 		
 		
 		
@@ -103,6 +113,12 @@ public class BoardController extends HttpServlet{
 		//노하우 삭제확인
 		else if(cmd.equals("khModifyOk")) {
 			action = new KHModifyAction();
+		}
+		else if(cmd.equals("khModifyLikeCnt")) {
+			action = new KHModifyLikeCntAction();
+		}
+		else if(cmd.equals("khModifyViewCnt")) {
+			action = new KHModifyViewCntAction();
 		}
 		
 		url = action.execute(req, resp);

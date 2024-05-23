@@ -46,6 +46,10 @@ function hideEditForm(formId) {
             <tr>
                 <th>제목</th>
                 <td>${boardVO.title }</td>
+                <th>조회수</th>
+                <td>${boardVO.viewCnt }</td>
+                <th>좋아요수</th>
+                <td>${boardVO.likeCnt }</td>
             </tr>
             <tr>
                 <th>내용</th>
@@ -53,9 +57,10 @@ function hideEditForm(formId) {
             </tr>
             <tr>
                 <td rowspan="2">
-                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qna' />'">노하우 목록</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qna' />'">QnA 목록</button>
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModify&bId=${boardVO.getBId()}' />'">수정하기</button>
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaDelete&bId=${boardVO.getBId()}' />'">삭제하기</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${boardVO.getBId()}' />'">좋아요</button>
                 </td>
             </tr>
         </table>
@@ -67,13 +72,16 @@ function hideEditForm(formId) {
             <c:forEach var="commentVO" items="${commentList}">
                 <tr id="comment-${commentVO.getCId()}">
                     <td>
-                        내용 : ${commentVO.contents} | 글쓴이Id : ${commentVO.getMId()}
+                        내용 : ${commentVO.contents} | 글쓴이Id : ${commentVO.getMId()} | 좋아요 : ${commentVO.likeCnt }
                     </td>
                     <td>
                         <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentDelete&cId=${commentVO.getCId()}&bId=${boardVO.getBId()}&type=${boardVO.type}' />'">댓글삭제하기</button>
                     </td>
                     <td>
                         <button type="button" onclick="showEditForm('${commentVO.getCId()}', '${commentVO.contents}', '${boardVO.getBId()}', '${boardVO.type}')">댓글수정하기</button>
+                    </td>
+                    <td>
+                        <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${commentVO.getCId()}&bId=${boardVO.getBId()}&type=${boardVO.type}' />'">좋아요</button>
                     </td>
                 </tr>                
             </c:forEach>

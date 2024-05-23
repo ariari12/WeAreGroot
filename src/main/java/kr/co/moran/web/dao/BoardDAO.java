@@ -137,4 +137,18 @@ public class BoardDAO {
 		
 		ss.close();
 	}
+
+	public void modifyKHViewCntBybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.board.ModifyKHViewCntBybId", bId);
+		
+		ss.close();
+	}
+	
+	public void modifyKHLikeCntBybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.board.ModifyKHLikeCntBybId", bId);
+		
+		ss.close();
+	}
 }

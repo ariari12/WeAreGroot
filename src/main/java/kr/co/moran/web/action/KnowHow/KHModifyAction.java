@@ -17,7 +17,6 @@ public class KHModifyAction implements Action {
 		String title = req.getParameter("title");
 		String contents = req.getParameter("contents");
 
-		System.out.println(bId +" "+ title + " " + contents);
 		dao.modifyKHBybId(bId, title, contents);
 		
 	
