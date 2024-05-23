@@ -10,7 +10,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+<script src="resources/js/productDetail.js?v=<%=System.currentTimeMillis() %>"></script>
 <style>
 	.div-wrapper {
     position: relative;
@@ -799,22 +799,16 @@
 	$(()=>{
 		$("#verifyEmailBtn").click(function(){
             var email = $("#email").val();
-            if(email != ""){
+            if(email != ""){            	
                 $.ajax({
                     type : "POST",
                     url : "/moran/member",
                     data : {
-                        cmd : "verifyEmail",
+                        cmd : "emailOk",
                         email : email
                     },
-                    success : function(response){
-                        if(response === "success"){
-                            alert("이메일 인증이 완료되었습니다");
-                            $("verifyEmailBtn").attr("disabled", true);
-                            $("verifyEmailBtn").attr("readonly", true);
-                        }else{
-                            alert("이메일 인증에 실패하였습니다");
-                        }
+                    success : function(data){
+                    	alert("이메일 인증번호가 전송이 완료되었습니다");
                     },                    
                     error : function(){
                         alert("이메일 인증 요청에 실패하였습니다. 다시 시도해주세요")
@@ -822,7 +816,9 @@
                 });
             }
         });
+		
 	});
+	
 </script>
 
 </head>
@@ -869,9 +865,8 @@
         <div class="text-wrapper-20">이메일</div>
         <div>
           <input type="email" name="email" id="email" class="frame-11 text-wrapper-21" placeholder="이메일을 입력해주세요 (필수)" required>
-          <button type="button" id="verifyEmailBtn" class="text-wrapper-18">인증번호 전송</button>          
+          <button type="button" id="verifyEmailBtn" class="text-wrapper-18">인증번호 전송</button>         
         </div>
-        
       </div>
       
       <div class="frame-14">
@@ -881,7 +876,7 @@
 
       <div class="frame-15">
         <div class="text-wrapper-20">이메일 인증번호</div>
-        <input type="password" name="pw" class="frame-11 text-wrapper-21" placeholder="인증번호 6자리" required>
+        <input type="text" name="verifyEmailCode" class="frame-11 text-wrapper-21" placeholder="인증번호 5자리" required>
       </div>
 
       <div class="frame-13">
@@ -936,7 +931,7 @@
         <label><input type="checkbox" name="agreement" value="term5" class="rectangle-2"> 이용약관이용약관이용약관이용약관(선택)</label>
         <div class="text-wrapper-26">약관보기&gt;</div>
       </div>
-
+	  <input type="hidden" name="cmd" value="joinOk" />
       <button type="submit">회원가입</button>
     </form>
 

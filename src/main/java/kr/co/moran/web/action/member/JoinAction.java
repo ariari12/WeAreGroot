@@ -23,10 +23,18 @@ public class JoinAction implements Action {
 			String nickName = req.getParameter("nickname");
 			String phone = req.getParameter("phone");
 			String birth = req.getParameter("birth"); 
-			String gender = req.getParameter("gender"); 
+			String gender = req.getParameter("gender");
+			String verifyEmailCode = req.getParameter("verifyEmailCode");
+			Object emailCode = req.getSession().getAttribute("emailCode");
+			
+			if(!emailCode.toString().equals(verifyEmailCode)) {
+				//이메일 인증번호가 맞지 않다면 회원가입 폼으로
+				req.setAttribute("error", "인증번호가 일치하지 않습니다.");
+				return "jsp/member/joinForm.jsp";
+			}
 			
 			if(!pw.equals(rePw) ) {
-				// 질문 req를 초기화 해주어야 하는가?
+				//비밀번호가 맞지 않다면 회원가입 폼으로
 				return "jsp/member/joinForm.jsp";
 			}
 			MemberVO vo = new MemberVO();

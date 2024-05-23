@@ -23,7 +23,7 @@ public class MemeberController extends HttpServlet{
 		resp.setContentType("text/html;charset=UTF-8");
 		
 		String cmd = req.getParameter("cmd");
-		System.out.println(cmd); // 콘솔 확인용
+		System.out.println("cmd = "+cmd); // 콘솔 확인용
 		String url = "";
 		String redirectUrl = "";
 		Action action = null;
@@ -43,8 +43,8 @@ public class MemeberController extends HttpServlet{
 			action = new EmailAction();
 		}
 		
-		url = action.execute(req, resp);		
-		System.out.println("url = "+url);		
+		url = action.execute(req, resp);
+		System.out.println("url = "+url);
 		if(url.startsWith("redirect:")) {
 			redirectUrl=url.substring("redirect:".length());
 			resp.sendRedirect(redirectUrl);

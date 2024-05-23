@@ -26,7 +26,11 @@ public class EmailAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		
+		
 		String receiver=req.getParameter("email");
+		
+		
 		
 
 		Properties p = new Properties();
@@ -54,12 +58,12 @@ public class EmailAction implements Action {
 		
 		System.out.println("sessions : "+sessions);
 		
-		String title = "test 인증 번호입니다";
+		String title = "이메일 인증 번호입니다";
 		
 		Message message = new MimeMessage(sessions);
 		try {
 			//보내는 사람
-			message.setFrom(new InternetAddress(USERNAME, "test", "utf-8"));
+			message.setFrom(new InternetAddress(USERNAME, "모란모란", "utf-8"));
 			
 			//받는사람
 			message.setRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
@@ -72,6 +76,7 @@ public class EmailAction implements Action {
 			
 			//발송
 			Transport.send(message);
+			req.getSession().setAttribute("emailCode", code);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -80,7 +85,7 @@ public class EmailAction implements Action {
 			e.printStackTrace();
 		}
 		
-		return code; //생성된 이메일인증 코드값 반환 (사용자가 입력한 이메일 인증번호와 같은지 확인해야함)
+		return "/jsp/member/joinForm.jsp";
 	}
 
 }
