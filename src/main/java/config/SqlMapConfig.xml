@@ -20,17 +20,10 @@
   	</environments>
   	
   	<mappers>
-<<<<<<< HEAD
   		<mapper resource="mapper/member.xml"/>
-
   		<mapper resource="mapper/event.xml"/>
-
-  		<mapper resource="mapper/dept.xml"/>
-=======
->>>>>>> branch 'IS' of https://github.com/ariari12/WeAreGroot.git
   		<mapper resource="mapper/board.xml"/>
   		<mapper resource="mapper/comment.xml"/>
-
   		<mapper resource="mapper/product.xml"/>
   		<mapper resource="mapper/category.xml"/>
   	</mappers>

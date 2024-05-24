@@ -11,8 +11,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="./resources/css/event.css" />
-<script src="resources/js/event.js"></script>
+<link rel="stylesheet" href="./resources/css/eventcss.css" />
+<script src="./resources/js/event.js"></script>
 </head>
 <body>
 	
@@ -49,20 +49,29 @@
 		<!-- 댓글작성 : ajax 비동기통신 -->
 		<div class="commentBox">
 			<div class="commentTop">
-				<h5>댓글<span>($댓글수)</span></h5>
+				<h5>댓글 <span>(${cList.size()})</span></h5>
 			</div>
 			
 			<!-- jstl반복문 10개씩 페이징 처리 -->
+			<c:forEach var="cList" items="${cList}">
 			<div class="commentCell">
 				<div>
-					<span class="memNick"></span>
-					 <span class="regDate"></span>
+					<span class="memNick">${cList.nick}</span>
+					 <span class="regDate">${cList.regDate}</span>
 				</div>
 				<div class="commentContents">
-					내용
+					${cList.contents}
 				</div>
-			</div>
-					
+				<button class="reCommentBtn"type="button">대댓글 작성하기</button>
+
+				<div class="replyForm" style="display:none;">
+					<textarea name="replyContent" rows="5" cols="50"></textarea>
+					<input type="hidden" name="parentId" value="${cList.id}">
+					<input class="regReComment" type="button" value="댓글 작성">
+				</div>
+
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	

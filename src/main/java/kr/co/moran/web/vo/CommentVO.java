@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentVO {
-	int cId,bId,mId,cParentId,likeCnt;
-	String  contents, regDate;
+	int cId,bId,mId,cParentId,eId,likeCnt, isMaintain;
+	String  contents, regDate, retentionPeriod;
 }

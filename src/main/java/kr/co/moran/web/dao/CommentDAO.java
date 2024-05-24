@@ -75,5 +75,13 @@ public class CommentDAO {
 		ss.close();
 	}
 	
+	//이벤트 댓글조회
+	public List<Map<String, Object>> selectCommentByEid(int eId) {
+		SqlSession ss = factory.openSession(true);
+		List<Map<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentByEid",eId);
+		ss.close();
+		return list;
+	}
+	
 	
 }

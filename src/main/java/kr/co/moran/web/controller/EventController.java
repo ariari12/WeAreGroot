@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
+import kr.co.moran.web.action.Comment.CommentDeleteAction;
 import kr.co.moran.web.action.event.EventDetailAction;
 import kr.co.moran.web.action.event.EventListAction;
 
@@ -20,14 +21,13 @@ public class EventController extends HttpServlet{
 		
 		String act = req.getParameter("eId");
 		String url = "";
-		
 		Action ac = null;
-		
 		
 		if(act==null || act.equals("")) {
 			ac = new EventListAction();
 			
-		}else {
+		}
+		if(act != null || !act.equals("")){
 			int eId = Integer.parseInt(act);
 			ac = new EventDetailAction(eId);
 		}

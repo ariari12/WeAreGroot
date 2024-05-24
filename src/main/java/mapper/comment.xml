@@ -31,4 +31,23 @@
 	<delete id="DeleteComment">
 		DELETE FROM COMMENT WHERE c_id = #{cId}
 	</delete>
+	
+	<!-- 이벤트 댓글조회 -->
+	<select id="SelectCommentByEid" parameterType="int" resultType="java.util.HashMap">
+		SELECT 
+			c.c_id as cId, 
+			c.e_id as eId, 
+			c.m_id as mId,
+			m.m_nick as nick, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt,
+			c.c_regdate as regDate
+		FROM
+			COMMENT AS c
+		INNER JOIN
+			MEMBER AS m ON c.m_id = m.m_id
+		WHERE
+			c.e_id = #{eId}
+	</select>
 </mapper>
