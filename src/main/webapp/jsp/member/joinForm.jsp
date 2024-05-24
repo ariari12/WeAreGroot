@@ -956,7 +956,7 @@
 			<div class="frame-14">
 				<div class="text-wrapper-20">비밀번호</div>
 				<input type="password" name="pw" class="frame-11 text-wrapper-21"
-					placeholder="비밀번호 (영문/숫자/특수번호 조합 8자 이상)" required>
+					placeholder="비밀번호 (6자 이상)" minlength="6" required>
 			</div>
 
 			<div class="frame-15">
