@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container" id="eventList">
 		<div class="topArea">
 			<span class="menuTitle fs-1">이벤트</span>
 		</div>
