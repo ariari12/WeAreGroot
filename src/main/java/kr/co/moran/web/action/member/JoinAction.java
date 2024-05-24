@@ -1,6 +1,7 @@
 package kr.co.moran.web.action.member;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ public class JoinAction implements Action {
 			resp.setContentType("text/html;charset=UTF-8");
 			String name = req.getParameter("name");
 			String email = req.getParameter("email");
+			String emailCheck = req.getParameter("emailCheck");
 			String pw = req.getParameter("pw");
 			String rePw = req.getParameter("repw");
 			String nickName = req.getParameter("nickname");
@@ -27,17 +29,27 @@ public class JoinAction implements Action {
 			String verifyEmailCode = req.getParameter("verifyEmailCode");
 			Object emailCode = req.getSession().getAttribute("emailCode");
 			
-			if(!emailCode.toString().equals(verifyEmailCode)) {
-				//이메일 인증번호가 맞지 않다면 회원가입 폼으로
-				req.setAttribute("error", "인증번호가 일치하지 않습니다.");
-				return "jsp/member/joinForm.jsp";
+			System.out.println("email = "+email);
+			System.out.println("emailCheck = "+emailCheck);
+			
+			/*
+			 * if(!emailCode.toString().equals(verifyEmailCode)) { //이메일 인증번호가 맞지 않다면 회원가입
+			 * 폼으로 req.setAttribute("error", "인증번호가 일치하지 않습니다.");
+			 * System.out.println("이메일 인증번호 불일치"); return "jsp/member/joinForm.jsp"; }
+			 */
+			
+			//검증해봐야함
+			if(!email.equals(emailCheck)) {
+				System.out.println("이메일 불일치");
+				return "verifyEmailMismatch";
 			}
 			
 			if(!pw.equals(rePw) ) {
-				//비밀번호가 맞지 않다면 회원가입 폼으로
+				//비밀번호가 맞지 않다면 회원가입 폼으로 //비밀번호가 맞지 않음 호출 클라이언트에서
+				System.out.println("비밀번호 불일치");
 				return "jsp/member/joinForm.jsp";
 			}
-			MemberVO vo = new MemberVO();
+			MemberVO vo = new MemberVO();			
 			MemberDAO dao = new MemberDAO();
 			vo.setName(name);
 			vo.setEmail(email);
@@ -46,6 +58,7 @@ public class JoinAction implements Action {
 			vo.setPhone(phone);
 			vo.setBirth(birth);
 			vo.setGender(birth);
+			System.out.println("joinAction VO = "+vo);
 			dao.insertMember(vo);
 			
 			

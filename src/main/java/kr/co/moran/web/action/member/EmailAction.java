@@ -31,6 +31,7 @@ public class EmailAction implements Action {
 		
 		
 		String receiver=req.getParameter("email");
+		System.out.println(receiver);
 		
 		MemberDAO dao = new MemberDAO();
 		MemberVO vo = new MemberVO();
