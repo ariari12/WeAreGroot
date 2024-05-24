@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,7 +15,7 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
 
-public class ModifyAction implements Action {
+public class AddAction implements Action {
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
@@ -35,20 +36,12 @@ public class ModifyAction implements Action {
 		
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
-				String ctg = req.getParameter("ctg");
-				
-				// 파라미터가 넘어오지 않은 경우
-				if(ctg == null) {
-					return null;
-				}
-				
-				// 각 파라미터에 따른 요청 처리
-				nextUrl = categoryModify(ctg); 
-				
+				nextUrl = categoryAdd(req.getParameter("ctg"));
 				break;
 			case "prd": // prd: product
 				break;
-			default: // type 파라미터가 넘어오지 않은 경우
+			default: 
+//				prdlist = noneType(startNum, PAGE_QUANTITY);
 		}
 		
 		dao.closeSession(); // db session 종료
@@ -56,72 +49,40 @@ public class ModifyAction implements Action {
 	}
 	
 	// category
-	private String categoryModify(String ctg) {
+	private String categoryAdd(String ctg) {
 		String cId;
 		switch (ctg) {
-			case "view":
-				/*
-				 * 수정 페이지 요청
-				 * 최상위 카테고리 데이터를 반환
-				 */
-				ctgList = dao.ctSelectByParentIdIsNull();
-				
-				// 최상위 카테고리가 없는 경우
-				if(ctgList.size() < 1) {
-					System.out.println("카테고리 테이블 레코드가 없습니다.");
-					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.");
-					return "jsp/product/createCategory.jsp";
-				}
-				
+			case "view": // 등록 페이지 요청
 				// 페이지 리소스 반환
 				req.setAttribute("masterList", ctgList);
-				return "jsp/product/modifyCategory.jsp";
+				return "jsp/product/createCategory.jsp";
 				
 			case "sub":
 				/*
-				 * 하위 카테고리 데이터 요청
-				 * 최상위 카테고리를 선택한 이후 요청
-				 * 선택한 최상위 카테고리에 해당하는
-				 * 하위 카테고리 데이터들을 반환
+				 * 상위 카테고리 데이터 요청
+				 * 상위 카테고리 데이터들을 반환
 				 */
-				cId = req.getParameter("cId");
-//				System.out.println("cId: " + cId);
-				
-				// 기본 키 (cId)가 파라미터로 넘어오지 않은 겨우
-				if(cId == null) {
-					req.setAttribute("message", "카테고리를 찾을 수 없습니다.");
-					req.setAttribute("redUrl", "product?cmd=modify&type=ctg&ctg=view");
-					return "jsp/product/inform.jsp";
-				}
-				
-				ctgList = dao.ctSelectByParentId(Integer.parseInt(cId));
+				ctgList = dao.ctSelectByParentIdIsNull();
 				
 				// JSON 객체 생성 후 AJAX 응답
 				return ajaxToJsonArray();
 				
 			case "confirm":
 				/*
-				 * 수정 완료 요청
+				 * 등록 완료 요청
 				 * db table 데이터 수정
 				 * 수정이 완료되었음을 사용자에게 반환
 				 */
 				
-				cId = req.getParameter("cId");
 				String cParantId = req.getParameter("cParentId");
 				String name = req.getParameter("name");
 				
-				System.out.println("cId: " + cId);
+				cParantId = cParantId.equals("") ? null : cParantId;
+				
 				System.out.println("cParentId: " + cParantId);
 				System.out.println("name:" + name);
 				
-				if(cId != null) {
-					dao.ctUpdate(
-						Integer.parseInt(cId), cParantId, name);
-				}
-				else {
-					dao.ctUpdate(
-							Integer.parseInt(cId), cParantId, name);
-				}
+				dao.ctAdd(cParantId, name);
 
 				// ajax 반환
 				return ajaxToJsonOk("product");
@@ -130,8 +91,7 @@ public class ModifyAction implements Action {
 				return null;
 		}
 	}
-	
-	
+
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();
@@ -184,5 +144,5 @@ public class ModifyAction implements Action {
 		// ajax 반환
 		return "ajax";
 	}
-	
+
 }

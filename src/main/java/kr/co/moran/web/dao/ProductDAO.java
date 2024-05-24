@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 
+import kr.co.moran.web.vo.CategoryVO;
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
 import lombok.val;
@@ -33,6 +34,10 @@ public class ProductDAO {
 		}
 	}
 	
+
+	/* 상품 */
+	
+	// 상품 종류 수
 	// 전체 상품 종류
 	public int pdTotal() {
 		openSession();
@@ -62,6 +67,7 @@ public class ProductDAO {
 	}
 	
 	
+	// 상품 리스트
 	// 상품 페이지 조회
 	public List<ProductVO> pdSelectPage(int start, int pageNum) {
 		openSession();
@@ -132,6 +138,72 @@ public class ProductDAO {
 		return vos;
 	}
 	
+	// update
+	
+	
+	// delete
+	
+	
+	
+	/* 카테고리 */
+	// insert
+	public void ctAdd(String cParentId, String name) {
+		openSession();
+		Map<String, String> vo = new HashMap<String, String>();
+		vo.put("cParentId", cParentId);
+		vo.put("name", name);
+		session.insert("kr.co.moran.category.ctAdd", vo);
+		session.commit();
+	}
+	
+	// 카테고리 전체 조회
+	public List<CategoryVO> ctSelectAll() {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectAll");
+		return vos;
+	}
+	
+	// 하위 카테고리가 없는 최상위 카테고리 조회
+	public List<CategoryVO> ctSelectByParentIdIsNull() {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByParentIdIsNull");
+		return vos;
+	}
+
+	// 부무 참조 키로 하위 카테고리 조회
+	public List<CategoryVO> ctSelectByParentId(int parentId) {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByParentId", parentId);
+		return vos;
+	}
+
+	// 부무 참조 키로 하위 카테고리 조회
+	public List<CategoryVO> ctSelectByCId(int cId) {
+		openSession();
+		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByCId", cId);
+		return vos;
+	}	
+	
+	
+	// update
+	public void ctUpdate(int cId, String cParentId, String name) {
+		openSession();
+		Map<String, Object> vo = new HashMap<String, Object>();
+		vo.put("cId", cId);
+		vo.put("cParentId", cParentId);
+		vo.put("name", name);
+		session.update("kr.co.moran.category.ctUpdate", vo);
+		session.commit();
+	}
+	
+	
+	// delete
+	public void ctDelete(int cId) {
+		openSession();
+		session.insert("kr.co.moran.category.ctDelete", cId);
+		session.commit();
+	}
+	
 	public void closeSession() {
 		if(session != null ) {
 			session.close();
@@ -139,9 +211,11 @@ public class ProductDAO {
 		}
 	}
 	
+	// test
 	public static void main(String[] args) {
 		ProductDAO dao = new ProductDAO();
 		
+		// product
 //		dao.pdSelectPage(0, 12).forEach(v -> {
 //			System.out.println(v.getPId());
 //			System.out.println(dao.piSelsctBigimgByPId(v.getPId()).getImg());
@@ -153,6 +227,17 @@ public class ProductDAO {
 		
 //		dao.pdSelectPopByPId(0, 12).forEach(System.out::println);
 //		dao.pdSelectLatest(0, 12).forEach(System.out::println);
+		
+		
+		// category
+//		dao.ctAdd(null, "test");
+		
+//		dao.ctUpdate(101, null, null);
+		
+//		dao.selectAll().forEach(System.out::println);
+//		dao.ctSelectByParentId(0).forEach(System.out::println);
+		
+//		dao.ctDelete(108);
 		
 		dao.closeSession();
 	}

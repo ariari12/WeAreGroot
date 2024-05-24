@@ -17,11 +17,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
+<!-- sweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="resources/js/product.js"></script>
+
 <link rel="stylesheet" href="resources/css/product.css">
-<link rel="stylesheet" href="resources/css/common.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
-<link rel="stylesheet" href="resources/css/product.css">
+
 <script>
 let viewDetails = (no) => {
 	window.location = "./product?cmd=detail&no=" + no;
@@ -30,8 +34,13 @@ let viewDetails = (no) => {
 
 </head>
 <body>
+<<<<<<< HEAD
 <div class="div-wrapper" style="height: 220px; z-index: 3;">
 	<jsp:include page="../layout/header.jsp"></jsp:include>
+=======
+<div class="div-wrapper " style="height: 220px; z-index: 3;">
+<jsp:include page="../layout/header.jsp"></jsp:include>
+>>>>>>> branch 'dev' of https://github.com/ariari12/WeAreGroot.git
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
@@ -40,6 +49,10 @@ let viewDetails = (no) => {
 	ProductDAO dao = new ProductDAO();
 	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
 	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
+	
+	if(vos.size() < 1) { %>
+	<script>msgRedirect("해당하는 상품이 없습니다.", "product"); </script>
+<%	}
 	
 	int cnt = 0;
 	for(ProductVO v : vos) {
