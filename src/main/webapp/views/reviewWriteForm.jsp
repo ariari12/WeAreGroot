@@ -13,13 +13,12 @@
 <body>
 	<div class="container">
 	<h2>리뷰 작성</h2>
-		<form action="../review" method="get" class="reviewWrite" enctype="multipart/form-data">
+		<form action="../review/writeOk" method="post" class="reviewWrite" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<th>별점</th>
 					<td>
 						<input type="text" name="score"/>
-						<input type="hidden" name="cmd" value="writeOk" />
 					</td>
 				</tr>
 				

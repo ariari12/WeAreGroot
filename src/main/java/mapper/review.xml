@@ -15,6 +15,12 @@
 		WHERE p.pd_id = #{pdId}
 	</select>
 	
+	<select id="SelectReviewImgByrId" parameterType="int" resultType="kr.co.moran.web.vo.ReviewImgVO">
+		SELECT r_id as rId, ri_img as riImg
+		FROM REVIEW_IMG
+		WHERE r_id = #{rId}
+	</select>
+	
 	<!-- 리뷰 수정 -->
 	<update id="ModifyReviewByrId">
 		UPDATE REVIEW
@@ -29,12 +35,14 @@
 		WHERE r_id = ${rId}
 	</update>
 	
+	<!-- 리뷰 등록 -->
 	<insert id="InsertReview" parameterType="kr.co.moran.web.vo.ReviewVO" useGeneratedKeys="true" keyProperty="rId">
 		INSERT INTO REVIEW( m_id, o_id, r_contents, r_regdate, r_score, r_is_maintain)
 		VALUES
 		(1, 10, #{contents}, now(), #{score}, 0)
 	</insert>
 	
+	<!-- 리뷰 이미지 등록 -->
 	<insert id="InsertReviewImg" parameterType="kr.co.moran.web.vo.ReviewImgVO">
 		INSERT INTO REVIEW_IMG(r_id, ri_img)
 		VALUES

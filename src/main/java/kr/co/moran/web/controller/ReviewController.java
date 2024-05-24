@@ -2,6 +2,9 @@ package kr.co.moran.web.controller;
 
 import java.io.IOException;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +31,7 @@ public class ReviewController extends HttpServlet{
 
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		resp.setContentType("text/html;charset=UTF-8");
+		resp.setContentType("text/html;charset=UTF-8");		
 		
 		String cmd = req.getParameter("cmd");
 		System.out.println(cmd);
@@ -37,9 +40,6 @@ public class ReviewController extends HttpServlet{
 		
 		if(cmd.equals("write")) {
 			action = new ReviewWriteFormAction();
-		}
-		else if(cmd.equals("writeOk")) {
-			action = new ReviewWriteAction();
 		}
 		else if(cmd.equals("modify")) {
 			action = new ReviewModifyFormAction();

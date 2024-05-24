@@ -37,6 +37,12 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	public List<ReviewImgVO> selectReviewImgByrId(int rId){
+		SqlSession ss = factory.openSession(true);
+		List<ReviewImgVO> list = ss.selectList("kr.co.moran.review.SelectReviewImgByrId",rId);
+		ss.close();
+		return list;
+	}
 	public int insertReview(ReviewVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.review.InsertReview",vo);
