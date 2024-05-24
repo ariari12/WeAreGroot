@@ -25,7 +25,7 @@
 			  height: 200px;
 			  top: 288px;
 			  left: 375px;
-			  background-image: url(resources/img/rectangle-1.png);
+			  background-image: url(resources/img/member/rectangle-1.png);
 			  background-size: cover;
 			  background-position: 50% 50%;
 			}
@@ -807,7 +807,7 @@
     
       <div class="overlap-group">
         <p class="text-wrapper">신규가입 최대 30% 할인 이벤트 진행 중!</p>
-        <img class="group" src="resources/img/group-2.png" />
+        <img class="group" src="resources/img/member/group-2.png" />
         <div class="frame"><div class="div">회원가입 바로가기</div></div>
       </div>
       <div class="did-you-know-wrapper">
@@ -820,15 +820,15 @@
         <div class="frame-3">
           <div class="frame-4">
             <div class="text-wrapper-2">이달의 인기 식물</div>
-            <img class="line" src="resources/img/line-3.svg" />
+            <img class="line" src="resources/img/member/line-3.svg" />
             <div class="text-wrapper-3">모란모란에서 가장 HOT한 상품들!</div>
           </div>
-          <img class="img" src="resources/img/line-2.svg" />
+          <img class="img" src="resources/img/member/line-2.svg" />
         </div>
         <div class="frame-5">
           <div class="frame-6">
             <div class="frame-7">
-              <img class="rectangle" src="resources/img/rectangle-2.png" />
+              <img class="rectangle" src="resources/img/member/rectangle-2.png" />
               <div class="frame-8"><div class="text-wrapper-4">1</div></div>
             </div>
             <div class="frame-9">
@@ -841,11 +841,11 @@
               </div>
               <div class="frame-11">
                 <div class="frame-12">
-                  <img class="vector" src="resources/img/vector-4.svg" />
+                  <img class="vector" src="resources/img/member/vector-4.svg" />
                   <div class="text-wrapper-8">인기</div>
                 </div>
                 <div class="frame-13">
-                  <img class="vector-2" src="resources/img/vector-1.svg" />
+                  <img class="vector-2" src="resources/img/member/vector-1.svg" />
                   <div class="text-wrapper-8">신상품</div>
                 </div>
               </div>
@@ -853,7 +853,7 @@
           </div>
           <div class="frame-14">
             <div class="frame-7">
-              <img class="rectangle" src="resources/img/rectangle-3.png" />
+              <img class="rectangle" src="resources/img/member/rectangle-3.png" />
               <div class="frame-8"><div class="text-wrapper-4">2</div></div>
             </div>
             <div class="frame-9">
@@ -864,13 +864,13 @@
               <div class="text-wrapper-7">12,345,678원</div>
             </div>
             <div class="frame-12">
-              <img class="vector" src="resources/img/vector-4.svg" />
+              <img class="vector" src="resources/img/member/vector-4.svg" />
               <div class="text-wrapper-8">인기</div>
             </div>
           </div>
           <div class="frame-14">
             <div class="frame-7">
-              <img class="rectangle" src="resources/img/rectangle-4.png" />
+              <img class="rectangle" src="resources/img/member/rectangle-4.png" />
               <div class="frame-8"><div class="text-wrapper-4">3</div></div>
             </div>
             <div class="frame-9">
@@ -881,13 +881,13 @@
               <div class="text-wrapper-7">12,345,678원</div>
             </div>
             <div class="frame-12">
-              <img class="vector" src="resources/img/vector-4.svg" />
+              <img class="vector" src="resources/img/member/vector-4.svg" />
               <div class="text-wrapper-8">인기</div>
             </div>
           </div>
           <div class="frame-14">
             <div class="frame-7">
-              <img class="rectangle" src="resources/img/rectangle-5.png" />
+              <img class="rectangle" src="resources/img/member/rectangle-5.png" />
               <div class="frame-8"><div class="text-wrapper-4">4</div></div>
             </div>
             <div class="frame-9">
@@ -898,21 +898,21 @@
               <div class="text-wrapper-7">12,345,678원</div>
             </div>
             <div class="frame-12">
-              <img class="vector" src="resources/img/vector-4.svg" />
+              <img class="vector" src="resources/img/member/vector-4.svg" />
               <div class="text-wrapper-8">인기</div>
             </div>
           </div>
         </div>
         <div class="frame-15">
-          <img class="line-2" src="resources/img/line-1.svg" />
+          <img class="line-2" src="resources/img/member/line-1.svg" />
           <div class="frame-16">
-            <img class="frame-17" src="resources/img/frame-30.svg" />
+            <img class="frame-17" src="resources/img/member/frame-30.svg" />
             <div class="frame-18">
               <div class="frame-19"><div class="text-wrapper-9">1</div></div>
               <div class="frame-19"><div class="text-wrapper-10">2</div></div>
               <div class="frame-19"><div class="text-wrapper-10">3</div></div>
             </div>
-            <img class="frame-17" src="resources/img/frame-35.svg" />
+            <img class="frame-17" src="resources/img/member/frame-35.svg" />
           </div>
         </div>
       </div>
@@ -944,7 +944,7 @@
 	
 
 				
-	<a href="index.jsp"><img class="header" src="resources/img/header.svg" /></a>
+	<a href="index.jsp"><img class="header" src="resources/img/member/header.svg" /></a>
       <div class="frame-20">
         <div class="frame-21">
           <div class="frame-22"><div class="text-wrapper-23"><a href="index.jsp">홈</a></div></div>
@@ -961,7 +961,7 @@
         </div>
         <div class="frame-24">
           <div class="text-wrapper-25">상품 또는 식물 검색하기</div>
-          <div class="union-wrapper"><img class="union" src="resources/img/union.svg" /></div>
+          <div class="union-wrapper"><img class="union" src="resources/img/member/union.svg" /></div>
         </div>
       </div>
       
