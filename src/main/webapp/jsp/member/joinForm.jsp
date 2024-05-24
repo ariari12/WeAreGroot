@@ -903,7 +903,7 @@ a {
 </head>
 <body>
 	<div class="div-wrapper">
-		<a href="index.jsp"><img class="header" src="resources/img/header.svg" /></a>
+		<a href="index.jsp"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
 			<div class="div">
 				<div class="frame-2">
@@ -944,14 +944,14 @@ a {
 			<div class="frame-6">
 				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
 				<div class="union-wrapper">
-					<img class="union" src="resources/img/union.svg" />
+					<img class="union" src="resources/img/member/union.svg" />
 				</div>
 			</div>
 		</div>
 		<form action="/moran/member" method="post" id="joinForm">
 			<div class="text-wrapper-16">회원가입</div>
-			<img class="line" src="resources/img/line-12.svg" /> <img
-				class="img" src="resources/img/line-13.svg" />
+			<img class="line" src="resources/img/member/line-12.svg" /> <img
+				class="img" src="resources/img/member/line-13.svg" />
 			<div class="text-wrapper-17">필수정보</div>
 			<p class="text-wrapper-19">반가워요! 회원가입에 필요한 정보들을 작성해주세요</p>
 
