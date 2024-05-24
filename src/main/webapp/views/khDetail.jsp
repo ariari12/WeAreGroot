@@ -46,6 +46,10 @@ function hideEditForm(formId) {
             <tr>
                 <th>제목</th>
                 <td>${boardVO.title }</td>
+                <th>조회수</th>
+                <td>${boardVO.viewCnt }</td>
+                <th>좋아요수</th>
+                <td>${boardVO.likeCnt }</td>
             </tr>
             <tr>
                 <th>내용</th>
@@ -56,6 +60,7 @@ function hideEditForm(formId) {
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=kh' />'">노하우 목록</button>
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=khModify&bId=${boardVO.getBId()}' />'">수정하기</button>
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=khDelete&bId=${boardVO.getBId()}' />'">삭제하기</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=khModifyLikeCnt&bId=${boardVO.getBId()}' />'">좋아요</button>
                 </td>
             </tr>
         </table>

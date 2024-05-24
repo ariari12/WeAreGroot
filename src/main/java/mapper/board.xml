@@ -78,4 +78,16 @@
 		WHERE b_id = ${bId}
 	</update>
 	
+	<update id="ModifyKHViewCntBybId" parameterType="int">
+		UPDATE BOARD
+		SET b_view_cnt = b_view_cnt + 1
+		WHERE b_id = ${bId}
+	</update>
+	
+	<update id="ModifyKHLikeCntBybId" parameterType="int">
+		UPDATE BOARD
+		SET b_like_cnt = b_like_cnt + 1
+		WHERE b_id = ${bId}
+	</update>
+	
 </mapper>

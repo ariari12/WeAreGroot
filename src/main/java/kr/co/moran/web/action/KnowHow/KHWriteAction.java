@@ -19,7 +19,6 @@ public class KHWriteAction implements Action {
 		vo.setContents(contents);
 		
 		dao.insertKH(vo);
-		System.out.println(vo);
 		return "board?cmd=kh";
 	}
 

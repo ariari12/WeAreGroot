@@ -22,6 +22,12 @@
 		WHERE c_id = #{cId}
 	</update>
 	
+	<update id="ModifyCommentLikeCntBycId" parameterType="int">
+		UPDATE COMMENT
+		SET c_like_cnt = c_like_cnt + 1
+		WHERE c_id = #{cId}
+	</update>
+	
 	<delete id="DeleteComment">
 		DELETE FROM COMMENT WHERE c_id = #{cId}
 	</delete>

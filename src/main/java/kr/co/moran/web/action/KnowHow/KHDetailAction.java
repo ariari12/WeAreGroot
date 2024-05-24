@@ -21,11 +21,10 @@ public class KHDetailAction implements Action {
 		CommentDAO commentDAO = new CommentDAO();  
 		
 		BoardVO boardVO = new BoardVO();
+
 		boardVO = boardDAO.selectKHBybId(bId);
-		
 		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);
 		
-		System.out.println(commentList);
 		
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);

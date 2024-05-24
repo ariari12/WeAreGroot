@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.Comment.CommentDeleteAction;
 import kr.co.moran.web.action.Comment.CommentModifyAction;
+import kr.co.moran.web.action.Comment.CommentModifyLikeCntAction;
 import kr.co.moran.web.action.Comment.CommentWriteAction;
 
 @WebServlet("/comment")
@@ -39,6 +40,8 @@ public class CommentController extends HttpServlet{
 			action = new CommentModifyAction();
 		}else if(cmd.equals("commentDelete")) {
 			action = new CommentDeleteAction();
+		}else if(cmd.equals("commentModifyLikeCnt")) {
+			action = new CommentModifyLikeCntAction();
 		}
 		
 		url = action.execute(req, resp);

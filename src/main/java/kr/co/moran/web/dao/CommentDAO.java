@@ -69,6 +69,11 @@ public class CommentDAO {
 		ss.close();
 	}
 	
+	public void modifyCommentLikeCntBycId(int cId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.comment.ModifyCommentLikeCntBycId", cId);
+		ss.close();
+	}
 	
 	
 }
