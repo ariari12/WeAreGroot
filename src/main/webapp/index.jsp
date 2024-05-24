@@ -944,7 +944,7 @@
 	
 
 				
-	<img class="header" src="resources/img/header.svg" />
+	<a href="index.jsp"><img class="header" src="resources/img/header.svg" /></a>
       <div class="frame-20">
         <div class="frame-21">
           <div class="frame-22"><div class="text-wrapper-23"><a href="index.jsp">홈</a></div></div>

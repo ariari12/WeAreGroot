@@ -22,7 +22,7 @@
 a {
 	text-align: center;
 	text-decoration: none; /* 링크의 밑줄 제거 */
-	color: inherit; /* 링크의 색상 제거 */
+	color: inherit; /* 링크의 색상 제거 */	
 }
 
 .div-wrapper {
@@ -30,7 +30,7 @@ a {
 	width: 1920px;
 	height: 1887px;
 	background-color: #ffffff;
-	overflow: hidden;
+	overflow: hidden;	
 }
 
 .div-wrapper .header {
@@ -290,6 +290,7 @@ a {
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-color: #e4e4e4;
+	z-index: 1;
 }
 
 .div-wrapper .frame-4 {
@@ -802,6 +803,7 @@ a {
 	border-radius: 4px;
 	cursor: pointer;
 }
+
 </style>
 
 <script>
@@ -901,7 +903,7 @@ a {
 </head>
 <body>
 	<div class="div-wrapper">
-		<img class="header" src="resources/img/header.svg" />
+		<a href="index.jsp"><img class="header" src="resources/img/header.svg" /></a>
 		<div class="frame">
 			<div class="div">
 				<div class="frame-2">
@@ -920,7 +922,7 @@ a {
 		<div class="frame-3">
 			<div class="frame-4">
 				<div class="frame-5">
-					<div class="text-wrapper-14">홈</div>
+					<div class="text-wrapper-14"><a href="index.jsp">홈</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14">커뮤니티</div>
