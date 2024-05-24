@@ -2,6 +2,7 @@ package kr.co.moran.web.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -9,7 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.moran.web.vo.cartTest.CartVO;
-import kr.co.moran.web.vo.productTest.ProductVO;
+import kr.co.moran.web.vo.cartTest.ProductCartVO;
 
 public class cartTestDAO {
 	public SqlSessionFactory factory;
@@ -33,4 +34,15 @@ public class cartTestDAO {
 	    }
 		return 0;
 	}
+
+	public List<ProductCartVO> selectCartList(int mId) {
+		List<ProductCartVO> vo = null;
+	    try (SqlSession ss = factory.openSession(true)) {
+	    	vo = ss.selectList("selectCart", mId);	
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return vo;
+	}
+	
 }

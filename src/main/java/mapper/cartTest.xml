@@ -5,10 +5,35 @@
   
   <mapper namespace="kr.co.moran.web.cartTest">
 
+
   	<insert id="insertCart" parameterType="kr.co.moran.web.vo.cartTest.CartVO" >
 	  	INSERT INTO MEMBER_CART (m_id, pd_id, mc_cnt)
 		SELECT #{mId}, pd_id, #{cnt} FROM PRODUCT 
 		WHERE pd_id = #{pId} AND pd_id IS NOT NULL;
   	</insert>
+  	
+  	<select id="selectCart" parameterType="int" resultType="kr.co.moran.web.vo.cartTest.ProductCartVO">
+	  	SELECT 
+		    A.pd_id as pId, 
+		    A.c_id as cId, 
+		    A.pd_name as pName, 
+		    A.pd_price as pPrice, 
+		    A.pd_quantity as pQuantity, 
+		    A.pd_wholesale as pWholesale, 
+		    A.pd_dcrate as pDcrate, 
+		    A.pd_is_maintain as pIsMaintain, 
+		    B.pi_img as pImg, 
+		    C.mc_cnt as mCnt, 
+		    C.m_id as mId 
+		FROM 
+		    PRODUCT A
+		JOIN 
+		    PRODUCT_IMG B ON A.pd_id = B.pd_id AND B.pi_no = 0
+		JOIN 
+		    MEMBER_CART C ON C.pd_id = A.pd_id
+		WHERE 
+		    A.pd_is_maintain = 0 AND C.m_id = #{mId};
+  	</select>
+  	
   	
   </mapper>

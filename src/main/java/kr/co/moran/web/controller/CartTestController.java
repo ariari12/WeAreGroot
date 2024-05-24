@@ -1,6 +1,7 @@
 package kr.co.moran.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,6 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
+import kr.co.moran.web.action.cart.CartAction;
+import kr.co.moran.web.action.cart.CartListAction;
 
 @WebServlet("/cart")
 public class CartTestController extends HttpServlet{
@@ -16,12 +19,16 @@ public class CartTestController extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
 		
+		PrintWriter out = resp.getWriter();
 		String cmd = req.getParameter("cmd");
 		String url = "";
 		Action action = null;
 		
-		if(cmd == null || cmd.equals("list")) {
-			System.out.println("test");
+		if (cmd == null || cmd.equals("cartList")) {
+			action = new CartListAction();
+		} else if(cmd.equals("addProduct")) {
+			out.println(new CartAction().execute(req, resp));
+			return;
 		}
 		
 		url = action.execute(req, resp);
