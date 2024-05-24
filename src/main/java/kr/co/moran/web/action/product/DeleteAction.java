@@ -9,9 +9,11 @@ import org.json.simple.JSONObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class DeleteAction implements Action {
 
@@ -22,11 +24,20 @@ public class DeleteAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		String type = req.getParameter("type");
-		String nextUrl = "";
-		dao = new ProductDAO();
 		this.req = req;
 		this.resp = resp;
+		
+		// admin이 아닌 사용자가 접근 시 예외처리
+		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		System.out.println("modify: " + adminCheck);
+		if(adminCheck == null || Integer.parseInt(adminCheck.getAdmintype()) < 1) {
+			return "jsp/product/unauthorized.jsp";
+		}
+		
+		dao = new ProductDAO();
+		
+		String type = req.getParameter("type");
+		String nextUrl = "";
 		
 		switch (type == null ? "" : type) {
 			case "ctg": nextUrl = ctgDelete();
@@ -41,7 +52,6 @@ public class DeleteAction implements Action {
 
 	private String ctgDelete() {
 		String ctg = req.getParameter("ctg");
-		
 		switch (ctg == null ? "" : ctg) {
 			case "view": 
 				/*

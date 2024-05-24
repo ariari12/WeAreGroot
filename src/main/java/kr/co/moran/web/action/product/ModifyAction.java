@@ -10,9 +10,11 @@ import org.json.simple.JSONObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class ModifyAction implements Action {
 	
@@ -23,6 +25,13 @@ public class ModifyAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		// admin이 아닌 사용자가 접근 시 예외처리
+		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		System.out.println("modify: " + adminCheck);
+		if(adminCheck == null || Integer.parseInt(adminCheck.getAdmintype()) < 1) {
+			return "jsp/product/unauthorized.jsp";
+		}
+
 		this.req = req;
 		this.resp = resp;
 		
@@ -30,8 +39,6 @@ public class ModifyAction implements Action {
 		dao = new ProductDAO();
 		ctgList = new ArrayList<CategoryVO>();
 		String nextUrl = "";
-		
-//		System.out.println("modify? " + type);
 		
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
@@ -58,6 +65,7 @@ public class ModifyAction implements Action {
 	// category
 	private String categoryModify(String ctg) {
 		String cId;
+		MemberVO adminCheck;
 		switch (ctg) {
 			case "view":
 				/*

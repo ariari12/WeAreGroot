@@ -122,7 +122,7 @@
 /* product categroy */
 div.category {
 	width: 1920px;
-	height: 600px;
+	padding-bottom: 22px;
 	background-color: #ffffff;
 	border: 2px solid;
 	border-color: #e4e4e4;
@@ -176,12 +176,13 @@ div.category .subcategories {
 
 div.category .ctg-btns {
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
+    gap: 7px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-left: 62%;
 }
 
 div.category .ctg-btn {
-    margin-left: 75%;
     text-decoration: none;
     color: white;
 }
