@@ -152,6 +152,7 @@
     </div>
     
     <!-- 수량5 %> -->
+   
     <c:set var="quantity" value="${productVO.quantity}" />
     <script type="text/javascript">
         // JSTL 변수할당

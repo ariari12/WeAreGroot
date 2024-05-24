@@ -29,7 +29,6 @@ function cleanAndConvertToInt(s) {
 
 // 가격 업데이트 해주는 함수
 function updatePrice(oper) {
-
     // 가격, 수량 
     let price = cleanAndConvertToInt($('#price').text());
     let cnt = cleanAndConvertToInt($('#cnt').val());
@@ -75,25 +74,33 @@ function updatePrice(oper) {
 function addCart() {
 	
 	let urlParams = new URLSearchParams(window.location.search);
-	let pId = urlParams.get('pd_id');
+	let productId = urlParams.get('pd_id');
+	let cnt = $('#cnt').val();
 	
 	// USERID 값을 가져와야함.
 	// 임시용 데이터 9
-	let mId = 9;
+	let memberId = 9;
+	
+	if (cnt > quantity) {
+		Toast.fire({
+			icon: 'error',
+			title: '재고부족\n남은수량 : ' + quantity
+		});
+		return;
+	}
 	
 	$.ajax({
-		url: './jsp/cart/cart.jsp',
+		url: 'cart?cmd=addProduct',
 		type: 'post',
 		data: {
-			mId: 9,
-			pId: pId,
-			cnt: $('#cnt').val(),
+			mId: memberId,
+			pId: productId,
+			cnt: cnt,
 		},
 		success : function(data) {
 			data = data.trim();
 			
 			if (data == 1) {
-				// alert("장바구니 성공!");
                 Toast.fire({
                     icon: 'success',
                     title: '장바구니에 상품을 추가하였습니다.'
