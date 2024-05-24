@@ -63,7 +63,7 @@ public class MemberController extends HttpServlet {
 		} else if (url.equals("verifyEmailMatch")) {
 			PrintWriter out = resp.getWriter();
 			out.print("verifyEmailMatch");
-		} else if (url.equals("index.jsp")) {
+		} else if (url.equals("joinSuccess")) {
 			PrintWriter out = resp.getWriter();
 			out.print("success"); //회원가입 성공
 		} else {
