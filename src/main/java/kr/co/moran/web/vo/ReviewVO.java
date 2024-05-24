@@ -1,13 +1,13 @@
 package kr.co.moran.web.vo;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class DeptVO {
-   private int deptno;
-   private String dname;
-   private String loc;
+public class ReviewVO {
+	int mId, oId, rId, isMaintain, score;
+	String contents, regDate, retentionPeriod;
 }

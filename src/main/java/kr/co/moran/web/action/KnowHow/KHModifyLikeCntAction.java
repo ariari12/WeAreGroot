@@ -11,7 +11,7 @@ public class KHModifyLikeCntAction implements Action{
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		
 		BoardDAO dao = new BoardDAO();
-		dao.modifyKHLikeCntBybId(bId);
+		dao.modifyBoardLikeCntBybId(bId);
 		
 		return "board?cmd=khDetail&bId=" + bId;
 	}

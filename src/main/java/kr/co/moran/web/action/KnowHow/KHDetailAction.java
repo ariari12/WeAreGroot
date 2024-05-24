@@ -22,7 +22,7 @@ public class KHDetailAction implements Action {
 		
 		BoardVO boardVO = new BoardVO();
 
-		boardVO = boardDAO.selectKHBybId(bId);
+		boardVO = boardDAO.selectBoardBybId(bId);
 		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);
 		
 		

@@ -11,7 +11,7 @@ public class QnAModifyViewCntAction implements Action{
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		
 		BoardDAO dao = new BoardDAO();
-		dao.modifyKHViewCntBybId(bId);
+		dao.modifyBoardViewCntBybId(bId);
 		
 		return "board?cmd=qnaDetail&bId=" + bId;
 	}

@@ -22,7 +22,7 @@ public class QnADetailAction implements Action {
 		CommentDAO commentDAO = new CommentDAO();  
 		
 		BoardVO boardVO = new BoardVO();
-		boardVO = boardDAO.selectKHBybId(bId);
+		boardVO = boardDAO.selectBoardBybId(bId);
 		
 		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);
 		

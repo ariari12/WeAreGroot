@@ -21,5 +21,6 @@
   	<mappers>
   		<mapper resource="mapper/board.xml"/>
   		<mapper resource="mapper/comment.xml"/>
+  		<mapper resource="mapper/review.xml"/>
   	</mappers>
   </configuration>

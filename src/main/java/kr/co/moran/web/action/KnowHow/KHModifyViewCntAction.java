@@ -11,7 +11,7 @@ public class KHModifyViewCntAction implements Action{
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		
 		BoardDAO dao = new BoardDAO();
-		dao.modifyKHViewCntBybId(bId);
+		dao.modifyBoardViewCntBybId(bId);
 		
 		return "board?cmd=khDetail&bId=" + bId;
 	}

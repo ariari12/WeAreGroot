@@ -2,6 +2,8 @@
 	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.moran.board">
+
+	<!-- 노하우 전체보기(최신순) -->
 	<select id="SelectAllKH" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
@@ -9,6 +11,7 @@
 		ORDER BY b_regdate
 	</select>
 	
+	<!-- 노하우 전체보기(인기순) -->	
 	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
@@ -16,6 +19,7 @@
 		ORDER BY b_view_cnt DESC
 	</select>
 	
+	<!-- QnA 전체보기(최신순) -->
 	<select id="SelectAllQnA" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
@@ -23,6 +27,7 @@
 		ORDER BY b_regdate DESC
 	</select>
 	
+	<!-- QnA 전체보기(인기순) -->
 	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
@@ -30,61 +35,49 @@
 		ORDER BY b_view_cnt 
 	</select>
 	
-	<select id="SelectQnABybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
+	<!-- 글 디테일 -->	
+	<select id="SelectBoardBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
 		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
 		FROM BOARD
 		WHERE b_id = #{bId}
 	</select>
 	
-	<select id="SelectKHBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_id = #{bId}
-	</select>
-	
+	<!-- QnA 글 작성 -->	
 	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
 		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 1, 0)
 	</insert>
 	
+	<!-- 노하우 글 작성 -->
 	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
 		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 2, 0)
 	</insert>
 	
-	<update id="ModifyKHBybId">
+	<!-- 글 수정 -->
+	<update id="ModifyBoardBybId">
 		UPDATE BOARD
 		SET b_title = #{title},
 			b_contents = #{contents}
 		WHERE b_id = #{bId}
 	</update>
 	
-	<update id="ModifyQnABybId">
-		UPDATE BOARD
-		SET b_title = #{title},
-			b_contents = #{contents}
-		WHERE b_id = #{bId}
-	</update>
-	
-	<update id="DeleteKHBybId">
+	<!-- 글 삭제 -->
+	<update id="DeleteBoardBybId">
 		UPDATE BOARD
 		SET b_is_maintain = 1, b_retention_period = ADDDATE(date(now()),INTERVAL 6 YEAR)
 		WHERE b_id = ${bId}
 	</update>
 	
-	<update id="DeleteQnABybId">
-		UPDATE BOARD
-		SET b_is_maintain = 1, b_retention_period = ADDDATE(date(now()),INTERVAL 6 YEAR)
-		WHERE b_id = ${bId}
-	</update>
-	
-	<update id="ModifyKHViewCntBybId" parameterType="int">
+	<!-- 조회수 증가 -->
+	<update id="ModifyBoardViewCntBybId" parameterType="int">
 		UPDATE BOARD
 		SET b_view_cnt = b_view_cnt + 1
 		WHERE b_id = ${bId}
 	</update>
 	
-	<update id="ModifyKHLikeCntBybId" parameterType="int">
+	<!-- 좋아요 수 증가 -->
+	<update id="ModifyBoardLikeCntBybId" parameterType="int">
 		UPDATE BOARD
 		SET b_like_cnt = b_like_cnt + 1
 		WHERE b_id = ${bId}

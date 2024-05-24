@@ -11,7 +11,7 @@ public class KHDeleteAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		BoardDAO dao = new BoardDAO();
-		dao.deleteKHBybId(bId);
+		dao.deleteBoardBybId(bId);
 		
 		return "/board?cmd=kh";
 	}
