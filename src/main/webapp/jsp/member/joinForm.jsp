@@ -808,7 +808,9 @@
                         email : email
                     },
                     success : function(data){
-                    	data = data.trim();                    	
+                    	console.log("data1 = "+data);
+                    	data = data.trim();
+                    	console.log("data2 = "+data);
                     	if (data == "emailDuplicated") {
                     		alert("이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.");
                     	}else{

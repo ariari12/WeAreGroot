@@ -1,6 +1,7 @@
 package kr.co.moran.web.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -40,13 +41,7 @@ public class MemeberController extends HttpServlet{
 		}else if(cmd.equals("logoutOk")) {
 			action = new LogoutAction();
 		}else if(cmd.equals("emailOk")) {
-			action = new EmailAction();
-			System.out.println("action"); //확인해봐야함
-            if (action.equals("emailDuplicated")) {
-                resp.setContentType("text/plain");
-                resp.getWriter().write("emailDuplicated");
-                return;
-            }
+			action = new EmailAction();									
 		}
 		
 		url = action.execute(req, resp);
@@ -54,6 +49,9 @@ public class MemeberController extends HttpServlet{
 		if(url.startsWith("redirect:")) {
 			redirectUrl=url.substring("redirect:".length());
 			resp.sendRedirect(redirectUrl);
+		}else if(url.equals("emailDuplicated")){
+			PrintWriter out = resp.getWriter();
+			out.print(url);
 		}else {
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, resp);
