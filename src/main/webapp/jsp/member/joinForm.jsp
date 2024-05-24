@@ -19,6 +19,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+a {
+	text-align: center;
+	text-decoration: none; /* 링크의 밑줄 제거 */
+	color: inherit; /* 링크의 색상 제거 */
+}
+
 .div-wrapper {
 	position: relative;
 	width: 1920px;
@@ -42,6 +48,7 @@
 	top: 0;
 	left: 0;
 	background-color: #4d4d4d;
+	z-index: 1;
 }
 
 .div-wrapper .div {
@@ -804,8 +811,9 @@
 		$("#verifyEmailBtn").click(function(){
             var email = $("#email").val();
             $("#emailCheck").val(email);
-            $("#verifyEmailBtn").attr("disabled",true);            
-            if(email != ""){            	
+                     
+            if(email != ""){
+            	$("#verifyEmailBtn").attr("disabled",true);   
                 $.ajax({
                     type : "POST",
                     url : "/moran/member",
@@ -826,6 +834,7 @@
                     },                    
                     error : function(){
                         alert("이메일 인증 요청에 실패하였습니다. 다시 시도해주세요")
+                        $("#verifyEmailBtn").attr("disabled",false);
                     }
                 });
             }
@@ -879,6 +888,11 @@
 			}
 		   });
 		 });
+	  	
+	  	
+
+	  	
+	  	
 		
 	});
 	
@@ -891,10 +905,14 @@
 		<div class="frame">
 			<div class="div">
 				<div class="frame-2">
-					<div class="text-wrapper">로그인</div>
+					<div class="text-wrapper">
+						<a href="/moran/member?cmd=loginForm">로그인</a>
+					</div>
 				</div>
 				<div class="frame-2">
-					<div class="text-wrapper">회원가입</div>
+					<div class="text-wrapper">
+						<a href="/moran/member?cmd=joinForm">회원가입</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -1031,8 +1049,8 @@
 					class="rectangle-2"> 이용약관이용약관이용약관이용약관(선택)</label>
 				<div class="text-wrapper-26">약관보기&gt;</div>
 			</div>
-			<input type="hidden" id="emailCheck" name="emailCheck" />
-			<input type="hidden" name="cmd" value="joinOk" />
+			<input type="hidden" id="emailCheck" name="emailCheck" /> <input
+				type="hidden" name="cmd" value="joinOk" />
 			<button type="button" id="submitBtn">회원가입</button>
 		</form>
 
