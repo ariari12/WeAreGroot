@@ -944,7 +944,7 @@
 	
 
 				
-	<img class="header" src="resources/img/header.svg" />
+	<a href="index.jsp"><img class="header" src="resources/img/header.svg" /></a>
       <div class="frame-20">
         <div class="frame-21">
           <div class="frame-22"><div class="text-wrapper-23"><a href="index.jsp">홈</a></div></div>
@@ -969,7 +969,7 @@
       
 
       <c:choose>
-		<c:when test="${not empty sessionScope.memberVO}">			
+		<c:when test="${not empty sessionScope.memberVO}">
 			<div class="frame-wrapper">
 				<div class="frame-25">
 					<div class="frame-26"><div class="text-wrapper-26">내 정보(링크 없음)</div></div>
