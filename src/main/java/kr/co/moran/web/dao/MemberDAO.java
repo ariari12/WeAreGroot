@@ -76,10 +76,10 @@ public class MemberDAO {
 	    }
 	}
 	
-	public MemberVO selectMemberWithAddress(int id) {
+	public MemberVO selectMemberWithAddressById(int id) {
 		try(SqlSession ss = factory.openSession(true)){
 			System.out.println("[MemberDAO] id : "+id);
-			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmail",id);
+			return ss.selectOne("kr.co.moran.web.member.selectMemberWithAddressById",id);
 		}catch (Exception e) {
 	        // 예외 처리
 			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");

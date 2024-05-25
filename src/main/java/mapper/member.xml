@@ -116,7 +116,7 @@
 		</association>
   	</resultMap>
   	
-  	<select id="selectMemberWithAddress" parameterType="int" resultMap="memberWithAddressMap">
+  	<select id="selectMemberWithAddressById" parameterType="int" resultMap="memberWithAddressMap">
   		SELECT
   			m.m_id AS mId,
 		    m.m_email AS email,

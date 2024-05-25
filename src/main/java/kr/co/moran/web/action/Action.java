@@ -6,4 +6,5 @@ import jakarta.servlet.http.HttpServletResponse;
 public interface Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp);
 	
+	
 }
