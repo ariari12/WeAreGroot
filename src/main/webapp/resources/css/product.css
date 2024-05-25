@@ -123,7 +123,7 @@
 div.category {
 	width: 1920px;
 	padding-bottom: 22px;
-	background-color: #ffffff;
+	height: 600px;
 	border: 2px solid;
 	border-color: #e4e4e4;
 }
@@ -183,6 +183,12 @@ div.category .ctg-btns {
 }
 
 div.category .ctg-btn {
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+div.category .ctg-btn {
+    margin-left: 75%;
     text-decoration: none;
     color: white;
 }

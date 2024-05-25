@@ -11,9 +11,11 @@ import org.json.simple.JSONObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class AddAction implements Action {
 	
@@ -27,12 +29,17 @@ public class AddAction implements Action {
 		this.req = req;
 		this.resp = resp;
 		
+		// admin이 아닌 사용자가 접근 시 예외처리
+		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		System.out.println("modify: " + adminCheck);
+		if(adminCheck == null || Integer.parseInt(adminCheck.getAdmintype()) < 1) {
+			return "jsp/product/unauthorized.jsp";
+		}
+		
 		String type = req.getParameter("type");
 		dao = new ProductDAO();
 		ctgList = new ArrayList<CategoryVO>();
 		String nextUrl = "";
-		
-//		System.out.println("modify? " + type);
 		
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
@@ -51,6 +58,7 @@ public class AddAction implements Action {
 	// category
 	private String categoryAdd(String ctg) {
 		String cId;
+		MemberVO adminCheck;
 		switch (ctg) {
 			case "view": // 등록 페이지 요청
 				// 페이지 리소스 반환
@@ -73,7 +81,6 @@ public class AddAction implements Action {
 				 * db table 데이터 수정
 				 * 수정이 완료되었음을 사용자에게 반환
 				 */
-				
 				String cParantId = req.getParameter("cParentId");
 				String name = req.getParameter("name");
 				
