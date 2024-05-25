@@ -807,10 +807,26 @@ a {
 </style>
 
 <script>
-
+	
 
 	$(()=>{
+		
+		//유효성 검사 함수
+		function validateForm() {
+		    var form = document.getElementById("joinForm");
+		    if (form.checkValidity() === false) {
+		      event.preventDefault();
+		      event.stopPropagation();
+		      alert("회원가입 양식을 지켜주세요");
+		      return false;
+		    }
+		    return true;
+		  }
+		
+		
 		$("#verifyEmailBtn").click(function(){
+			event.preventDefault(); //기본제출 동작 막기
+			
             var email = $("#email").val();
             $("#emailCheck").val(email);
                      
@@ -868,27 +884,30 @@ a {
 		});
 		
 
-	  	$("#submitBtn").click(function() {
-		    var form = $("#joinForm");
-		    var data = form.serialize(); //직렬화 방식으로 보내 예시로 "username=john&email=john@example.com" 이런 형태로 Content-Type이 application/x-www-form-urlencode
-		    $.ajax({
-		      type: "post",		      
-		      url: "/moran/member",
-		      data: data,
-		      success: function(response) {
-		        // 서버 응답 처리
-		        console.log(response);
-		        if(response == "success"){		        	
-			        window.location.href="index.jsp";
-			        alert("회원가입 성공");
-		        }else{		        	
-			        alert("회원가입 양식을 지켜주세요");
-		        }		        
-		      },
-		      error : function(){
-					alert("회원가입 요청에 실패하였습니다");
+	  	$("#submitBtn").click(function(event) {
+	  		event.preventDefault(); // 기본 제출 동작 막기
+			if(validateForm()){
+			    var form = $("#joinForm");
+			    var data = form.serialize(); //직렬화 방식으로 보내 예시로 "username=john&email=john@example.com" 이런 형태로 Content-Type이 application/x-www-form-urlencode
+			    $.ajax({
+			      type: "post",		      
+			      url: "/moran/member",
+			      data: data,
+			      success: function(response) {
+			        // 서버 응답 처리
+			        console.log(response);
+			        if(response == "success"){		        	
+				        window.location.href="index.jsp";
+				        alert("회원가입 성공");
+			        }else{		        	
+				        alert("회원가입 양식을 지켜주세요");
+			        }		        
+			      },
+			      error : function(){
+						alert("회원가입 요청에 실패하였습니다");
+				}
+			   });
 			}
-		   });
 		 });
 	  	
 	  	
@@ -948,7 +967,9 @@ a {
 				</div>
 			</div>
 		</div>
-		<form action="/moran/member" method="post" id="joinForm">
+		
+		
+		<form action="/moran/member" method="post" id="joinForm" onsubmit="return validateForm()">
 			<div class="text-wrapper-16">회원가입</div>
 			<img class="line" src="resources/img/member/line-12.svg" /> <img
 				class="img" src="resources/img/member/line-13.svg" />
