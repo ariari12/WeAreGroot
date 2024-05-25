@@ -14,7 +14,7 @@
     		
     		.div-wrapper {
 			  position: relative;
-			  width: 1920px;
+			  width: 2100px;
 			  height: 1774px;
 			  background-color: #ffffff;
 			}
@@ -760,7 +760,7 @@
 			
 			.div-wrapper .frame-wrapper {
 			  position: fixed;
-			  width: 1920px;
+			  width: 2100px;
 			  height: 48px;
 			  top: 0;
 			  left: 0;
