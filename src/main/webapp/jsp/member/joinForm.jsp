@@ -27,7 +27,7 @@ a {
 
 .div-wrapper {
 	position: relative;
-	width: 1920px;
+	width: 2100px;
 	height: 1887px;
 	background-color: #ffffff;
 	overflow: hidden;	
@@ -43,7 +43,7 @@ a {
 
 .div-wrapper .frame {
 	position: absolute;
-	width: 1920px;
+	width: 2100px;
 	height: 48px;
 	top: 0;
 	left: 0;
@@ -928,7 +928,7 @@ a {
 					<div class="text-wrapper-14">커뮤니티</div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">스토어</div>
+					<div class="text-wrapper-14"><a href="product?cmd=list">스토어</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14">공지</div>
