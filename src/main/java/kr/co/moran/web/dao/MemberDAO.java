@@ -103,7 +103,21 @@ public class MemberDAO {
 	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
 	        e.printStackTrace();
 	        return false;
-	    }	
+	    }
 		
+	}
+	
+	public void deleteMemberbyId(MemberVO vo) {
+		try (SqlSession ss = factory.openSession(true)) {
+			System.out.println("[MemberDAO] = "+vo);
+			ss.update("kr.co.moran.web.member.insertMemberExit",vo);
+			ss.update("kr.co.moran.web.member.updateMemberStatus",vo);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 삭제 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	    }
 	}
 }

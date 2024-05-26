@@ -155,7 +155,7 @@
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">
 	  UPDATE 
-	    MEMBER m
+	    MEMBER AS m
 	    LEFT JOIN ADDRESS a ON m.m_id = a.m_id
 	  SET
 	    m.m_name = #{name},
@@ -170,7 +170,25 @@
 	  WHERE
 	    m.m_id = #{mId}  
   	</update>
-  	
-  	
+  	  	
+  	<insert id="insertMemberExit" parameterType="kr.co.moran.web.vo.member.MemberVO">
+    INSERT INTO MEMBER_EXIT (
+        m_id,
+        me_reason,
+        me_date
+    ) VALUES (
+        #{memberExitVO.mId},
+        #{memberExitVO.reason},
+        NOW()
+    );
+	</insert>
+	
+	<update id="updateMemberStatus" parameterType="kr.co.moran.web.vo.member.MemberVO">
+	    UPDATE MEMBER
+	    SET
+	        m_is_maintain = 1
+	    WHERE
+	        m_id = #{memberExitVO.mId};
+	</update>
 
   </mapper>
