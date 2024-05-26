@@ -154,7 +154,7 @@
 						
 						<div class="mb-3">
 							<input type="hidden" name="cmd" value="modifyMemberOk" />	
-							<input type="hidden" name="mId" value="${sessionScope.memberVO.mId}" />	
+							<input type="hidden" name="mId" value="${sessionScope.memberVO.getMId()}" />	
 							<button type="submit" id="submitBtn" class="btn btn-primary">회원정보 수정</button>
 						</div>
 					</form>
