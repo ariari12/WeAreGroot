@@ -79,8 +79,8 @@ CREATE TABLE `MORANMORAN`.`ADDRESS` (
 -- 탈퇴사유
 CREATE TABLE `MORANMORAN`.`MEMBER_EXIT` (
 	`m_id`      INT          NULL, -- 회원번호
-	`l_reason` VARCHAR(255) NULL, -- 회원탈퇴사유
-	`l_date`   DATE         NULL,  -- 회원탈퇴날짜
+	`me_reason` VARCHAR(255) NULL, -- 회원탈퇴사유
+	`me_date`   DATE         NULL,  -- 회원탈퇴날짜
     FOREIGN KEY (`m_id`) REFERENCES `MORANMORAN`.`MEMBER` (`m_id`) ON DELETE CASCADE
 );
 
