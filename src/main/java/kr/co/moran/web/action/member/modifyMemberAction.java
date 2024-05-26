@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.MemberDAO;
 import kr.co.moran.web.vo.member.AddressVO;
@@ -48,8 +49,13 @@ public class modifyMemberAction implements Action {
 			System.out.println("[modifyMemberAction] MemeberVO = "+vo);
 			System.out.println("[modifyMemberAction] AddressVO = "+avo);
 			
-			dao.modifyMemberWithAddressById(vo);
-
+			if(dao.modifyMemberWithAddressById(vo)) {
+				HttpSession session = req.getSession();
+				session.setAttribute("memberVO", vo);
+				System.out.println("세션 저장 성공"+session.getAttribute("memberVO"));
+			}
+			
+			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
