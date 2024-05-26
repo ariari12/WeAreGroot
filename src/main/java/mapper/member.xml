@@ -160,5 +160,28 @@
 		WHERE
 			m.m_id = #{mId}  	
   	</select>
+  	
+  	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">
+	    UPDATE MEMBER
+	    SET
+	      m_name = #{name},
+	      m_nick = #{nick},
+	      m_email = #{email},
+	      m_phone = #{phone},
+	      m_birth = #{birth},
+	      m_gender = #{gender}
+	    WHERE
+	      m_id = #{mId}
+	      
+	    <if test="addressVO != null">
+	      UPDATE ADDRESS
+	      SET
+	        a_zipcode = #{addressVO.zipcode},
+	        a_addr1 = #{addressVO.addr1},
+	        a_addr2 = #{addressVO.addr2}
+	      WHERE
+	        m_id = #{mId}
+	    </if>
+  	</update>
 
   </mapper>
