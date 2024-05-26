@@ -177,8 +177,34 @@
 			</div>
 			<div>
 				<div>
-					<button>회원탈퇴(버튼)</button>
+				  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">회원탈퇴</button>
 				</div>
+			</div>
+			
+			
+			<!-- 회원 탈퇴 모달 -->
+			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="deleteModalLabel">회원 탈퇴</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        <form id="deleteForm" action="member" method="post">
+			          <div class="mb-3">
+			            <label for="reason" class="form-label">탈퇴 사유</label>
+			            <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+			          </div>
+			          <input type="hidden" name="cmd" value="deleteMemberOk">
+			        </form>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			        <button type="submit" form="deleteForm" class="btn btn-danger">확인</button>
+			      </div>
+			    </div>
+			  </div>
 			</div>
 
 		</c:when>
