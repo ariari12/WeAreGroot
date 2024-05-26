@@ -31,7 +31,7 @@
 <body>
 <%
 	MemberVO member = (MemberVO)session.getAttribute("memberVO");
-	if(member == null || Integer.parseInt(member.getAdmintype()) < 1) {
+	if(member == null || member.getAdmintype() < 1) {
 		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
 	}
 	request.setAttribute("admin", true);
