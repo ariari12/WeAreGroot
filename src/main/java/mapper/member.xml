@@ -27,7 +27,8 @@
 			   <result property="addr2" column="a_addr2" />
 		</association>
   	</resultMap>
-  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.member.MemberVO">
+  		
+  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.member.MemberVO" useGeneratedKeys="true" keyProperty="mId">
   		INSERT INTO MEMBER (
 	      m_email,
 	      m_pw,
@@ -58,19 +59,11 @@
 	      #{gender}
 	    )
   	</insert>
-  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.AddressVO">
-  		INSERT INTO ADDRESS (
-  			m_id,
-  			a_zipcode,
-  			a_addr1,
-  			a_addr2
-  		) VALUES (
-  			#{mId},
-  			#{zipcode},
-  			#{addr1},
-  			#{addr2}
-  		)
-  	</insert>
+  	
+  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.MemberVO">
+  		INSERT INTO ADDRESS (m_id) VALUES (#{mId});
+	</insert>
+
   	
   	<select id="selectMemberByEmailAndPassword" parameterType="map" resultType="kr.co.moran.web.vo.member.MemberVO">
   		SELECT 
@@ -162,26 +155,23 @@
   	</select>
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">
-	    UPDATE MEMBER
-	    SET
-	      m_name = #{name},
-	      m_nick = #{nick},
-	      m_email = #{email},
-	      m_phone = #{phone},
-	      m_birth = #{birth},
-	      m_gender = #{gender}
-	    WHERE
-	      m_id = #{mId}
-	      
-	    <if test="addressVO != null">
-	      UPDATE ADDRESS
-	      SET
-	        a_zipcode = #{addressVO.zipcode},
-	        a_addr1 = #{addressVO.addr1},
-	        a_addr2 = #{addressVO.addr2}
-	      WHERE
-	        m_id = #{mId}
-	    </if>
+	  UPDATE 
+	    MEMBER m
+	    LEFT JOIN ADDRESS a ON m.m_id = a.m_id
+	  SET
+	    m.m_name = #{name},
+	    m.m_nick = #{nick},
+	    m.m_email = #{email},
+	    m.m_phone = #{phone},
+	    m.m_birth = #{birth},
+	    m.m_gender = #{gender},
+	    a.a_zipcode = #{addressVO.zipcode},
+	    a.a_addr1 = #{addressVO.addr1},
+	    a.a_addr2 = #{addressVO.addr2}
+	  WHERE
+	    m.m_id = #{mId}  
   	</update>
+  	
+  	
 
   </mapper>

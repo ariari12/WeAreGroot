@@ -24,6 +24,8 @@ public class LoginAction implements Action {
 			//회원 로그인 성공
 			System.out.println("로그인 성공");
 			return "index.jsp";
+		}else {
+			System.out.println("로그인 실패");
 		}
 		return "jsp/member/loginForm.jsp";
 	}

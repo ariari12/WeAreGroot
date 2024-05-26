@@ -30,7 +30,9 @@ public class MemberDAO {
 	public void insertMember(MemberVO vo) {
 	    try (SqlSession ss = factory.openSession(true)) {
 	    	System.out.println("[MemberDAO] MemberVO = "+vo);
-	        ss.insert("kr.co.moran.web.member.insertMember", vo);
+	    	ss.insert("kr.co.moran.web.member.insertMember", vo);
+	    	ss.insert("kr.co.moran.web.member.insertAddress",vo);
+	        
 	        // 자원을 닫을 필요가 없음 try~with~resource
 	        // ss.close
 	    } catch (Exception e) {

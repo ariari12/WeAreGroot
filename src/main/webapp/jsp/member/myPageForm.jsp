@@ -67,12 +67,12 @@
 								value="${sessionScope.memberVO.email}" readonly="readonly">
 						</div>
 						<c:choose>
-							<c:when test="${not empty requestScope.memberInfo}">
+							<c:when test="${not empty sessionScope.memberVO}">
 								<div class="mb-3">
 									<label for="zipcode" class="form-label">우편번호</label>
 									<div class="input-group">
-										<input type="text" class="form-control" name="" id="zipcode"
-											value="${sessionScope.memberVO.zipcode }">
+										<input type="text" class="form-control" name="zipcode" id="zipcode"
+											value="${sessionScope.memberVO.addressVO.zipcode }">
 										<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
 									</div>
 								</div>
@@ -80,20 +80,20 @@
 								<div class="mb-3">
 									<label for="addr1" class="form-label">주소</label> <input
 										type="text" class="form-control" name="addr1" id="addr1"
-										value="${sessionScope.memberVO.addr1 }">
+										value="${sessionScope.memberVO.addressVO.addr1 }">
 								</div>
 
 								<div class="mb-3">
 									<label for="addr2" class="form-label">상세 주소</label> <input
 										type="text" class="form-control" name="addr2" id="addr2"
-										value="${sessionScope.memberVO.addr2 }">
+										value="${sessionScope.memberVO.addressVO.addr2 }">
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="mb-3">
 									<label for="zipcode" class="form-label">우편번호</label>
 									<div class="input-group">
-										<input type="text" class="form-control" name="" id="zipcode">
+										<input type="text" class="form-control" name="zipcode" id="zipcode">
 										<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
 									</div>
 								</div>
