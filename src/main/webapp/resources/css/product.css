@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap'); */
 
 /* product navigation */
 .prd_nav-group {
@@ -121,11 +120,11 @@
 
 /* product categroy */
 div.category {
-	width: 1920px;
-	padding-bottom: 22px;
-	height: 600px;
-	border: 2px solid;
-	border-color: #e4e4e4;
+    width: 1920px;
+    padding-bottom: 22px;
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #e4e4e4;
 }
 
 div.category .overlap-group {

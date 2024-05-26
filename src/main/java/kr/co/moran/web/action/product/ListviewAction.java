@@ -83,7 +83,7 @@ public class ListviewAction implements Action {
 	private List<ProductVO> populType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
-		List<ProductVO> prdList = dao.pdSelectPopByPId(start, pageNum);
+		List<ProductVO> prdList = dao.pdSelectPop(start, pageNum);
 		
 		if(start < (3 *12)) {
 			for(ProductVO v : prdList) {
