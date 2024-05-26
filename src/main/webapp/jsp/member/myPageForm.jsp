@@ -22,6 +22,10 @@
 	window.onload = function() {
 		let btn = document.getElementById("btn");
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
+		
+		$("submitBtn").click(function(){
+			alert("회원정보 수정 완료");
+		});
 	}
 
 	function openKakaoPostCode() {
@@ -56,11 +60,11 @@
 				</div>
 
 				<div class="container">
-					<form action="" method="post">
+					<form action="member" method="post">
 						<div class="mb-3">
 							<label for="email" class="form-label">이메일</label> <input
 								type="email" class="form-control" name="email" id="email"
-								value="${memberInfo.email}" readonly="readonly">
+								value="${sessionScope.memberVO.email}" readonly="readonly">
 						</div>
 						<c:choose>
 							<c:when test="${not empty requestScope.memberInfo}">
@@ -68,7 +72,7 @@
 									<label for="zipcode" class="form-label">우편번호</label>
 									<div class="input-group">
 										<input type="text" class="form-control" name="" id="zipcode"
-											value="${requestScope.memberInfo.zipcode }">
+											value="${sessionScope.memberVO.zipcode }">
 										<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
 									</div>
 								</div>
@@ -76,13 +80,13 @@
 								<div class="mb-3">
 									<label for="addr1" class="form-label">주소</label> <input
 										type="text" class="form-control" name="addr1" id="addr1"
-										value="${requestScope.memberInfo.addr1 }">
+										value="${sessionScope.memberVO.addr1 }">
 								</div>
 
 								<div class="mb-3">
 									<label for="addr2" class="form-label">상세 주소</label> <input
 										type="text" class="form-control" name="addr2" id="addr2"
-										value="${requestScope.memberInfo.addr2 }">
+										value="${sessionScope.memberVO.addr2 }">
 								</div>
 							</c:when>
 							<c:otherwise>
@@ -110,19 +114,24 @@
 						<div class="mb-3">
 							<label for="name" class="form-label">이름</label> <input
 								type="text" class="form-control" name="name" id="name"
-								value="${requestScope.memberInfo.name }">
+								value="${sessionScope.memberVO.name }">
+						</div>
+						<div class="mb-3">
+							<label for="name" class="form-label">닉네임</label> <input
+								type="text" class="form-control" name="nick" id="nick"
+								value="${sessionScope.memberVO.nick }">
 						</div>
 
 						<div class="mb-3">
 							<label for="phone" class="form-label">연락처</label> <input
 								type="tel" class="form-control" name="phone" id="phone"
-								value="${requestScope.memberInfo.phone }">
+								value="${sessionScope.memberVO.phone }">
 						</div>
 
 						<div class="mb-3">
 							<label for="birth" class="form-label">생년월일</label> <input
 								type="date" class="form-control" name="birth" id="birth"
-								value="${requestScope.memberInfo.birth }">
+								value="${sessionScope.memberVO.birth }">
 						</div>
 
 						<div class="mb-3">
@@ -131,23 +140,25 @@
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="gender"
 										id="male" value="male"
-										${requestScope.memberInfo.gender == 'male' ? 'checked' : ''}>
+										${sessionScope.memberVO.gender == 'male' ? 'checked' : ''}>
 									<label class="form-check-label" for="male">남성</label>
 								</div>
 								<div class="form-check form-check-inline">
 									<input class="form-check-input" type="radio" name="gender"
 										id="female" value="female"
-										${requestScope.memberInfo.gender == 'female' ? 'checked' : ''}>
+										${sessionScope.memberVO.gender == 'female' ? 'checked' : ''}>
 									<label class="form-check-label" for="female">여성</label>
 								</div>
 							</div>
 						</div>
+						
+						<div class="mb-3">
+							<input type="hidden" name="cmd" value="modifyMemberOk" />	
+							<input type="hidden" name="mId" value="${sessionScope.memberVO.mId}" />	
+							<button type="submit" id="submitBtn" class="btn btn-primary">회원정보 수정</button>
+						</div>
 					</form>
-				</div>
-
-				<div class="mb-3">
-					<button type="submit" class="btn btn-primary">회원정보 수정</button>
-				</div>
+				</div>		
 			</div>
 
 			<div>
@@ -172,8 +183,9 @@
 
 		</c:when>
 		<c:otherwise>
-			<%response.sendRedirect("index.jsp");	%>
-			<%return; %>
+			<%
+			response.sendRedirect("index.jsp");
+			%>
 		</c:otherwise>
 	</c:choose>
 
