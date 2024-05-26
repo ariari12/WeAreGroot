@@ -9,13 +9,7 @@ import kr.co.moran.web.vo.member.MemberVO;
 public class MyPageForm implements Action {
 
 	@Override
-	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		MemberDAO dao = new MemberDAO();
-		MemberVO vo= (MemberVO) req.getSession().getAttribute("memberVO");
-		System.out.println("[MyPageForm] MemberVO = "+vo);
-		
-		MemberVO findMember =dao.selectMemberWithAddressById(vo.getMId());
-		req.setAttribute("memberInfo", findMember);
+	public String execute(HttpServletRequest req, HttpServletResponse resp) {		
 		return "jsp/member/myPageForm.jsp";
 	}
 

@@ -14,10 +14,10 @@ public class LoginAction implements Action {
 		String email = req.getParameter("email");
 		String password = req.getParameter("pw");
 		MemberDAO dao = new MemberDAO();
-		MemberVO vo=dao.selectMemberByEmailAndPassword(email, password);
+		MemberVO vo=dao.selectMemberByEmailAndPassword(email, password);		
 		
 		if(vo!=null) {
-			System.out.println("vo 객체 : "+vo);
+			System.out.println("[LoginAction] MemberVO = "+vo);
 			HttpSession session = req.getSession();
 			session.setAttribute("memberVO", vo);
 			System.out.println(session.getAttribute("memberVO"));
