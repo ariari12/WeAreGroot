@@ -17,12 +17,14 @@ public class MemberVO {
 	private String nick; // 회원 닉네임
 	private String phone; // 회원 전화번호
 	private String regdate; // 회원 가입일
-	private String logtype; // 로그인 타입
-	private String admintype; // 관리자 유무
+	private int logtype; // 로그인 타입
+	private int admintype; // 관리자 유무
 	private int isMaintain;// 정보 상태
 	private String retentionPeriod; // 삭제한 회원 정보 보관 기간
 	private String birth; // 회원 생일
 	private String gender; // 성별
+	
+	private AddressVO addressVO; //주소정보
 	
 	//변수명 정보상태, 삭제한 날짜, 관리자 유무 db 칼럼 이름 변경, Date 타입 정하기
 }

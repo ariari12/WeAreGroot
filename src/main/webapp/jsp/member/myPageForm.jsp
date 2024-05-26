@@ -22,6 +22,10 @@
 	window.onload = function() {
 		let btn = document.getElementById("btn");
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
+		
+		$("submitBtn").click(function(){
+			alert("회원정보 수정 완료");
+		});
 	}
 
 	function openKakaoPostCode() {
@@ -52,87 +56,131 @@
 				<div>
 
 					<h3>비밀번호 변경(푸르다 마켓처럼 페이지 이동)</h3>
-					<h3>
-						회원 정보 수정
-						</h3>
+					<h3>회원 정보 수정</h3>
 				</div>
 
 				<div class="container">
-					<div class="mb-3">
-						<label for="zipcode" class="form-label">우편번호</label>
-						<div class="input-group">
-							<input type="text" class="form-control" name="" id="zipcode">
-							<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
+					<form action="member" method="post">
+						<div class="mb-3">
+							<label for="email" class="form-label">이메일</label> <input
+								type="email" class="form-control" name="email" id="email"
+								value="${sessionScope.memberVO.email}" readonly="readonly">
 						</div>
-					</div>
+						<c:choose>
+							<c:when test="${not empty sessionScope.memberVO}">
+								<div class="mb-3">
+									<label for="zipcode" class="form-label">우편번호</label>
+									<div class="input-group">
+										<input type="text" class="form-control" name="zipcode" id="zipcode"
+											value="${sessionScope.memberVO.addressVO.zipcode }">
+										<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
+									</div>
+								</div>
 
-					<div class="mb-3">
-						<label for="addr1" class="form-label">주소</label> <input
-							type="text" class="form-control" name="addr1" id="addr1">
-					</div>
+								<div class="mb-3">
+									<label for="addr1" class="form-label">주소</label> <input
+										type="text" class="form-control" name="addr1" id="addr1"
+										value="${sessionScope.memberVO.addressVO.addr1 }">
+								</div>
 
-					<div class="mb-3">
-						<label for="addr2" class="form-label">상세 주소</label> <input
-							type="text" class="form-control" name="addr2"
-							id="addr2">
-					</div>
+								<div class="mb-3">
+									<label for="addr2" class="form-label">상세 주소</label> <input
+										type="text" class="form-control" name="addr2" id="addr2"
+										value="${sessionScope.memberVO.addressVO.addr2 }">
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="mb-3">
+									<label for="zipcode" class="form-label">우편번호</label>
+									<div class="input-group">
+										<input type="text" class="form-control" name="zipcode" id="zipcode">
+										<button class="btn btn-primary" type="button" id="btn">우편번호찾기</button>
+									</div>
+								</div>
 
-					<div class="mb-3">
-						<label for="name" class="form-label">이름</label> <input type="text"
-							class="form-control" name="name" id="name">
-					</div>
+								<div class="mb-3">
+									<label for="addr1" class="form-label">주소</label> <input
+										type="text" class="form-control" name="addr1" id="addr1">
+								</div>
 
-					<div class="mb-3">
-						<label for="phone" class="form-label">연락처</label> <input
-							type="tel" class="form-control" name="phone" id="phone">
-					</div>
+								<div class="mb-3">
+									<label for="addr2" class="form-label">상세 주소</label> <input
+										type="text" class="form-control" name="addr2" id="addr2">
+								</div>
+							</c:otherwise>
 
-					<div class="mb-3">
-						<label for="birth" class="form-label">생년월일</label> <input
-							type="date" class="form-control" name="birth" id="birth">
-					</div>
+						</c:choose>
 
-					<div class="mb-3">
-						<label class="form-label">성별</label>
-						<div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="gender"
-									id="male" value="male"> <label class="form-check-label"
-									for="male">남성</label>
-							</div>
-							<div class="form-check form-check-inline">
-								<input class="form-check-input" type="radio" name="gender"
-									id="female" value="female"> <label
-									class="form-check-label" for="female">여성</label>
+						<div class="mb-3">
+							<label for="name" class="form-label">이름</label> <input
+								type="text" class="form-control" name="name" id="name"
+								value="${sessionScope.memberVO.name }">
+						</div>
+						<div class="mb-3">
+							<label for="name" class="form-label">닉네임</label> <input
+								type="text" class="form-control" name="nick" id="nick"
+								value="${sessionScope.memberVO.nick }">
+						</div>
+
+						<div class="mb-3">
+							<label for="phone" class="form-label">연락처</label> <input
+								type="tel" class="form-control" name="phone" id="phone"
+								value="${sessionScope.memberVO.phone }">
+						</div>
+
+						<div class="mb-3">
+							<label for="birth" class="form-label">생년월일</label> <input
+								type="date" class="form-control" name="birth" id="birth"
+								value="${sessionScope.memberVO.birth }">
+						</div>
+
+						<div class="mb-3">
+							<label class="form-label">성별</label>
+							<div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="gender"
+										id="male" value="male"
+										${sessionScope.memberVO.gender == 'male' ? 'checked' : ''}>
+									<label class="form-check-label" for="male">남성</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="gender"
+										id="female" value="female"
+										${sessionScope.memberVO.gender == 'female' ? 'checked' : ''}>
+									<label class="form-check-label" for="female">여성</label>
+								</div>
 							</div>
 						</div>
-					</div>
+						
+						<div class="mb-3">
+							<input type="hidden" name="cmd" value="modifyMemberOk" />	
+							<input type="hidden" name="mId" value="${sessionScope.memberVO.getMId()}" />	
+							<button type="submit" id="submitBtn" class="btn btn-primary">회원정보 수정</button>
+						</div>
+					</form>
+				</div>		
+			</div>
 
-					<div class="mb-3">
-						<button type="submit" class="btn btn-primary">회원정보 수정</button>
-					</div>
-				</div>
+			<div>
+				<h3>주문 내역</h3>
+				<button>상세보기 버튼(상세목록 페이지로 이동)</button>
 
+				주문번호,상품이름 ,주문날짜, 총가격, 수량, 주문상태 주문내역 목록 5개정도 보여줌
+
+				<h3>내가 쓴 글</h3>
+				<button>상세보기 버튼 (상세목록 페이지로 이동)</button>
+				게시판 이름 목록 5개정도 보여줌
+
+				<h3>내가 찜한 상품</h3>
+				<button>상세보기 버튼(상세목록 페이지로 이동)</button>
+				상품이름 상품 5개정도 보여줌
+			</div>
+			<div>
 				<div>
-					<h3>주문 내역</h3>
-					<button>상세보기 버튼(상세목록 페이지로 이동)</button>
-
-					주문번호,상품이름 ,주문날짜, 총가격, 수량, 주문상태 주문내역 목록 5개정도 보여줌
-
-					<h3>내가 쓴 글</h3>
-					<button>상세보기 버튼 (상세목록 페이지로 이동)</button>
-					게시판 이름 목록 5개정도 보여줌
-
-					<h3>내가 찜한 상품</h3>
-					<button>상세보기 버튼(상세목록 페이지로 이동)</button>
-					상품이름 상품 5개정도 보여줌
-				</div>
-				<div>
-					<div>
-						<button>회원탈퇴(버튼)</button>
-					</div>
+					<button>회원탈퇴(버튼)</button>
 				</div>
 			</div>
+
 		</c:when>
 		<c:otherwise>
 			<%

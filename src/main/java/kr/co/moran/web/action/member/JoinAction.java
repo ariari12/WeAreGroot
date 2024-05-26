@@ -22,7 +22,7 @@ public class JoinAction implements Action {
 			String emailCheck = req.getParameter("emailCheck");
 			String pw = req.getParameter("pw");
 			String rePw = req.getParameter("repw");
-			String nickName = req.getParameter("nickname");
+			String nick = req.getParameter("nick");
 			String phone = req.getParameter("phone");
 			String birth = req.getParameter("birth"); 
 			String gender = req.getParameter("gender");
@@ -54,11 +54,11 @@ public class JoinAction implements Action {
 			vo.setName(name);
 			vo.setEmail(email);
 			vo.setPw(pw);
-			vo.setNick(nickName);
+			vo.setNick(nick);
 			vo.setPhone(phone);
 			vo.setBirth(birth);
-			vo.setGender(birth);
-			System.out.println("joinAction VO = "+vo);
+			vo.setGender(gender);
+			System.out.println("[joinAction] VO = "+vo);
 			dao.insertMember(vo);
 			
 			

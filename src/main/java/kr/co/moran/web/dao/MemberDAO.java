@@ -29,7 +29,10 @@ public class MemberDAO {
 	}
 	public void insertMember(MemberVO vo) {
 	    try (SqlSession ss = factory.openSession(true)) {
-	        ss.insert("kr.co.moran.web.member.insertMember", vo);
+	    	System.out.println("[MemberDAO] MemberVO = "+vo);
+	    	ss.insert("kr.co.moran.web.member.insertMember", vo);
+	    	ss.insert("kr.co.moran.web.member.insertAddress",vo);
+	        
 	        // 자원을 닫을 필요가 없음 try~with~resource
 	        // ss.close
 	    } catch (Exception e) {
@@ -45,8 +48,8 @@ public class MemberDAO {
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("email", email);
 			map.put("pw", pw);
-			System.out.println("email : "+map.get("email"));
-			System.out.println("pw : "+map.get("pw"));
+			System.out.println("[MemberDAO] email : "+map.get("email"));
+			System.out.println("[MemberDAO] pw : "+map.get("pw"));
 			
 			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmailAndPassword", map);
 		}catch (Exception e) {
@@ -58,10 +61,11 @@ public class MemberDAO {
 	        return null;
 	    }
 	}
+	
 	public MemberVO selectMemberByEmail(String email) {
 		try (SqlSession ss = factory.openSession(true)) {
 			
-			System.out.println("email : "+email);			
+			System.out.println("[MemberDAO] email : "+email);			
 			
 			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmail", email);
 		}catch (Exception e) {
@@ -72,5 +76,34 @@ public class MemberDAO {
 	        e.printStackTrace();
 	        return null;
 	    }
+	}
+	
+	public MemberVO selectMemberWithAddressById(int id) {
+		try(SqlSession ss = factory.openSession(true)){
+			System.out.println("[MemberDAO] id : "+id);
+			return ss.selectOne("kr.co.moran.web.member.selectMemberWithAddressById",id);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	        return null;
+	    }		
+		
+	}
+	public boolean modifyMemberWithAddressById(MemberVO vo) {
+		try (SqlSession ss = factory.openSession(true)) {
+			ss.update("kr.co.moran.web.member.modifyMemberWithAddressById",vo);
+			return true;
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 수정 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	        return false;
+	    }	
+		
 	}
 }
