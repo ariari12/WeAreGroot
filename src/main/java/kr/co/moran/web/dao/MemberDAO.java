@@ -90,4 +90,16 @@ public class MemberDAO {
 	    }		
 		
 	}
+	public void modifyMemberWithAddressById(MemberVO vo) {
+		try (SqlSession ss = factory.openSession(true)) {
+			ss.update("kr.co.moran.web.member.modifyMemberWithAddressById",vo);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 수정 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	    }	
+		
+	}
 }

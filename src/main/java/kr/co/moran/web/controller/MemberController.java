@@ -18,6 +18,7 @@ import kr.co.moran.web.action.member.LoginAction;
 import kr.co.moran.web.action.member.LoginFormAction;
 import kr.co.moran.web.action.member.LogoutAction;
 import kr.co.moran.web.action.member.MyPageForm;
+import kr.co.moran.web.action.member.modifyMemberAction;
 
 @WebServlet("/member")
 public class MemberController extends HttpServlet {
@@ -50,6 +51,8 @@ public class MemberController extends HttpServlet {
 			action = new EmailCodeAction();
 		} else if (cmd.equals("myPageForm")) {
 			action = new MyPageForm();
+		} else if (cmd.equals("modifyMemberOk")) {
+			action = new modifyMemberAction();
 		}
 
 		url = action.execute(req, resp);
