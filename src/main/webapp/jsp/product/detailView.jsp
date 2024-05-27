@@ -124,30 +124,10 @@
 		</div>
 
 		<%-- todo: 찜하기 추가할 것 --%>
+		
 
-		<div id="prd-text-tag">
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#꽃을 감상하는</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#초보자용</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#선물하기 좋은</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#공기정화</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#목대있는</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#둥근모양</div>
-		    </div>
-		    <div class="prd-text-tag-frame">
-		        <div class="tag-text">#길쭉한</div>
-		    </div>
-		</div>
+		<%-- 상품 글 태그 --%>
+		<div id="prd-text-tag"></div>
 		
 		<div style="position: absolute; margin-top: 36px; margin-left: 16px;">
 		    <%  int amount = (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
@@ -158,16 +138,22 @@
 		    <div class="prd-dcrate"><%=v.getDcRate() %>% 할인</div>
 		</div>
 		
-		
+		<%-- product imgs --%>
 		<div id="prdImgs"></div>
 		
 		<div class="prd-pay-opt">
 		    <div class="shop-bak">
-		        <div class="btn-text">장바구니 담기</div>
+		        <div class="btn-text">
+		        	<%-- 장바구니 url 추가 --%>
+		        	<a href="">장바구니 담기</a>
+	        	</div>
 		    </div>
 		    
 		    <div class="buy-now">
-		        <div class="btn-text">바로 구매</div>
+		        <div class="btn-text">
+		        	<%-- 구매 url 추가 --%>
+		        	<a href="">바로 구매</a>
+				</div>
 		    </div>
 		    
 		    <div>
@@ -216,6 +202,7 @@
 		    
 		    <div id="review-frame">
 		    	<%-- 상품후기 추가 --%>
+		    	
 		    </div>
 		    
 		    <div id="qna-frame">

@@ -55,7 +55,7 @@ let msgRedirect = (msg, redUrl) => {
 let descConvert = (data, name) => {
 	let plantInfo = "";
 	let textTag = "<div class='prd-text-tag-frame'>"
-	 + "<div class='tag-text'>" + name + "</div></div>";
+	 + "<div class='tag-text'># " + name + "</div></div>";
 	 
 	for(key in data) {
 		switch(key){
@@ -65,7 +65,7 @@ let descConvert = (data, name) => {
 				$(".prd-growth-form").html("생육형태 : " + data[key]);
 				
 				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'>" + data[key] + "</div></div>";
+				 + "<div class='tag-text'># " + data[key] + "</div></div>";
 				break;
 			// 기능성정보
 		    case "fncltyInfo":
@@ -92,14 +92,14 @@ let descConvert = (data, name) => {
 				plantInfo += "관리 요구도 :" + data[key] + "<br>";
 				
 				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'>난이도:" + data[key] + "</div></div>";
+				 + "<div class='tag-text'># 난이도:" + data[key] + "</div></div>";
 				break;
 		    // 관리수준
 		    case "managelevelCodeNm":
 				plantInfo += "난이도 : " + data[key] + "<br><br>";
 				
 				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'>" + data[key] + "</div></div>";
+				 + "<div class='tag-text'># " + data[key] + "</div></div>";
 				break;
 		    // 배치장소
 		    case "postngplaceCodeNm":
