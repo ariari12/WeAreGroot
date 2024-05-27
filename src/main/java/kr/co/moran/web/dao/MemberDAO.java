@@ -89,7 +89,7 @@ public class MemberDAO {
 	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
 	        e.printStackTrace();
 	        return null;
-	    }		
+	    }
 		
 	}
 	public boolean modifyMemberWithAddressById(MemberVO vo) {
