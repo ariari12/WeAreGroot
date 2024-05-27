@@ -210,7 +210,8 @@
 		</c:when>
 		<c:otherwise>
 			<%
-			response.sendRedirect("index.jsp");
+			//수정해야함
+			response.sendRedirect("main");
 			%>
 		</c:otherwise>
 	</c:choose>

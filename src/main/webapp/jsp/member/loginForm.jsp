@@ -588,7 +588,7 @@ a {  	text-align: center;
 </head>
 <body>
 	<div class="div-wrapper">
-		<a href="index.jsp"><img class="header" src="resources/img/member/header.svg" /></a>
+		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
 			<div class="div">
 				<div class="frame-2">
@@ -630,7 +630,7 @@ a {  	text-align: center;
 		<div class="frame-3">
 			<div class="frame-4">
 				<div class="frame-5">
-					<div class="text-wrapper-14"><a href="index.jsp">홈</a></div>
+					<div class="text-wrapper-14"><a href="main">홈</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14">커뮤니티</div>
