@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.qnA;
+package kr.co.moran.web.action.qna;
 
 import java.util.HashMap;
 import java.util.List;

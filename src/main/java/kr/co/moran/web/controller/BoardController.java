@@ -18,15 +18,15 @@ import kr.co.moran.web.action.knowHow.KHModifyLikeCntAction;
 import kr.co.moran.web.action.knowHow.KHModifyViewCntAction;
 import kr.co.moran.web.action.knowHow.KHWriteAction;
 import kr.co.moran.web.action.knowHow.KHWriteFormAction;
-import kr.co.moran.web.action.qnA.QnADeleteAction;
-import kr.co.moran.web.action.qnA.QnADetailAction;
-import kr.co.moran.web.action.qnA.QnAListAction;
-import kr.co.moran.web.action.qnA.QnAModifyAction;
-import kr.co.moran.web.action.qnA.QnAModifyFormAction;
-import kr.co.moran.web.action.qnA.QnAModifyLikeCntAction;
-import kr.co.moran.web.action.qnA.QnAModifyViewCntAction;
-import kr.co.moran.web.action.qnA.QnAWriteAction;
-import kr.co.moran.web.action.qnA.QnAWriteFormAction;
+import kr.co.moran.web.action.qna.QnADeleteAction;
+import kr.co.moran.web.action.qna.QnADetailAction;
+import kr.co.moran.web.action.qna.QnAListAction;
+import kr.co.moran.web.action.qna.QnAModifyAction;
+import kr.co.moran.web.action.qna.QnAModifyFormAction;
+import kr.co.moran.web.action.qna.QnAModifyLikeCntAction;
+import kr.co.moran.web.action.qna.QnAModifyViewCntAction;
+import kr.co.moran.web.action.qna.QnAWriteAction;
+import kr.co.moran.web.action.qna.QnAWriteFormAction;
 
 @WebServlet("/board")
 public class BoardController extends HttpServlet{
