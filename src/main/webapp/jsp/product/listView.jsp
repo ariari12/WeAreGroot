@@ -26,6 +26,18 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 
+<style>
+a {
+	text-decoration: none;
+	color: #202020;
+}
+
+.text-wrapper-26 a {
+	text-decoration: none;
+	color: #ffffff;
+}
+</style>
+
 <script>
 let viewDetails = (no) => {
 	window.location = "./product?cmd=detail&no=" + no;
@@ -35,7 +47,7 @@ let viewDetails = (no) => {
 </head>
 <body>
 <div class="div-wrapper " style="height: 220px; z-index: 3;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
@@ -144,7 +156,7 @@ let viewDetails = (no) => {
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

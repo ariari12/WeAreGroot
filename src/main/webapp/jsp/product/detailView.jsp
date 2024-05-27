@@ -7,6 +7,9 @@
 <%@page import="kr.co.moran.web.dao.ProductDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +37,23 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 
+<style>
+	.text-wrapper-26 a {
+		text-decoration: none;
+		color: #ffffff;
+	}
+	
+	.div-wrapper .frame-23 a {
+		text-decoration: none;
+		color: #202020;
+	}
+	
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
+</style>
+
 </head>
 <body>
 
@@ -49,17 +69,41 @@
 %>
 
 <script>
-	
 	$(() => {
 		descConvert(<%=v.getDescription().replace("None", "") %>, '<%=v.getName() %>');
 		imgBath(<%=imgsTag %>);
 		menuBtnClick();
+		
+		$("#info-frame").show();
+		$("#review-frame").hide();
+		$("#qna-frame").hide();
+		
+		$("#btn-plant").click(() => {
+			$("#info-frame").show();
+			$("#review-frame").hide();
+			$("#qna-frame").hide();
+		});
+		
+		$("#btn-review").click(() => {
+			review(<%=prdId %>);
+			$("#plant-frame").hide();
+			$("#review-frame").show();
+			$("#qna-frame").hide();
+		});
+		
+
+		$("#btn-qna").click(() => {
+			qnaInfo();
+			$("#plant-frame").hide();
+			$("#review-frame").hide();
+			$("#qna-frame").show();
+		});
 	});
 </script>
 
 <%-- header --%>
 <div class="div-wrapper" style="z-index: 4; height: 254px; margin-bottom: -444px;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+	<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <%-- nav --%>
@@ -87,8 +131,8 @@
 		    </div>
 		    <div class="reviews-score">
 		        <img class="rv-img-star" src="resources/img/product_detail/star.svg" />
-		        <div class="rv-text">0.0</div>
-		        <div class="rv-text">(123)</div>
+		        <div class="rv-text">${score}</div>
+		        <div class="rv-text">(${cnt})</div>
 		    </div>
 		</div>
 		
@@ -123,8 +167,17 @@
 		    <% 	} %>
 		</div>
 
+		
 		<%-- todo: 찜하기 추가할 것 --%>
 		
+
+		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
+		<c:if test="${admintype > 0}">
+			<div class="admin-btn">
+	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품수정</a>
+	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=view&no=${prdId}">상품삭제</a>
+			</div>
+		</c:if>
 
 		<%-- 상품 글 태그 --%>
 		<div id="prd-text-tag"></div>
@@ -157,7 +210,7 @@
 		    </div>
 		    
 		    <div>
-			    <div style="display: flex; justify-content: flex-end; align-items: center; position: absolute; right: 768px;">
+			    <div style="display: flex;justify-content: flex-end; align-items: center; position: absolute; right: 768px;">
 			        <div class="amount-text">주문금액</div>
 			        <div id="totalPrice"><%=String.format("%,d", amount) %> 원</div>
 			        <p class="prd-goods"><%=v.getName() %></p>
@@ -173,7 +226,7 @@
 			</div>
 		</div>
 	
-		<div style="margin-top: -634px; margin-left: -780px;">
+		<div style="margin-top: -634px; margin-left: -780px; position: relative; z-index: -1;">
 		    <div style="border: 1px solid #f1f1f1; position: relative; top: 806px;margin-left: 374px; width: 1176px;"></div>
 		        <div class="menu">
 		            <div class="menu-select">
@@ -181,7 +234,7 @@
 		                    <div class="menu-btn-text menu-btn-click">상품 식물 정보</div>
 		                </div>
 		                <div class="info-btn" id="btn-review">
-		                    <div class="menu-btn-text">상품후기(01)</div>
+		                    <div class="menu-btn-text">상품후기 (${cnt})</div>
 		                </div>
 		                <div class="info-btn" id="btn-qna">
 		                    <div class="menu-btn-text">상품문의</div>
@@ -198,15 +251,21 @@
 			    <div class="prd-text-title"><%=v.getName() %></div>
 			    <div class="prd-growth-form"></div>
 			    <p class="plant-info"></p>
+			    <div id="big-img"></div>
 		    </div>
 		    
 		    <div id="review-frame">
 		    	<%-- 상품후기 추가 --%>
-		    	
+		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
+		    		<h1>상품후기</h1>
+		    	</div>
 		    </div>
 		    
 		    <div id="qna-frame">
 		    	<%-- 상품문의 추가 --%>
+		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
+		    		<h1>상품문의</h1>
+		    	</div>
 		    </div>
 		</div>
 	</div>
@@ -214,8 +273,8 @@
 </div>
 
 <%-- footer --%>
-<div class="div-wrapper" style="z-index: 1; height: 476px; top: -1400px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>	
+<div class="div-wrapper" style="z-index: 1; height: 476px;">
+	<jsp:include page="layout/footer.jsp"></jsp:include>	
 </div>
 </body>
 </html>

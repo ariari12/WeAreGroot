@@ -36,7 +36,7 @@
 
 <%-- header --%>
 <div class="div-wrapper" style="z-index: 4; height: 254px; margin-bottom: -444px;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <%-- nav --%>
@@ -45,11 +45,13 @@
 </div>
 
 <div id="input-form">
+	
+
 </div>
 
 <%-- footer --%>
 <div class="div-wrapper" style="z-index: 1; height: 476px; top: -1400px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>	
+<jsp:include page="layout/footer.jsp"></jsp:include>	
 </div>
 
 </body>

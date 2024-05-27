@@ -105,7 +105,7 @@
 
 
 <div class="div-wrapper " style="height: 220px; z-index: 3;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <!-- TODO : 객체 가져오고 반복문 순회 완성하기 -->
@@ -153,7 +153,7 @@
 </div>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

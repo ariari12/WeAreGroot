@@ -1,3 +1,5 @@
+select * from ORDERS;
+
 INSERT INTO ORDERS (m_id, pd_id, o_date, o_total, o_cnt, o_status) 
 VALUES (1, 13206, '2024-05-01', 150.00, 3, 0);
 

@@ -73,11 +73,58 @@ function updatePrice(oper) {
 }
 
 // AJAX 로 장바구니에 담는 함수.
-function addCart() {
+let addCart = () => {
 
 }
 
 // 구매하기로 넘어가는 함수.
-function order() {
+let order = () => {
 
 }
+
+// 리뷰정보 가져오는 ajax
+let review = (no) => {
+	$.ajax({
+        type: "post",
+        url: "./product?cmd=detail&no=" + no + "&type=rev",
+        dataType: "json",
+        success: function (data) {
+        	console.log("성공");
+            console.log(data);
+            
+			for(item of data["reviews"]) {
+				console.log(item);
+				for(key in item) {
+				}
+			}
+            
+        },
+        error: (data, status, err) => {
+        	console.log("실패");
+        	console.log(data);
+        	console.log(err);
+        }
+    });
+}
+
+
+// 상품문의 정보 가져오는 ajax
+let qnaInfo = (no) => {
+	$.ajax({
+        type: "post",
+        url: "",
+   		data: {"cId" : cId},
+        dataType: "json",
+        success: function (data) {
+        	console.log("성공");
+            console.log(data);
+            
+        },
+        error: (data, status, err) => {
+        	console.log("실패");
+        	console.log(data);
+        	console.log(err);
+        }
+    });
+}
+

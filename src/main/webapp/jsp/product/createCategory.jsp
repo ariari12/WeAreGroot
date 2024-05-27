@@ -180,7 +180,7 @@
 
 
 <div class="div-wrapper " style="height: 260px;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <div class="container category-con">
@@ -218,7 +218,7 @@
 </div>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

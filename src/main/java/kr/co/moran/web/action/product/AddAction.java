@@ -146,25 +146,24 @@ public class AddAction implements Action {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();
 		
-		// JSON ArayList 생성
-		JSONArray ctgJsonArray = new JSONArray();
-		
-		// cgtList -> JSON Array 변환
-		Object[] ctgArray = new Object[ctgList.size()];
-		for (int i = 0; i < ctgList.size(); i++) {
-			// dao JSON 객체
-			Map<String, Object> subCtg = new HashMap<String, Object>();
-			subCtg.put("cId", ctgList.get(i).getCId());
-			subCtg.put("name", ctgList.get(i).getName());
-			
-			ctgJsonArray.add(new JSONObject(subCtg));
-		}
 		
 		// ctgList 내용이 비어있는 경우
 		if(ctgList.size() < 1) {
 			jsonObject.put("ctgList", null);
 		}
 		else {
+			// JSON ArayList 생성
+			JSONArray ctgJsonArray = new JSONArray();
+			
+			// cgtList -> JSON Array 변환
+			for (int i = 0; i < ctgList.size(); i++) {
+				// dao JSON 객체
+				Map<String, Object> subCtg = new HashMap<String, Object>();
+				subCtg.put("cId", ctgList.get(i).getCId());
+				subCtg.put("name", ctgList.get(i).getName());
+				
+				ctgJsonArray.add(new JSONObject(subCtg));
+			}
 			jsonObject.put("ctgList", ctgJsonArray);
 		}
 		jsonObject.put("result", "ok");

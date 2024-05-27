@@ -61,49 +61,67 @@ let descConvert = (data, name) => {
 		switch(key){
 			// 생육형태
 		    case "clCodeNm":
-				$("#category").html(data[key]);
-				$(".prd-growth-form").html("생육형태 : " + data[key]);
-				
-				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'># " + data[key] + "</div></div>";
+				if(data[key] == "") {
+					$("#category").html(data[key]);
+					$(".prd-growth-form").html("생육형태 : " + data[key]);
+					
+					textTag += "<div class='prd-text-tag-frame'>"
+					 + "<div class='tag-text'># " + data[key] + "</div></div>";
+				}
 				break;
 			// 기능성정보
 		    case "fncltyInfo":
-				plantInfo += "기능성정보 :<br>" + data[key] + "<br><br>";
+				if(data[key] != "") {
+					plantInfo += "기능성정보 :<br>" + data[key] + "<br><br>";
+				}
 				break;
 			// 꽃정보
 			case "flwrInfo":
-				plantInfo += "꽃정보 :<br>" + data[key] + "<br><br>";
+				if(data[key] != "") {
+					plantInfo += "꽃정보 :<br>" + data[key] + "<br><br>";
+				}
 				break;
 			// 특별관리정보 / 특성 & 광
 		    case "speclmanageInfo":
-				plantInfo += "특별관리 정보 :<br>" + data[key] + "<br><br>";
+				if(data[key] != "") {
+					plantInfo += "특별관리 정보 :<br>" + data[key] + "<br><br>";
+				}
 				break;
 			// 조언정보
 		    case "adviseInfo":
-				plantInfo += "조언 정보 :<br>" + data[key] + "<br><br>";
+				if(data[key] != "") {
+					plantInfo += "조언 정보 :<br>" + data[key] + "<br><br>";
+				}
 				break;
 			// 물주기
 		    case "watercycleCodeNm":
-				plantInfo += "물주기 : <br>" + data[key] + "<br><br>";
+				if(data[key] != "") {
+					plantInfo += "물주기 : <br>" + data[key] + "<br><br>";
+				}
 				break;
 		    // 관리 요구도
 		    case "managedemanddoCodeNm":
-				plantInfo += "관리 요구도 :" + data[key] + "<br>";
-				
-				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'># 난이도:" + data[key] + "</div></div>";
+				if(data[key] != "") {
+					plantInfo += "관리 요구도 :" + data[key] + "<br>";
+					
+					textTag += "<div class='prd-text-tag-frame'>"
+					 + "<div class='tag-text'># 난이도:" + data[key] + "</div></div>";
+				}
 				break;
 		    // 관리수준
 		    case "managelevelCodeNm":
-				plantInfo += "난이도 : " + data[key] + "<br><br>";
-				
-				textTag += "<div class='prd-text-tag-frame'>"
-				 + "<div class='tag-text'># " + data[key] + "</div></div>";
+				if(data[key] != "") {
+					plantInfo += "난이도 : " + data[key] + "<br>";
+					
+					textTag += "<div class='prd-text-tag-frame'>"
+					 + "<div class='tag-text'># " + data[key] + "</div></div>";
+				}
 				break;
 		    // 배치장소
 		    case "postngplaceCodeNm":
-				plantInfo += "배치장소 : <br>" + data[key].replaceAll(",", ",<br>") ;
+				if(data[key] != "") {
+					plantInfo += "<br>배치장소 : <br>" + data[key].replaceAll(",", ",<br>");
+				}
 				break;
 		}
 		$(".plant-info").html(plantInfo);
@@ -113,12 +131,19 @@ let descConvert = (data, name) => {
 
 let imgBath = (imgs) => {
 	let imgTags = "";
-	for(key in imgs) {
-		imgTags += "<img class='prd-imgs' src='" + imgs[key] + "' />";
-	}
-	$("#prdImgs").html(imgTags);
-}	
+	let bigImg = "";
+	let cnt = 1;
 	
+	for(key in imgs) {
+		imgTags += "<a id='#img" + cnt + "'><img class='prd-imgs' src='" + imgs[key] + "' /></a>";
+		bigImg += "<img class='prd-big-imgs' id='img" + cnt + "' src='" + imgs[key] + "' />";
+		cnt++;
+	}
+	
+	$("#prdImgs").html(imgTags);
+	$("#big-img").html(bigImg);
+}
+
 let menuBtnClick = () => {
 	const frames = {
 	    "btn-plant": "#info-frame",
@@ -168,6 +193,7 @@ let subCtgSelects = (list) => {
     $("select#subCtg").html(options);
 }
 
+// category ajax
 let ajaxReq = (url, data, msg) => {
 	console.log(data);
 	

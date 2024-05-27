@@ -61,7 +61,8 @@ public class DeleteAction implements Action {
 				if(ctgList.size() < 1) {
 					System.out.println("카테고리 테이블 레코드가 없습니다.");
 					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.");
-					return "jsp/product/createCategory.jsp";
+					req.setAttribute("redUrl", "product");
+					return "jsp/product/inform.jsp";
 				}
 				
 				// 페이지 리소스 반환

@@ -66,7 +66,7 @@ $(() => {
 	       	</div>
        	</div>
        	
-       	<%-- 관리자 용 --%>
+       	<%-- 상품등록 버튼 : 관리자 용 --%>
 <c:if test="${admintype > 0}">
         <div class="products-container">
 	        <div class="nav-subtitle">

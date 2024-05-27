@@ -53,13 +53,19 @@
   left: 779px;
 }
 
+.admin-btn {
+    position: absolute;
+    margin-top: 430px;
+    margin-left: 1330px;
+}
+
 .prd-detail-contents .prd-tag-pop {
-  display: inline-flex;
-  align-items: flex-start;
-  gap: 6px;
-  position: absolute;
-  margin-top: 524px;
-  margin-left: 787px;
+	display: inline-flex;
+	align-items: flex-start;
+	gap: 6px;
+	position: absolute;
+    margin-top: 495px;
+	margin-left: 787px;
 }
 
 .prd-detail-contents .prd-tag-hot {
@@ -205,41 +211,42 @@
 }
 
 .prd-detail-contents .prd-price-before {
-  text-decoration: line-through;
-  position: relative;
-  top: 572px;
-  margin-left: 5px;
-  font-family: "Pretendard Variable-Bold", Helvetica;
-  font-weight: 700;
-  color: #000000;
-  font-size: 14px;
-  letter-spacing: 0;
-  line-height: 40px;
-  white-space: nowrap;
-  display: inline-block;
+	text-decoration: line-through;
+	position: relative;
+	top: 572px;
+	margin-left: 5px;
+	font-family: "Pretendard Variable-Bold", Helvetica;
+	font-weight: 700;
+	color: #000000;
+	font-size: 14px;
+	letter-spacing: 0;
+	line-height: 40px;
+	white-space: nowrap;
+	display: inline-block;
 }
 
 .prd-detail-contents .prd-dcrate {
-  position: relative;
-  top: 556px;
-  margin-left: 780px;
-  font-family: "Pretendard Variable-Bold", Helvetica;
-  color: #ff1e1e;
-  font-size: 25px;
-  letter-spacing: 0;
-  line-height: 40px;
-  white-space: nowrap;
+	position: relative;
+	top: 556px;
+	margin-left: 780px;
+	font-family: "Pretendard Variable-Bold", Helvetica;
+	color: #ff1e1e;
+	font-size: 25px;
+	letter-spacing: 0;
+	line-height: 40px;
+	white-space: nowrap;
 }
 
 .prd-detail-contents .prd-imgs {
-  position: relative;
-  width: 81px;
-  height: 81px;
-  top: 777px;
-  left: 375px;
-  object-fit: cover;
-  margin-right: 11px;
-    border-radius: 10px;
+	position: relative;
+	width: 81px;
+	height: 81px;
+	top: 777px;
+	left: 375px;
+	object-fit: cover;
+	margin-right: 11px;
+	border-radius: 10px;
+	margin-top: -27px;
 }
 
 .prd-detail-contents .prd-pay-opt {
@@ -363,20 +370,6 @@
   text-align: center;
   letter-spacing: 0;
   line-height: normal;
-  white-space: nowrap;
-}
-
-.prd-detail-contents .text-wrapper-29 {
-  position: absolute;
-  top: 8px;
-  left: 19px;
-  opacity: 0.5;
-  font-family: "Pretendard Variable-Medium", Helvetica;
-  font-weight: 500;
-  color: #202020;
-  font-size: 16px;
-  letter-spacing: 0;
-  line-height: 20px;
   white-space: nowrap;
 }
 
@@ -564,4 +557,18 @@
   font-weight: 500;
   font-size: 26px;
   letter-spacing: 0;
+}
+
+#info-frame #big-img {
+    position: absolute;
+    margin-top: 1200px;
+    margin-left: -200px;
+    text-align: center;
+}
+
+#big-img .prd-big-imgs {
+	display: block;
+	width: 500px;
+	height: 500px;
+	margin-bottom: 20px;
 }

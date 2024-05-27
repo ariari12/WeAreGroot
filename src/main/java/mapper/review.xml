@@ -6,7 +6,7 @@
 <mapper namespace="kr.co.moran.review">
 
 	<!-- 리뷰 목록 -->
-	<select id="SelectReviewBypdId" parameterType="int" resultType="hashmap">
+	<select id="SelectReviewBypdId" parameterType="int" resultType="kr.co.moran.web.vo.ReviewVO">
 		SELECT 
 			r.r_id as rId, 
 			r.m_id as mId, 
@@ -33,6 +33,44 @@
 		FROM REVIEW_IMG
 		WHERE r_id = #{rId}
 	</select>
+	
+	<!-- 상품 리뷰 수 조회 -->
+	<select id="SelectReviewCntByPdId" parameterType="int" resultType="int" >
+		select count(*)
+		from (
+		    select * from REVIEW
+		    where o_id in (
+		        select o_id from ORDERS
+		        where pd_id = #{pdId}
+		    )
+		) as pd_rv
+	</select>
+	
+	<!-- 상품에 대한 모든 리뷰점수 평균 : 평점 -->
+	<select id="gradeByPdId" parameterType="int" resultType="float">
+		select avg(r_score)
+		from REVIEW
+		where o_id in (
+		    select o_id from ORDERS
+		    where pd_id = #{pdId}
+		)
+	</select>
+	
+	<!-- 상품에 대한 모든 리뷰점수 평균 : 평점 -->
+	<select id="cntByPdId" parameterType="int" resultType="int">
+		select count(*)
+		from REVIEW
+		where o_id in (
+		    select o_id from ORDERS
+		    where pd_id = #{pdId}
+		)
+	</select>
+	
+	
+	<select id="">
+		
+	</select>
+	
 	
 	<!-- 리뷰 수정 -->
 	<update id="ModifyReviewByrId">

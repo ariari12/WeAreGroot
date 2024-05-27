@@ -24,3 +24,34 @@ from (
         where pd_id = 14697
     )
 ) as pd_rv;
+
+select avg(r_score), count(*)
+from REVIEW
+where o_id in (
+    select o_id from ORDERS
+    where pd_id = 14697
+)
+;
+
+SELECT 
+    r_id as rId, 
+    m_id as mId, 
+    o_id as oId, 
+    r_contents as contents,
+    r_regdate as regDate, 
+    r_score as score, 
+    r_is_maintain as isMaintain, 
+    r_retention_period as retentionPeriod,
+from REVIEW
+where o_id in (
+    select o_id from ORDERS
+    where pd_id = 14697
+)
+desc
+;
+
+
+
+-- order id 1~69
+insert into REVIEW()
+from REVIEW;

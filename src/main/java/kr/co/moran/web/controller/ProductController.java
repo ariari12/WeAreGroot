@@ -33,10 +33,10 @@ public class ProductController extends HttpServlet {
 		String act = req.getParameter("cmd");
 		// System.out.println(act);
 		
-		MemberVO memberCheck = (MemberVO)req.getSession().getAttribute("memberVO");
-		if(memberCheck == null) {
+//		MemberVO memberCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		if(memberCheck == null) {
 //			System.out.println("product memberChekc is null: " + memberCheck);
-		}
+//		}
 		
 		Action action = null;
 		switch (act == null ? "" : act) {
