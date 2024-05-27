@@ -39,7 +39,6 @@ public class CommentDAO {
 		SqlSession ss = factory.openSession(true);
 		List<CommentVO> list = ss.selectList("kr.co.moran.comment.SelectCommentBybId", bId);
 		
-		System.out.println(list);
 		ss.close();
 		return list;
 
