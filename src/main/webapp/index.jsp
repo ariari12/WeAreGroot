@@ -853,18 +853,18 @@
             </div>
           </div> -->
           
-          <c:forEach var="vo" begin="1" end="4" items="productVO">
+          <c:forEach var="vo" begin="${requestScope.startNo}" end="${requestScope.endNo}" items="${requestScope.productList}" varStatus="status">
 	          <div class="frame-14">
 	            <div class="frame-7">
 	              <img class="rectangle" src="resources/img/member/rectangle-3.png" />
-	              <div class="frame-8"><div class="text-wrapper-4">2</div></div>
+	              <div class="frame-8"><div class="text-wrapper-4">${status.count}</div></div>
 	            </div>
 	            <div class="frame-9">
 	              <div class="frame-10">
-	                <div class="text-wrapper-5">상품명상품명상품명</div>
-	                <div class="text-wrapper-6">판매스토어명</div>
+	                <div class="text-wrapper-5">${vo.name}</div>
+	                <div class="text-wrapper-6">모란모란</div>
 	              </div>
-	              <div class="text-wrapper-7">12,345,678원</div>
+	              <div class="text-wrapper-7">${vo.price}원</div>
 	            </div>
 	            <div class="frame-12">
 	              <img class="vector" src="resources/img/member/vector-4.svg" />
