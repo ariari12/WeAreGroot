@@ -26,6 +26,37 @@
     	        }
     	    });
     		
+    		
+    		// 삭제버튼을 누름
+    		$('#selectDelete').click(function () {
+    			let index = 0;
+    			let jsonData = '{pdIds:[';
+    			$('.checkboxs:checked').each(function() {
+    	        	let productId = $(this).attr('id').split('-')[1];			
+    	        	jsonData += productId + ',';
+    			})
+    			jsonData += ']}';
+    			
+                
+                console.log( JSON.stringify(jsonData) );
+    			
+    			// 삭제할 데이터가 없음.
+    			if (jsonData == '{}') return;
+    			
+    			// 501 에러
+
+    			$.ajax({
+    				url: 'cart?cmd=deleteProduct',
+    				type: 'json',
+    				data: jsonData,
+    				success : function(resp) {
+    					console.log(resp);
+    				}
+    			})
+    			
+			})
+    		
+    		
     		// + 버튼 클릭
     		$('.plus-btn').click(function() {
     	        let productId = $(this).attr('id').split('-')[1];
@@ -89,25 +120,28 @@
     	        $('.cart-checkbox').prop('checked', this.checked);
     	    });
     		
-    		
     		function calculateCheckedValues() {
     			let totalValue = 0;
-    	        let delivery = 3500;
+    			let totalProduct = 0;
+    	        let checked = $('.cart-checkbox:checked').length;
+    	        let checkedLength = $('.cart-checkbox').length;
+    	        
     	        $('.cart-checkbox:checked').each(function() {
+    	        	let productId = $(this).attr('id').split('-')[1];
     	            let price = parseFloat($(this).closest('.cart-item').find('.product-price').text().replace(/[^0-9]/g, ''));
     	            if (!isNaN(price)) {
     	            	totalValue += price;
+    	            	totalProduct++;
     	            }
     	        });
     	        
-    	        // 5만원 이상 구매시 배송료 무료
-    	        if (totalValue >= 50000) {
-    	        	delivery = 0;
-    	        }
-    	        
+    	        // 5만원 이상 구매시 배송비 무료.
+    	       	let delivery = totalValue >= 50000 ? 0 : 3500;
+    	        $('#check-all').prop('checked', checkedLength > checked ? false:true);
     	        $('#delivery-value').text(delivery.toLocaleString() + '원');
     	        $('#total-value').text((totalValue + delivery).toLocaleString() + '원');
     	        $('#price-value').text(totalValue.toLocaleString() + '원');
+    	        $('#total-product').text(totalProduct);      
     	    }
     		
     		$('.cart-checkbox').change(function() {
@@ -135,7 +169,7 @@
 	                <div class="cart-item-th-cetner">
 	                	<% // 재고가 남아있다면 checkbox를 생성 %>
 	                	<c:if test="${vo.getPQuantity() >= 1}">
-	                    	<input class="form-check-input cart-checkbox" type="checkbox" name="" id="check-${vo.getPId() }">
+	                    	<input class="form-check-input cart-checkbox checkboxs" type="checkbox" name="" id="check-${vo.getPId() }">
 	                    </c:if>
 	                </div>
 	                <div class="cart-item-th-left">
@@ -198,11 +232,11 @@
 	            </div>
             </c:forEach>      
             <div class="cart-actions">
-                <input type="button" class="btn btn-outline-danger btn-sm" value="선택상품 삭제"> 
-                <input type="button" class="btn btn-outline-danger btn-sm" value="품절상품 삭제">
+                <input type="button" class="btn btn-outline-danger btn-sm" id="selectDelete" value="선택상품 삭제"> 
+                <input type="button" class="btn btn-outline-danger btn-sm" id="soldOutDelete" value="품절상품 삭제">
             </div>
             <div class="cart-summary">
-                <span style="font-size: 14px;">총 주문 상품 0개</span>
+                <span class="total-product">총 주문 상품 </span><span class="total-product" id="total-product">0</span><span class="total-product">개</span>
             </div>
             <div class="cart-total">
                 <div class="grid-container">

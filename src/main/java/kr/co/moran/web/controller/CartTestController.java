@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.cart.CartAction;
 import kr.co.moran.web.action.cart.CartListAction;
+import kr.co.moran.web.action.cart.DeleteCartAction;
 
 @WebServlet("/cart")
 public class CartTestController extends HttpServlet{
@@ -29,6 +30,12 @@ public class CartTestController extends HttpServlet{
 		} else if(cmd.equals("addProduct")) {
 			out.println(new CartAction().execute(req, resp));
 			return;
+		} else if(cmd.equals("deleteProduct")) {
+			
+			String jsonData = req.getParameter("jsonData");
+			System.out.println("jsonData : " + jsonData);
+			
+			out.println(new DeleteCartAction().execute(req, resp));
 		}
 		
 		url = action.execute(req, resp);
