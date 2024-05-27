@@ -1,14 +1,15 @@
-package kr.co.moran.web.action.Review;
+package kr.co.moran.web.action.qna;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 
-public class ReviewWriteFormAction implements Action {
+public class QnAModifyFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		return "views/reviewWriteForm.jsp";
+		// TODO Auto-generated method stub
+		return "views/qnaModifyForm.jsp";
 	}
 
 }

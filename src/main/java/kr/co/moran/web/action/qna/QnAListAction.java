@@ -1,6 +1,5 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.qna;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,22 +9,23 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.vo.BoardVO;
 
-public class KHListAction implements Action {
+public class QnAListAction implements Action {
+
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = new BoardDAO();
 		String sort = req.getParameter("sort");
 		
-		List<HashMap<String, Object>> boardList ;
+        List<HashMap<String, Object>> boardList;
         if ("viewCntDesc".equals(sort)) {
-        	boardList = dao.selectAllKHOrderByViewCntDesc();
+        	boardList = dao.selectAllQnAOrderByViewCntDesc();
         } else {
-        	boardList = dao.selectAllKH();
+        	boardList = dao.selectAllQnA();
         }
 
         req.setAttribute("boardList", boardList);
-        return "views/khlist.jsp";
+        return "views/qnalist.jsp";
 	}
 
 }

@@ -1,11 +1,11 @@
-package kr.co.moran.web.action.QnA;
+package kr.co.moran.web.action.knowHow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 
-public class QnADeleteAction implements Action {
+public class KHDeleteAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -13,7 +13,7 @@ public class QnADeleteAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		dao.deleteBoardBybId(bId);
 		
-		return "/board?cmd=qna";
+		return "/board?cmd=kh";
 	}
 
 }

@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.Review;
+package kr.co.moran.web.action.review;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;

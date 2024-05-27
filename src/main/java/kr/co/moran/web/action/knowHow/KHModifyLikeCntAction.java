@@ -1,17 +1,17 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.knowHow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
 
-public class KHModifyViewCntAction implements Action{
+public class KHModifyLikeCntAction implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		
 		BoardDAO dao = new BoardDAO();
-		dao.modifyBoardViewCntBybId(bId);
+		dao.modifyBoardLikeCntBybId(bId);
 		
 		return "board?cmd=khDetail&bId=" + bId;
 	}

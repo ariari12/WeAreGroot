@@ -12,10 +12,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.Review.ReviewModifyAction;
-import kr.co.moran.web.action.Review.ReviewModifyFormAction;
-import kr.co.moran.web.action.Review.ReviewWriteAction;
-import kr.co.moran.web.action.Review.ReviewWriteFormAction;
+import kr.co.moran.web.action.review.ReviewModifyAction;
+import kr.co.moran.web.action.review.ReviewModifyFormAction;
+import kr.co.moran.web.action.review.ReviewWriteAction;
+import kr.co.moran.web.action.review.ReviewWriteFormAction;
 
 @WebServlet("/review")
 public class ReviewController extends HttpServlet{

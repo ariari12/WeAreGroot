@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.knowHow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

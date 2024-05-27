@@ -1,23 +1,20 @@
-package kr.co.moran.web.action.Comment;
-
-import java.util.HashMap;
-import java.util.Map;
+package kr.co.moran.web.action.comment;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.CommentDAO;
 
-public class CommentModifyAction implements Action{
+public class CommentDeleteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		String contents = req.getParameter("contents");
 		int cId = Integer.parseInt(req.getParameter("cId"));
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		int type = Integer.parseInt(req.getParameter("type"));
-		CommentDAO dao = new CommentDAO();
+		System.out.println(bId);
 		
-		dao.modifyComment(cId, contents);
+		CommentDAO dao = new CommentDAO();
+		dao.deleteComment(cId);
 		if(type == 1) {
 			return "/board?cmd=qnaDetail&bId=" + bId;
 		}else {

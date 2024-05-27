@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.qna;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,10 +11,11 @@ import kr.co.moran.web.dao.CommentDAO;
 import kr.co.moran.web.vo.BoardVO;
 import kr.co.moran.web.vo.CommentVO;
 
-public class KHDetailAction implements Action {
+public class QnADetailAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		
 		String sbId = req.getParameter("bId");
 		int bId = Integer.parseInt(sbId);
 		
@@ -22,15 +23,16 @@ public class KHDetailAction implements Action {
 		CommentDAO commentDAO = new CommentDAO();  
 		
 		HashMap<String, Object> boardVO = new HashMap<String, Object>();
-
 		boardVO = boardDAO.selectBoardBybId(bId);
+		
 		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);
 		
+		System.out.println(commentList);
 		
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);
 		
-		return "views/khDetail.jsp";
+		return "views/qnaDetail.jsp";
 	}
 
 }
