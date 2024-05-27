@@ -26,7 +26,8 @@ public class ReviewWriteAction extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		String saveDir = "C:\\dev\\WeAreGroot\\src\\main\\webapp\\resources\\reviewimg";
+		String saveDir = "C:\\dev\\WeAreGroot\\src\\main\\webapp\\resources\\img\\review";
+	
     	File uploadDir = new File(saveDir);
     	
     	if(!uploadDir.exists()) {
