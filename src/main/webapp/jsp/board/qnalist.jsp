@@ -32,11 +32,12 @@
 </head>
 <body>
 	<div class="container">
+	<h1>QnA 리스트</h1>
 	<table class="table">
 		<c:forEach var="boardVO" items="${boardList}">
 		<tr>
-			<th><a href="?cmd=qnaModifyViewCnt&bId=${boardVO.getBId() }">${boardVO.title}</a></th>
-			<td><a href="?cmd=qnaModifyViewCnt&bId=${boardVO.getBId() }">${boardVO.contents}</a></td>
+			<th><a href="?cmd=qnaDetail&bId=${boardVO.get('bId') }">${boardVO.get('title')}</a></th>
+			<td><a href="?cmd=qnaDetail&bId=${boardVO.get('bId') }">${boardVO.get('contents')}</a></td>
 		</tr>
    		 </c:forEach>
 	</table>

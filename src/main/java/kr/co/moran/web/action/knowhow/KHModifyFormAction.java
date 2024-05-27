@@ -9,7 +9,7 @@ public class KHModifyFormAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		return "views/khModifyForm.jsp";
+		return "jsp/board/khModifyForm.jsp";
 	}
 
 }

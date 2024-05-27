@@ -42,8 +42,6 @@ public class ReviewWriteAction extends HttpServlet {
         String contents = mpr.getParameter("contents");
         String riImg = mpr.getFilesystemName("riImg");
         
-        System.out.println(saveDir);
-        System.out.println(riImg);
 
         ReviewVO rvo = new ReviewVO();
         rvo.setScore(score);

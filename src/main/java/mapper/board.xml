@@ -128,13 +128,13 @@
 	</select>
 	
 	<!-- QnA 글 작성 -->	
-	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
+	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO" useGeneratedKeys="true" keyProperty="bId">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
 		VALUES (#{mId}, #{title}, #{contents}, NOW(), 0, 0, 1, 0)
 	</insert>
 	
 	<!-- 노하우 글 작성 -->
-	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO">
+	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO" useGeneratedKeys="true" keyProperty="bId">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
 		VALUES (#{mId}, #{title}, #{contents}, NOW(), 0, 0, 2, 0)
 	</insert>
@@ -200,5 +200,12 @@
 		JOIN MEMBER m ON l.m_id = m.m_id
 		WHERE m.m_id = #{mId}
 	</select>
+	
+	<!-- 게시글 작성 시 이미지 입력 -->
+	<insert id="InsertBoardImg" parameterType="kr.co.moran.web.vo.BoardImgVO" >
+		INSERT INTO BOARD_IMG(b_id, bi_img)
+		VALUES
+		(#{bId}, #{biImg})
+	</insert>
 	
 </mapper>

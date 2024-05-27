@@ -16,7 +16,7 @@ public class QnAListAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		BoardDAO dao = new BoardDAO();
 		String sort = req.getParameter("sort");
-		
+
         List<HashMap<String, Object>> boardList;
         if ("viewCntDesc".equals(sort)) {
         	boardList = dao.selectAllQnAOrderByViewCntDesc();
@@ -25,7 +25,7 @@ public class QnAListAction implements Action {
         }
 
         req.setAttribute("boardList", boardList);
-        return "views/qnalist.jsp";
+        return "jsp/board/qnalist.jsp";
 	}
 
 }
