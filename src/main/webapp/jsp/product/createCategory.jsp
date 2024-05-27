@@ -89,6 +89,17 @@
 </head>
 <body>
 
+<%
+	MemberVO member = (MemberVO)session.getAttribute("memberVO");
+	if(member == null || member.getAdmintype() < 1) {
+		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
+	}
+	request.setAttribute("admin", true);
+	if(request.getAttribute("message") != null) { %>
+<script>viewMsg('<%=request.getAttribute("message") %>')</script>
+<% 	} %>
+
+
 <script>
     $(() => {
         $("div.ctg-super").hide();

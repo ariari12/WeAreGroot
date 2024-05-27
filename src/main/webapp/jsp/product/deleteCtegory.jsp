@@ -34,6 +34,7 @@
 	if(member == null || member.getAdmintype() < 1) {
 		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
 	}
+	request.setAttribute("admin", true);
 	if(request.getAttribute("message") != null) { %>
 <script>viewMsg('<%=request.getAttribute("message") %>')</script>
 <% 	} %>
@@ -111,6 +112,7 @@
         </select>
     </div>
     <div class="cate-block">
+       	<span style="color: orange; margin-left: 31px;">※ 선택 안할 시 상위 카테고리로 지정됩니다.</span>
         <span class="cate-label">하위 카테고리 선택</span>
         <select name="subCtg" id="subCtg">
             <option value='null'>카테고리 없음</option>

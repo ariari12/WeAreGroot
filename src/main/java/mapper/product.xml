@@ -135,7 +135,7 @@
 	</select>
 	
 	<!-- 인기 조회 -->
-	<select id="pdSelectPopByPId" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
+	<select id="pdSelectPop" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
 		select  pd_id as pId,
 		        c_id as cId,
 		        pd_name as name,
@@ -160,6 +160,18 @@
 		)
 	</select>
 	
+	<!-- 인기상품 id 조회 -->
+	<select id="pdSelectPopByPId" parameterType="Map" resultType="int">
+		select pd_id from (
+			SELECT pd_id, COUNT(*) as hit
+			FROM ORDERS
+			WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+			GROUP BY pd_id
+			ORDER BY hit desc
+			LIMIT 36
+		) as pop
+	</select>
+	
 	<!-- 인기 상퐁 종류 총 갯수 -->
 	<select id="pdPopTotal" resultType="int">
 		select count(*)
@@ -170,6 +182,5 @@
 		    GROUP BY pd_id
 		) as pop;
 	</select>
-	
 	
 </mapper>

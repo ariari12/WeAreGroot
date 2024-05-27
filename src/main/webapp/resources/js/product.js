@@ -52,15 +52,97 @@ let msgRedirect = (msg, redUrl) => {
 /**
  * product - detailView.jsp
  */
-let descConvert = (data) => {
-	let contents = "<p>";
+let descConvert = (data, name) => {
+	let plantInfo = "";
+	let textTag = "<div class='prd-text-tag-frame'>"
+	 + "<div class='tag-text'>" + name + "</div></div>";
+	 
 	for(key in data) {
-		contents += data[key] + "<br/>";
+		switch(key){
+			// 생육형태
+		    case "clCodeNm":
+				$("#category").html(data[key]);
+				$(".prd-growth-form").html("생육형태 : " + data[key]);
+				
+				textTag += "<div class='prd-text-tag-frame'>"
+				 + "<div class='tag-text'>" + data[key] + "</div></div>";
+				break;
+			// 기능성정보
+		    case "fncltyInfo":
+				plantInfo += "기능성정보 :<br>" + data[key] + "<br><br>";
+				break;
+			// 꽃정보
+			case "flwrInfo":
+				plantInfo += "꽃정보 :<br>" + data[key] + "<br><br>";
+				break;
+			// 특별관리정보 / 특성 & 광
+		    case "speclmanageInfo":
+				plantInfo += "특별관리 정보 :<br>" + data[key] + "<br><br>";
+				break;
+			// 조언정보
+		    case "adviseInfo":
+				plantInfo += "조언 정보 :<br>" + data[key] + "<br><br>";
+				break;
+			// 물주기
+		    case "watercycleCodeNm":
+				plantInfo += "물주기 : <br>" + data[key] + "<br><br>";
+				break;
+		    // 관리 요구도
+		    case "managedemanddoCodeNm":
+				plantInfo += "관리 요구도 :" + data[key] + "<br>";
+				
+				textTag += "<div class='prd-text-tag-frame'>"
+				 + "<div class='tag-text'>난이도:" + data[key] + "</div></div>";
+				break;
+		    // 관리수준
+		    case "managelevelCodeNm":
+				plantInfo += "난이도 : " + data[key] + "<br><br>";
+				
+				textTag += "<div class='prd-text-tag-frame'>"
+				 + "<div class='tag-text'>" + data[key] + "</div></div>";
+				break;
+		    // 배치장소
+		    case "postngplaceCodeNm":
+				plantInfo += "배치장소 : <br>" + data[key].replaceAll(",", ",<br>") ;
+				break;
+		}
+		$(".plant-info").html(plantInfo);
+		$("#prd-text-tag").html(textTag);
 	}
-	contents += "</p>";
-	
-	return contents;
 }
+
+let imgBath = (imgs) => {
+	let imgTags = "";
+	for(key in imgs) {
+		imgTags += "<img class='prd-imgs' src='" + imgs[key] + "' />";
+	}
+	$("#prdImgs").html(imgTags);
+}	
+	
+let menuBtnClick = () => {
+	const frames = {
+	    "btn-plant": "#info-frame",
+	    "btn-review": "#review-frame",
+	    "btn-qna": "#qna-frame"
+	};
+	
+	let divMenu = $(".menu-select").children();
+	
+    divMenu.each((index, element) => {
+        $(element).click(() => {
+            $(element).children().addClass("menu-btn-click");
+            divMenu.not(element).children().removeClass("menu-btn-click");
+            
+	        const frameToShow = frames[$(element).attr('id')];
+	        if (frameToShow) {
+	            Object.values(frames).forEach(frame => $(frame).hide());
+	            $(frameToShow).show();
+	        }
+        });
+    });
+}
+
+
 
 /**
  * category - modifyCatefory.jsp

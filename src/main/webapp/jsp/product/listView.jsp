@@ -34,13 +34,8 @@ let viewDetails = (no) => {
 
 </head>
 <body>
-<<<<<<< HEAD
-<div class="div-wrapper" style="height: 220px; z-index: 3;">
-	<jsp:include page="../layout/header.jsp"></jsp:include>
-=======
 <div class="div-wrapper " style="height: 220px; z-index: 3;">
 <jsp:include page="../layout/header.jsp"></jsp:include>
->>>>>>> branch 'dev' of https://github.com/ariari12/WeAreGroot.git
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
@@ -67,7 +62,7 @@ let viewDetails = (no) => {
                 <div class="prd-name"><%=v.getName() %></div>
                 <div class="prd-price">
                 	<del><%=String.format("%,d", v.getPrice()) %> 원</del>
-                	<span style="color: red; margin-left: 20px;"> <%=v.getDcRate() %>% 할인</span>
+                	<span style="color: red; margin-left: 20px;"><%=v.getDcRate() %>% 할인</span>
                 	<br>
                 	<span><%=String.format("%,d", price) %> 원</span>
                 </div>

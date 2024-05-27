@@ -24,6 +24,8 @@ public class DetailviewAction implements Action {
 		
 		dao = new ProductDAO();
 		ProductVO v = dao.pdSelsctOneByPId(no);
+		List<Integer> popPIdList = dao.pdSelectPopByPId();
+		
 		if(v == null) {
 			return null;
 		}
@@ -34,6 +36,7 @@ public class DetailviewAction implements Action {
 		
 		// 모든 상품 목록 가져오기
 		req.setAttribute("pdList", v);
+		req.setAttribute("popPIdList", popPIdList);
 		req.setAttribute("imgs", imgs);
 		
 		dao.closeSession();
