@@ -50,7 +50,7 @@ public class BoardController extends HttpServlet{
 		//qna와 노하우페이지는 board테이블의 boardtype의 영향을 받음
 		
 		//qna 전체보기
-		if(cmd.equals("qna")) {
+		if( cmd == null || cmd.equals("qna")) {
 			action = new QnAListAction();
 		}
 		//qna 작성하기
@@ -87,7 +87,7 @@ public class BoardController extends HttpServlet{
 		
 		
 		//노하우 전체보기
-		if(cmd.equals("kh")) {
+		else if(cmd.equals("kh")) {
 			action = new KHListAction();
 		}
 		//노하우 작성하기

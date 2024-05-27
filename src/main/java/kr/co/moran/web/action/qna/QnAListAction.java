@@ -25,7 +25,7 @@ public class QnAListAction implements Action {
         }
 
         req.setAttribute("boardList", boardList);
-        return "views/qnalist.jsp";
+        return "jsp/board/qnalist.jsp";
 	}
 
 }
