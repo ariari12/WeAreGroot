@@ -27,6 +27,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
+<script src="resources/js/product_detail.js"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/product_detail.css">
@@ -91,6 +92,10 @@
 		    </div>
 		</div>
 		
+		<div>
+	        <img style="" class="rv-img-star" src="resources/img/product_detail/heart.svg" />
+		</div>
+		
 		
 		<div class="prd-tag-pop">
 		    <% 	Object popPIdList = request.getAttribute("popPIdList");
@@ -144,7 +149,7 @@
 		    </div>
 		</div>
 		
-		<div style="position: absolute; margin-top: 68px; margin-left: 16px;">
+		<div style="position: absolute; margin-top: 36px; margin-left: 16px;">
 		    <%  int amount = (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
 		    <%-- 할인 후 가격 --%>
 		    <div class="prd-dc-amount" id="price"><%=String.format("%,d", amount) %></div>

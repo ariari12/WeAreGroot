@@ -45,6 +45,7 @@ public class AddAction implements Action {
 				nextUrl = categoryAdd(req.getParameter("ctg"));
 				break;
 			case "prd": // prd: product
+				nextUrl = productAdd(req.getParameter("prd"));
 				break;
 			default: 
 //				prdlist = noneType(startNum, PAGE_QUANTITY);
@@ -57,7 +58,6 @@ public class AddAction implements Action {
 	// category
 	private String categoryAdd(String ctg) {
 		String cId;
-		MemberVO adminCheck;
 		switch (ctg) {
 			case "view": // 등록 페이지 요청
 				// 페이지 리소스 반환
@@ -98,6 +98,50 @@ public class AddAction implements Action {
 		}
 	}
 
+	// product
+	private String productAdd(String prd) {
+		String pId;
+		switch (prd) {
+			case "view": // 등록 페이지 요청
+				// 페이지 리소스 반환
+				req.setAttribute("masterList", ctgList);
+				return "jsp/product/createProduct.jsp";
+				
+			case "sub":
+				/*
+				 * 상위 카테고리 데이터 요청
+				 * 상위 카테고리 데이터들을 반환
+				 */
+				
+				// JSON 객체 생성 후 AJAX 응답
+				return ajaxToJsonArray();
+				
+			case "confirm":
+				/*
+				 * 등록 완료 요청
+				 * db table 데이터 수정
+				 * 수정이 완료되었음을 사용자에게 반환
+				 */
+//				String cParantId = req.getParameter("cParentId");
+//				String name = req.getParameter("name");
+//				
+//				cParantId = cParantId.equals("") ? null : cParantId;
+//				
+//				System.out.println("cParentId: " + cParantId);
+//				System.out.println("name:" + name);
+//				
+//				dao.ctAdd(cParantId, name);
+
+				// ajax 반환
+				return ajaxToJsonOk("product");
+				
+			default: // 잘못된 요청에 대한 예외 처리
+				return null;
+		}
+	}
+	
+	
+	// common
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();

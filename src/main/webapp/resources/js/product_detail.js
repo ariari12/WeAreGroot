@@ -63,8 +63,12 @@ function updatePrice(oper) {
     $('#totalPrice').text(totalPrice);
 
     // +- 버튼 투명도 설정
-    $("#minus").attr("src", cnt == 1 ? "resources/img/minus.svg" : "resources/img/minus_1.svg");
-    $("#plus").attr("src", cnt == 1000 ? "resources/img/plus.svg" : "resources/img/plus_1.svg");
+    $("#minus").attr("src", cnt == 1 ? 
+    	"resources/img/product_detail/minus.svg" : 
+    	"resources/img/product_detail/minus_1.svg");
+    $("#plus").attr("src", cnt == 1000 ? 
+    	"resources/img/product_detail/plus.svg" : 
+    	"resources/img/product_detail/plus_1.svg");
 
 }
 
