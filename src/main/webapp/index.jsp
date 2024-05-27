@@ -826,7 +826,8 @@
           <img class="img" src="resources/img/member/line-2.svg" />
         </div>
         <div class="frame-5">
-          <div class="frame-6">
+        
+          <!-- <div class="frame-6">
             <div class="frame-7">
               <img class="rectangle" src="resources/img/member/rectangle-2.png" />
               <div class="frame-8"><div class="text-wrapper-4">1</div></div>
@@ -850,25 +851,29 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="frame-14">
-            <div class="frame-7">
-              <img class="rectangle" src="resources/img/member/rectangle-3.png" />
-              <div class="frame-8"><div class="text-wrapper-4">2</div></div>
-            </div>
-            <div class="frame-9">
-              <div class="frame-10">
-                <div class="text-wrapper-5">상품명상품명상품명</div>
-                <div class="text-wrapper-6">판매스토어명</div>
-              </div>
-              <div class="text-wrapper-7">12,345,678원</div>
-            </div>
-            <div class="frame-12">
-              <img class="vector" src="resources/img/member/vector-4.svg" />
-              <div class="text-wrapper-8">인기</div>
-            </div>
-          </div>
-          <div class="frame-14">
+          </div> -->
+          
+          <c:forEach var="vo" begin="1" end="4" items="productVO">
+	          <div class="frame-14">
+	            <div class="frame-7">
+	              <img class="rectangle" src="resources/img/member/rectangle-3.png" />
+	              <div class="frame-8"><div class="text-wrapper-4">2</div></div>
+	            </div>
+	            <div class="frame-9">
+	              <div class="frame-10">
+	                <div class="text-wrapper-5">상품명상품명상품명</div>
+	                <div class="text-wrapper-6">판매스토어명</div>
+	              </div>
+	              <div class="text-wrapper-7">12,345,678원</div>
+	            </div>
+	            <div class="frame-12">
+	              <img class="vector" src="resources/img/member/vector-4.svg" />
+	              <div class="text-wrapper-8">인기</div>
+	            </div>
+	          </div>          	
+          </c:forEach>
+
+          <!-- <div class="frame-14">
             <div class="frame-7">
               <img class="rectangle" src="resources/img/member/rectangle-4.png" />
               <div class="frame-8"><div class="text-wrapper-4">3</div></div>
@@ -901,7 +906,7 @@
               <img class="vector" src="resources/img/member/vector-4.svg" />
               <div class="text-wrapper-8">인기</div>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="frame-15">
           <img class="line-2" src="resources/img/member/line-1.svg" />
