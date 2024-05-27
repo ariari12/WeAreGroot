@@ -49,6 +49,8 @@ public class ModifyMemberAction implements Action {
 			System.out.println("[modifyMemberAction] MemeberVO = "+vo);
 			System.out.println("[modifyMemberAction] AddressVO = "+avo);
 			
+			
+			
 			if(dao.modifyMemberWithAddressById(vo)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("memberVO", vo);

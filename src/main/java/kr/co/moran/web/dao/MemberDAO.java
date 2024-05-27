@@ -92,6 +92,20 @@ public class MemberDAO {
 	    }		
 		
 	}
+	public MemberVO selectMemberById(int id) {
+		try(SqlSession ss = factory.openSession(true)){
+			System.out.println("[MemberDAO] id : "+id);
+			return ss.selectOne("kr.co.moran.web.member.selectMemberById",id);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	        return null;
+	    }		
+		
+	}
 	public boolean modifyMemberWithAddressById(MemberVO vo) {
 		try (SqlSession ss = factory.openSession(true)) {
 			ss.update("kr.co.moran.web.member.modifyMemberWithAddressById",vo);
