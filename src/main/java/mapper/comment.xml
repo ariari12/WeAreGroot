@@ -6,8 +6,13 @@
 
 	<!-- Board의 댓글 목록 -->
 	<select id="SelectCommentBybId" parameterType="int" resultType="kr.co.moran.web.vo.CommentVO">
-		SELECT c_id as cId, b_id as bId, m_id as mId, c_parent_id as cParentId,
-				c_contents as contents, c_like_cnt as likeCnt
+		SELECT 
+			c_id as cId, 
+			b_id as bId, 
+			m_id as mId, 
+			c_parent_id as cParentId,
+			c_contents as contents, 
+			c_like_cnt as likeCnt
 		FROM COMMENT
 		WHERE b_id = #{bId}
 		ORDER BY c_regdate DESC

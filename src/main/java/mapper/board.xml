@@ -5,7 +5,18 @@
 
 	<!-- 내가 쓴 글 전체보기 파라미터는 mId -->
 	<select id="SelectAllBoardBymId" parameterType="int" resultType="hashmap">
-		SELECT m.m_nick as nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod
+		SELECT 
+			m.m_nick as nick,
+			b.b_id AS bId ,
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -14,7 +25,18 @@
 
 	<!-- 노하우 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
 	<select id="SelectAllKH" resultType="hashmap">
-		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		SELECT 
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod 
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -24,7 +46,18 @@
 	
 	<!-- 노하우 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->	
 	<select id="SelectAllKHOrderByViewCntDesc" resultType="hashmap">
-		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		SELECT 
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod 
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -34,7 +67,18 @@
 	
 	<!-- QnA 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
 	<select id="SelectAllQnA" resultType="hashmap">
-		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		SELECT 
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod 
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -44,7 +88,18 @@
 	
 	<!-- QnA 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
 	<select id="SelectAllQnAOrderByViewCntDesc" resultType="hashmap">
-		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		SELECT 
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod 
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -54,7 +109,18 @@
 	
 	<!-- 글 디테일 -->	
 	<select id="SelectBoardBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="hashmap">
-		SELECT m.m_nick AS nick, b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		SELECT 
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod  
 		FROM BOARD b
 		JOIN MEMBER m
 		ON b.m_id = m.m_id
@@ -117,7 +183,18 @@
 	
 	<!-- 좋아요한 게시글 보기 -->
 	<select id="SelectBoardLikeBymId" parameterType="int" resultType="hashmap">
-		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod
+		SELECT 			
+			m.m_nick AS nick, 
+			b.b_id AS bId , 
+			b.m_id AS mId , 
+			b.b_title AS title, 
+			b.b_contents AS contents, 
+			b.b_regdate AS regDate, 
+			b.b_view_cnt AS viewCnt , 
+			b.b_like_cnt AS likeCnt , 
+			b.b_type AS type , 
+			b.b_is_maintain AS isMaintain, 
+			b.b_retention_period AS retentionPeriod 
 		FROM LIKES l
 		JOIN BOARD b ON l.b_id = b.b_id
 		JOIN MEMBER m ON l.m_id = m.m_id
