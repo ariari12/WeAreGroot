@@ -11,15 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.IndexFormAction;
-import kr.co.moran.web.action.member.EmailAction;
-import kr.co.moran.web.action.member.EmailCodeAction;
-import kr.co.moran.web.action.member.JoinAction;
-import kr.co.moran.web.action.member.JoinFormAction;
-import kr.co.moran.web.action.member.LoginAction;
-import kr.co.moran.web.action.member.LoginFormAction;
-import kr.co.moran.web.action.member.LogoutAction;
-import kr.co.moran.web.action.member.MyPageForm;
-import kr.co.moran.web.action.member.modifyMemberAction;
+
 
 @WebServlet("/main")
 public class MainController extends HttpServlet {
