@@ -1,12 +1,17 @@
 package kr.co.moran.web.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.dao.ProductDAO;
+import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
 
 public class IndexFormAction implements Action {
@@ -70,14 +75,23 @@ public class IndexFormAction implements Action {
 				}
 			}
 		}
+				
+		List<ProductVO> list = dao.pdSelectPop(startNo, endNo+1);	
+		List<ProductImgVO> imgList = new ArrayList<ProductImgVO>();
 		
-		List<ProductVO> list = dao.pdSelectPop(startNo, endNo+1);
+		for (ProductVO v : list) {
+			imgList.add(dao.piSelsctBigimgByPId(v.getPId()));
+		}
+		
+				
+		
 		System.out.println("[IndexFormAction] "+list);
 		//dao.piSelsctBigimgByPId();
 		
 		req.setAttribute("startNo", startNo);
 		req.setAttribute("endNo", endNo);
-		req.setAttribute("productList", list);
+		req.setAttribute("productList", list);	
+		req.setAttribute("productImgList", imgList);	
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("startPage", startPage);
 		req.setAttribute("endPage", endPage);

@@ -828,27 +828,31 @@
         <div class="frame-5">
                
 	    <div class="frame-18">
-			<c:forEach var="vo" items="${requestScope.productList}" varStatus="status">
-			    <div class="frame-14">
-			        <div class="frame-7">
-			            <img class="rectangle" src="resources/img/member/rectangle-3.png" />
-			            <div class="frame-8">
-			                <div class="text-wrapper-4">${status.count}</div>
+	    	    	
+			<c:forEach var="product" items="${requestScope.productList}" varStatus="status">
+			    <a href="product?cmd=detail&no=${product.getPId()}">
+			        <div class="frame-14">
+			            <div class="frame-7">
+			                <img class="rectangle" src="${requestScope.productImgList[status.index].img}" />
+			                <div class="frame-8">
+			                    <div class="text-wrapper-4">${status.count}</div>
+			                </div>
+			            </div>
+			            <div class="frame-9">
+			                <div class="frame-10">
+			                    <div class="text-wrapper-5">${product.name}</div>
+			                    <div class="text-wrapper-6">모란모란</div>
+			                </div>
+			                <div class="text-wrapper-7">${product.price}원</div>
+			            </div>
+			            <div class="frame-12">
+			                <img class="vector" src="resources/img/member/vector-4.svg" />
+			                <div class="text-wrapper-8">인기</div>
 			            </div>
 			        </div>
-			        <div class="frame-9">
-			            <div class="frame-10">
-			                <div class="text-wrapper-5">${vo.name}</div>
-			                <div class="text-wrapper-6">모란모란</div>
-			            </div>
-			            <div class="text-wrapper-7">${vo.price}원</div>
-			        </div>
-			        <div class="frame-12">
-			            <img class="vector" src="resources/img/member/vector-4.svg" />
-			            <div class="text-wrapper-8">인기</div>
-			        </div>
-			    </div>
+			    </a>
 			</c:forEach>
+			 
 	    </div>
 
         </div>
@@ -882,7 +886,7 @@
 			                </c:otherwise>
 			            </c:choose>
 			        </c:forEach>
-			    </div>					    
+			    </div>
 			    <c:if test="${currentPage < totalPage}">
 			        <a href="main?page=${currentPage + 1}">
 			            <img class="frame-17" src="resources/img/member/frame-35.svg" />
