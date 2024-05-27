@@ -11,7 +11,6 @@ import org.json.simple.JSONObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
@@ -32,7 +31,7 @@ public class AddAction implements Action {
 		// admin이 아닌 사용자가 접근 시 예외처리
 		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
 //		System.out.println("modify: " + adminCheck);
-		if(adminCheck == null || Integer.parseInt(adminCheck.getAdmintype()) < 1) {
+		if(adminCheck == null || adminCheck.getAdmintype() < 1) {
 			return "jsp/product/unauthorized.jsp";
 		}
 		

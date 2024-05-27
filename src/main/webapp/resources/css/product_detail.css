@@ -12,6 +12,7 @@
   top: 391px;
   left: 374px;
   object-fit: cover;
+  border-radius: 20px;
 }
 
 .prd-detail-contents .ctg-label {
@@ -57,8 +58,8 @@
   align-items: flex-start;
   gap: 6px;
   position: absolute;
-  margin-top: 413px;
-  left: 887px;
+  margin-top: 524px;
+  margin-left: 787px;
 }
 
 .prd-detail-contents .prd-tag-hot {
@@ -108,8 +109,8 @@
   align-items: flex-start;
   gap: 10px;
   position: absolute;
-  top: 490px;
-  left: 788px;
+  margin-top: 487px;
+  margin-left: 788px;
 }
 
 .prd-detail-contents .reviews-score {
@@ -145,7 +146,7 @@
   align-items: flex-start;
   gap: 4px;
   position: absolute;
-  top: 530px;
+  top: 571px;
   left: 787px;
 }
 
@@ -238,6 +239,7 @@
   left: 375px;
   object-fit: cover;
   margin-right: 11px;
+    border-radius: 10px;
 }
 
 .prd-detail-contents .prd-pay-opt {
@@ -546,7 +548,7 @@
   font-family: "Pretendard Variable-Medium", Helvetica;
   font-weight: 500;
   color: #00b267;
-  font-size: 14px;
+  font-size: 24px;
   letter-spacing: 0;
   line-height: normal;
 }
@@ -560,6 +562,6 @@
   position: absolute;
   font-family: "Pretendard Variable-Medium", Helvetica;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 26px;
   letter-spacing: 0;
 }

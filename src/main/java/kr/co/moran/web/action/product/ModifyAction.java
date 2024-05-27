@@ -10,7 +10,6 @@ import org.json.simple.JSONObject;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
