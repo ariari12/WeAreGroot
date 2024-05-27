@@ -12,7 +12,7 @@
 
 
 	<insert id="InsertComment" parameterType="kr.co.moran.web.vo.CommentVO">
-		INSERT INTO COMMENT (b_id, c_contents, c_like_cnt, c_parent_id, c_regdate, m_id) VALUES
+		INSERT INTO COMMENT (b_id c_contents, c_like_cnt, c_parent_id, c_regdate, m_id) VALUES
 		(#{bId}, #{contents}, 0, NULL, NOW(), #{mId} )
 	</insert>
 	
@@ -50,4 +50,17 @@
 		WHERE
 			c.e_id = #{eId}
 	</select>
+	
+	
+	<insert id="InsertCommentBy" parameterType="kr.co.moran.web.vo.CommentVO">
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_title, c_contents, c_regdate)
+		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{title}, #{contents}, now())
+	</insert>
+	
+	<!-- 댓글의 댓글등록 -->
+	<insert id="InsertReComment" parameterType="kr.co.moran.web.vo.CommentVO">
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_title, c_contents, c_regdate)
+		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{title}, #{contents}, now())
+	</insert>
+	
 </mapper>

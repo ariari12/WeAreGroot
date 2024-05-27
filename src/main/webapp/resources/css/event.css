@@ -1,147 +1,315 @@
 @charset "UTF-8";
 
-* {
-    color: #222;
-    /* 기본 글 색상 */
-    font-family: "Nanum Gothic", sans-serif;
-    /* 나눔고딕체 적용 */
-    text-decoration: none;
-    /* 밑줄 제거 */
-    padding: 0;
-    margin: 0;
-
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
 }
 
-#eventList{
-/* 	border: 3px solid #000; */
+.container {
+    margin-top: 30px;
 }
 
-/********************************************************/
-/********************* eventList.jsp 시작 ********************/
-/********************************************************/
+/* ******************* eventList.jsp ******************* */
+#eventList .topArea {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#eventList .menuTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
 #eventList .eventBox {
-	padding: 4px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-#eventList .eventBox:hover{
-	border: 3px solid #68f724;
+#eventList .eventBox:hover {
+    transform: translateY(-10px);
 }
 
-#eventList .topArea{
-	margin-top: 30px;
-	margin-bottom: 20px;
-	text-align: center;
+#eventList .eventThum img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
 }
 
-#eventList .topArea .menuTitle{
-	font-weight: bold;
+#eventList .topInfo {
+    padding: 15px;
 }
 
-#eventList .eventBox{
-	display: inline-block;
-	width: 250px;
-	height: 400px;
-	margin: 10px 5px 5px 0;
-	border: 0.5px solid #ababab;
+#eventList .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-#eventList .eventBox>.eventThum{
-	cursor: pointer;
+#eventList .due {
+    font-size: 1rem;
+    color: #dc3545;
 }
 
-#eventList .eventBox img{
-	width: 100%;
+#eventList .bottomInfo {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
 }
 
-#eventList .topInfo{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-top: 10px;
-}
-#eventList .topInfo .title{
-	text-align: left;
-	font-weight: bold;
-	font-size: 20px;
-}
-#eventList .topInfo .due{
-	text-align: right; 
-	color: #ababab;
-}
-#eventList .eventBox .topInfo>span.title{
-	cursor: pointer;
+#eventList .writer {
+    font-weight: bold;
+    color: #007bff;
 }
 
-#eventList .bottomInfo{
-	margin-top: 10px;
+#eventList .regdate {
+    color: gray;
 }
 
-#eventList .bottomInfo .writer{
-	color: gray;
-}
-/********************* eventList.jsp 끝 ********************/
-
-
-/********************************************************/
-/********************* eventDetail.jsp 시작 ********************/
-/********************************************************/
-#eventDetail{
-	border: 3px solid black;
+/* ****************** eventDetail.jsp ****************** */
+#eventList .topArea {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-#eventDetail>.formTitle{
-	margin-top: 10px;
-}
-#eventDetail .formTitle>span{
-	font-weight: bold;
-	font-size: 20px;
+#eventList .menuTitle {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
 }
 
-#eventDetail .titleBG{
-	margin: 0 auto;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: center;
-	border: 1px solid #bbb;
-	border-left: none;
-	border-right: none;
-}
-.titleBG>.eventTitle{
-	font-size: 18px;
-}
-.titleBG>.eventPeriod{
-	margin-top: 6px;
-	font-weight: lighter;
-	font-size: 12px;
+#eventList .eventBox {
+    width: 350px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: inline-block;
 }
 
+#eventList .eventBox:hover {
+    transform: translateY(-10px);
+}
 
-#eventDetail .eventContentsBox{
-	text-align: center;
-	margin-top: 20px;
-	font-size: 18px;
+#eventList .eventThum img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#eventList .topInfo {
+    padding: 15px;
+}
+
+#eventList .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#eventList .due {
+    font-size: 1rem;
+    color: #dc3545;
+}
+
+#eventList .bottomInfo {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border-top: 1px solid #ddd;
+}
+
+#eventList .writer {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#eventList .regdate {
+    color: gray;
+}
+
+/* Event Detail Page Styles */
+#eventDetail .formTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#eventDetail .formTitle span {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #343a40;
+}
+
+#eventDetail .titleBG {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#eventDetail .eventTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+#eventDetail .eventPeriod {
+    font-size: 1rem;
+    color: #555;
+}
+
+#eventDetail .eventContentsBox {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 #eventDetail .eventContentsBox img{
-	width: 50%;
+	width: 35%;
+}
+#eventDetail .eventContent {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 20px;
 }
 
-#eventDetail .eventContentsBox>.eventContent{
-	margin-top: 20px;
-	margin-bottom: 20px;
-	
-}
-#eventDetail .eventContentsBox>.eventWritedate{
-	font-size: 12px;
-	margin-bottom: 20px;
-	text-align: right;
+#eventDetail .eventWritedate {
+    font-size: 0.9rem;
+    color: gray;
+    margin-top: 10px;
 }
 
-#eventDetail .commentBox{
-	border: 1px solid red;
-	margin-bottom: 20px;
+#eventDetail .commentBox {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
 }
 
-/********************* eventDetail.jsp 끝 ********************/
+#eventDetail .commentTop {
+    margin-bottom: 20px;
+}
+
+#eventDetail .commentTop h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#eventDetail .commentTop h5 span {
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+.commentWriteContainer {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px; 
+}
+
+.profileImage {
+    margin-right: 10px; /* 이미지와 입력 필드 사이 간격 조정 */
+}
+
+.writeCommentContainer {
+    position: relative;
+    flex: 1;
+}
+
+.writeComment {
+    border: 2px solid #009688;
+    border-radius: 20px;
+    padding: 10px 15px;
+    width: 80%;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.writeComment-tail {
+	content: '';
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #009688;
+    transform: rotate(45deg);
+}
+
+
+#eventDetail .commentCell {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+#eventDetail .commentCell:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+#eventDetail .memNick {
+    font-weight: bold;
+    color: #007bff;
+}
+
+#eventDetail .regDate {
+    color: gray;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}
+
+#eventDetail .commentContents {
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+#eventDetail .reCommentBtn {
+	color: #aaa;
+	border: none;
+    border-bottom: 0.5px solid #dfdfdf;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* 대댓글 입력 폼 */
+#eventDetail .replyForm {
+    margin-top: 10px;
+}
+
+#eventDetail .replyForm textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+#eventDetail .replyForm input[type="button"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
 

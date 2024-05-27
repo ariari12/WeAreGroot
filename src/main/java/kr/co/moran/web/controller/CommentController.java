@@ -13,6 +13,8 @@ import kr.co.moran.web.action.Comment.CommentDeleteAction;
 import kr.co.moran.web.action.Comment.CommentModifyAction;
 import kr.co.moran.web.action.Comment.CommentModifyLikeCntAction;
 import kr.co.moran.web.action.Comment.CommentWriteAction;
+import kr.co.moran.web.action.Comment.CommentWriteAjax;
+import kr.co.moran.web.action.Comment.ReCommentWriteAction;
 
 @WebServlet("/comment")
 public class CommentController extends HttpServlet{
@@ -42,6 +44,8 @@ public class CommentController extends HttpServlet{
 			action = new CommentDeleteAction();
 		}else if(cmd.equals("commentModifyLikeCnt")) {
 			action = new CommentModifyLikeCntAction();
+		}else if(cmd.equals("commentWriteAjax")) {
+			action = new CommentWriteAjax();
 		}
 		
 		url = action.execute(req, resp);

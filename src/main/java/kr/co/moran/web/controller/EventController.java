@@ -20,6 +20,7 @@ public class EventController extends HttpServlet{
 		resp.setContentType("text/html;charset=UTF-8");
 		
 		String act = req.getParameter("eId");
+		String cmd = req.getParameter("cmd");
 		String url = "";
 		Action ac = null;
 		
@@ -27,6 +28,7 @@ public class EventController extends HttpServlet{
 			ac = new EventListAction();
 			
 		}
+	
 		if(act != null ){
 			int eId = Integer.parseInt(act);
 			ac = new EventDetailAction(eId);

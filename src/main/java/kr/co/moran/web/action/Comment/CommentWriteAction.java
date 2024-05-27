@@ -21,8 +21,8 @@ public class CommentWriteAction implements Action{
 		vo.setContents(contents);
 		vo.setMId(mId);
 		
-		
 		dao.insertComment(vo);
+		
 		if(type == 1) {
 			return "/board?cmd=qnaDetail&bId=" + bId;
 		}else {

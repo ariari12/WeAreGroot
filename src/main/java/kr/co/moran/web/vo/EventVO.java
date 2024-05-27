@@ -25,7 +25,6 @@ public class EventVO {
 	private Date writedate;
 	private Date start;
 	private Date end;
-	
 	private EventImgVO eventImgVO;
 	private MemberVO memberVO;
 	
@@ -108,6 +107,7 @@ public class EventVO {
 	public void setMemberVO(MemberVO memberVO) {
 		this.memberVO = memberVO;
 	}
+
 
 
 	
