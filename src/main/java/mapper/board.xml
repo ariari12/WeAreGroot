@@ -3,55 +3,74 @@
 	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.moran.board">
 
-	<!-- 노하우 전체보기(최신순) -->
-	<select id="SelectAllKH" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_type = 2 AND b_is_maintain = 0
-		ORDER BY b_regdate
+	<!-- 내가 쓴 글 전체보기 파라미터는 mId -->
+	<select id="SelectAllBoardBymId" parameterType="int" resultType="hashmap">
+		SELECT m.m_nick as nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.m_id= #{mId}
+	</select>
+
+	<!-- 노하우 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
+	<select id="SelectAllKH" resultType="hashmap">
+		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.b_type = 2 AND b.b_is_maintain = 0
+		ORDER BY b.b_regdate
 	</select>
 	
-	<!-- 노하우 전체보기(인기순) -->	
-	<select id="SelectAllKHOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_type = 2 AND b_is_maintain = 0
-		ORDER BY b_view_cnt DESC
+	<!-- 노하우 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->	
+	<select id="SelectAllKHOrderByViewCntDesc" resultType="hashmap">
+		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.b_type = 2 AND b.b_is_maintain = 0
+		ORDER BY b.b_view_cnt DESC
 	</select>
 	
-	<!-- QnA 전체보기(최신순) -->
-	<select id="SelectAllQnA" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_type = 1 AND b_is_maintain = 0
-		ORDER BY b_regdate DESC
+	<!-- QnA 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
+	<select id="SelectAllQnA" resultType="hashmap">
+		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.b_type = 1 AND b.b_is_maintain = 0
+		ORDER BY b.b_regdate DESC
 	</select>
 	
-	<!-- QnA 전체보기(인기순) -->
-	<select id="SelectAllQnAOrderByViewCntDesc" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_type = 1 AND b_is_maintain = 0
-		ORDER BY b_view_cnt 
+	<!-- QnA 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
+	<select id="SelectAllQnAOrderByViewCntDesc" resultType="hashmap">
+		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod 
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.b_type = 1 AND b.b_is_maintain = 0
+		ORDER BY b.b_view_cnt 
 	</select>
 	
 	<!-- 글 디테일 -->	
-	<select id="SelectBoardBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="kr.co.moran.web.vo.BoardVO">
-		SELECT b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
-		FROM BOARD
-		WHERE b_id = #{bId}
+	<select id="SelectBoardBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="hashmap">
+		SELECT m.m_nick AS nick, b_id AS bId , m_id AS mId , b_title AS title, b_contents AS contents, b_regdate AS regDate, b_view_cnt AS viewCnt , b_like_cnt AS likeCnt , b_type AS type , b_is_maintain AS isMaintain, b_retention_period AS retentionPeriod 
+		FROM BOARD b
+		JOIN MEMBER m
+		ON b.m_id = m.m_id
+		WHERE b.b_id = #{bId}
 	</select>
 	
 	<!-- QnA 글 작성 -->	
 	<insert id="InsertQnA" parameterType="kr.co.moran.web.vo.BoardVO">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
-		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 1, 0)
+		VALUES (#{mId}, #{title}, #{contents}, NOW(), 0, 0, 1, 0)
 	</insert>
 	
 	<!-- 노하우 글 작성 -->
 	<insert id="InsertKH" parameterType="kr.co.moran.web.vo.BoardVO">
 		INSERT INTO BOARD(m_id, b_title, b_contents, b_regdate, b_view_cnt, b_like_cnt, b_type, b_is_maintain) 
-		VALUES (1, #{title}, #{contents}, NOW(), 0, 0, 2, 0)
+		VALUES (#{mId}, #{title}, #{contents}, NOW(), 0, 0, 2, 0)
 	</insert>
 	
 	<!-- 글 수정 -->
@@ -82,5 +101,27 @@
 		SET b_like_cnt = b_like_cnt + 1
 		WHERE b_id = ${bId}
 	</update>
+	
+	<!-- 좋아요 버튼 누를 때 테이블 값 추가 b_id나 c_id와 물려야됨 내가 좋아요 누른 글 보기는 조인 두번 해야 함-->
+	<!-- 게시글 좋아요 -->
+	<insert id="InsertBoardLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
+		INSERT INTO LIKES(m_id, b_id, l_date)
+		VALUES(#{mId}, #{bId}, NOW())
+	</insert>
+	
+	<!-- 댓글 좋아요 -->
+	<insert id="InsertCommentLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
+		INSERT INTO LIKES(m_id, c_id, l_date)
+		VALUES(#{mId}, #{bId}, NOW())
+	</insert>
+	
+	<!-- 좋아요한 게시글 보기 -->
+	<select id="SelectBoardLikeBymId" parameterType="int" resultType="hashmap">
+		SELECT m.m_nick AS nick, b.b_id AS bId , b.m_id AS mId , b.b_title AS title, b.b_contents AS contents, b.b_regdate AS regDate, b.b_view_cnt AS viewCnt , b.b_like_cnt AS likeCnt , b.b_type AS type , b.b_is_maintain AS isMaintain, b.b_retention_period AS retentionPeriod
+		FROM LIKES l
+		JOIN BOARD b ON l.b_id = b.b_id
+		JOIN MEMBER m ON l.m_id = m.m_id
+		WHERE m.m_id = #{mId}
+	</select>
 	
 </mapper>

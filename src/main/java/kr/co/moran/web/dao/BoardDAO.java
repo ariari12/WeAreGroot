@@ -16,6 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.moran.web.vo.BoardVO;
+import kr.co.moran.web.vo.LikeVO;
 
 public class BoardDAO {
 	public SqlSessionFactory factory;
@@ -38,45 +39,45 @@ public class BoardDAO {
 	
 	
 //	<!-- 노하우 전체보기(최신순) -->
-	public List<BoardVO> selectAllKH(){
+	public List<HashMap<String, Object>> selectAllKH(){
 		SqlSession ss = factory.openSession(true);
-		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKH");
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKH");
 		
 		ss.close();
 		return list;
 	}
 	
 //	<!-- 노하우 전체보기(인기순) -->	
-	public List<BoardVO> selectAllKHOrderByViewCntDesc(){
+	public List<HashMap<String, Object>> selectAllKHOrderByViewCntDesc(){
 		SqlSession ss = factory.openSession(true);
-		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc");
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc");
 		
 		ss.close();
 		return list;
 	}
 	
 //	<!-- QnA 전체보기(최신순) -->
-	public List<BoardVO> selectAllQnA(){
+	public List<HashMap<String, Object>> selectAllQnA(){
 		SqlSession ss = factory.openSession(true);
-		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnA");
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnA");
 		
 		ss.close();
 		return list;
 	}
 	
 //	<!-- QnA 전체보기(인기순) -->
-	public List<BoardVO> selectAllQnAOrderByViewCntDesc(){
+	public List<HashMap<String, Object>> selectAllQnAOrderByViewCntDesc(){
 		SqlSession ss = factory.openSession(true);
-		List<BoardVO> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc");
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc");
 		
 		ss.close();
 		return list;
 	}
 	
 //	<!-- 글 디테일 -->	
-	public BoardVO selectBoardBybId(int bId) {
+	public HashMap<String, Object> selectBoardBybId(int bId) {
 		SqlSession ss = factory.openSession(true);
-		BoardVO vo = ss.selectOne("kr.co.moran.board.SelectBoardBybId", bId);
+		HashMap<String, Object> vo = ss.selectOne("kr.co.moran.board.SelectBoardBybId", bId);
 		
 		ss.close();
 		return vo;
@@ -134,5 +135,41 @@ public class BoardDAO {
 		ss.update("kr.co.moran.board.ModifyBoardLikeCntBybId", bId);
 		
 		ss.close();
+	}
+	
+//	<!-- 게시글 좋아요 -->
+	public void insertBoardLikeBybId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.InsertBoardLikeBybId", vo);
+		
+		ss.close();
+	}
+	
+// 	<!-- 댓글 좋아요 -->
+	public void insertCommentLikeBybId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.InsertCommentLikeBybId", vo);
+		
+		ss.close();
+	}
+	
+//	<!-- 좋아요한 게시글 보기 -->
+	public List<HashMap<String, Object>> selectBoardLikeBymId(int mId) {
+		SqlSession ss = factory.openSession(true);
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectBoardLikeBymId", mId);
+		
+		System.out.println("list :" + list);
+		ss.close();
+		return list;
+		
+	}
+	
+//	<!-- 내가 쓴 글 전체보기 파라미터는 mId -->
+	public List<HashMap<String, Object>> selectAllBoardBymId(int mId) {
+		SqlSession ss = factory.openSession(true);
+		List<HashMap<String, Object>> list =  ss.selectList("kr.co.moran.board.SelectAllBoardBymId", mId);
+		
+		ss.close();
+		return list;
 	}
 }

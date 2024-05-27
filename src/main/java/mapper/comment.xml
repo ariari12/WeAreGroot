@@ -10,6 +10,7 @@
 				c_contents as contents, c_like_cnt as likeCnt
 		FROM COMMENT
 		WHERE b_id = #{bId}
+		ORDER BY c_regdate DESC
 	</select>
 
 	<!-- 댓글 작성 -->

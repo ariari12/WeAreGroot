@@ -1,5 +1,6 @@
 package kr.co.moran.web.action.QnA;
 
+import java.util.HashMap;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class QnAListAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		String sort = req.getParameter("sort");
 		
-        List<BoardVO> boardList;
+        List<HashMap<String, Object>> boardList;
         if ("viewCntDesc".equals(sort)) {
         	boardList = dao.selectAllQnAOrderByViewCntDesc();
         } else {

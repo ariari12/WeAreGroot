@@ -1,5 +1,6 @@
 package kr.co.moran.web.action.KnowHow;
 
+import java.util.HashMap;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class KHDetailAction implements Action {
 		BoardDAO boardDAO = new BoardDAO();
 		CommentDAO commentDAO = new CommentDAO();  
 		
-		BoardVO boardVO = new BoardVO();
+		HashMap<String, Object> boardVO = new HashMap<String, Object>();
 
 		boardVO = boardDAO.selectBoardBybId(bId);
 		List<CommentVO> commentList = commentDAO.selectCommentBybId(bId);

@@ -1,6 +1,7 @@
 package kr.co.moran.web.action.KnowHow;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ public class KHListAction implements Action {
 		BoardDAO dao = new BoardDAO();
 		String sort = req.getParameter("sort");
 		
-        List<BoardVO> boardList;
+		List<HashMap<String, Object>> boardList ;
         if ("viewCntDesc".equals(sort)) {
         	boardList = dao.selectAllKHOrderByViewCntDesc();
         } else {
