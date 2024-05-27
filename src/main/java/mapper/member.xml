@@ -123,8 +123,8 @@
 			m.m_email = #{email}
   	</select>
   	
-  	
-  	<select id="selectMemberWithAddressById" parameterType="int" resultMap="memberWithAddressMap">
+  	<!-- 고쳐야 할것 -->
+<!--   	<select id="selectMemberWithAddressById" parameterType="int" resultMap="memberWithAddressMap">
   		SELECT
   			m.m_id AS mId,
 		    m.m_email AS email,
@@ -151,11 +151,34 @@
 		ON m.m_id = a.m_id	
 		WHERE
 			m.m_id = #{mId}  	
+  	</select> -->
+  	
+  	<select id="selectMemberById" parameterType="int" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT
+  			m_id AS mId,
+		    m_email AS email,
+		    m_pw AS pw,
+		    m_name AS name,
+		    m_profile_img AS profileImg,
+		    m_nick AS nick,
+		    m_phone AS phone,
+		    m_regdate AS regdate,
+		    m_logtype AS logtype,
+		    m_admintype AS admintype,
+		    m_is_maintain AS isMaintain,
+		    m_retention_period AS retentionPeriod,
+		    m_birth AS birth,
+		    m_gender AS gender
+
+		FROM
+			MEMBER
+		WHERE
+			m_id = #{mId}  	
   	</select>
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">
 	  UPDATE 
-	    MEMBER m
+	    MEMBER AS m
 	    LEFT JOIN ADDRESS a ON m.m_id = a.m_id
 	  SET
 	    m.m_name = #{name},
@@ -170,7 +193,25 @@
 	  WHERE
 	    m.m_id = #{mId}  
   	</update>
-  	
-  	
+  	  	
+  	<insert id="insertMemberExit" parameterType="kr.co.moran.web.vo.member.MemberVO">
+    INSERT INTO MEMBER_EXIT (
+        m_id,
+        me_reason,
+        me_date
+    ) VALUES (
+        #{memberExitVO.mId},
+        #{memberExitVO.reason},
+        NOW()
+    );
+	</insert>
+	
+	<update id="updateMemberStatus" parameterType="kr.co.moran.web.vo.member.MemberVO">
+	    UPDATE MEMBER
+	    SET
+	        m_is_maintain = 1
+	    WHERE
+	        m_id = #{memberExitVO.mId};
+	</update>
 
   </mapper>

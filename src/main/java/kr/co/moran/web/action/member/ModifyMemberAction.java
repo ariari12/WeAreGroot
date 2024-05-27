@@ -10,7 +10,7 @@ import kr.co.moran.web.dao.MemberDAO;
 import kr.co.moran.web.vo.member.AddressVO;
 import kr.co.moran.web.vo.member.MemberVO;
 
-public class modifyMemberAction implements Action {
+public class ModifyMemberAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -48,6 +48,8 @@ public class modifyMemberAction implements Action {
 			
 			System.out.println("[modifyMemberAction] MemeberVO = "+vo);
 			System.out.println("[modifyMemberAction] AddressVO = "+avo);
+			
+			
 			
 			if(dao.modifyMemberWithAddressById(vo)) {
 				HttpSession session = req.getSession();
