@@ -27,7 +27,7 @@ public class ModifyAction implements Action {
 		// admin이 아닌 사용자가 접근 시 예외처리
 		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
 //		System.out.println("modify: " + adminCheck);
-		if(adminCheck == null || Integer.parseInt(adminCheck.getAdmintype()) < 1) {
+		if(adminCheck == null || adminCheck.getAdmintype() < 1) {
 			return "jsp/product/unauthorized.jsp";
 		}
 
