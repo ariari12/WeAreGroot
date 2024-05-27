@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+* {
+    color: #222;
+    /* 기본 글 색상 */
+    font-family: "Nanum Gothic", sans-serif;
+    /* 나눔고딕체 적용 */
+    text-decoration: none;
+    /* 밑줄 제거 */
+    padding: 0;
+    margin: 0;
+
+}
+
+#eventList{
+/* 	border: 3px solid #000; */
+}
+
+/********************************************************/
+/********************* eventList.jsp 시작 ********************/
+/********************************************************/
+#eventList .eventBox {
+	padding: 4px;
+}
+
+#eventList .eventBox:hover{
+	border: 3px solid #68f724;
+}
+
+#eventList .topArea{
+	margin-top: 30px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+#eventList .topArea .menuTitle{
+	font-weight: bold;
+}
+
+#eventList .eventBox{
+	display: inline-block;
+	width: 250px;
+	height: 400px;
+	margin: 10px 5px 5px 0;
+	border: 0.5px solid #ababab;
+}
+
+#eventList .eventBox>.eventThum{
+	cursor: pointer;
+}
+
+#eventList .eventBox img{
+	width: 100%;
+}
+
+#eventList .topInfo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 10px;
+}
+#eventList .topInfo .title{
+	text-align: left;
+	font-weight: bold;
+	font-size: 20px;
+}
+#eventList .topInfo .due{
+	text-align: right; 
+	color: #ababab;
+}
+#eventList .eventBox .topInfo>span.title{
+	cursor: pointer;
+}
+
+#eventList .bottomInfo{
+	margin-top: 10px;
+}
+
+#eventList .bottomInfo .writer{
+	color: gray;
+}
+/********************* eventList.jsp 끝 ********************/
+
+
+/********************************************************/
+/********************* eventDetail.jsp 시작 ********************/
+/********************************************************/
+#eventDetail{
+	border: 3px solid black;
+}
+
+#eventDetail>.formTitle{
+	margin-top: 10px;
+}
+#eventDetail .formTitle>span{
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#eventDetail .titleBG{
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	border: 1px solid #bbb;
+	border-left: none;
+	border-right: none;
+}
+.titleBG>.eventTitle{
+	font-size: 18px;
+}
+.titleBG>.eventPeriod{
+	margin-top: 6px;
+	font-weight: lighter;
+	font-size: 12px;
+}
+
+
+#eventDetail .eventContentsBox{
+	text-align: center;
+	margin-top: 20px;
+	font-size: 18px;
+}
+#eventDetail .eventContentsBox img{
+	width: 50%;
+}
+
+#eventDetail .eventContentsBox>.eventContent{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+}
+#eventDetail .eventContentsBox>.eventWritedate{
+	font-size: 12px;
+	margin-bottom: 20px;
+	text-align: right;
+}
+
+#eventDetail .commentBox{
+	border: 1px solid red;
+	margin-bottom: 20px;
+}
+
+/********************* eventDetail.jsp 끝 ********************/
+
