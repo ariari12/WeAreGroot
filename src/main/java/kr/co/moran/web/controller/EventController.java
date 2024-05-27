@@ -27,7 +27,7 @@ public class EventController extends HttpServlet{
 			ac = new EventListAction();
 			
 		}
-		if(act != null || !act.equals("")){
+		if(act != null ){
 			int eId = Integer.parseInt(act);
 			ac = new EventDetailAction(eId);
 		}
