@@ -32,7 +32,7 @@ public class QnADetailAction implements Action {
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);
 		
-		return "views/qnaDetail.jsp";
+		return "jsp/board/qnaDetail.jsp";
 	}
 
 }

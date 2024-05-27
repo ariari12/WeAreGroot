@@ -9,7 +9,8 @@ import kr.co.moran.web.vo.member.MemberVO;
 public class MyPageForm implements Action {
 
 	@Override
-	public String execute(HttpServletRequest req, HttpServletResponse resp) {		
+	public String execute(HttpServletRequest req, HttpServletResponse resp) {	
+		
 		return "jsp/member/myPageForm.jsp";
 	}
 

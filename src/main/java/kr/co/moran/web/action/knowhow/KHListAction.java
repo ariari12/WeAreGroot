@@ -25,7 +25,7 @@ public class KHListAction implements Action {
         }
 
         req.setAttribute("boardList", boardList);
-        return "views/khlist.jsp";
+        return "jsp/board/khlist.jsp";
 	}
 
 }

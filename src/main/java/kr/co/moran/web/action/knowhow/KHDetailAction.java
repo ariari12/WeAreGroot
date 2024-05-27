@@ -30,7 +30,7 @@ public class KHDetailAction implements Action {
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);
 		
-		return "views/khDetail.jsp";
+		return "jsp/board/khDetail.jsp";
 	}
 
 }
