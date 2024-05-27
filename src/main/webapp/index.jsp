@@ -826,91 +826,35 @@
           <img class="img" src="resources/img/member/line-2.svg" />
         </div>
         <div class="frame-5">
-        
-          <!-- <div class="frame-6">
-            <div class="frame-7">
-              <img class="rectangle" src="resources/img/member/rectangle-2.png" />
-              <div class="frame-8"><div class="text-wrapper-4">1</div></div>
-            </div>
-            <div class="frame-9">
-              <div class="frame-9">
-                <div class="frame-10">
-                  <div class="text-wrapper-5">상품명상품명상품명</div>
-                  <div class="text-wrapper-6">판매스토어명</div>
-                </div>
-                <div class="text-wrapper-7">12,345,678원</div>
-              </div>
-              <div class="frame-11">
-                <div class="frame-12">
-                  <img class="vector" src="resources/img/member/vector-4.svg" />
-                  <div class="text-wrapper-8">인기</div>
-                </div>
-                <div class="frame-13">
-                  <img class="vector-2" src="resources/img/member/vector-1.svg" />
-                  <div class="text-wrapper-8">신상품</div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-          
-          <c:forEach var="vo" begin="${requestScope.startNo}" end="${requestScope.endNo}" items="${requestScope.productList}" varStatus="status">
-	          <div class="frame-14">
-	            <div class="frame-7">
-	              <img class="rectangle" src="resources/img/member/rectangle-3.png" />
-	              <div class="frame-8"><div class="text-wrapper-4">${status.count}</div></div>
-	            </div>
-	            <div class="frame-9">
-	              <div class="frame-10">
-	                <div class="text-wrapper-5">${vo.name}</div>
-	                <div class="text-wrapper-6">모란모란</div>
-	              </div>
-	              <div class="text-wrapper-7">${vo.price}원</div>
-	            </div>
-	            <div class="frame-12">
-	              <img class="vector" src="resources/img/member/vector-4.svg" />
-	              <div class="text-wrapper-8">인기</div>
-	            </div>
-	          </div>          	
-          </c:forEach>
+               
+	    <div class="frame-18">
+			<c:forEach var="vo" items="${requestScope.productList}" varStatus="status">
+			    <div class="frame-14">
+			        <div class="frame-7">
+			            <img class="rectangle" src="resources/img/member/rectangle-3.png" />
+			            <div class="frame-8">
+			                <div class="text-wrapper-4">${status.count}</div>
+			            </div>
+			        </div>
+			        <div class="frame-9">
+			            <div class="frame-10">
+			                <div class="text-wrapper-5">${vo.name}</div>
+			                <div class="text-wrapper-6">모란모란</div>
+			            </div>
+			            <div class="text-wrapper-7">${vo.price}원</div>
+			        </div>
+			        <div class="frame-12">
+			            <img class="vector" src="resources/img/member/vector-4.svg" />
+			            <div class="text-wrapper-8">인기</div>
+			        </div>
+			    </div>
+			</c:forEach>
+	    </div>
 
-          <!-- <div class="frame-14">
-            <div class="frame-7">
-              <img class="rectangle" src="resources/img/member/rectangle-4.png" />
-              <div class="frame-8"><div class="text-wrapper-4">3</div></div>
-            </div>
-            <div class="frame-9">
-              <div class="frame-10">
-                <div class="text-wrapper-5">상품명상품명상품명</div>
-                <div class="text-wrapper-6">판매스토어명</div>
-              </div>
-              <div class="text-wrapper-7">12,345,678원</div>
-            </div>
-            <div class="frame-12">
-              <img class="vector" src="resources/img/member/vector-4.svg" />
-              <div class="text-wrapper-8">인기</div>
-            </div>
-          </div>
-          <div class="frame-14">
-            <div class="frame-7">
-              <img class="rectangle" src="resources/img/member/rectangle-5.png" />
-              <div class="frame-8"><div class="text-wrapper-4">4</div></div>
-            </div>
-            <div class="frame-9">
-              <div class="frame-10">
-                <div class="text-wrapper-5">상품명상품명상품명</div>
-                <div class="text-wrapper-6">판매스토어명</div>
-              </div>
-              <div class="text-wrapper-7">12,345,678원</div>
-            </div>
-            <div class="frame-12">
-              <img class="vector" src="resources/img/member/vector-4.svg" />
-              <div class="text-wrapper-8">인기</div>
-            </div>
-          </div> -->
         </div>
         <div class="frame-15">
           <img class="line-2" src="resources/img/member/line-1.svg" />
-          <div class="frame-16">
+ <!--          <div class="frame-16">
             <img class="frame-17" src="resources/img/member/frame-30.svg" />
             <div class="frame-18">
               <div class="frame-19"><div class="text-wrapper-9">1</div></div>
@@ -918,7 +862,34 @@
               <div class="frame-19"><div class="text-wrapper-10">3</div></div>
             </div>
             <img class="frame-17" src="resources/img/member/frame-35.svg" />
-          </div>
+          </div> -->
+			<div class="frame-16">
+			    <c:if test="${currentPage > 1}">
+			        <a href="main?page=${currentPage - 1}">
+			            <img class="frame-17" src="resources/img/member/frame-30.svg" />
+			        </a>
+			    </c:if>			    
+			    <div class="frame-18">
+			        <c:forEach var="i" begin="${startPage}" end="${endPage}">
+			            <c:choose>
+			                <c:when test="${i == currentPage}">
+			                    <div class="frame-19"><div class="text-wrapper-9">${i}</div></div>
+			                </c:when>
+			                <c:otherwise>
+			                    <div class="frame-19">
+			                        <a href="main?page=${i}"><div class="text-wrapper-9">${i}</div></a>
+			                    </div>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
+			    </div>					    
+			    <c:if test="${currentPage < totalPage}">
+			        <a href="main?page=${currentPage + 1}">
+			            <img class="frame-17" src="resources/img/member/frame-35.svg" />
+			        </a>
+			    </c:if>
+			</div>          
+	
         </div>
       </div>
       

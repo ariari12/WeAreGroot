@@ -12,7 +12,7 @@ import kr.co.moran.web.vo.ProductVO;
 public class IndexFormAction implements Action {
 
 	@Override
-	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {		
+	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {				
 		ProductDAO dao = new ProductDAO();
 		// 총 게시물 건수를 출력
 		int totalCount = dao.pdPopTotal();
@@ -26,11 +26,14 @@ public class IndexFormAction implements Action {
 		// 현재 페이지 번호
 		int currentPage=0;
 		String page = req.getParameter("page");
+		System.out.println("[IndexFormAction] page = "+page);
 		if(page!=null) {
 			currentPage = Integer.parseInt(page);
 		} else {
 			currentPage = 1;
 		}
+		
+		System.out.println("[IndexFormAction] currentPage = "+currentPage);
 		
 		// 시작번호
 		int startNo = (currentPage - 1) * recordPerPage;
@@ -68,7 +71,8 @@ public class IndexFormAction implements Action {
 			}
 		}
 		
-		List<ProductVO> list = dao.pdSelectPop(startNo, recordPerPage);
+		List<ProductVO> list = dao.pdSelectPop(startNo, endNo+1);
+		System.out.println("[IndexFormAction] "+list);
 		//dao.piSelsctBigimgByPId();
 		
 		req.setAttribute("startNo", startNo);
