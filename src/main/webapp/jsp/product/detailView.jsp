@@ -52,6 +52,40 @@
 		text-decoration: none;
 		color: #202020;
 	}
+
+	/* 상품 후기 */	
+    .review-container {
+        border: 1px solid #ccc;
+        padding: 15px;
+        border-radius: 5px;
+        max-width: 600px;
+        margin: auto;
+        background-color: #f9f9f9;
+    }
+    .review-container table {
+        width: 100%;
+        border-collapse: collapse;
+        border-bottom: 1px solid #ccc;
+    }
+    .review-container th, .review-container td {
+        padding: 8px;
+        text-align: left;
+    }
+    .review-container th {
+        background-color: #f0f0f0;
+    }
+
+    .rv_imgs {
+        border: 1px solid rgb(179, 179, 179);
+        width: 100px;
+        height: 100px;
+        margin-right: 10px;
+    }
+
+    .review-container #review-page {
+        margin-top: 11px;
+        margin-bottom: -20px;
+    }
 </style>
 
 </head>
@@ -90,10 +124,9 @@
 			$("#review-frame").show();
 			$("#qna-frame").hide();
 		});
-		
 
 		$("#btn-qna").click(() => {
-			qnaInfo();
+			qnaInfo(<%=prdId %>);
 			$("#plant-frame").hide();
 			$("#review-frame").hide();
 			$("#qna-frame").show();
@@ -124,11 +157,13 @@
 		</div>
 				
 		<div class="reviews">
+			<%-- 찜 --%>
 		    <div class="reviews-score">
 		        <img class="rv-img-star" src="resources/img/product_detail/heart.svg" />
 		        <div class="rv-text">0.0</div>
 		        <div class="rv-text">(123)</div>
 		    </div>
+		    <%-- 상품 후기 --%>
 		    <div class="reviews-score">
 		        <img class="rv-img-star" src="resources/img/product_detail/star.svg" />
 		        <div class="rv-text">${score}</div>
@@ -136,8 +171,12 @@
 		    </div>
 		</div>
 		
-		<div>
-	        <img style="" class="rv-img-star" src="resources/img/product_detail/heart.svg" />
+		<div style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
+	        <img style="height: 80px;" src="resources/img/product_detail/heart.svg" />
+	        <span style="position: absolute; width: 150px; font-size: 28px;
+				margin-top: 10px; margin-left: 1px; font-weight: bold;">
+				찜
+			</span>
 		</div>
 		
 		

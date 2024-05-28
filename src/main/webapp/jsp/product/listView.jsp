@@ -101,9 +101,9 @@ let viewDetails = (no) => {
 	} %>
 	<%-- frame-line end --%>
     
-	 <div class="page frame-line">
+	 <div class="page frame-line" style="margin-top: 20px;">
 		 <nav aria-label="Page navigation">
-			<ul class="pagination">
+			<ul class="pagination justify-content-center pagination-lg">
 			<%
 				dao.closeSession();
 				int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
