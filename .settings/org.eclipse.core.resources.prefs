@@ -1,7 +1,10 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=branch 'kah' of https\://github.com/ariari12/WeAreGroot.git
+>>>>>>>=refs/heads/dev
 eclipse.preferences.version=1
 encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/jsp/board/khDetail.jsp=UTF-8
+encoding//src/main/webapp/jsp/board/qnaWriteForm.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/bak/loginForm1.jsp=UTF-8
+encoding//src/main/webapp/jsp/member/myPageForm.jsp=UTF-8
 encoding/<project>=UTF-8
