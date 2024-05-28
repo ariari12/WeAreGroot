@@ -50,7 +50,9 @@ public class BoardController extends HttpServlet{
 		//qna와 노하우페이지는 board테이블의 boardtype의 영향을 받음
 		
 		//qna 전체보기
-		if( cmd == null || cmd.equals("qna")) {
+
+		if(cmd == null || cmd.equals("qna")) {
+
 			action = new QnAListAction();
 		}
 		//qna 작성하기
@@ -58,9 +60,9 @@ public class BoardController extends HttpServlet{
 			action = new QnAWriteFormAction();
 		}
 		//qna 작성확인
-		else if(cmd.equals("qnaWriteOk")) {
-			action = new QnAWriteAction();
-		}
+		/*
+		 * else if(cmd.equals("qnaWriteOk")) { action = new QnAWriteAction(); }
+		 */
 		//qna 상세보기
 		else if(cmd.equals("qnaDetail")){
 			action = new QnADetailAction();

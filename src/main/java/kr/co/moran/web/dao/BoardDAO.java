@@ -15,6 +15,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import kr.co.moran.web.vo.BoardImgVO;
 import kr.co.moran.web.vo.BoardVO;
 import kr.co.moran.web.vo.LikeVO;
 
@@ -171,5 +172,13 @@ public class BoardDAO {
 		
 		ss.close();
 		return list;
+	}
+	
+//	<!-- 게시글 작성 시 이미지 입력 -->
+	public void insertBoardImg(BoardImgVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.board.InsertBoardImg", vo);
+		ss.close();
+		
 	}
 }

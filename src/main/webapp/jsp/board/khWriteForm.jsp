@@ -14,13 +14,13 @@
 <body>
 	<div class="container">
 	<h2>노하우 글 작성</h2>
-		<form action="board" method="get">
+		<form action="board/writekhOk" method="post" class="reviewWrite" enctype="multipart/form-data">
 			<table class="table">
 				<tr>
 					<th>제목</th>
 					<td>
 						<input type="text" name="title"/>
-						<input type="hidden" name="cmd" value="khWriteOk" />
+						<!-- <input type="hidden" name="cmd" value="khWriteOk" /> -->
 					</td>
 				</tr>
 				
@@ -28,6 +28,13 @@
 					<th>내용</th>
 					<td>
 						<textarea name="contents" id="contents" cols="30" rows="10"></textarea>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>이미지</th>
+					<td>
+						<input type="file" name="biImg" id="biImg" accept="image/*" onchange="loadFile(this)"/>
 					</td>
 				</tr>
 				

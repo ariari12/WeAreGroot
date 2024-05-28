@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	img {
+	width: 500px;
+	height: 500px
+}
+
+</style>
 <script>
 function showEditForm(cId, contents, bId, type) {
     var formId = 'editForm-' + cId;
@@ -43,24 +50,34 @@ function hideEditForm(formId) {
     <div class="container">
         <h2>QnA 상세보기 페이지</h2>
         <table class="table">
+        	<tr>
+        	    <th>제목</th>
+                <td>${boardVO.get('title') }</td>
+                <th>작성자</th>
+                <td>${boardVO.get('nick') }</td>
+        	</tr>
             <tr>
-                <th>제목</th>
-                <td>${boardVO.title }</td>
                 <th>조회수</th>
-                <td>${boardVO.viewCnt }</td>
+                <td>${boardVO.get('viewCnt')}</td>
                 <th>좋아요수</th>
-                <td>${boardVO.likeCnt }</td>
+                <td>${boardVO.get('likeCnt') }</td>
             </tr>
             <tr>
                 <th>내용</th>
-                <td>${boardVO.contents }</td>
+                <td>${boardVO.get('contents') }</td>
+            </tr>
+            <tr>
+            	<td rowspan="1">
+            		<img src="./resources/img/board/${boardVO.get('biImg') }" alt="${boardVO.get('biImg') }" />
+            	</td>
             </tr>
             <tr>
                 <td rowspan="2">
+                <c:set var="bId" value="${boardVO.get('bId') }"></c:set>
                     <button type="button" onclick="location.href='<c:url value='/board?cmd=qna' />'">QnA 목록</button>
-                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModify&bId=${boardVO.getBId()}' />'">수정하기</button>
-                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaDelete&bId=${boardVO.getBId()}' />'">삭제하기</button>
-                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${boardVO.getBId()}' />'">좋아요</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModify&bId=${bId}' />'">수정하기</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaDelete&bId=${bId}' />'">삭제하기</button>
+                    <button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${bId}' />'">좋아요</button>
                 </td>
             </tr>
         </table>
@@ -68,32 +85,44 @@ function hideEditForm(formId) {
     
     <div class="container">
         <h4>댓글</h4>
+       
         <table class="table">
             <c:forEach var="commentVO" items="${commentList}">
-                <tr id="comment-${commentVO.getCId()}">
+            <c:set var="bId" value="${boardVO.get('bId') }"></c:set>
+            <c:set var="type" value="${boardVO.get('type') }"></c:set>
+            <c:set var="cId" value="${commentVO.get('cId') }"></c:set>
+            <c:set var="loginId" value="${loginId }"></c:set>
+                <tr id="comment-${commentVO.get('cId')}">
                     <td>
-                        내용 : ${commentVO.contents} | 글쓴이Id : ${commentVO.getMId()} | 좋아요 : ${commentVO.likeCnt }
+                        내용 : ${commentVO.get('contents')} | 작성자 : ${commentVO.get('nick')} | 좋아요 : ${commentVO.get('likeCnt') }
                     </td>
+                    <c:choose >
+                    	<c:when test="${commentVO.get('mId') eq loginId }">
                     <td>
-                        <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentDelete&cId=${commentVO.getCId()}&bId=${boardVO.getBId()}&type=${boardVO.type}' />'">댓글삭제하기</button>
+                        <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentDelete&cId=${cId}&bId=${bId}&type=${type}' />'">댓글삭제하기</button>
                     </td>
+                    
+
                     <td>
-                        <button type="button" onclick="showEditForm('${commentVO.getCId()}', '${commentVO.contents}', '${boardVO.getBId()}', '${boardVO.type}')">댓글수정하기</button>
+                        <button type="button" onclick="showEditForm('${commentVO.get('cId')}', '${commentVO.get('contents')}', '${bId}', '${type}')">댓글수정하기</button>
                     </td>
+                    	</c:when>
+                    </c:choose>
+
                     <td>
-                        <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${commentVO.getCId()}&bId=${boardVO.getBId()}&type=${boardVO.type}' />'">좋아요</button>
+                        <button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&bId=${bId}&type=${type}' />'">좋아요</button>
                     </td>
                 </tr>                
             </c:forEach>
         </table>
     </div>
     
-    <form action="comment" method="post">
+    <form action="comment" method="get">
         <h3>댓글작성</h3>
         <input type="hidden" name="cmd" value="commentWrite">
-        <input type="hidden" name="bId" value="${boardVO.getBId()}">
-        <input type="hidden" name="mId" value="${boardVO.getMId()}">
-        <input type="hidden" name="type" value="${boardVO.type}">
+        <input type="hidden" name="bId" value="${boardVO.get('bId')}">
+        <input type="hidden" name="mId" value="${loginId}">
+        <input type="hidden" name="type" value="${boardVO.get('type')}">
         <textarea name="contents" id="contents" cols="100" rows="10"></textarea>
         <button type="submit">댓글작성</button>
     </form>

@@ -2,25 +2,31 @@ package kr.co.moran.web.action.comment;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.CommentDAO;
 import kr.co.moran.web.vo.CommentVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class CommentWriteAction implements Action{
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		HttpSession session = req.getSession();
+		
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+		
 		CommentDAO dao = new CommentDAO();
 		CommentVO vo = new CommentVO();
 		
 		int bId = Integer.parseInt(req.getParameter("bId"));
-		int mId = Integer.parseInt(req.getParameter("mId"));
+		int mId = memberVO.getMId();
 		int type = Integer.parseInt(req.getParameter("type"));
 		String contents = req.getParameter("contents");
 		
 		vo.setBId(bId);
 		vo.setContents(contents);
 		vo.setMId(mId);
-		
+	
 		
 		dao.insertComment(vo);
 		if(type == 1) {

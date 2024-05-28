@@ -5,17 +5,33 @@
 <mapper namespace="kr.co.moran.comment">
 
 	<!-- Board의 댓글 목록 -->
-	<select id="SelectCommentBybId" parameterType="int" resultType="kr.co.moran.web.vo.CommentVO">
+	<select id="SelectCommentBybId" parameterType="int" resultType="hashmap">
 		SELECT 
-			c_id as cId, 
-			b_id as bId, 
-			m_id as mId, 
-			c_parent_id as cParentId,
-			c_contents as contents, 
-			c_like_cnt as likeCnt
-		FROM COMMENT
+			c.c_id as cId, 
+			c.b_id as bId, 
+			c.m_id as mId, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt,
+			m.m_nick as nick
+		FROM COMMENT c
+		JOIN MEMBER m ON c.m_id = m.m_id
 		WHERE b_id = #{bId}
 		ORDER BY c_regdate DESC
+	</select>
+
+	<!-- 내가 쓴 댓글 목록 -->
+	<select id="SelectCommentBymId" parameterType="int" resultType="hashmap">
+		SELECT
+			c.c_id as cId, 
+			c.b_id as bId, 
+			c.m_id as mId, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt
+		FROM COMMENT c
+		JOIN MEMBER m ON c.m_id = m.m_id
+		WHERE m.m_id = #{mId}
 	</select>
 
 	<!-- 댓글 작성 -->
