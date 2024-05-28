@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="resources/css/globals.css" />
-    
     <style>
-       	a {  	text-align: center;
-   			text-decoration: none; /* 링크의 밑줄 제거 */  
-   			color: inherit; /* 링크의 색상 제거 */
-   		}
-   		
+    	:root {
+		  --colors-light-green: rgba(118, 176, 156, 1);
+		  --colors-mint: rgba(140, 215, 144, 1);
+		}
+		
 		.div-wrapper {
 		  position: relative;
 		  width: 1920px;
@@ -88,10 +87,10 @@
 		
 		.div-wrapper .union {
 		  position: absolute;
-		  width: 50px;
-		  height: 50px;
-		  top: -13.8px;
-		  left: -15px;
+		  width: 20px;
+		  height: 22px;
+		  top: 0;
+		  left: 0;
 		}
 		
 		.div-wrapper .subtract {
@@ -123,7 +122,7 @@
 		  position: absolute;
 		  top: 4px;
 		  left: 4px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #ffffff;
 		  font-size: 12px;
@@ -166,7 +165,7 @@
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020cc;
 		  font-size: 20px;
@@ -205,7 +204,7 @@
 		  height: 24px;
 		  margin-top: -1px;
 		  opacity: 0.2;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 16px;
@@ -260,7 +259,7 @@
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #ffffff;
 		  font-size: 16px;
@@ -322,7 +321,7 @@
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-SemiBold", Helvetica;
+		  font-family: "Pretendard Variable-SemiBold", Helvetica;
 		  font-weight: 600;
 		  color: #202020;
 		  font-size: 28px;
@@ -342,7 +341,7 @@
 		  position: relative;
 		  width: fit-content;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 14px;
@@ -375,7 +374,7 @@
 		  top: 56px;
 		  left: 150px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 20px;
@@ -389,7 +388,7 @@
 		  top: 159px;
 		  left: 150px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 16px;
@@ -403,7 +402,7 @@
 		  top: 159px;
 		  left: 1175px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 16px;
@@ -417,7 +416,7 @@
 		  top: 183px;
 		  left: 1175px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 16px;
@@ -431,7 +430,7 @@
 		  top: 183px;
 		  left: 150px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 16px;
@@ -445,7 +444,7 @@
 		  top: 253px;
 		  left: 150px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: transparent;
 		  font-size: 16px;
@@ -466,7 +465,7 @@
 		  top: 183px;
 		  left: 651px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #202020;
 		  font-size: 16px;
@@ -479,7 +478,7 @@
 		  position: absolute;
 		  top: 127px;
 		  left: 150px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #202020;
 		  font-size: 20px;
@@ -492,7 +491,7 @@
 		  position: absolute;
 		  top: 127px;
 		  left: 1175px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #202020;
 		  font-size: 20px;
@@ -505,7 +504,7 @@
 		  position: absolute;
 		  top: 127px;
 		  left: 1290px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #ff0000;
 		  font-size: 20px;
@@ -519,7 +518,7 @@
 		  top: 56px;
 		  left: 294px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 20px;
@@ -533,7 +532,7 @@
 		  top: 56px;
 		  left: 404px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 20px;
@@ -547,7 +546,7 @@
 		  top: 56px;
 		  left: 583px;
 		  opacity: 0.8;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #202020;
 		  font-size: 20px;
@@ -558,18 +557,27 @@
 		
 		.div-wrapper .frame-11 {
 		  display: inline-flex;
-		  align-items: center;
-		  gap: 500px;
+		  flex-direction: column;
+		  align-items: flex-start;
+		  gap: 30px;
 		  position: absolute;
 		  top: 392px;
-		  left: 375px;
+		  left: 1145px;
+		}
+		
+		.div-wrapper .frame-12 {
+		  display: inline-flex;
+		  align-items: center;
+		  gap: 247px;
+		  position: relative;
+		  flex: 0 0 auto;
 		}
 		
 		.div-wrapper .text-wrapper-19 {
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-SemiBold", Helvetica;
+		  font-family: "Pretendard Variable-SemiBold", Helvetica;
 		  font-weight: 600;
 		  color: #000000;
 		  font-size: 20px;
@@ -582,43 +590,7 @@
 		  position: relative;
 		  width: fit-content;
 		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
-		  font-weight: 500;
-		  color: #000000;
-		  font-size: 16px;
-		  text-align: right;
-		  letter-spacing: 0;
-		  line-height: normal;
-		  white-space: nowrap;
-		  
-		}
-		
-		.div-wrapper .frame-12 {
-		  display: inline-flex;
-		  align-items: center;
-		  gap: 493px;
-		  position: absolute;
-		  top: 1122px;
-		  left: 375px;
-		}
-		
-		.div-wrapper .overlap-3 {
-		  position: absolute;
-		  width: 670px;
-		  height: 500px;
-		  top: 1176px;
-		  left: 375px;
-		  background-color: #ffffff;
-		  border: 1px solid;
-		  border-color: #e4e4e4;
-		}
-		
-		.div-wrapper .text-wrapper-21 {
-		  position: absolute;
-		  top: 163px;
-		  left: 264px;
-		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 16px;
@@ -629,83 +601,6 @@
 		
 		.div-wrapper .frame-13 {
 		  display: inline-flex;
-		  align-items: center;
-		  gap: 490px;
-		  position: absolute;
-		  top: 1700px;
-		  left: 375px;
-		}
-		
-		.div-wrapper .text-wrapper-22 {
-		  position: relative;
-		  width: 150px;
-		  margin-top: -1px;
-		  font-family: "Pretendard-SemiBold", Helvetica;
-		  font-weight: 600;
-		  color: #000000;
-		  font-size: 20px;
-		  letter-spacing: 0;
-		  line-height: normal;
-		}
-		
-		.div-wrapper .overlap-4 {
-		  position: absolute;
-		  width: 670px;
-		  height: 500px;
-		  top: 1754px;
-		  left: 375px;
-		  background-color: #ffffff;
-		  border: 1px solid;
-		  border-color: #e4e4e4;
-		}
-		
-		.div-wrapper .text-wrapper-23 {
-		  position: absolute;
-		  top: 239px;
-		  left: 264px;
-		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
-		  font-weight: 500;
-		  color: #000000;
-		  font-size: 16px;
-		  letter-spacing: 0;
-		  line-height: normal;
-		  white-space: nowrap;
-		}
-		
-		.div-wrapper .frame-14 {
-		  display: inline-flex;
-		  flex-direction: column;
-		  align-items: flex-start;
-		  gap: 30px;
-		  position: absolute;
-		  top: 392px;
-		  left: 1145px;
-		}
-		
-		.div-wrapper .frame-15 {
-		  display: inline-flex;
-		  align-items: center;
-		  gap: 247px;
-		  position: relative;
-		  flex: 0 0 auto;
-		}
-		
-		.div-wrapper .text-wrapper-24 {
-		  position: relative;
-		  width: fit-content;
-		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
-		  font-weight: 500;
-		  color: #000000;
-		  font-size: 16px;
-		  letter-spacing: 0;
-		  line-height: normal;
-		  white-space: nowrap;
-		}
-		
-		.div-wrapper .frame-16 {
-		  display: inline-flex;
 		  flex-direction: column;
 		  align-items: flex-start;
 		  gap: 20px;
@@ -713,7 +608,7 @@
 		  flex: 0 0 auto;
 		}
 		
-		.div-wrapper .frame-17 {
+		.div-wrapper .frame-14 {
 		  display: inline-flex;
 		  flex-direction: column;
 		  align-items: flex-start;
@@ -722,11 +617,11 @@
 		  flex: 0 0 auto;
 		}
 		
-		.div-wrapper .text-wrapper-25 {
+		.div-wrapper .text-wrapper-21 {
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 16px;
@@ -735,7 +630,7 @@
 		  white-space: nowrap;
 		}
 		
-		.div-wrapper .frame-18 {
+		.div-wrapper .frame-15 {
 		  display: inline-flex;
 		  align-items: center;
 		  justify-content: center;
@@ -746,11 +641,11 @@
 		  background-color: #ffffff;
 		}
 		
-		.div-wrapper .text-wrapper-26 {
+		.div-wrapper .text-wrapper-22 {
 		  position: relative;
 		  width: 380px;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #00000033;
 		  font-size: 16px;
@@ -758,10 +653,73 @@
 		  line-height: 20px;
 		}
 		
-		.div-wrapper .frame-19 {
+		.div-wrapper .frame-16 {
 		  display: inline-flex;
 		  align-items: center;
 		  gap: 10px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .frame-17 {
+		  display: inline-flex;
+		  align-items: center;
+		  justify-content: center;
+		  gap: 10px;
+		  padding: 10px;
+		  position: relative;
+		  flex: 0 0 auto;
+		  background-color: #ffffff;
+		  border: 1px solid;
+		  border-color: #e4e4e4;
+		}
+		
+		.div-wrapper .text-wrapper-23 {
+		  position: relative;
+		  width: 200px;
+		  height: 20px;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: #00000033;
+		  font-size: 16px;
+		  letter-spacing: 0;
+		  line-height: 20px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-18 {
+		  display: flex;
+		  width: 170px;
+		  align-items: center;
+		  justify-content: center;
+		  gap: 10px;
+		  padding: 10px;
+		  position: relative;
+		  background-color: #e4e4e4;
+		  border: 1px solid;
+		  border-color: #20202080;
+		}
+		
+		.div-wrapper .text-wrapper-24 {
+		  position: relative;
+		  width: fit-content;
+		  margin-top: -1px;
+		  margin-left: -41.5px;
+		  margin-right: -41.5px;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: #000000;
+		  font-size: 16px;
+		  letter-spacing: 0;
+		  line-height: 20px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-19 {
+		  display: inline-flex;
+		  align-items: flex-start;
+		  gap: 11px;
 		  position: relative;
 		  flex: 0 0 auto;
 		}
@@ -771,7 +729,7 @@
 		  align-items: center;
 		  justify-content: center;
 		  gap: 10px;
-		  padding: 10px;
+		  padding: 10px 67px;
 		  position: relative;
 		  flex: 0 0 auto;
 		  background-color: #ffffff;
@@ -779,14 +737,14 @@
 		  border-color: #e4e4e4;
 		}
 		
-		.div-wrapper .text-wrapper-27 {
+		.div-wrapper .text-wrapper-25 {
 		  position: relative;
-		  width: 200px;
-		  height: 20px;
+		  width: fit-content;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  opacity: 0.2;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
-		  color: #00000033;
+		  color: #000000;
 		  font-size: 16px;
 		  letter-spacing: 0;
 		  line-height: 20px;
@@ -794,69 +752,6 @@
 		}
 		
 		.div-wrapper .frame-21 {
-		  display: flex;
-		  width: 170px;
-		  align-items: center;
-		  justify-content: center;
-		  gap: 10px;
-		  padding: 10px 83px;
-		  position: relative;
-		  background-color: #e4e4e4;
-		  border: 1px solid;
-		  border-color: #20202080;
-		}
-		
-		.div-wrapper .text-wrapper-28 {
-		  position: relative;
-		  width: fit-content;
-		  margin-top: -1px;
-		  margin-left: -41.5px;
-		  margin-right: -41.5px;
-		  font-family: "Pretendard-Medium", Helvetica;
-		  font-weight: 500;
-		  color: #000000;
-		  font-size: 16px;
-		  letter-spacing: 0;
-		  line-height: 20px;
-		  white-space: nowrap;
-		}
-		
-		.div-wrapper .frame-22 {
-		  display: inline-flex;
-		  align-items: flex-start;
-		  gap: 11px;
-		  position: relative;
-		  flex: 0 0 auto;
-		}
-		
-		.div-wrapper .frame-23 {
-		  display: inline-flex;
-		  align-items: center;
-		  justify-content: center;
-		  gap: 10px;
-		  padding: 10px 83px;
-		  position: relative;
-		  flex: 0 0 auto;
-		  background-color: #ffffff;
-		  border: 1px solid;
-		  border-color: #e4e4e4;
-		}
-		
-		.div-wrapper .text-wrapper-29 {
-		  position: relative;
-		  width: fit-content;
-		  margin-top: -1px;
-		  opacity: 0.2;
-		  font-family: "Pretendard-Medium", Helvetica;
-		  font-weight: 500;
-		  color: #000000;
-		  font-size: 16px;
-		  letter-spacing: 0;
-		  line-height: 20px;
-		  white-space: nowrap;
-		}
-		
-		.div-wrapper .frame-24 {
 		  display: inline-flex;
 		  flex-direction: column;
 		  align-items: center;
@@ -877,13 +772,12 @@
 		  background-color: #20202033;
 		}
 		
-		.div-wrapper .text-wrapper-30 {
+		.div-wrapper .text-wrapper-26 {
 		  position: relative;
 		  width: fit-content;
 		  margin-top: -1px;
-		  margin-left: -22px;
-		  margin-right: -22px;
-		  font-family: "Pretendard-Bold", Helvetica;
+		  margin-left: -30px;		  
+		  font-family: "Pretendard Variable-Bold", Helvetica;
 		  font-weight: 700;
 		  color: #ffffff;
 		  font-size: 20px;
@@ -893,13 +787,67 @@
 		  white-space: nowrap;
 		}
 		
+		.div-wrapper .frame-22 {
+		  display: inline-flex;
+		  flex-direction: column;
+		  align-items: flex-start;
+		  gap: 60px;
+		  position: absolute;
+		  top: 392px;
+		  left: 375px;
+		}
+		
+		.div-wrapper .frame-23 {
+		  display: inline-flex;
+		  flex-direction: column;
+		  align-items: flex-start;
+		  gap: 30px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .frame-24 {
+		  display: inline-flex;
+		  align-items: center;
+		  gap: 74px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .text-wrapper-27 {
+		  position: relative;
+		  width: 530px;
+		  height: 24px;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-SemiBold", Helvetica;
+		  font-weight: 600;
+		  color: #000000;
+		  font-size: 20px;
+		  letter-spacing: 0;
+		  line-height: normal;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .text-wrapper-28 {
+		  position: relative;
+		  width: fit-content;
+		  opacity: 0.5;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: #000000;
+		  font-size: 16px;
+		  text-align: right;
+		  letter-spacing: 0;
+		  line-height: normal;
+		  white-space: nowrap;
+		}
+		
 		.div-wrapper .frame-25 {
 		  display: inline-flex;
 		  flex-direction: column;
 		  align-items: flex-start;
-		  position: absolute;
-		  top: 446px;
-		  left: 375px;
+		  position: relative;
+		  flex: 0 0 auto;
 		}
 		
 		.div-wrapper .frame-26 {
@@ -925,12 +873,12 @@
 		  border-color: #e4e4e4;
 		}
 		
-		.div-wrapper .text-wrapper-31 {
+		.div-wrapper .text-wrapper-29 {
 		  position: relative;
 		  width: 490px;
 		  margin-top: -0.5px;
 		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 14px;
@@ -944,7 +892,7 @@
 		  align-items: center;
 		  justify-content: center;
 		  gap: 10px;
-		  padding: 20px 25px;
+		  padding: 20px 31px;
 		  position: relative;
 		  flex: 0 0 auto;
 		  margin-top: -1px;
@@ -955,11 +903,11 @@
 		  border-color: #e4e4e4;
 		}
 		
-		.div-wrapper .text-wrapper-32 {
+		.div-wrapper .text-wrapper-30 {
 		  position: relative;
 		  width: fit-content;
 		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 14px;
@@ -1015,12 +963,12 @@
 		  flex: 0 0 auto;
 		}
 		
-		.div-wrapper .text-wrapper-33 {
+		.div-wrapper .text-wrapper-31 {
 		  position: relative;
 		  width: 400px;
 		  height: 24px;
 		  margin-top: -1px;
-		  font-family: "Pretendard-SemiBold", Helvetica;
+		  font-family: "Pretendard Variable-SemiBold", Helvetica;
 		  font-weight: 600;
 		  color: #000000;
 		  font-size: 16px;
@@ -1038,24 +986,24 @@
 		  opacity: 0.5;
 		}
 		
-		.div-wrapper .text-wrapper-34 {
+		.div-wrapper .text-wrapper-32 {
 		  width: fit-content;
 		  color: #000000;
 		  font-size: 12px;
 		  text-align: center;
+		  letter-spacing: 0;
 		  line-height: normal;
 		  white-space: nowrap;
 		  position: relative;
 		  margin-top: -1px;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
-		  letter-spacing: 0;
 		}
 		
-		.div-wrapper .text-wrapper-35 {
+		.div-wrapper .text-wrapper-33 {
 		  position: relative;
 		  width: fit-content;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 14px;
@@ -1071,7 +1019,6 @@
 		  align-items: center;
 		  justify-content: center;
 		  gap: 10px;
-		  padding: 46px 30px;
 		  position: relative;
 		  margin-top: -1px;
 		  margin-bottom: -1px;
@@ -1081,47 +1028,236 @@
 		  border-color: #e4e4e4;
 		}
 		
-		.div-wrapper .text-wrapper-36 {
+		.div-wrapper .text-wrapper-34 {
 		  position: relative;
 		  width: fit-content;
 		  margin-left: -5.5px;
 		  margin-right: -3.5px;
 		  opacity: 0.5;
-		  font-family: "Pretendard-Medium", Helvetica;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
 		  color: #000000;
 		  font-size: 14px;
 		  letter-spacing: 0;
 		  line-height: normal;
+		}
+		
+		.div-wrapper .frame-35 {
+		  display: inline-flex;
+		  flex-direction: column;
+		  gap: 36px;
+		  align-items: flex-start;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .frame-36 {
+		  display: flex;
+		  flex-direction: column;
+		  width: 672px;
+		  align-items: flex-start;
+		  gap: 8px;
+		  padding: 17px 15px;
+		  position: relative;
+		  flex: 0 0 auto;
+		  margin-top: -1px;
+		  margin-left: -1px;
+		  margin-right: -1px;
+		  background-color: #ffffff;
+		  border: 1px solid;
+		  border-color: #e4e4e4;
+		}
+		
+		.div-wrapper .text-wrapper-35 {
+		  position: relative;
+		  width: 621px;
+		  height: 24px;
+		  margin-top: -0.5px;
+		  font-family: "Pretendard Variable-SemiBold", Helvetica;
+		  font-weight: 600;
+		  color: #000000;
+		  font-size: 16px;
+		  letter-spacing: 0;
+		  line-height: 24px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-37 {
+		  display: flex;
+		  width: 635px;
+		  align-items: flex-start;
+		  gap: 8px;
+		  position: relative;
+		  flex: 0 0 auto;
+		  opacity: 0.5;
+		}
+		
+		.div-wrapper .text-wrapper-36 {
+		  position: relative;
+		  width: 630px;
+		  height: 19px;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-Regular", Helvetica;
+		  font-weight: 400;
+		  color: #000000;
+		  font-size: 16px;
+		  letter-spacing: 0;
+		  line-height: normal;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-38 {
+		  display: inline-flex;
+		  align-items: flex-start;
+		  gap: 16px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .frame-39 {
+		  display: inline-flex;
+		  align-items: flex-start;
+		  gap: 4px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .text-wrapper-37 {
+		  position: relative;
+		  width: fit-content;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: var(--colors-light-green);
+		  font-size: 14px;
+		  letter-spacing: -0.28px;
+		  line-height: 14px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-40 {
+		  display: inline-flex;
+		  align-items: flex-start;
+		  gap: 10px;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .rectangle-2 {
+		  position: relative;
+		  width: 14px;
+		  height: 14px;
+		}
+		
+		.div-wrapper .vector-2 {
+		  position: absolute;
+		  width: 12px;
+		  height: 11px;
+		  top: 2px;
+		  left: 1px;
+		}
+		
+		.div-wrapper .text-wrapper-38 {
+		  position: relative;
+		  width: fit-content;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: var(--colors-mint);
+		  font-size: 14px;
+		  letter-spacing: -0.28px;
+		  line-height: 14px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .vector-3 {
+		  position: absolute;
+		  width: 11px;
+		  height: 10px;
+		  top: 3px;
+		  left: 2px;
+		}
+		
+		.div-wrapper .text-wrapper-39 {
+		  position: relative;
+		  width: fit-content;
+		  margin-top: -1px;
+		  font-family: "Pretendard Variable-Medium", Helvetica;
+		  font-weight: 500;
+		  color: #2020204c;
+		  font-size: 14px;
+		  letter-spacing: -0.28px;
+		  line-height: 14px;
+		  white-space: nowrap;
+		}
+		
+		.div-wrapper .frame-41 {
+		  display: flex;
+		  flex-direction: column;
+		  width: 672px;
+		  gap: 8px;
+		  padding: 17px 15px;
+		  margin-left: -1px;
+		  margin-right: -1px;
+		  background-color: #ffffff;
+		  border: 1px solid;
+		  border-color: #e4e4e4;
+		  align-items: flex-start;
+		  position: relative;
+		  flex: 0 0 auto;
+		}
+		
+		.div-wrapper .frame-42 {
+		  display: flex;
+		  flex-direction: column;
+		  width: 672px;
+		  align-items: flex-start;
+		  gap: 8px;
+		  padding: 17px 15px;
+		  position: relative;
+		  flex: 0 0 auto;
+		  margin-bottom: -1px;
+		  margin-left: -1px;
+		  margin-right: -1px;
+		  background-color: #ffffff;
+		  border: 1px solid;
+		  border-color: #e4e4e4;
+		}
+		
+		.div-wrapper .frame-43 {
+		  display: flex;
+		  flex-direction: column;
+		  width: 672px;
+		  align-items: flex-start;
+		  gap: 10px;
+		  padding: 20px;
+		  position: relative;
+		  margin-top: -1px;
+		  margin-bottom: -1px;
+		  margin-left: -1px;
+		  margin-right: -1px;
+		  background-color: #ffffff;
+		  border: 1px solid;
+		  border-color: #e4e4e4;
 		}    	
     </style>
   </head>
+  
+	<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
   <body>
     <div class="div-wrapper">
       <header class="header">
         <a href="main"><img class="group" src="resources/img/member/group-1.png" /></a>
-        <div class="overlap-wrapper">
-          <div class="overlap">
-            <div class="frame">
-              <div class="overlap-group-wrapper">
-                <div class="overlap-group">
-                  <img class="union" src="resources/img/member/image.svg" /> <img class="subtract" src="resources/img/member/subtract.svg" />
-                </div>
-              </div>
-            </div>
-            <div class="div">
-              <div class="ellipse"></div>
-              <div class="text-wrapper">10</div>
-            </div>
-          </div>
-        </div>
       </header>
       <div class="frame-2">
         <div class="frame-3">
           <div class="frame-4"><div class="text-wrapper-2"><a href="main">홈</a></div></div>
           <div class="frame-4"><div class="text-wrapper-2"><a href="board">커뮤니티</a></div></div>
           <div class="frame-4"><div class="text-wrapper-2"><a href="product?cmd=list">스토어</a></div></div>
-          <div class="frame-4"><div class="text-wrapper-2"><a href="">공지</a></div></div>
+          <div class="frame-4"><div class="text-wrapper-2">공지</div></div>
           <div class="frame-4">
             <div class="text-wrapper-2"><a href="event">이벤트</a></div>
             <div class="ellipse-2"></div>
@@ -1147,7 +1283,7 @@
         <div class="frame-9">
           <div class="frame-10">
             <div class="text-wrapper-5">마이 페이지</div>
-            <img class="line" src="resources/img/member/line-3.svg" />
+            <img class="line" src="img/line-3.svg" />
             <p class="p">내 활동 및 정보를 관리하세요</p>
           </div>
           <img class="line-2" src="resources/img/member/line-2.svg" />
@@ -1176,152 +1312,428 @@
         <div class="text-wrapper-18">개인정보처리방침</div>
       </div>
       <div class="frame-11">
-        <div class="text-wrapper-19">주문 내역</div>
-        <div class="text-wrapper-20">상세보기&gt;</div>
-      </div>
-      <div class="frame-12">
-        <div class="text-wrapper-19">내가 쓴 글</div>
-        <div class="text-wrapper-20">상세보기&gt;</div>
-      </div>
-      <div class="overlap-3"><div class="text-wrapper-21">내가 쓴 글이 없습니다.</div></div>
-      <div class="frame-13">
-        <div class="text-wrapper-22">내가 찜한 상품</div>
-        <div class="text-wrapper-20" style=" left: -50; left: -30; right: 61px;">상세보기&gt;</div>
-      </div>
-      <div class="overlap-4"><div class="text-wrapper-23">내가 쓴 글이 없습니다.</div></div>
-      <div class="frame-14">
-        <div class="frame-15">
+        <div class="frame-12">
           <div class="text-wrapper-19">회원정보</div>
-          <div class="text-wrapper-24">로그아웃</div>
+          <div class="text-wrapper-20">로그아웃</div>
         </div>
-        <div class="frame-16">
-          <div class="frame-17">
-            <div class="text-wrapper-25">이메일</div>
-            <div class="frame-18"><div class="text-wrapper-26">moranmoran@moran.com</div></div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">우편번호</div>
-            <div class="frame-19">
-              <div class="frame-20"><div class="text-wrapper-27">우편번호</div></div>
-              <div class="frame-21"><div class="text-wrapper-28">우편번호 찾기</div></div>
-            </div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">주소</div>
-            <div class="frame-20"><div class="text-wrapper-26">주소</div></div>
-            <div class="frame-20"><div class="text-wrapper-26">상세주소</div></div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">이름</div>
-            <div class="frame-20"><div class="text-wrapper-26">이름</div></div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">연락처</div>
-            <div class="frame-20"><div class="text-wrapper-26">000-0000-0000</div></div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">생년월일</div>
-            <div class="frame-20"><div class="text-wrapper-26">000000</div></div>
-          </div>
-          <div class="frame-17">
-            <div class="text-wrapper-25">성별</div>
-            <div class="frame-22">
-              <div class="frame-23"><div class="text-wrapper-29">남성</div></div>
-              <div class="frame-23"><div class="text-wrapper-29">여성</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="frame-24">
-          <div class="view-2"><div class="text-wrapper-30">변경 사항 저장하기</div></div>
-          <div class="text-wrapper-24">회원 탈퇴하기</div>
-        </div>
+        
+        
+        
+<form action="your_action_url" method="post">
+  <div class="frame-13">
+    <div class="frame-14">
+      <label for="email" class="text-wrapper-21">이메일</label>
+      <div class="frame-15">
+        <input type="email" id="email" name="email" class="text-wrapper-22" value="moranmoran@moran.com" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
-      <div class="frame-25">
-        <div class="frame-26">
-          <div class="frame-27"><div class="text-wrapper-31">상품정보</div></div>
-          <div class="frame-28"><div class="text-wrapper-32">주문/배송상태</div></div>
+    </div>
+    <div class="frame-14">
+      <label for="zipcode" class="text-wrapper-21">우편번호</label>
+      <div class="frame-16">
+        <div class="frame-17">
+          <input type="text" id="zipcode" name="zipcode" class="text-wrapper-23" value="우편번호" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
         </div>
-        <div class="frame-29">
-          <div class="frame-30">
-            <div class="frame-31">
-              <div class="rectangle"></div>
-              <div class="frame-32">
-                <div class="text-wrapper-33">상품이름상품이름</div>
-                <div class="frame-33">
-                  <div class="text-wrapper-34">0000000000</div>
-                  <div class="text-wrapper-34">24/00/00</div>
-                </div>
-                <div class="text-wrapper-35">000,000원 / 수량 00개</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-34"><div class="text-wrapper-32">배송중</div></div>
-        </div>
-        <div class="frame-29">
-          <div class="frame-30">
-            <div class="frame-31">
-              <div class="rectangle"></div>
-              <div class="frame-32">
-                <div class="text-wrapper-33">상품이름상품이름</div>
-                <div class="frame-33">
-                  <div class="text-wrapper-34">0000000000</div>
-                  <div class="text-wrapper-34">24/00/00</div>
-                </div>
-                <div class="text-wrapper-35">000,000원 / 수량 00개</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-34"><div class="text-wrapper-36">주문완료</div></div>
-        </div>
-        <div class="frame-29">
-          <div class="frame-30">
-            <div class="frame-31">
-              <div class="rectangle"></div>
-              <div class="frame-32">
-                <div class="text-wrapper-33">상품이름상품이름</div>
-                <div class="frame-33">
-                  <div class="text-wrapper-34">0000000000</div>
-                  <div class="text-wrapper-34">24/00/00</div>
-                </div>
-                <div class="text-wrapper-35">000,000원 / 수량 00개</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-34"><div class="text-wrapper-32">배송전</div></div>
-        </div>
-        <div class="frame-29">
-          <div class="frame-30">
-            <div class="frame-31">
-              <div class="rectangle"></div>
-              <div class="frame-32">
-                <div class="text-wrapper-33">상품이름상품이름</div>
-                <div class="frame-33">
-                  <div class="text-wrapper-34">0000000000</div>
-                  <div class="text-wrapper-34">24/00/00</div>
-                </div>
-                <div class="text-wrapper-35">000,000원 / 수량 00개</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-34"><div class="text-wrapper-32">배송중</div></div>
-        </div>
-        <div class="frame-29">
-          <div class="frame-30">
-            <div class="frame-31">
-              <div class="rectangle"></div>
-              <div class="frame-32">
-                <div class="text-wrapper-33">상품이름상품이름</div>
-                <div class="frame-33">
-                  <div class="text-wrapper-34">0000000000</div>
-                  <div class="text-wrapper-34">24/00/00</div>
-                </div>
-                <div class="text-wrapper-35">000,000원 / 수량 00개</div>
-              </div>
-            </div>
-          </div>
-          <div class="frame-34"><div class="text-wrapper-32">배송중</div></div>
+        <div class="frame-18">
+          <button type="button" class="text-wrapper-24" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">우편번호 찾기</button>
         </div>
       </div>
     </div>
+    <div class="frame-14">
+      <label for="address" class="text-wrapper-21">주소</label>
+      <div class="frame-17">
+        <input type="text" id="address" name="address" class="text-wrapper-22" value="주소" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+      </div>
+      <div class="frame-17">
+        <input type="text" id="detailAddress" name="detailAddress" class="text-wrapper-22" value="상세주소" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+      </div>
+    </div>
+    <div class="frame-14">
+      <label for="name" class="text-wrapper-21">이름</label>
+      <div class="frame-17">
+        <input type="text" id="name" name="name" class="text-wrapper-22" value="이름" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+      </div>
+    </div>
+    <div class="frame-14">
+      <label for="phone" class="text-wrapper-21">연락처</label>
+      <div class="frame-17">
+        <input type="tel" id="phone" name="phone" class="text-wrapper-22" value="000-0000-0000" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+      </div>
+    </div>
+    <div class="frame-14">
+      <label for="birthday" class="text-wrapper-21">생년월일</label>
+      <div class="frame-17">
+        <input type="text" id="birthday" name="birthday" class="text-wrapper-22" value="000000" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+      </div>
+    </div>
+    <div class="frame-14">
+      <span class="text-wrapper-21">성별</span>
+      <div class="frame-19">
+        <div class="frame-20">
+          <input type="radio" id="male" name="gender" value="male">
+          <label for="male" class="text-wrapper-25">남성</label>
+        </div>
+        <div class="frame-20">
+          <input type="radio" id="female" name="gender" value="female">
+          <label for="female" class="text-wrapper-25"">여성</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="frame-21">
+    <div class="view-2">
+      <button type="submit" class="text-wrapper-26" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경 사항 저장하기</button>
+    </div>
+    <div>
+      <button class="text-wrapper-20" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">회원탈퇴</button>
+    </div>
+  </div>
+</form>
+        
+        
+      </div>
+      
+      <div class="frame-22">
+        <div class="frame-23">
+          <div class="frame-24">
+            <div class="text-wrapper-27">주문 내역</div>
+            <div class="text-wrapper-28">상세보기&gt;</div>
+          </div>
+          <div class="frame-25">
+            <div class="frame-26">
+              <div class="frame-27"><div class="text-wrapper-29">상품정보</div></div>
+              <div class="frame-28"><div class="text-wrapper-30">주문/배송상태</div></div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-30">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33">
+                      <div class="text-wrapper-32">0000000000</div>
+                      <div class="text-wrapper-32">24/00/00</div>
+                    </div>
+                    <div class="text-wrapper-33">000,000원 / 수량 00개</div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-34"><div class="text-wrapper-30">배송중</div></div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-30">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33">
+                      <div class="text-wrapper-32">0000000000</div>
+                      <div class="text-wrapper-32">24/00/00</div>
+                    </div>
+                    <div class="text-wrapper-33">000,000원 / 수량 00개</div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-34"><div class="text-wrapper-34">주문완료</div></div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-30">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33">
+                      <div class="text-wrapper-32">0000000000</div>
+                      <div class="text-wrapper-32">24/00/00</div>
+                    </div>
+                    <div class="text-wrapper-33">000,000원 / 수량 00개</div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-34"><div class="text-wrapper-30">배송전</div></div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-30">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33">
+                      <div class="text-wrapper-32">0000000000</div>
+                      <div class="text-wrapper-32">24/00/00</div>
+                    </div>
+                    <div class="text-wrapper-33">000,000원 / 수량 00개</div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-34"><div class="text-wrapper-30">배송중</div></div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-30">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33">
+                      <div class="text-wrapper-32">0000000000</div>
+                      <div class="text-wrapper-32">24/00/00</div>
+                    </div>
+                    <div class="text-wrapper-33">000,000원 / 수량 00개</div>
+                  </div>
+                </div>
+              </div>
+              <div class="frame-34"><div class="text-wrapper-30">배송중</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-35">
+          <div class="frame-24">
+            <div class="text-wrapper-27">내가 쓴 글</div>
+            <div class="text-wrapper-28">전체보기&gt;</div>
+          </div>
+          <div class="frame-25">
+            <div class="frame-36">
+              <div class="text-wrapper-35">글제목글제목</div>
+              <div class="frame-37">
+                <div class="text-wrapper-36">
+                  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내...
+                </div>
+              </div>
+              <div class="frame-38">
+                <div class="frame-39">
+                  <div class="text-wrapper-37">공감</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-2" src="img/vector-9.svg" />
+                    </div>
+                    <div class="text-wrapper-37">20</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-38">댓글</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-3" src="img/image.svg" />
+                    </div>
+                    <div class="text-wrapper-38">13</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-39">23/11/01</div>
+                  <div class="text-wrapper-39">22:58</div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-41">
+              <div class="text-wrapper-35">글제목글제목</div>
+              <div class="frame-37">
+                <div class="text-wrapper-36">
+                  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내...
+                </div>
+              </div>
+              <div class="frame-38">
+                <div class="frame-39">
+                  <div class="text-wrapper-37">공감</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-2" src="img/vector-10.svg" />
+                    </div>
+                    <div class="text-wrapper-37">20</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-38">댓글</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-3" src="img/vector-5.svg" />
+                    </div>
+                    <div class="text-wrapper-38">13</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-39">23/11/01</div>
+                  <div class="text-wrapper-39">22:58</div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-41">
+              <div class="text-wrapper-35">글제목글제목</div>
+              <div class="frame-37">
+                <div class="text-wrapper-36">
+                  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내...
+                </div>
+              </div>
+              <div class="frame-38">
+                <div class="frame-39">
+                  <div class="text-wrapper-37">공감</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-2" src="img/vector-2.svg" />
+                    </div>
+                    <div class="text-wrapper-37">20</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-38">댓글</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-3" src="img/vector-7.svg" />
+                    </div>
+                    <div class="text-wrapper-38">13</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-39">23/11/01</div>
+                  <div class="text-wrapper-39">22:58</div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-41">
+              <div class="text-wrapper-35">글제목글제목</div>
+              <div class="frame-37">
+                <div class="text-wrapper-36">
+                  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내...
+                </div>
+              </div>
+              <div class="frame-38">
+                <div class="frame-39">
+                  <div class="text-wrapper-37">공감</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-2" src="img/vector-8.svg" />
+                    </div>
+                    <div class="text-wrapper-37">20</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-38">댓글</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-3" src="img/vector-6.svg" />
+                    </div>
+                    <div class="text-wrapper-38">13</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-39">23/11/01</div>
+                  <div class="text-wrapper-39">22:58</div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-42">
+              <div class="text-wrapper-35">글제목글제목</div>
+              <div class="frame-37">
+                <div class="text-wrapper-36">
+                  글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내...
+                </div>
+              </div>
+              <div class="frame-38">
+                <div class="frame-39">
+                  <div class="text-wrapper-37">공감</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-2" src="img/vector-3.svg" />
+                    </div>
+                    <div class="text-wrapper-37">20</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-38">댓글</div>
+                  <div class="frame-39">
+                    <div class="frame-40">
+                      <div class="rectangle-2"></div>
+                      <img class="vector-3" src="img/vector.svg" />
+                    </div>
+                    <div class="text-wrapper-38">13</div>
+                  </div>
+                </div>
+                <div class="frame-39">
+                  <div class="text-wrapper-39">23/11/01</div>
+                  <div class="text-wrapper-39">22:58</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="frame-35">
+          <div class="frame-24">
+            <div class="text-wrapper-27">내가 찜한 상품</div>
+            <div class="text-wrapper-28">전체보기&gt;</div>
+          </div>
+          <div class="frame-25">
+            <div class="frame-29">
+              <div class="frame-43">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33"><div class="text-wrapper-32">판매스토어명</div></div>
+                    <div class="text-wrapper-33">000,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-43">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33"><div class="text-wrapper-32">판매스토어명</div></div>
+                    <div class="text-wrapper-33">000,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-43">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33"><div class="text-wrapper-32">판매스토어명</div></div>
+                    <div class="text-wrapper-33">000,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-43">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33"><div class="text-wrapper-32">판매스토어명</div></div>
+                    <div class="text-wrapper-33">000,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="frame-29">
+              <div class="frame-43">
+                <div class="frame-31">
+                  <div class="rectangle"></div>
+                  <div class="frame-32">
+                    <div class="text-wrapper-31">상품이름상품이름</div>
+                    <div class="frame-33"><div class="text-wrapper-32">판매스토어명</div></div>
+                    <div class="text-wrapper-33">000,000원</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
   </body>
 </html>
