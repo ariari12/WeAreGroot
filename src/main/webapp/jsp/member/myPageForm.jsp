@@ -647,8 +647,7 @@
 		  margin-top: -1px;
 		  font-family: "Pretendard Variable-Medium", Helvetica;
 		  font-weight: 500;
-		  color: #00000033;
-		  font-size: 16px;
+000000		  font-size: 16px;
 		  letter-spacing: 0;
 		  line-height: 20px;
 		}
@@ -1241,12 +1240,40 @@
 		  border-color: #e4e4e4;
 		}    	
     </style>
-  </head>
-  
-	<script
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script    
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+    <script>
+	window.onload = function() {
+		let btn = document.getElementById("zipBtn");
+		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
+		
+		$("submitBtn").click(function(){
+			alert("회원정보 수정 완료");
+		});
+	}
+
+	function openKakaoPostCode() {
+		new daum.Postcode({
+			oncomplete : function(data) {
+				// 팝업에서 검색 결과 항목을 클릭했을때
+				// 실행할 코드를 작성하는 부분
+				console.log("팝업에서 검색 버튼 눌림");
+				console.dir(data);
+
+				document.getElementById("zipcode").value = data.zonecode;
+				document.getElementById("addr1").value = data.roadAddress;				
+				//document.getElementById("addr2").value = data.jibunAddress;
+			}
+		}).open();
+	}    	
+    </script>
+    
+  </head>
+  
+	
   <body>
     <div class="div-wrapper">
       <header class="header">
@@ -1319,69 +1346,70 @@
         
         
         
-<form action="your_action_url" method="post">
+<form action="member" method="post">
   <div class="frame-13">
     <div class="frame-14">
       <label for="email" class="text-wrapper-21">이메일</label>
       <div class="frame-15">
-        <input type="email" id="email" name="email" class="text-wrapper-22" value="moranmoran@moran.com" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="email" id="email" name="email" class="text-wrapper-22" value="${sessionScope.memberVO.email}" readonly="readonly" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
     </div>
     <div class="frame-14">
       <label for="zipcode" class="text-wrapper-21">우편번호</label>
       <div class="frame-16">
         <div class="frame-17">
-          <input type="text" id="zipcode" name="zipcode" class="text-wrapper-23" value="우편번호" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+          <input type="text" id="zipcode" name="zipcode" class="text-wrapper-23" value="${sessionScope.memberVO.addressVO.addr1}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
         </div>
         <div class="frame-18">
-          <button type="button" class="text-wrapper-24" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">우편번호 찾기</button>
+          <button type="button" id="zipBtn" class="text-wrapper-24" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">우편번호 찾기</button>
         </div>
       </div>
     </div>
     <div class="frame-14">
       <label for="address" class="text-wrapper-21">주소</label>
       <div class="frame-17">
-        <input type="text" id="address" name="address" class="text-wrapper-22" value="주소" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="text" id="addr1" name="addr1" class="text-wrapper-22" value="${sessionScope.memberVO.addressVO.addr1}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
       <div class="frame-17">
-        <input type="text" id="detailAddress" name="detailAddress" class="text-wrapper-22" value="상세주소" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="text" id="addr2" name="addr2" class="text-wrapper-22" value="${sessionScope.memberVO.addressVO.addr2}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
     </div>
     <div class="frame-14">
       <label for="name" class="text-wrapper-21">이름</label>
       <div class="frame-17">
-        <input type="text" id="name" name="name" class="text-wrapper-22" value="이름" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="text" id="name" name="name" class="text-wrapper-22" value="${sessionScope.memberVO.name}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
     </div>
     <div class="frame-14">
       <label for="phone" class="text-wrapper-21">연락처</label>
       <div class="frame-17">
-        <input type="tel" id="phone" name="phone" class="text-wrapper-22" value="000-0000-0000" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="tel" id="phone" name="phone" class="text-wrapper-22" value="${sessionScope.memberVO.phone}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
     </div>
     <div class="frame-14">
       <label for="birthday" class="text-wrapper-21">생년월일</label>
       <div class="frame-17">
-        <input type="text" id="birthday" name="birthday" class="text-wrapper-22" value="000000" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
+        <input type="text" id="birth" name="birth" class="text-wrapper-22" value="${sessionScope.memberVO.birth}" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
       </div>
     </div>
     <div class="frame-14">
       <span class="text-wrapper-21">성별</span>
       <div class="frame-19">
         <div class="frame-20">
-          <input type="radio" id="male" name="gender" value="male">
+          <input type="radio" id="male" name="gender" value="male" ${sessionScope.memberVO.gender == 'male' ? 'checked' : ''}>
           <label for="male" class="text-wrapper-25">남성</label>
         </div>
         <div class="frame-20">
-          <input type="radio" id="female" name="gender" value="female">
-          <label for="female" class="text-wrapper-25"">여성</label>
+          <input type="radio" id="female" name="gender" value="female" ${sessionScope.memberVO.gender == 'female' ? 'checked' : ''}>
+          <label for="female" class="text-wrapper-25">여성</label>
         </div>
       </div>
     </div>
   </div>
   <div class="frame-21">
     <div class="view-2">
-      <button type="submit" class="text-wrapper-26" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경 사항 저장하기</button>
+    	<input type="hidden" name="cmd" value="modifyMemberOk" />
+      <button type="submit" id="submitBtn" class="text-wrapper-26" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경 사항 저장하기</button>
     </div>
     <div>
       <button class="text-wrapper-20" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">회원탈퇴</button>
