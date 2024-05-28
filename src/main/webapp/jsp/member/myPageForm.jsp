@@ -7,6 +7,13 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" href="resources/css/globals.css" />
 <style>
+
+a {  	
+	text-align: center;
+	text-decoration: none; /* 링크의 밑줄 제거 */  
+	color: inherit; /* 링크의 색상 제거 */
+}
+ 		
 :root {
 	--colors-light-green: rgba(118, 176, 156, 1);
 	--colors-mint: rgba(140, 215, 144, 1);
@@ -1241,6 +1248,9 @@
 	border-color: #e4e4e4;
 }
 </style>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script
@@ -1248,14 +1258,14 @@
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
 <script>
-	window.onload = function() {
+	$(document).ready(function() {
 		let btn = document.getElementById("zipBtn");
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
 
-		$("submitBtn").click(function() {
+		$("#submitBtn").click(function() {
 			alert("회원정보 수정 완료");
 		});
-	}
+	});
 
 	function openKakaoPostCode() {
 		new daum.Postcode({
@@ -1470,8 +1480,7 @@
 							사항 저장하기</button>
 					</div>
 					<div>
-						<button class="text-wrapper-20" type="button"
-							data-bs-toggle="modal" data-bs-target="#deleteModal"
+						<button 
 							style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">회원탈퇴</button>
 					</div>
 				</div>
@@ -1600,9 +1609,9 @@
 					<c:when test="${not empty requestScope.boardList && requestScope.boardList.size() > 0 }">
 						<c:forEach var="i" begin="1" end="5">
 							<div class="frame-36">
-								<div class="text-wrapper-35">글제목글제목</div>
+								<div class="text-wrapper-35">${requestScope.boardList.get(i).get("title")}</div>
 								<div class="frame-37">
-									<div class="text-wrapper-36">${requestScope.boardList.get(i).get("title")}</div>
+									<div class="text-wrapper-36">${requestScope.boardList.get(i).get("contents")}</div>
 								</div>
 								<div class="frame-38">
 									<div class="frame-39">
@@ -1626,7 +1635,7 @@
 										</div>
 									</div>
 									<div class="frame-39">
-										<div class="text-wrapper-39">23/11/01</div>
+										<div class="text-wrapper-39">${requestScope.boardList.get(i).get("regdate")}</div>
 										<div class="text-wrapper-39">22:58</div>
 									</div>
 								</div>
@@ -1724,5 +1733,6 @@
 				</div>
 			</div>
 		</div>
+		
 </body>
 </html>
