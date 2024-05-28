@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="resources/css/globals.css" />
     
     <style>
+       	a {  	text-align: center;
+   			text-decoration: none; /* 링크의 밑줄 제거 */  
+   			color: inherit; /* 링크의 색상 제거 */
+   		}
+   		
 		.div-wrapper {
 		  position: relative;
 		  width: 1920px;
@@ -1094,7 +1099,7 @@
   <body>
     <div class="div-wrapper">
       <header class="header">
-        <img class="group" src="resources/img/member/group-1.png" />
+        <a href="main"><img class="group" src="resources/img/member/group-1.png" /></a>
         <div class="overlap-wrapper">
           <div class="overlap">
             <div class="frame">
@@ -1113,12 +1118,12 @@
       </header>
       <div class="frame-2">
         <div class="frame-3">
-          <div class="frame-4"><div class="text-wrapper-2">홈</div></div>
-          <div class="frame-4"><div class="text-wrapper-2">커뮤니티</div></div>
-          <div class="frame-4"><div class="text-wrapper-2">스토어</div></div>
-          <div class="frame-4"><div class="text-wrapper-2">공지</div></div>
+          <div class="frame-4"><div class="text-wrapper-2"><a href="main">홈</a></div></div>
+          <div class="frame-4"><div class="text-wrapper-2"><a href="board">커뮤니티</a></div></div>
+          <div class="frame-4"><div class="text-wrapper-2"><a href="product?cmd=list">스토어</a></div></div>
+          <div class="frame-4"><div class="text-wrapper-2"><a href="">공지</a></div></div>
           <div class="frame-4">
-            <div class="text-wrapper-2">이벤트</div>
+            <div class="text-wrapper-2"><a href="event">이벤트</a></div>
             <div class="ellipse-2"></div>
           </div>
           <div class="frame-4"><div class="text-wrapper-2">1:1 문의</div></div>
@@ -1130,12 +1135,10 @@
       </div>
       <div class="frame-wrapper">
         <div class="frame-6">
-          <div class="frame-7"><div class="text-wrapper-4">내 정보</div></div>
-          <div class="frame-7"><div class="text-wrapper-4">로그아웃</div></div>
+          <div class="frame-7"><div class="text-wrapper-4"><a href="member?cmd=myPageForm">내 정보</a></div></div>
+          <div class="frame-7"><div class="text-wrapper-4"><a href="member?cmd=logoutOk">로그아웃</a></div></div>
           <div class="frame-8">
-            <img class="vector" src="img/vector.svg" />
             <div class="text-wrapper-4">장바구니</div>
-            <div class="text-wrapper-4">(1)</div>
           </div>
         </div>
       </div>

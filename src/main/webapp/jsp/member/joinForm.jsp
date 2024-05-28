@@ -944,7 +944,7 @@ a {
 					<div class="text-wrapper-14"><a href="main">홈</a></div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">커뮤니티</div>
+					<div class="text-wrapper-14"><a href="board">커뮤니티</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14"><a href="product?cmd=list">스토어</a></div>
@@ -953,7 +953,7 @@ a {
 					<div class="text-wrapper-14">공지</div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">이벤트</div>
+					<div class="text-wrapper-14"><a href="event">이벤트</a></div>
 					<div class="ellipse"></div>
 				</div>
 				<div class="frame-5">
