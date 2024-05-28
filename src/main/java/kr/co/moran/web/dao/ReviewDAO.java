@@ -38,6 +38,7 @@ public class ReviewDAO {
 		return list;
 	}
 	
+	
 	public List<ReviewImgVO> selectReviewImgByrId(int rId){
 		SqlSession ss = factory.openSession(true);
 		List<ReviewImgVO> list = ss.selectList("kr.co.moran.review.SelectReviewImgByrId",rId);
@@ -53,7 +54,7 @@ public class ReviewDAO {
 		return score;
 	}
 	
-	// 상품 평점
+	// 상품 리뷰 수
 	public Object cntByPdId(int pdId) {
 		SqlSession ss = factory.openSession(true);
 		Object cnt = ss.selectOne("kr.co.moran.review.cntByPdId", pdId);

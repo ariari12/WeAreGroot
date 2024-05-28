@@ -142,6 +142,7 @@ public class AddAction implements Action {
 	
 	
 	// common
+	@SuppressWarnings("unchecked")
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();

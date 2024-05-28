@@ -17,6 +17,7 @@ import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.dao.ReviewDAO;
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
+import kr.co.moran.web.vo.ReviewImgVO;
 import kr.co.moran.web.vo.ReviewVO;
 import kr.co.moran.web.vo.member.MemberVO;
 
@@ -82,44 +83,48 @@ public class DetailviewAction implements Action {
 		return "jsp/product/detailView.jsp";
 	}
 
+	@SuppressWarnings("unchecked")
 	private String prdReview(int no) {
-		Map<String, Object> returnJson = new HashMap<String, Object>();
-			
+		// AJAX 응답 반환할 JSON 객체
+		JSONObject returnJson = new JSONObject();
+
+		// Review 가져오기
 		List<ReviewVO> reviewVOs = reviewDAO.selectReviewBypdId(no);
-//		System.out.println("reviewVOs: " + reviewVOs);
+		System.out.println("reviewVOs: " + reviewVOs);
 		
-		if(returnJson != null || returnJson.size() > 0) {
+		// ReviewList JSON 생성
+		JSONArray rvJsonArray = new JSONArray();
+		for (ReviewVO reviewVO : reviewVOs) {
 			
+			// Review Img 가져오기
+			List<ReviewImgVO> reviewImgVOs = reviewDAO.selectReviewImgByrId(
+					reviewVO.getRId());
 			// JSON ArayList 생성
-			JSONArray rvJsonArray = new JSONArray();
-			for (int i = 0; i < reviewVOs.size(); i++) {
-				// dao JSON 객체
-				Map<String, Object> reviewVO = new HashMap<String, Object>();
-				reviewVO.put("rId", reviewVOs.get(i).getRId());
-				
-				MemberVO member = memberDAO.selectMemberWithAddressById(
-						reviewVOs.get(i).getMId());
-				memberDAO.factory.openSession().commit();
-				
-				System.out.println(member);
-				if(member != null) {
-					reviewVO.put("nick", member.getNick());
-				}
-				reviewVO.put("contents", reviewVOs.get(i).getContents());
-				reviewVO.put("regDate", reviewVOs.get(i).getRegDate());
-				reviewVO.put("score", reviewVOs.get(i).getScore());
-				
-				rvJsonArray.add(new JSONObject(reviewVO));
+			JSONArray rvImgJsonArray = new JSONArray();
+			for (ReviewImgVO imgVO : reviewImgVOs) {
+				rvImgJsonArray.add(imgVO.getRiImg());
 			}
-			returnJson.put("reviews", rvJsonArray);
+			
+			MemberVO member = memberDAO.selectMemberById(reviewVO.getMId());
+//			System.out.println(member);
+			
+			// reviewVO JSON 객체
+			JSONObject reviewJSON = new JSONObject();
+			if(member != null) {
+				reviewJSON.put("nick", member.getNick());
+			}
+			reviewJSON.put("contents", reviewVO.getContents());
+			reviewJSON.put("imgs", rvImgJsonArray);
+			reviewJSON.put("regDate", reviewVO.getRegDate());
+			reviewJSON.put("score", reviewVO.getScore());
+			
+			rvJsonArray.add(reviewJSON);
 		}
-		else {
-			returnJson.put("reviews", null);
-		}
+		returnJson.put("reviews", rvJsonArray);
 		
 		returnJson.put("result", "ok");
 		try {
-			resp.getWriter().print(new JSONObject(returnJson).toJSONString());
+			resp.getWriter().print(returnJson.toJSONString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
