@@ -15,36 +15,34 @@ public class IndexFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {				
-		ProductDAO dao = new ProductDAO();
-		// 총 게시물 건수를 출력
-		int totalCount = dao.pdPopTotal();
-		// 한 페이지당 게시물수: 4
-		int recordPerPage = 4;
-		
-		// 총 페이지 수
-		int totalPage = (totalCount % recordPerPage == 0) ? 
-						 totalCount / recordPerPage : totalCount / recordPerPage + 1;
-		
-		// 현재 페이지 번호
-		int currentPage=0;
-		String page = req.getParameter("page");
-		System.out.println("[IndexFormAction] page = "+page);
-		if(page!=null) {
-			currentPage = Integer.parseInt(page);
-		} else {
-			currentPage = 1;
-		}
-		
-		System.out.println("[IndexFormAction] currentPage = "+currentPage);
-		
-		// 시작번호
-		int startNo = (currentPage - 1) * recordPerPage;
-		//  1  => (1-1)*20+1
-		//  2  => (2-1)*20+1
-		//  3  => (3-1)*20+1
-		
-		// 끝번호
-		int endNo = currentPage * recordPerPage-1;
+	    ProductDAO dao = new ProductDAO();
+	    
+	    // 총 게시물 건수를 출력
+	    int totalCount = dao.pdPopTotal();
+	    
+	    // 한 페이지당 게시물수: 4
+	    int recordPerPage = 4;
+	    
+	    // 총 페이지 수
+	    int totalPage = (totalCount % recordPerPage == 0) ?
+	            totalCount / recordPerPage : totalCount / recordPerPage + 1;
+	    
+	    // 현재 페이지 번호
+	    int currentPage = 0;
+	    String page = req.getParameter("page");
+	    System.out.println("[IndexFormAction] page = " + page);
+	    if (page != null) {
+	        currentPage = Integer.parseInt(page);
+	    } else {
+	        currentPage = 1;
+	    }
+	    System.out.println("[IndexFormAction] currentPage = " + currentPage);
+	    
+	    // 시작번호
+	    int startNo = (currentPage - 1) * recordPerPage;
+	    
+	    // 끝번호
+	    int endNo = startNo + recordPerPage;
 		
 		// 시작페이지 번호
 		int startPage = 1;
@@ -73,7 +71,7 @@ public class IndexFormAction implements Action {
 			}
 		}
 				
-		List<ProductVO> list = dao.pdSelectPop(startNo, endNo+1);	
+		List<ProductVO> list = dao.pdSelectPop(startNo, recordPerPage);	
 		List<ProductImgVO> imgList = new ArrayList<ProductImgVO>();
 		
 		for (ProductVO v : list) {
