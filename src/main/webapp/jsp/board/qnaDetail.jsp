@@ -68,7 +68,7 @@ function hideEditForm(formId) {
             </tr>
             <tr>
             	<td rowspan="1">
-            		<img src="./resources/img/board/${boardVO.get('biImg') }" alt="${boardVO.get('biImg') }" />
+            		<img src="./resources/img/board/${boardVO.get('biImg') }" onerror="this.style.display='none'" alt='' />
             	</td>
             </tr>
             <tr>
