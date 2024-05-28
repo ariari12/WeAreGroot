@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	img {
+	width: 500px;
+	height: 500px
+}
+
+</style>
 <script>
 function showEditForm(cId, contents, bId, type) {
     var formId = 'editForm-' + cId;
@@ -58,6 +65,11 @@ function hideEditForm(formId) {
             <tr>
                 <th>내용</th>
                 <td>${boardVO.get('contents') }</td>
+            </tr>
+            <tr>
+            	<td rowspan="1">
+            		<img src="./resources/img/board/${boardVO.get('biImg') }" alt="${boardVO.get('biImg') }" />
+            	</td>
             </tr>
             <tr>
                 <td rowspan="2">

@@ -120,10 +120,11 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod  
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img AS biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		JOIN MEMBER m ON b.m_id = m.m_id
+		JOIN BOARD_IMG bi ON b.b_id = bi.b_id
 		WHERE b.b_id = #{bId}
 	</select>
 	

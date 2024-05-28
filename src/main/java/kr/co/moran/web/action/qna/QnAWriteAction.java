@@ -27,8 +27,9 @@ public class QnAWriteAction extends HttpServlet {
 		
 		req.setCharacterEncoding("UTF-8");
 		
-		String saveDir = "C:\\dev\\WeAreGroot\\src\\main\\webapp\\resources\\img\\board";
-	
+//		String saveDir = "C:\\dev\\WeAreGroot\\src\\main\\webapp\\resources\\img\\board";
+		String saveDir = req.getSession().getServletContext().getRealPath("/resources/img/board");
+		System.out.println("saveDir : " + saveDir);
     	File uploadDir = new File(saveDir);
     	
     	if(!uploadDir.exists()) {
@@ -43,23 +44,26 @@ public class QnAWriteAction extends HttpServlet {
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 		
 		BoardVO bvo = new BoardVO();
-		BoardDAO dao = new BoardDAO();
+
 		String title = mpr.getParameter("title");
 		String contents = mpr.getParameter("contents");
-		
-		BoardImgVO bivo = new BoardImgVO();
-		String biImg = mpr.getFilesystemName("biImg");
-		
-		bivo.setBiImg(biImg);
 		
 		bvo.setTitle(title);
 		bvo.setContents(contents);
 		bvo.setMId(memberVO.getMId());
 		
+		BoardDAO dao = new BoardDAO();
+		BoardImgVO bivo = new BoardImgVO();
+		String biImg = mpr.getFilesystemName("biImg");
 		dao.insertQnA(bvo);
+		
+		bivo.setBiImg(biImg);
+		bivo.setBId(bvo.getBId());
 		dao.insertBoardImg(bivo);
+		
+		System.out.println("bivo.getBiImg() : " + bivo.getBiImg());
 		System.out.println("글 작성 성공");
-		resp.sendRedirect("board?cmd=qna"); 
+		resp.sendRedirect("../board?cmd=qna"); 
 	}
 
 }

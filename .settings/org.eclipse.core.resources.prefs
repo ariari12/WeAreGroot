@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 =\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=refs/remotes/origin/JM
 eclipse.preferences.version=1
+encoding//src/main/webapp/jsp/board/qnalist.jsp=UTF-8
 encoding//src/main/webapp/jsp/layout/footer.jsp=UTF-8
-encoding//src/main/webapp/jsp/member/joinForm.jsp=UTF-8
-encoding//src/main/webapp/jsp/member/loginForm.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/bak/loginForm1.jsp=UTF-8
-
-encoding/<project>=UTF-8
-=======
-=\=\=\=\=\=\=
-eclipse.preferences.version=1
-encoding//src/main/webapp/jsp/layout/footer.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/joinForm.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/loginForm.jsp=UTF-8
 encoding/<project>=UTF-8
->>>>>>> refs/remotes/origin/JM

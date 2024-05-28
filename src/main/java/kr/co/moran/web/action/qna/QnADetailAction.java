@@ -38,7 +38,6 @@ public class QnADetailAction implements Action {
 		req.setAttribute("commentList", commentList);
 		req.setAttribute("loginId",memberVO.getMId());
 		
-		System.out.println("로그인 id : " +memberVO.getMId());
 		
 		return "jsp/board/qnaDetail.jsp";
 	}
