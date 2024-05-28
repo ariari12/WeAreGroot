@@ -12,8 +12,6 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.moran.web.vo.member.MemberVO;
 
-
-
 public class MemberDAO {
 	public SqlSessionFactory factory;
 	public MemberDAO() {
@@ -81,7 +79,9 @@ public class MemberDAO {
 	public MemberVO selectMemberWithAddressById(int id) {
 		try(SqlSession ss = factory.openSession(true)){
 			System.out.println("[MemberDAO] id : "+id);
-			return ss.selectOne("kr.co.moran.web.member.selectMemberWithAddressById",id);
+			MemberVO vo = ss.selectOne("kr.co.moran.web.member.selectMemberWithAddressById",id);
+			System.out.println(vo);
+			return vo;
 		}catch (Exception e) {
 	        // 예외 처리
 			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");

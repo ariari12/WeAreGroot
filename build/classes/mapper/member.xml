@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="kr.co.moran.web.member">
+  	 <resultMap id="memberWithAddressMap" type="kr.co.moran.web.vo.member.MemberVO">
+  		<id property="mId" column="m_id"/>  		
+  		<result property="email" column="m_email" />
+		<result property="pw" column="m_pw" />
+		<result property="name" column="m_name" />
+		<result property="profileImg" column="m_profileImg" />
+		<result property="nick" column="m_nick" />
+		<result property="phone" column="m_phone" />
+		<result property="regdate" column="m_regdate" />
+		<result property="logtype" column="m_logtype" />
+		<result property="admintype" column="m_admintype" />
+		<result property="isMaintain" column="m_is_maintain" />
+		<result property="retentionPeriod" column="m_retention_period" />
+		<result property="birth" column="m_birth" />
+		<result property="gender" column="m_gender" />
+		
+		<association property="addressVO" javaType="kr.co.moran.web.vo.member.AddressVO">
+			   <id property="aId" column="a_id" />
+			   <result property="zipcode" column="a_zipcode" />
+			   <result property="addr1" column="a_addr1" />
+			   <result property="addr2" column="a_addr2" />
+		</association>
+  	</resultMap>
+  		
+  	<insert id="insertMember" parameterType="kr.co.moran.web.vo.member.MemberVO" useGeneratedKeys="true" keyProperty="mId">
+  		INSERT INTO MEMBER (
+	      m_email,
+	      m_pw,
+	      m_name,
+	      m_profile_img,
+	      m_nick,
+	      m_phone,
+	      m_regdate,
+	      m_logtype,
+	      m_admintype,
+	      m_is_maintain,
+	      m_retention_period,
+	      m_birth,
+	      m_gender
+	    ) VALUES (
+	      #{email},
+	      #{pw},
+	      #{name},
+	      #{profileImg},
+	      #{nick},
+	      #{phone},
+	      NOW(),
+	      0,
+	      #{admintype},
+	      #{isMaintain},
+	      #{retentionPeriod},
+	      DATE_FORMAT(#{birth}, '%Y-%m-%d'),
+	      #{gender}
+	    )
+  	</insert>
+  	
+  	<insert id="insertAddress" parameterType="kr.co.moran.web.vo.member.MemberVO">
+  		INSERT INTO ADDRESS (m_id) VALUES (#{mId});
+	</insert>
+
+  	
+  	<select id="selectMemberByEmailAndPassword" parameterType="map" resultMap="memberWithAddressMap">
+  		SELECT 
+		    m.m_id,
+		    m.m_email,
+		    m.m_pw,
+		    m.m_name,
+		    m.m_profile_img,
+		    m.m_nick,
+		    m.m_phone,
+		    m.m_regdate,
+		    m.m_logtype,
+		    m.m_admintype,
+		    m.m_is_maintain,
+		    m.m_retention_period,
+		    m.m_birth,
+		    m.m_gender,
+		    a.a_id,
+		    a.a_zipcode,
+		    a.a_addr1,
+		    a.a_addr2
+		FROM
+			MEMBER AS m
+		LEFT JOIN ADDRESS AS a	
+		ON m.m_id = a.m_id
+		WHERE
+			m.m_email = #{email} AND m.m_pw = #{pw}
+			
+  	</select>
+  	
+  	
+  	<select id="selectMemberByEmail" parameterType="String" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT
+  			m.m_id AS mId,
+		    m.m_email AS email,
+		    m.m_pw AS pw,
+		    m.m_name AS name,
+		    m.m_profile_img AS profileImg,
+		    m.m_nick AS nick,
+		    m.m_phone AS phone,
+		    m.m_regdate AS regdate,
+		    m.m_logtype AS logtype,
+		    m.m_admintype AS admintype,
+		    m.m_is_maintain AS isMaintain,
+		    m.m_retention_period AS retentionPeriod,
+		    m.m_birth AS birth,
+		    m.m_gender AS gender,
+		    a.a_id AS aId,
+		    a.m_id AS mId,
+		    a.a_zipcode AS zipcode,
+		    a.a_addr1 AS addr1,
+		    a.a_addr2 AS addr2
+		FROM
+			MEMBER AS m
+		ON m.m_id = a.m_id
+		WHERE
+			m.m_email = #{email}
+  	</select>
+  	
+  	<!-- 고쳐야 할것 -->
+<!--   	<select id="selectMemberWithAddressById" parameterType="int" resultMap="memberWithAddressMap">
+  		SELECT
+  			m.m_id AS mId,
+		    m.m_email AS email,
+		    m.m_pw AS pw,
+		    m.m_name AS name,
+		    m.m_profile_img AS profileImg,
+		    m.m_nick AS nick,
+		    m.m_phone AS phone,
+		    m.m_regdate AS regdate,
+		    m.m_logtype AS logtype,
+		    m.m_admintype AS admintype,
+		    m.m_is_maintain AS isMaintain,
+		    m.m_retention_period AS retentionPeriod,
+		    m.m_birth AS birth,
+		    m.m_gender AS gender,
+		    a.a_id AS aId,
+		    a.m_id AS mId,
+		    a.a_zipcode AS zipcode,
+		    a.a_addr1 AS addr1,
+		    a.a_addr2 AS addr2
+		FROM
+			MEMBER AS m
+		LEFT JOIN ADDRESS AS a 
+		ON m.m_id = a.m_id	
+		WHERE
+			m.m_id = #{mId}  	
+  	</select> -->
+  	
+  	<select id="selectMemberById" parameterType="int" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT
+  			m_id AS mId,
+		    m_email AS email,
+		    m_pw AS pw,
+		    m_name AS name,
+		    m_profile_img AS profileImg,
+		    m_nick AS nick,
+		    m_phone AS phone,
+		    m_regdate AS regdate,
+		    m_logtype AS logtype,
+		    m_admintype AS admintype,
+		    m_is_maintain AS isMaintain,
+		    m_retention_period AS retentionPeriod,
+		    m_birth AS birth,
+		    m_gender AS gender
+
+		FROM
+			MEMBER
+		WHERE
+			m_id = #{mId}  	
+  	</select>
+  	
+  	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">
+	  UPDATE 
+	    MEMBER AS m
+	    LEFT JOIN ADDRESS a ON m.m_id = a.m_id
+	  SET
+	    m.m_name = #{name},
+	    m.m_nick = #{nick},
+	    m.m_email = #{email},
+	    m.m_phone = #{phone},
+	    m.m_birth = #{birth},
+	    m.m_gender = #{gender},
+	    a.a_zipcode = #{addressVO.zipcode},
+	    a.a_addr1 = #{addressVO.addr1},
+	    a.a_addr2 = #{addressVO.addr2}
+	  WHERE
+	    m.m_id = #{mId}  
+  	</update>
+  	  	
+  	<insert id="insertMemberExit" parameterType="kr.co.moran.web.vo.member.MemberVO">
+    INSERT INTO MEMBER_EXIT (
+        m_id,
+        me_reason,
+        me_date
+    ) VALUES (
+        #{memberExitVO.mId},
+        #{memberExitVO.reason},
+        NOW()
+    );
+	</insert>
+	
+	<update id="updateMemberStatus" parameterType="kr.co.moran.web.vo.member.MemberVO">
+	    UPDATE MEMBER
+	    SET
+	        m_is_maintain = 1
+	    WHERE
+	        m_id = #{memberExitVO.mId};
+	</update>
+
+  </mapper>

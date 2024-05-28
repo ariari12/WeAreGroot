@@ -15,28 +15,27 @@ import kr.co.moran.web.action.product.ListviewAction;
 import kr.co.moran.web.action.product.ModifyAction;
 import kr.co.moran.web.vo.member.MemberVO;
 
-@SuppressWarnings("serial")
-@WebServlet("/product")
-public class ProductController extends HttpServlet {
-
+@WebServlet("/prodcut/keep")
+public class KeepController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		trigger(req, resp);
+		process(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		trigger(req, resp);
+		process(req, resp);
 	}
 	
-	private void trigger(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String act = req.getParameter("cmd");
 		// System.out.println(act);
 		
-//		MemberVO memberCheck = (MemberVO)req.getSession().getAttribute("memberVO");
-//		if(memberCheck == null) {
+		MemberVO memberCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+		if(memberCheck == null) {
 //			System.out.println("product memberChekc is null: " + memberCheck);
-//		}
+		}
 		
 		Action action = null;
 		switch (act == null ? "" : act) {

@@ -3,6 +3,7 @@ package kr.co.moran.web.dao;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -33,9 +34,10 @@ public class ReviewDAO {
 	public List<ReviewVO> selectReviewBypdId(int pdId){
 		SqlSession ss = factory.openSession(true);
 		List<ReviewVO> list = ss.selectList("kr.co.moran.review.SelectReviewBypdId",pdId);
-		ss.close(); 
+		ss.close();
 		return list;
 	}
+	
 	
 	public List<ReviewImgVO> selectReviewImgByrId(int rId){
 		SqlSession ss = factory.openSession(true);
@@ -43,6 +45,23 @@ public class ReviewDAO {
 		ss.close();
 		return list;
 	}
+	
+	// 상품 평점
+	public Object gradeByPdId(int pdId) {
+		SqlSession ss = factory.openSession(true);
+		Object score = ss.selectOne("kr.co.moran.review.gradeByPdId", pdId);
+		ss.close();
+		return score;
+	}
+	
+	// 상품 리뷰 수
+	public Object cntByPdId(int pdId) {
+		SqlSession ss = factory.openSession(true);
+		Object cnt = ss.selectOne("kr.co.moran.review.cntByPdId", pdId);
+		ss.close();
+		return cnt;
+	}
+	
 	public int insertReview(ReviewVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.review.InsertReview",vo);

@@ -737,11 +737,11 @@
 }
 
 .div-wrapper .union {
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  top: 3px;
-  left: 2px;
+	position: absolute;
+	width: 18px;
+	height: 18px;
+    top: 33px;
+    left: 1481px;
 }
 
 .div-wrapper .frame-wrapper {

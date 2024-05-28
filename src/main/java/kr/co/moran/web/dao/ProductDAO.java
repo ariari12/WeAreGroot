@@ -138,6 +138,18 @@ public class ProductDAO {
 		return vos;
 	}
 	
+	// 카테고리별 페이지 조회
+	public List<ProductVO> pdSelectBySearch(int start, int pageNum, String keyword) {
+		openSession();
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("pageNum", pageNum);
+		map.put("keyword", keyword);
+		
+        List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySearch", map);
+		return vos;
+	}
+	
 	// 인기상품 id 조회
 	public List<Integer> pdSelectPopByPId() {
 		openSession();
