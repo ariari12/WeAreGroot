@@ -1,5 +1,6 @@
 /*Event JavaScript*/
 
+
 $(function(){
 
 /************** eventList.jsp ***************/	
@@ -22,20 +23,48 @@ $(function(){
 
 	//console.log(url.search.split("?")[1].split("=")[1]);
 	
+	
 	//댓글 등록
 	$('.writeCommentBtn').on('click', function(){
 		let eId = url.search.split("?")[1].split("=")[1];
 		let contents = $('.writeComment').val();
-		
+	
+		alert(eId);
 		$.ajax({
+			url: "./comment?cmd=cmntWrite",
+			type: "post",
+			data: {
+				"eId": eId,
+				"contents": contents
+			},
+			dataType: "json",
+			success:function(data){
+				console.log(data);
+				if(data.msg === "성공")	window.location.reload();
+				else if(data.msg === "실패") alert("댓글 등록 실패...");
+				else if(data.msg === "로그인 후 이용해주세요") {
+					alert("로그인 후 이용해주세요.");
+					location.href = "/member?cmd=loginForm";
+				}
+			},
+			error: function(request, status, error){
+				console.log("code: " + request.status);
+				console.log("msg : " + request.responseText);
+				console.log("error: " + error);
+			}
 			
 			
 		});
 	});
 
 	//대댓글 입력폼 
-	$('.reCommentBtn').on("click", function(){
-		$('.replyForm').show();
+	$('.reCommentBtn').on("click", function() {
+		let replyForm = $(this).parent().children('.replyForm');
+		if (replyForm.is(':visible')) {
+			replyForm.hide();
+		} else {
+			replyForm.show();
+		}
 	});
 	
 	//대댓글 등록

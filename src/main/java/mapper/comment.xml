@@ -52,15 +52,26 @@
 	</select>
 	
 	
-	<insert id="InsertCommentBy" parameterType="kr.co.moran.web.vo.CommentVO">
-		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_title, c_contents, c_regdate)
-		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{title}, #{contents}, now())
+	<insert id="InsertCommentByAny" parameterType="kr.co.moran.web.vo.CommentVO">
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_contents, c_like_cnt ,c_regdate)
+		VALUES (
+		#{mId},
+		<if test="bId != 0">#{bId}</if>
+		<if test="bId == 0">null</if>,
+		<if test="eId != 0">#{eId}</if>
+		<if test="eId == 0">null</if>,
+		<if test="cParentId != 0">#{cParentId}</if>
+		<if test="cParentId == 0">null</if>,
+		#{contents},
+		0,
+		now()
+		)
 	</insert>
 	
 	<!-- 댓글의 댓글등록 -->
-	<insert id="InsertReComment" parameterType="kr.co.moran.web.vo.CommentVO">
-		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_title, c_contents, c_regdate)
-		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{title}, #{contents}, now())
+	<insert id="InsertReComment" parameterType="kr.co.moran.web.vo.CommentVO" >
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_contents, c_regdate)
+		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{contents}, now())
 	</insert>
 	
 </mapper>

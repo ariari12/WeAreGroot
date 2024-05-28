@@ -1,5 +1,12 @@
 package kr.co.moran.web.action.Comment;
 
+import java.io.IOException;
+
+import org.apache.catalina.connector.Response;
+import org.json.simple.JSONObject;
+
+import com.mysql.cj.xdevapi.JsonArray;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -10,30 +17,56 @@ import kr.co.moran.web.vo.member.MemberVO;
 
 public class CommentWriteAjax implements Action {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		HttpSession session= req.getSession();
 		CommentDAO cdao = new CommentDAO();
 		CommentVO cvo = new CommentVO();
 		MemberVO mvo =(MemberVO)session.getAttribute("memberVO");
+//		System.out.println(mvo.toString());
 		
+		JSONObject json = new JSONObject();
 		
 		if(req.getParameter("bId") != null) {
 			int bId = Integer.parseInt(req.getParameter("bId"));
 			cvo.setBId(bId);
 		}
 		if(req.getParameter("eId") != null) {
+			
+			System.out.println("@@@@@@@@@@" + req.getParameter("eId"));
 			int eId = Integer.parseInt(req.getParameter("eId"));
 			cvo.setEId(eId);
 		}
-		cvo.setMId(mvo.getMId());
-		cvo.setTitle(req.getParameter("title"));
+		if(req.getParameter("cParent") != null) {
+			int cParent = Integer.parseInt(req.getParameter("cParent"));
+			cvo.setCParentId(cParent);
+		}
+		try {
+			cvo.setMId(mvo.getMId());
+		} catch (Exception e) {
+			json.put("msg", "로그인 후 이용해주세요");
+		}
 		cvo.setContents(req.getParameter("contents"));
 		
-		cdao.insertCommentAjax(cvo);
+		int res = cdao.InsertCommentByAny(cvo);
 		
+		if(res == 1) {
+			json.put("msg", "성공");
+		}else {
+			json.put("msg", "실패");
+		}
+		resp.setContentType("application/json");
+		try {
+			resp.getWriter().write(json.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		return null;
+		return json.toJSONString();
 	}
+	
+	
+	
 
 }

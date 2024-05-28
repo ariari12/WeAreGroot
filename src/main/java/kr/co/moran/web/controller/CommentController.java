@@ -35,7 +35,7 @@ public class CommentController extends HttpServlet{
 		String cmd = req.getParameter("cmd");
 		String url = "";
 		Action action = null;
-		
+		System.out.println("comment컨트롤러");
 		if(cmd.equals("commentWrite")){
 			action = new CommentWriteAction();
 		}else if(cmd.equals("commentModify")) {
@@ -44,8 +44,11 @@ public class CommentController extends HttpServlet{
 			action = new CommentDeleteAction();
 		}else if(cmd.equals("commentModifyLikeCnt")) {
 			action = new CommentModifyLikeCntAction();
-		}else if(cmd.equals("commentWriteAjax")) {
+		}else if(cmd.equals("cmntWrite")) {
 			action = new CommentWriteAjax();
+			action.execute(req, resp);
+			return;
+			
 		}
 		
 		url = action.execute(req, resp);

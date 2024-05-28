@@ -27,8 +27,6 @@ public class EventDetailAction implements Action {
 		CommentDAO cdao = new CommentDAO();
 		evo = edao.selectEventByEid(eId);
 		List<Map<String, Object>> list = cdao.selectCommentByEid(eId);
-		list.forEach(i->System.out.println("@@@@@@@@cList : \n " +i));
-		
 		
 		if(evo != null) {
 			req.setAttribute("evo", evo);

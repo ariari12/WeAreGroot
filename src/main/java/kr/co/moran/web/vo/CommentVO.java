@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CommentVO {
 	int cId,bId,mId,cParentId,eId,likeCnt, isMaintain;
-	String  title, contents, regDate, retentionPeriod;
+	String contents, regDate, retentionPeriod;
 }

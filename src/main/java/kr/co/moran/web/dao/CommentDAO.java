@@ -90,10 +90,12 @@ public class CommentDAO {
 		return list;
 	}
 
-	public void insertCommentAjax(CommentVO cvo) {
+	public int InsertCommentByAny(CommentVO cvo) {
 		SqlSession ss = factory.openSession(true);
-		ss.insert("kr.co.moran.comment.InsertCommentBy", cvo);
+		System.out.println("dao eId값 : @@@@@@@ \n" + cvo.getEId());
+		int res = ss.insert("kr.co.moran.comment.InsertCommentByAny", cvo);
 		ss.close();
+		return res;
 	}
 	
 	

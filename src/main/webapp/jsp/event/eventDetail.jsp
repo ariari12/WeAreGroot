@@ -13,6 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="./resources/css/event.css" />
 <script src="./resources/js/event.js"></script>
+
 </head>
 <body>
 
@@ -66,23 +67,36 @@
 					</div>
 				</div>
 			</c:if>
-			<!-- jstl반복문 10개씩 페이징 처리 -->
+			
 			<c:forEach var="cList" items="${cList}">
-				<input type="hidden" name="eId" value="${cList.eId}" />
-				<input type="hidden" name="mId" value="${cList.mId}" />
-				<input type="hidden" name="cId" value="${cList.eId}" />
 
 				<div class="commentCell">
+					<input type="hidden" name="eId" value="${cList.eId}" />
+					<input type="hidden" name="mId" value="${cList.mId}" />
+					<input type="hidden" name="cId" value="${cList.eId}" />
+			
 					<div>
 						<span class="memNick">${cList.nick}</span> <span class="regDate">${cList.regDate}</span>
 					</div>
 					<div class="commentContents">${cList.contents}</div>
-
 					<button class="reCommentBtn" type="button">답글</button>
+			
 					<div class="replyForm" style="display: none;">
-						<textarea name="replyContent" rows="5" cols="50"></textarea>
+						<!-- 댓글의댓글(테이블자기참조) -->
+						<c:forEach var="reList" items="${reList}">
+						<div class="reComntBox">
+							<div>
+								<span class="memNick">${reList.nick}</span><span class="regDate">${reList.regDate}</span>
+							</div>
+							<div class="commentContents">${reList.contents}</div>
+
+						</div>
+						</c:forEach>
+						
+						<input type="text" class="writeComment" name="writeComment"
+							placeholder="바른말 고운말!">
 						<input type="hidden" name="parentId" value="${cList.id}">
-						<input class="regReComment" type="button" value="댓글 작성">
+						<button class="btn btn-success writeCommentBtn">작성</button>
 					</div>
 
 				</div>
