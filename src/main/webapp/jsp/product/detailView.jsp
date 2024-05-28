@@ -58,9 +58,10 @@
         border: 1px solid #ccc;
         padding: 15px;
         border-radius: 5px;
-        max-width: 600px;
-        margin: auto;
+        max-width: 1000px;
+    	margin: 27px 0 10px -342px;
         background-color: #f9f9f9;
+        font-size: 22px;
     }
     .review-container table {
         width: 100%;
@@ -73,6 +74,9 @@
     }
     .review-container th {
         background-color: #f0f0f0;
+    }
+    .review-container .reg-date {
+    	margin-right: 10px;
     }
 
     .rv_imgs {
@@ -153,7 +157,7 @@
 
 		<div class="prd-title-liner"></div>
 		<div class="ctg-label">
-		    <div class="ctg-text" id="category">카테고리</div>
+		    <div class="ctg-text" id="category"></div>
 		</div>
 				
 		<div class="reviews">
@@ -173,8 +177,14 @@
 		
 		<div style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
 	        <img style="height: 80px;" src="resources/img/product_detail/heart.svg" />
-	        <span style="position: absolute; width: 150px; font-size: 28px;
-				margin-top: 10px; margin-left: 1px; font-weight: bold;">
+	        <span style="
+	        position: absolute;
+		    width: 150px;
+		    font-size: 37px;
+		    font-family: 'Pretendard Variable-Bold', Helvetica;
+		    margin-top: 20px;
+		    margin-left: 1px;
+		    font-weight: bold;">
 				찜
 			</span>
 		</div>
@@ -222,7 +232,7 @@
 		<div id="prd-text-tag"></div>
 		
 		<div style="position: absolute; margin-top: 36px; margin-left: 16px;">
-		    <%  int amount = (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
+		    <%  int amount = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
 		    <%-- 할인 후 가격 --%>
 		    <div class="prd-dc-amount" id="price"><%=String.format("%,d", amount) %></div>
 		    <div class="prd-won">원</div>
@@ -295,14 +305,36 @@
 		    
 		    <div id="review-frame">
 		    	<%-- 상품후기 추가 --%>
-		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
-		    		<h1>상품후기</h1>
+		    	<div style="height: 1000px; margin-top: 50px;">
+				    <div class="review-container">
+				        <table id="tabel-1">
+				            <tr>
+				                <td>userone 님</td>
+				                <td>2024-05-24</td>
+				            </tr>
+				            <tr>
+				                <td colspan="2" class="score">
+				                    4
+				                </td>
+				            </tr>
+				            <tr>
+				                <td>
+				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
+				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
+				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
+				                </td>
+				            </tr>
+				            <tr>
+				                <td colspan="2">좋아요!</td>
+				            </tr>
+				        </table>
+			        </div>
 		    	</div>
 		    </div>
 		    
 		    <div id="qna-frame">
 		    	<%-- 상품문의 추가 --%>
-		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
+		    	<div style="height: 1000px; margin-top: 50px; font-size: 40px;">
 		    		<h1>상품문의</h1>
 		    	</div>
 		    </div>
@@ -312,7 +344,7 @@
 </div>
 
 <%-- footer --%>
-<div class="div-wrapper" style="z-index: 1; height: 476px;">
+<div class="div-wrapper" id="footer" style="z-index: 1; margin-top: -300px;">
 	<jsp:include page="layout/footer.jsp"></jsp:include>	
 </div>
 </body>
