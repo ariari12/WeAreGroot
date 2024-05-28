@@ -42,7 +42,7 @@ function updatePrice(oper) {
     if (cnt < 1) { 
         alert('1개 이상부터 구입이 가능합니다.'); 
         cnt = 1; 
-    } else if (cnt > quantity) { 
+    } else if (parseInt(cnt) > parseInt(quantity)) { 
         alert('재고부족 남은 수량 : ' + quantity); 
         cnt = quantity; 
     }
@@ -81,7 +81,7 @@ function addCart() {
 	// 임시용 데이터 9
 	let memberId = 9;
 	
-	if (cnt > quantity) {
+	if (parseInt(cnt) > parseInt(quantity)) {
 		Toast.fire({
 			icon: 'error',
 			title: '재고부족\n남은수량 : ' + quantity

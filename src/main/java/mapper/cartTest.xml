@@ -4,13 +4,26 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="kr.co.moran.web.cartTest">
-
-
-  	<insert id="insertCart" parameterType="kr.co.moran.web.vo.cartTest.CartVO" >
-	  	INSERT INTO MEMBER_CART (m_id, pd_id, mc_cnt)
-		SELECT #{mId}, pd_id, #{cnt} FROM PRODUCT 
-		WHERE pd_id = #{pId} AND pd_id IS NOT NULL;
+  
+  	<insert id="insertCart" parameterType="hashmap" >
+		INSERT INTO MEMBER_CART (m_id, pd_id, mc_cnt) VALUE (#{mId}, #{pId}, #{cnt})
   	</insert>
+  	
+  	<update id="updateCart">
+  		UPDATE MEMBER_CART SET mc_cnt = mc_cnt + #{cnt} WHERE pd_id = #{pId} AND m_id = #{mId}
+  	</update>
+  	
+  	<delete id="deleteCart">
+        DELETE FROM MEMBER_CART 
+        WHERE m_id = #{mId} AND pd_id IN
+		<foreach item="item" index="index" collection="productIds" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+    </delete>
+    
+   	<select id="checkProduct" parameterType="hashmap" resultType="int">
+   		SELECT COUNT(1) FROM PRODUCT WHERE pd_id = #{pId} AND pd_quantity >= #{cnt}
+   	</select>
   	
   	<select id="selectCart" parameterType="int" resultType="kr.co.moran.web.vo.cartTest.ProductCartVO">
 	  	SELECT 
@@ -23,7 +36,7 @@
 		    A.pd_dcrate as pDcrate, 
 		    A.pd_is_maintain as pIsMaintain, 
 		    B.pi_img as pImg, 
-		    C.mc_cnt as mCnt, 
+		    SUM(C.mc_cnt) as mCnt, 
 		    C.m_id as mId 
 		FROM 
 		    PRODUCT A
@@ -32,8 +45,22 @@
 		JOIN 
 		    MEMBER_CART C ON C.pd_id = A.pd_id
 		WHERE 
-		    A.pd_is_maintain = 0 AND C.m_id = #{mId};
+		    A.pd_is_maintain = 0 AND C.m_id = #{mId}
+		GROUP BY 
+		    A.pd_id, 
+		    A.c_id, 
+		    A.pd_name, 
+		    A.pd_price, 
+		    A.pd_quantity, 
+		    A.pd_wholesale, 
+		    A.pd_dcrate, 
+		    A.pd_is_maintain, 
+		    B.pi_img, 
+		    C.m_id
   	</select>
-  	
-  	
+  	 
+  	<update id="changeCart">
+		UPDATE MEMBER_CART SET mc_cnt = #{cnt} WHERE pd_id = #{pId} AND m_id = #{mId}
+  	</update>
+  	 
   </mapper>

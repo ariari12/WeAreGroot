@@ -1,12 +1,15 @@
 package kr.co.moran.web.action.cart;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.dao.cartTestDAO;
+import kr.co.moran.web.dao.CartDAO;
 import kr.co.moran.web.vo.cartTest.CartVO;
 
-public class CartAction implements Action {
+public class AddCartAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -20,18 +23,13 @@ public class CartAction implements Action {
 		if (m == null || m == "") { return "fail"; }
 		if (p == null || p == "") { return "fail"; }
 		if (c == null || c == "") { return "fail"; }
-			
-		// STR TO INT
-		int mId = Integer.parseInt(m);
-		int pId = Integer.parseInt(p);
-		int cnt = Integer.parseInt(c);
-			
-		cartTestDAO dao = new cartTestDAO();
-		CartVO cvo = new CartVO();
-		cvo.setMId(mId);
-		cvo.setPId(pId);
-		cvo.setCnt(cnt);
-			
-		return String.valueOf(dao.insertCart(cvo));
+		
+		Map<String, Object> params = new HashMap<>();
+		params.put("mId", m);
+		params.put("pId", p);
+		params.put("cnt", c);
+
+		CartDAO dao = new CartDAO();
+		return String.valueOf(dao.insertCart(params));
 	}
 }

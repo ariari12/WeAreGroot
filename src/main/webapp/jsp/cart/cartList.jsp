@@ -11,145 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="resources/css/cart.css" />
-    
-    <script type="text/javascript">
-    	$(document).ready(function () {
-    		
-    		// 처음 로딩할때 천단위 콤마
-    		$('.product-price').each(function() {
-    			let priceString = $(this).text().trim();
-    	        let cnt = parseInt($(this).closest('.cart-item').find('.product-cnt').val());
-    	        let price = parseFloat(priceString.replace(/[^0-9]/g, ''));    	        
-    	        if (!isNaN(price)) {
-    	        	let formattedPrice = (price * cnt).toLocaleString() + '원';
-    	            $(this).text(formattedPrice);
-    	        }
-    	    });
-    		
-    		
-    		// 삭제버튼을 누름
-    		$('#selectDelete').click(function () {
-    			let index = 0;
-    			let jsonData = '{pdIds:[';
-    			$('.checkboxs:checked').each(function() {
-    	        	let productId = $(this).attr('id').split('-')[1];			
-    	        	jsonData += productId + ',';
-    			})
-    			jsonData += ']}';
-    			
-                
-                console.log( JSON.stringify(jsonData) );
-    			
-    			// 삭제할 데이터가 없음.
-    			if (jsonData == '{}') return;
-    			
-    			// 501 에러
-
-    			$.ajax({
-    				url: 'cart?cmd=deleteProduct',
-    				type: 'json',
-    				data: jsonData,
-    				success : function(resp) {
-    					console.log(resp);
-    				}
-    			})
-    			
-			})
-    		
-    		
-    		// + 버튼 클릭
-    		$('.plus-btn').click(function() {
-    	        let productId = $(this).attr('id').split('-')[1];
-    	        let qty = parseInt($('#product-price-' + productId).data('qty'));
-    	        let cnt = parseInt($('#cnt-' + productId).val()) + 1;
-    	        
-    	        if (qty == 0) {
-    	        	alert("품절 상품입니다.");
-    	        	return;
-    	        }
-    	        
-    	        // 재고량 부족
-    	        if (cnt > qty) {
-    	        	$('#cnt-' + productId).val(qty);
-    	        	alert('재고량 부족');
-    	        	return;
-    	        }
-    	        
-    	        $('#cnt-' + productId).val(cnt);
-    	        let price = $('#product-price-' + productId).data('price');        
-    	        price = (cnt * price).toLocaleString();
-    	        $('#product-price-' + productId).text(price + '원');
-    	        calculateCheckedValues();
-    	        
-    	        $("#plus-" + productId).attr("src", cnt == qty ? "resources/img/frame-427321499.svg" : "resources/img/frame-427321499_1.svg");
-    	        $("#minus-" + productId).attr("src", cnt <= 2 ? "resources/img/frame-427321498.svg" : "resources/img/frame-427321498_1.svg");
-    	    });
-    		
-    		// - 버튼 클릭
-    		$('.minus-btn').click(function() {
-    	        let productId = $(this).attr('id').split('-')[1];
-    	        let qty = parseInt($('#product-price-' + productId).data('qty'));
-    	        let cnt = parseInt($('#cnt-' + productId).val()) - 1;
-    	        
-    	        // 주문수량 0개는 불가능
-    	        // 주문하기 누를때 한번더 체크할것.
-    	        
-    	        if (qty == 0) {
-    	        	alert("품절 상품입니다.");
-    	        	return;
-    	        }
-    	        
-    	        if (cnt <= 0) {
-    	        	$('#cnt-' + productId).val(1);
-    	        	alert("0 이하는 선택할수없습니다.");
-    	        	return;
-    	        }
-    	        
-    	        $('#cnt-' + productId).val(cnt);        
-    	        let price = $('#product-price-' + productId).data('price');        
-    	        price = (cnt * price).toLocaleString();
-    	        $('#product-price-' + productId).text(price + '원');
-    	        calculateCheckedValues();
-    	        
-    	        $("#plus-" + productId).attr("src", cnt == qty ? "resources/img/frame-427321499.svg" : "resources/img/frame-427321499_1.svg");
-    	        $("#minus-" + productId).attr("src", cnt <= 2 ? "resources/img/frame-427321498.svg" : "resources/img/frame-427321498_1.svg");
-    	    });
-    		
-    		// 체크박스 전체 체크/해제
-    		$('#check-all').change(function() {
-    	        $('.cart-checkbox').prop('checked', this.checked);
-    	    });
-    		
-    		function calculateCheckedValues() {
-    			let totalValue = 0;
-    			let totalProduct = 0;
-    	        let checked = $('.cart-checkbox:checked').length;
-    	        let checkedLength = $('.cart-checkbox').length;
-    	        
-    	        $('.cart-checkbox:checked').each(function() {
-    	        	let productId = $(this).attr('id').split('-')[1];
-    	            let price = parseFloat($(this).closest('.cart-item').find('.product-price').text().replace(/[^0-9]/g, ''));
-    	            if (!isNaN(price)) {
-    	            	totalValue += price;
-    	            	totalProduct++;
-    	            }
-    	        });
-    	        
-    	        // 5만원 이상 구매시 배송비 무료.
-    	       	let delivery = totalValue >= 50000 ? 0 : 3500;
-    	        $('#check-all').prop('checked', checkedLength > checked ? false:true);
-    	        $('#delivery-value').text(delivery.toLocaleString() + '원');
-    	        $('#total-value').text((totalValue + delivery).toLocaleString() + '원');
-    	        $('#price-value').text(totalValue.toLocaleString() + '원');
-    	        $('#total-product').text(totalProduct);      
-    	    }
-    		
-    		$('.cart-checkbox').change(function() {
-    	        calculateCheckedValues();
-    	    });
-		})
-		
-    </script>
+    <script src="resources/js/cart.js?v=<%=System.currentTimeMillis() %>"></script>
     
 </head>
 <body>
@@ -158,22 +20,22 @@
         <div class="cart-table">
             <div class="cart-header">
                 <div style="flex: 0 0 5%; text-align: center;">
-                    <input class="cart-checkbox form-check-input" type="checkbox" name="" id="check-all">
+                    <input class="cart-checkbox form-check-input" type="checkbox" name="" id="check-all" checked>
                 </div>
                 <div class="cart-th-left">상품정보</div>
                 <div class="cart-th-center">수량</div>
                 <div class="cart-th-center">주문금액</div>
             </div>
+            <div class="cart-list">
             <c:forEach var="vo" items="${cartVO }">
 	            <div class="cart-item">
 	                <div class="cart-item-th-cetner">
 	                	<% // 재고가 남아있다면 checkbox를 생성 %>
 	                	<c:if test="${vo.getPQuantity() >= 1}">
-	                    	<input class="form-check-input cart-checkbox checkboxs" type="checkbox" name="" id="check-${vo.getPId() }">
+	                    	<input class="form-check-input cart-checkbox checkboxs" type="checkbox" name="" id="check-${vo.getPId() }" checked>
 	                    </c:if>
 	                </div>
 	                <div class="cart-item-th-left">
-	                
 	                	<% // 프로젝트를 합치면서 주소가 바뀔 예정 수정해주어야 함. %>
 	                	<a href="productTest?cmd=detail&pd_id=${vo.getPId() }">
 	                    <img class="product-img" src="${vo.getPImg() }" alt="">
@@ -206,10 +68,8 @@
 								<input type="number" class="product-cnt" name="cnt" id="cnt-${vo.getPId() }" value="0" disabled>
 							</c:otherwise>
 						</c:choose>
-						
-	                    
 	                    <c:choose>
-							<c:when test="${vo.getPQuantity() eq vo.getMCnt()}">
+							<c:when test="${vo.getPQuantity() <= vo.getMCnt()}">
 								<img id="plus-${vo.getPId() }" class="plus-btn" src="resources/img/frame-427321499.svg" />
 							</c:when>
 							<c:otherwise>
@@ -217,7 +77,7 @@
 							</c:otherwise>
 						</c:choose>
 	                </div>
-	                <div class="product-price" id="product-price-${vo.getPId() }" data-price="${vo.getPPrice() }" data-qty="${vo.getPQuantity() }">
+	                <div class="product-price" id="product-price-${vo.getPId() }" data-price="${vo.getPPrice() }" data-qty="${vo.getPQuantity() }" data-pid="${vo.getPId() }">
 	                	<% // 재고량 부조시 0 원으로 출력 %>
 	                	<c:choose>
 							<c:when test="${vo.getPQuantity() >= 1}">
@@ -230,7 +90,8 @@
 	                	원
 	                </div>
 	            </div>
-            </c:forEach>      
+            </c:forEach>
+            </div>   
             <div class="cart-actions">
                 <input type="button" class="btn btn-outline-danger btn-sm" id="selectDelete" value="선택상품 삭제"> 
                 <input type="button" class="btn btn-outline-danger btn-sm" id="soldOutDelete" value="품절상품 삭제">

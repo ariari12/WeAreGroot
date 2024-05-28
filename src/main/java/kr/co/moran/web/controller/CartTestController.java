@@ -10,9 +10,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.cart.CartAction;
+import kr.co.moran.web.action.cart.AddCartAction;
+import kr.co.moran.web.action.cart.CartFormAction;
 import kr.co.moran.web.action.cart.CartListAction;
 import kr.co.moran.web.action.cart.DeleteCartAction;
+import kr.co.moran.web.action.cart.CntChange;
 
 @WebServlet("/cart")
 public class CartTestController extends HttpServlet{
@@ -27,15 +29,17 @@ public class CartTestController extends HttpServlet{
 		
 		if (cmd == null || cmd.equals("cartList")) {
 			action = new CartListAction();
+		} else if(cmd.equals("cartForm")) {
+			action = new CartFormAction();
+		} else if(cmd.equals("cntChange")) {
+			out.println(new CntChange().execute(req, resp));
+			return;
 		} else if(cmd.equals("addProduct")) {
-			out.println(new CartAction().execute(req, resp));
+			out.println(new AddCartAction().execute(req, resp));
 			return;
 		} else if(cmd.equals("deleteProduct")) {
-			
-			String jsonData = req.getParameter("jsonData");
-			System.out.println("jsonData : " + jsonData);
-			
 			out.println(new DeleteCartAction().execute(req, resp));
+			return;
 		}
 		
 		url = action.execute(req, resp);
