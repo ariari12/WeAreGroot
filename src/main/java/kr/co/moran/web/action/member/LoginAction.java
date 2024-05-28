@@ -23,7 +23,7 @@ public class LoginAction implements Action {
 			System.out.println(session.getAttribute("memberVO"));
 			//회원 로그인 성공
 			System.out.println("로그인 성공");
-			return "index.jsp";
+			return "redirect:main";
 		}else {
 			System.out.println("로그인 실패");
 		}

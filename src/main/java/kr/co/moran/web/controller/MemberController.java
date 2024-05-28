@@ -62,6 +62,7 @@ public class MemberController extends HttpServlet {
 		System.out.println("url = " + url);
 		if (url.startsWith("redirect:")) {
 			redirectUrl = url.substring("redirect:".length());
+			System.out.println("redirectUrl = "+redirectUrl);
 			resp.sendRedirect(redirectUrl);
 		} else if (url.equals("emailDuplicated")) {
 			PrintWriter out = resp.getWriter();
