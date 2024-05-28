@@ -1442,7 +1442,7 @@
           <div class="frame-22"><div class="text-wrapper-28">노하우</div></div>
         </div>
       </div>
-      <img class="header" src="img/header.svg" />
+      <img class="header" src="../resources/img/header.svg" />
       <div class="frame-23">
         <div class="frame-24">
           <div class="frame-25"><div class="text-wrapper-29">홈</div></div>
