@@ -220,7 +220,7 @@ body {
 }
 
 .profileImage {
-    margin-right: 10px; /* 이미지와 입력 필드 사이 간격 조정 */
+    margin-right: 10px; 
 }
 
 .writeCommentContainer {
@@ -311,5 +311,11 @@ body {
     cursor: pointer;
     margin-top: 5px;
 }
-
+#eventDetail .reComntBox{
+	margin-left: 30px;
+/* 	border: 2px solid red; */
+}
+#eventDetail .reComntBox>div{
+	margin-bottom: 10px;
+}
 

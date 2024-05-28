@@ -92,10 +92,16 @@ public class CommentDAO {
 
 	public int InsertCommentByAny(CommentVO cvo) {
 		SqlSession ss = factory.openSession(true);
-		System.out.println("dao eId값 : @@@@@@@ \n" + cvo.getEId());
 		int res = ss.insert("kr.co.moran.comment.InsertCommentByAny", cvo);
 		ss.close();
 		return res;
+	}
+
+	public List<Map<String, Object>> selectCommentByCid(int cId) {
+		SqlSession ss = factory.openSession(true);
+		List<Map<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentByCid", cId);
+		ss.close();
+		return list;
 	}
 	
 	

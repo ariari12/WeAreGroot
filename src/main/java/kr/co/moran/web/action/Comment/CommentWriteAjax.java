@@ -34,13 +34,12 @@ public class CommentWriteAjax implements Action {
 		}
 		if(req.getParameter("eId") != null) {
 			
-			System.out.println("@@@@@@@@@@" + req.getParameter("eId"));
 			int eId = Integer.parseInt(req.getParameter("eId"));
 			cvo.setEId(eId);
 		}
-		if(req.getParameter("cParent") != null) {
-			int cParent = Integer.parseInt(req.getParameter("cParent"));
-			cvo.setCParentId(cParent);
+		if(req.getParameter("cParentId") != null) {
+			int cParentId = Integer.parseInt(req.getParameter("cId"));
+			cvo.setCParentId(cParentId);
 		}
 		try {
 			cvo.setMId(mvo.getMId());
@@ -49,6 +48,8 @@ public class CommentWriteAjax implements Action {
 		}
 		cvo.setContents(req.getParameter("contents"));
 		
+		
+		System.out.println("action cvo : " + cvo.toString());
 		int res = cdao.InsertCommentByAny(cvo);
 		
 		if(res == 1) {
@@ -62,7 +63,6 @@ public class CommentWriteAjax implements Action {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return json.toJSONString();
 	}
 	

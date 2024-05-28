@@ -73,7 +73,7 @@
 				<div class="commentCell">
 					<input type="hidden" name="eId" value="${cList.eId}" />
 					<input type="hidden" name="mId" value="${cList.mId}" />
-					<input type="hidden" name="cId" value="${cList.eId}" />
+					<input type="hidden" name="cId" value="${cList.cId}" />
 			
 					<div>
 						<span class="memNick">${cList.nick}</span> <span class="regDate">${cList.regDate}</span>
@@ -83,20 +83,12 @@
 			
 					<div class="replyForm" style="display: none;">
 						<!-- 댓글의댓글(테이블자기참조) -->
-						<c:forEach var="reList" items="${reList}">
-						<div class="reComntBox">
-							<div>
-								<span class="memNick">${reList.nick}</span><span class="regDate">${reList.regDate}</span>
-							</div>
-							<div class="commentContents">${reList.contents}</div>
-
-						</div>
-						</c:forEach>
 						
-						<input type="text" class="writeComment" name="writeComment"
+						
+						<input type="text" class="reWriteComment" name="reWriteComment"
 							placeholder="바른말 고운말!">
 						<input type="hidden" name="parentId" value="${cList.id}">
-						<button class="btn btn-success writeCommentBtn">작성</button>
+						<button class="btn btn-success reWriteCommentBtn">작성</button>
 					</div>
 
 				</div>

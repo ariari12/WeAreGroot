@@ -14,7 +14,7 @@ import kr.co.moran.web.action.Comment.CommentModifyAction;
 import kr.co.moran.web.action.Comment.CommentModifyLikeCntAction;
 import kr.co.moran.web.action.Comment.CommentWriteAction;
 import kr.co.moran.web.action.Comment.CommentWriteAjax;
-import kr.co.moran.web.action.Comment.ReCommentWriteAction;
+import kr.co.moran.web.action.Comment.ReComntListView;
 
 @WebServlet("/comment")
 public class CommentController extends HttpServlet{
@@ -48,12 +48,17 @@ public class CommentController extends HttpServlet{
 			action = new CommentWriteAjax();
 			action.execute(req, resp);
 			return;
-			
+		}else if(cmd.equals("reComntListView")) {
+			action = new ReComntListView();
+			String res = action.execute(req, resp);
+			resp.getWriter().print(res);
+			return;
 		}
 		
-		url = action.execute(req, resp);
 		
-		RequestDispatcher rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
+		 url = action.execute(req, resp);
+		 
+		 RequestDispatcher rd = req.getRequestDispatcher(url); rd.forward(req, resp);
+		 
 	}
 }
