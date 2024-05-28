@@ -19,6 +19,7 @@
 	ProductVO v = new ProductDAO().pdSelsctOneByPId( Integer.parseInt(prdId.toString()) );
 %>
 <title><%=v.getName() %></title>
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -306,29 +307,7 @@
 		    <div id="review-frame">
 		    	<%-- 상품후기 추가 --%>
 		    	<div style="height: 1000px; margin-top: 50px;">
-				    <div class="review-container">
-				        <table id="tabel-1">
-				            <tr>
-				                <td>userone 님</td>
-				                <td>2024-05-24</td>
-				            </tr>
-				            <tr>
-				                <td colspan="2" class="score">
-				                    4
-				                </td>
-				            </tr>
-				            <tr>
-				                <td>
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                </td>
-				            </tr>
-				            <tr>
-				                <td colspan="2">좋아요!</td>
-				            </tr>
-				        </table>
-			        </div>
+				    <div class="review-container"></div>
 		    	</div>
 		    </div>
 		    

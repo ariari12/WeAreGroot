@@ -72,7 +72,7 @@ $(() => {
         <div class="products-container">
 	        <div class="nav-subtitle">
 	        	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
-				color: #0070ff; font-size: 20px;" href="?cmd=add&type=prd&prd=view">상품등록</a>
+    			color: #00b267; font-size: 20px;" href="?cmd=add&type=prd&prd=view">상품등록</a>
 	       	</div>
        	</div>
 </c:if>

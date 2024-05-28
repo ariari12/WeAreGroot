@@ -177,16 +177,10 @@ let productReview = (data) => {
 	let reviewTable = "";
 	let cnt = 1;
 	for(item of data["reviews"]) {
-		// console.log(item);
-		
-		// console.log(item.nick);
-		// console.log(item.regDate);
-		// console.log(item.score);
-		// console.log(item.imgs);
-		// console.log(item.contents);
 		
 		reviewTable += "<table id='tabel-" + cnt + "''><tr>"
-			+ "<td style='width: 200px;'>" + item.nick + " 님</td>"
+			+ "<td style='font-family: &quot;Pretendard Variable-Bold&quot;, Helvetica; width: 200px;'>"
+			 + item.nick + " 님</td>"
 			+ "<td>작성일: " + item.regDate + "</td></tr>"
 			+ "<tr><td colspan='2' class='score'>"
 			+ "<span>" + item.score  + "점 </span>";
@@ -205,14 +199,14 @@ let productReview = (data) => {
 			reviewTable += "<img class='rv_imgs' src='" + img + "' />";
 		}
 		
-		reviewTable += "</td></tr><tr><td colspan='2'>" + item.contents + "</td></tr>";
+		reviewTable += "</td></tr><tr><td style='line-height: 32px;'  colspan='2'>" + item.contents + "</td></tr>";
 		cnt++;
 	}
 	
 	$(".review-container").html(reviewTable);
 	
 	let reviewHeight = $(".review-container").height() -2672;
-	reviewHeight = (reviewHeight < -1967 ? -1967 : reviewHeight);
+	reviewHeight = (reviewHeight < -1966 ? -1966 : reviewHeight);
 	console.log(reviewHeight);
 	$("#footer").css("margin-top", reviewHeight + "px");
 }
