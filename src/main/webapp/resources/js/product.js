@@ -1,4 +1,3 @@
-
 /**
  * product - common
  */
@@ -58,13 +57,15 @@ let descConvert = (data, name) => {
 	let textTag = "<div class='prd-text-tag-frame'>"
 	 + "<div class='tag-text'># " + name + "</div></div>";
 	 
+	console.log(data);
+	 
 	for(key in data) {
 		switch(key){
 			// 생육형태
 		    case "clCodeNm":
-				if(data[key] == "") {
-					$("#category").html(data[key]);
-					$(".prd-growth-form").html("생육형태 : " + data[key]);
+				if(data[key] != "") {
+					$("#category").text(data[key]);
+					$(".prd-growth-form").text("생육형태 : " + data[key]);
 					
 					textTag += "<div class='prd-text-tag-frame'>"
 					 + "<div class='tag-text'># " + data[key] + "</div></div>";
@@ -125,9 +126,13 @@ let descConvert = (data, name) => {
 				}
 				break;
 		}
-		$(".plant-info").html(plantInfo);
-		$("#prd-text-tag").html(textTag);
 	}
+	$(".plant-info").html(plantInfo);
+	$("#prd-text-tag").html(textTag);
+	
+	let height = $(".plant-info").height();
+	$("#big-img").css("margin-top", (250 + height + 12) + "px");
+	$("#footer").css("margin-top", "-" + (930 - height) + "px");
 }
 
 let imgBath = (imgs) => {
@@ -166,6 +171,50 @@ let menuBtnClick = () => {
 	        }
         });
     });
+}
+
+let productReview = (data) => {
+	let reviewTable = "";
+	let cnt = 1;
+	for(item of data["reviews"]) {
+		// console.log(item);
+		
+		// console.log(item.nick);
+		// console.log(item.regDate);
+		// console.log(item.score);
+		// console.log(item.imgs);
+		// console.log(item.contents);
+		
+		reviewTable += "<table id='tabel-" + cnt + "''><tr>"
+			+ "<td style='width: 200px;'>" + item.nick + " 님</td>"
+			+ "<td>작성일: " + item.regDate + "</td></tr>"
+			+ "<tr><td colspan='2' class='score'>"
+			+ "<span>" + item.score  + "점 </span>";
+		
+        let score = parseInt(item.score);
+        for (let index = 0; index < score; index++) {
+            reviewTable += "<img src='resources/img/product_detail/star.svg' />";
+        }
+        for (let index = 0; index < 5 - score; index++) {
+            reviewTable += "<img src='resources/img/product_detail/star_gray.svg' />";
+        }
+		reviewTable += "</td></tr>";
+		
+		reviewTable += "<tr><td colspan='2'>";
+		for(img of item.imgs) {
+			reviewTable += "<img class='rv_imgs' src='" + img + "' />";
+		}
+		
+		reviewTable += "</td></tr><tr><td colspan='2'>" + item.contents + "</td></tr>";
+		cnt++;
+	}
+	
+	$(".review-container").html(reviewTable);
+	
+	let reviewHeight = $(".review-container").height() -2672;
+	reviewHeight = (reviewHeight < -1967 ? -1967 : reviewHeight);
+	console.log(reviewHeight);
+	$("#footer").css("margin-top", reviewHeight + "px");
 }
 
 

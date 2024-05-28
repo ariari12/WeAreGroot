@@ -63,7 +63,7 @@ let viewDetails = (no) => {
 	
 	int cnt = 0;
 	for(ProductVO v : vos) {
-		int price = (int)(v.getPrice() * (v.getDcRate() / 100.0));
+		int price = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0));
 		
 		if(cnt == 0) {  %> 
 		<div class="frame-line"> 

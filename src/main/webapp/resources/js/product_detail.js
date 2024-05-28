@@ -92,12 +92,7 @@ let review = (no) => {
         	console.log("성공");
             console.log(data);
             
-			for(item of data["reviews"]) {
-				console.log(item);
-				for(key in item) {
-				}
-			}
-            
+            productReview(data);
         },
         error: (data, status, err) => {
         	console.log("실패");
