@@ -12,7 +12,7 @@
 	int admin = 0;
 	
 	if(member != null) {
-		admin = Integer.parseInt(member.getAdmintype());
+		admin = member.getAdmintype();
 	}
 	// System.out.println("admin? " + admin);
 

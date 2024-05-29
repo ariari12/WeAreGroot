@@ -8,8 +8,7 @@ public class KHWriteFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		System.out.println("khWriteForm.jsp");
-		return "views/khWriteForm.jsp";
+		return "jsp/board/khWriteForm.jsp";
 	}
-
+	
 }

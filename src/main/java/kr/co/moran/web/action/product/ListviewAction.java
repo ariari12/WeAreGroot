@@ -1,3 +1,4 @@
+
 package kr.co.moran.web.action.product;
 
 import java.util.ArrayList;
@@ -44,9 +45,11 @@ public class ListviewAction implements Action {
 			case "popul": prdlist = populType(startNum, PAGE_QUANTITY); break;
 			case "ctg": prdlist = categoryType(startNum, PAGE_QUANTITY,
 				 req.getParameter("ctg")); break;
+			case "search": 
+				String keyword = req.getParameter("search");
+				prdlist = searchType(startNum, PAGE_QUANTITY, keyword); break;
 			default: prdlist = noneType(startNum, PAGE_QUANTITY);
 		}
-		
 //		System.out.println(hotPIds);
 		
 		// 속성변수 삽입
@@ -83,7 +86,7 @@ public class ListviewAction implements Action {
 	private List<ProductVO> populType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
 		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
-		List<ProductVO> prdList = dao.pdSelectPopByPId(start, pageNum);
+		List<ProductVO> prdList = dao.pdSelectPop(start, pageNum);
 		
 		if(start < (3 *12)) {
 			for(ProductVO v : prdList) {
@@ -102,6 +105,15 @@ public class ListviewAction implements Action {
 		maxPage = (int) Math.ceil(dao.pdcategoryTotal() / PAGE_QUANTITY);
 		List<ProductVO> prdList = 
 				dao.pdSelectByCId(start, pageNum, Integer.parseInt(strCId));
+		hitPrdocuts(prdList);
+		return prdList;
+	}
+	
+	// 검색 상품 가져오기
+	private List<ProductVO> searchType(int start, int pageNum, String keyword) {
+		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+		maxPage = (int) Math.ceil(dao.pdPopTotal() / PAGE_QUANTITY);
+		List<ProductVO> prdList = dao.pdSelectBySearch(start, pageNum, keyword);
 		hitPrdocuts(prdList);
 		return prdList;
 	}

@@ -89,6 +89,17 @@
 </head>
 <body>
 
+<%
+	MemberVO member = (MemberVO)session.getAttribute("memberVO");
+	if(member == null || member.getAdmintype() < 1) {
+		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
+	}
+	request.setAttribute("admin", true);
+	if(request.getAttribute("message") != null) { %>
+<script>viewMsg('<%=request.getAttribute("message") %>')</script>
+<% 	} %>
+
+
 <script>
     $(() => {
         $("div.ctg-super").hide();
@@ -169,7 +180,7 @@
 
 
 <div class="div-wrapper " style="height: 260px;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <div class="container category-con">
@@ -207,7 +218,7 @@
 </div>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

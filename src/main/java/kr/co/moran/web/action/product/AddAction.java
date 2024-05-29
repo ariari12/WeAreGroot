@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class AddAction implements Action {
 	
@@ -27,18 +28,24 @@ public class AddAction implements Action {
 		this.req = req;
 		this.resp = resp;
 		
+		// admin이 아닌 사용자가 접근 시 예외처리
+		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		System.out.println("modify: " + adminCheck);
+		if(adminCheck == null || adminCheck.getAdmintype() < 1) {
+			return "jsp/product/unauthorized.jsp";
+		}
+		
 		String type = req.getParameter("type");
 		dao = new ProductDAO();
 		ctgList = new ArrayList<CategoryVO>();
 		String nextUrl = "";
-		
-//		System.out.println("modify? " + type);
 		
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
 				nextUrl = categoryAdd(req.getParameter("ctg"));
 				break;
 			case "prd": // prd: product
+				nextUrl = productAdd(req.getParameter("prd"));
 				break;
 			default: 
 //				prdlist = noneType(startNum, PAGE_QUANTITY);
@@ -73,7 +80,6 @@ public class AddAction implements Action {
 				 * db table 데이터 수정
 				 * 수정이 완료되었음을 사용자에게 반환
 				 */
-				
 				String cParantId = req.getParameter("cParentId");
 				String name = req.getParameter("name");
 				
@@ -92,29 +98,73 @@ public class AddAction implements Action {
 		}
 	}
 
+	// product
+	private String productAdd(String prd) {
+		String pId;
+		switch (prd) {
+			case "view": // 등록 페이지 요청
+				// 페이지 리소스 반환
+				req.setAttribute("masterList", ctgList);
+				return "jsp/product/createProduct.jsp";
+				
+			case "sub":
+				/*
+				 * 상위 카테고리 데이터 요청
+				 * 상위 카테고리 데이터들을 반환
+				 */
+				
+				// JSON 객체 생성 후 AJAX 응답
+				return ajaxToJsonArray();
+				
+			case "confirm":
+				/*
+				 * 등록 완료 요청
+				 * db table 데이터 수정
+				 * 수정이 완료되었음을 사용자에게 반환
+				 */
+//				String cParantId = req.getParameter("cParentId");
+//				String name = req.getParameter("name");
+//				
+//				cParantId = cParantId.equals("") ? null : cParantId;
+//				
+//				System.out.println("cParentId: " + cParantId);
+//				System.out.println("name:" + name);
+//				
+//				dao.ctAdd(cParantId, name);
+
+				// ajax 반환
+				return ajaxToJsonOk("product");
+				
+			default: // 잘못된 요청에 대한 예외 처리
+				return null;
+		}
+	}
+	
+	
+	// common
+	@SuppressWarnings("unchecked")
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();
 		
-		// JSON ArayList 생성
-		JSONArray ctgJsonArray = new JSONArray();
-		
-		// cgtList -> JSON Array 변환
-		Object[] ctgArray = new Object[ctgList.size()];
-		for (int i = 0; i < ctgList.size(); i++) {
-			// dao JSON 객체
-			Map<String, Object> subCtg = new HashMap<String, Object>();
-			subCtg.put("cId", ctgList.get(i).getCId());
-			subCtg.put("name", ctgList.get(i).getName());
-			
-			ctgJsonArray.add(new JSONObject(subCtg));
-		}
 		
 		// ctgList 내용이 비어있는 경우
 		if(ctgList.size() < 1) {
 			jsonObject.put("ctgList", null);
 		}
 		else {
+			// JSON ArayList 생성
+			JSONArray ctgJsonArray = new JSONArray();
+			
+			// cgtList -> JSON Array 변환
+			for (CategoryVO ctg : ctgList) {
+				// dao JSON 객체
+				Map<String, Object> subCtg = new HashMap<String, Object>();
+				subCtg.put("cId", ctg.getCId());
+				subCtg.put("name", ctg.getName());
+				
+				ctgJsonArray.add(new JSONObject(subCtg));
+			}
 			jsonObject.put("ctgList", ctgJsonArray);
 		}
 		jsonObject.put("result", "ok");

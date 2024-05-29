@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class DeleteAction implements Action {
 
@@ -28,6 +29,13 @@ public class DeleteAction implements Action {
 		this.req = req;
 		this.resp = resp;
 		
+		// admin이 아닌 사용자가 접근 시 예외처리
+		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
+//		System.out.println("modify: " + adminCheck);
+		if(adminCheck == null || adminCheck.getAdmintype() < 1) {
+			return "jsp/product/unauthorized.jsp";
+		}
+		
 		switch (type == null ? "" : type) {
 			case "ctg": nextUrl = ctgDelete();
 				break;
@@ -41,7 +49,6 @@ public class DeleteAction implements Action {
 
 	private String ctgDelete() {
 		String ctg = req.getParameter("ctg");
-		
 		switch (ctg == null ? "" : ctg) {
 			case "view": 
 				/*
@@ -54,7 +61,8 @@ public class DeleteAction implements Action {
 				if(ctgList.size() < 1) {
 					System.out.println("카테고리 테이블 레코드가 없습니다.");
 					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.");
-					return "jsp/product/createCategory.jsp";
+					req.setAttribute("redUrl", "product");
+					return "jsp/product/inform.jsp";
 				}
 				
 				// 페이지 리소스 반환

@@ -26,6 +26,18 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 
+<style>
+a {
+	text-decoration: none;
+	color: #202020;
+}
+
+.text-wrapper-26 a {
+	text-decoration: none;
+	color: #ffffff;
+}
+</style>
+
 <script>
 let viewDetails = (no) => {
 	window.location = "./product?cmd=detail&no=" + no;
@@ -34,13 +46,8 @@ let viewDetails = (no) => {
 
 </head>
 <body>
-<<<<<<< HEAD
-<div class="div-wrapper" style="height: 220px; z-index: 3;">
-	<jsp:include page="../layout/header.jsp"></jsp:include>
-=======
 <div class="div-wrapper " style="height: 220px; z-index: 3;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
->>>>>>> branch 'dev' of https://github.com/ariari12/WeAreGroot.git
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 <jsp:include page="./productNav.jsp"></jsp:include>
 
@@ -56,7 +63,7 @@ let viewDetails = (no) => {
 	
 	int cnt = 0;
 	for(ProductVO v : vos) {
-		int price = (int)(v.getPrice() * (v.getDcRate() / 100.0));
+		int price = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0));
 		
 		if(cnt == 0) {  %> 
 		<div class="frame-line"> 
@@ -67,7 +74,7 @@ let viewDetails = (no) => {
                 <div class="prd-name"><%=v.getName() %></div>
                 <div class="prd-price">
                 	<del><%=String.format("%,d", v.getPrice()) %> 원</del>
-                	<span style="color: red; margin-left: 20px;"> <%=v.getDcRate() %>% 할인</span>
+                	<span style="color: red; margin-left: 20px;"><%=v.getDcRate() %>% 할인</span>
                 	<br>
                 	<span><%=String.format("%,d", price) %> 원</span>
                 </div>
@@ -94,9 +101,9 @@ let viewDetails = (no) => {
 	} %>
 	<%-- frame-line end --%>
     
-	 <div class="page frame-line">
+	 <div class="page frame-line" style="margin-top: 20px;">
 		 <nav aria-label="Page navigation">
-			<ul class="pagination">
+			<ul class="pagination justify-content-center pagination-lg">
 			<%
 				dao.closeSession();
 				int currentPage = Integer.parseInt(request.getAttribute("currentPage").toString());
@@ -149,7 +156,7 @@ let viewDetails = (no) => {
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

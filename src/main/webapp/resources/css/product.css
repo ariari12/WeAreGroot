@@ -1,10 +1,9 @@
 @charset "UTF-8";
-/* @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap'); */
 
 /* product navigation */
 .prd_nav-group {
     width: 1920px;
-    height: 104px;
+    height: 96px;
     background-color: #ffffff;
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -19,6 +18,7 @@
     position: relative;
     top: 40px;
     left: 375px;
+    margin-bottom: 23px;
 }
 
 .prd_nav-group .prd_nav-categoryframe {
@@ -121,11 +121,11 @@
 
 /* product categroy */
 div.category {
-	width: 1920px;
-	height: 600px;
-	background-color: #ffffff;
-	border: 2px solid;
-	border-color: #e4e4e4;
+    width: 1920px;
+    padding-bottom: 22px;
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #e4e4e4;
 }
 
 div.category .overlap-group {
@@ -176,6 +176,14 @@ div.category .subcategories {
 
 div.category .ctg-btns {
     display: flex;
+    gap: 7px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    margin-left: 62%;
+    width: 0px;
+}
+
+div.category .ctg-btn {
     gap: 5px;
     flex-wrap: wrap;
 }

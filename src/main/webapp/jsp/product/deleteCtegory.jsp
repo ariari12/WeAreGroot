@@ -31,9 +31,10 @@
 <body>
 <%
 	MemberVO member = (MemberVO)session.getAttribute("memberVO");
-	if(member == null || Integer.parseInt(member.getAdmintype()) < 1) {
+	if(member == null || member.getAdmintype() < 1) {
 		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
 	}
+	request.setAttribute("admin", true);
 	if(request.getAttribute("message") != null) { %>
 <script>viewMsg('<%=request.getAttribute("message") %>')</script>
 <% 	} %>
@@ -88,7 +89,7 @@
 
 
 <div class="div-wrapper " style="height: 220px;">
-<jsp:include page="../layout/header.jsp"></jsp:include>
+<jsp:include page="layout/header.jsp"></jsp:include>
 </div>
 
 <!-- TODO : 객체 가져오고 반복문 순회 완성하기 -->
@@ -111,6 +112,7 @@
         </select>
     </div>
     <div class="cate-block">
+       	<span style="color: orange; margin-left: 31px;">※ 선택 안할 시 상위 카테고리로 지정됩니다.</span>
         <span class="cate-label">하위 카테고리 선택</span>
         <select name="subCtg" id="subCtg">
             <option value='null'>카테고리 없음</option>
@@ -125,7 +127,7 @@
 </div>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">
-<jsp:include page="../layout/footer.jsp"></jsp:include>
+<jsp:include page="layout/footer.jsp"></jsp:include>
 </div>
 </body>
 </html>

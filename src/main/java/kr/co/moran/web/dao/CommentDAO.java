@@ -33,18 +33,27 @@ public class CommentDAO {
 		}
 		
 	}
-	
-	public List<CommentVO> selectCommentBybId(int bId) {
+//	<!-- Board의 댓글 목록 -->
+	public List<HashMap<String, Object>> selectCommentBybId(int bId) {
 		
 		SqlSession ss = factory.openSession(true);
-		List<CommentVO> list = ss.selectList("kr.co.moran.comment.SelectCommentBybId", bId);
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentBybId", bId);
 		
-		System.out.println(list);
 		ss.close();
 		return list;
 
 	}
 	
+//	<!-- 내가 쓴 댓글 목록 -->
+	public List<HashMap<String, Object>> selectCommentBymId(int mId){
+		SqlSession ss = factory.openSession(true);
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentBymId", mId);
+		
+		ss.close();
+		return list;
+	}
+	
+//	<!-- 댓글 작성 -->
 	public void insertComment(CommentVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.comment.InsertComment",vo);
@@ -52,6 +61,7 @@ public class CommentDAO {
 		ss.close();
 	}
 	
+//	<!-- 댓글 삭제 -->
 	public void deleteComment(int cId) {
 		SqlSession ss = factory.openSession(true);
 		ss.delete("kr.co.moran.comment.DeleteComment",cId);
@@ -59,6 +69,7 @@ public class CommentDAO {
 		ss.close();
 	}
 
+//	<!-- 댓글 수정 -->
 	public void modifyComment(@Param("cId") int cId, @Param("contents") String contents) {
 		SqlSession ss = factory.openSession(true);
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -69,6 +80,7 @@ public class CommentDAO {
 		ss.close();
 	}
 	
+//	<!-- 댓글 좋아요 -->
 	public void modifyCommentLikeCntBycId(int cId) {
 		SqlSession ss = factory.openSession(true);
 		ss.update("kr.co.moran.comment.ModifyCommentLikeCntBycId", cId);

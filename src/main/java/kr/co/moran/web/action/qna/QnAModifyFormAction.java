@@ -9,7 +9,7 @@ public class QnAModifyFormAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		// TODO Auto-generated method stub
-		return "views/qnaModifyForm.jsp";
+		return "jsp/board/qnaModifyForm.jsp";
 	}
 
 }
