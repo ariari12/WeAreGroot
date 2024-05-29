@@ -89,7 +89,7 @@ function hideEditForm(formId) {
                     	
                     	<c:when test="${not empty loginId }">
                     		<c:choose>
-                    			<c:when test="${likeResult eq 'ok' }">
+                    			<c:when test="${boardLikeResult eq 'ok' }">
 									<button type="button" onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${bId}&likeResult=likeOk' />'">좋아요</button>
                     			</c:when>
                     			<c:otherwise>
@@ -131,20 +131,24 @@ function hideEditForm(formId) {
                     	</c:when>
                     
                     	<c:when test="${not empty loginId }">
+                    	<td>
                     		<c:choose>
-                    			<c:when test="${likeResult eq 'ok' }">
-									<button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&likeResult=likeOk' />'">좋아요</button>
+                    			<c:when test="${commentVO.get('commentLikeResult') eq 'ok' }">
+									<button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeOk&type=${type }&bId=${bId }' />'">좋아요</button>
                     			</c:when>
-                    			<c:otherwise>
-									<button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&likeResult=likeCancel' />'" >좋아요취소</button>
-                    			</c:otherwise>
-                    		</c:choose>
+                    			<c:when test="${commentVO.get('commentLikeResult') eq 'no' }">
+									<button type="button" onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeCancel&type=${type }&bId=${bId }' />'" >좋아요취소</button>
+                    			</c:when>
+                    		</c:choose>                    	
+                    	</td>
                     	</c:when>
                     </c:choose>
                 </tr>                
             </c:forEach>
         </table>
-        
+        <select>
+        	<option onclick="">
+        </select>
         <!-- 댓글작성 -->
         <c:choose>
         <c:when test="${not empty loginId }">

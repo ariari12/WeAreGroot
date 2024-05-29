@@ -66,6 +66,7 @@
 		VALUES(#{mId}, #{bId}, NOW())
 	</insert>
 	
+	
 	<select id="SelectCommentLikeBybIdandmId" parameterType="kr.co.moran.web.vo.LikeVO" resultType="kr.co.moran.web.vo.LikeVO">
 		SELECT 
 			c_id as cId,
@@ -79,4 +80,11 @@
 		DELETE FROM COMMENT 
 		WHERE c_id = #{cId} AND m_id = #{mId}
 	</delete>
+	
+	<!-- 댓글 좋아요 취소 -->
+	<delete id="DeleteCommentLikebycid" parameterType="kr.co.moran.web.vo.LikeVO" >
+		DELETE FROM LIKES
+		WHERE l_id = #{lId} AND m_id = #{mId}
+	</delete>
+	
 </mapper>

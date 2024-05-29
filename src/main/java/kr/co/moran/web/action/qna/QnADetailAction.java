@@ -26,9 +26,11 @@ public class QnADetailAction implements Action {
 		
 		HttpSession session = req.getSession();
 		LikeVO vo = new LikeVO();
-//		memberVO 세션에서 가져오기(mId 가져오려고)
+		MemberVO memberVO = new MemberVO();
+		System.out.println("memberVO.getMId : " + memberVO.getMId());
+//		memberVO 세션에서 가져오기(mId 가져오려고) if문 안쓰면 null예외 발생할 수 있음
 		if((MemberVO)session.getAttribute("memberVO") != null) {
-			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+			memberVO = (MemberVO)session.getAttribute("memberVO");
 			req.setAttribute("loginId",memberVO.getMId());
 			
 			
@@ -40,13 +42,13 @@ public class QnADetailAction implements Action {
 		BoardDAO boardDAO = new BoardDAO();
 		CommentDAO commentDAO = new CommentDAO();
 		
-		String likeResult;
+		String boardLikeResult;
 		
 //		만약 좋아요 목록에 bId와 mId가 같은게 없다면
 		if(boardDAO.SelectBoardLikeBybIdandmId(vo) == null) {
-			likeResult = "ok";
+			boardLikeResult = "ok";
 		}else {
-			likeResult = "no";
+			boardLikeResult = "no";
 		}
 		
 		
@@ -59,14 +61,24 @@ public class QnADetailAction implements Action {
 //		해당 게시글의 댓글 목록 가져오기
 		List<HashMap<String, Object>> commentList = commentDAO.selectCommentBybId(bId);
 		
-		for (HashMap<String, Object> hashMap : commentList) {
-			hashMap.
-			hashMap.put("commentLikeResult", commentList)
+//		각 댓글의 좋아요 유무 판별
+		for (HashMap<String, Object> comment : commentList) {
+			vo = new LikeVO();
+			vo.setCId((int)comment.get("cId"));
+			vo.setMId(memberVO.getMId());
+			
+//			만약 좋아요 목록에 cId와 mId가 같은게 없다면
+			if(commentDAO.selectCommentLikeBycIdandmId(vo) == null) {
+				comment.put("commentLikeResult", "ok");
+			}else {
+				comment.put("commentLikeResult", "no");
+			}
 		}
+		System.out.println(commentList);
 		
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);
-		req.setAttribute("likeResult", likeResult);
+		req.setAttribute("boardLikeResult", boardLikeResult);
 		
 		return "jsp/board/qnaDetail.jsp";
 	}

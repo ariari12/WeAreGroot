@@ -96,12 +96,14 @@ public class CommentDAO {
 	}
 	
 	
+//	댓글 좋아요 추가
 	public void insertCommentLikeBycId(LikeVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.comment.InsertCommentLikeBycId", vo);
 		ss.close();
 	}
 	
+//	댓글 좋아요 삭제
 	public void deleteCommentLikeBycId(LikeVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.delete("kr.co.moran.comment.DeleteCommentLikebycid", vo);
@@ -109,7 +111,7 @@ public class CommentDAO {
 	}
 	
 //	게시글 좋아요 여부 확인, 반환된 lvo를 참고하여 좋아요 여부 확인
-	public LikeVO SelectBoardLikeBybIdandmId(LikeVO vo) {
+	public LikeVO selectCommentLikeBycIdandmId(LikeVO vo) {
 		SqlSession ss = factory.openSession(true);
 		LikeVO lvo = ss.selectOne("kr.co.moran.comment.SelectCommentLikeBybIdandmId", vo);
 		
