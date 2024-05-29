@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.order.OrderDetailAction;
-import kr.co.moran.web.action.productTest.ProductListAction;
 
 @WebServlet("/order")
 public class OrderTestController extends HttpServlet{
@@ -22,9 +21,7 @@ public class OrderTestController extends HttpServlet{
 		String url = "";
 		
 		Action action = null;
-		if(cmd == null || cmd.equals("list")) {
-			action = new ProductListAction();
-		}else if(cmd.equals("detail")) {
+		if(cmd == null || cmd.equals("detail")) {
 			action = new OrderDetailAction();
 		}
 		
