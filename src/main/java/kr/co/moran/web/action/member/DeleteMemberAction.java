@@ -27,7 +27,7 @@ public class DeleteMemberAction implements Action {
 		dao.deleteMemberbyId(vo);
 		session.invalidate();
 		 
-		return "redirect:index.jsp";
+		return "redirect:main";
 	}
 
 }
