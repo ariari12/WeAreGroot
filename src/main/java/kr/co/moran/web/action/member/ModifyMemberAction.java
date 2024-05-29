@@ -54,7 +54,7 @@ public class ModifyMemberAction implements Action {
 			if(dao.modifyMemberWithAddressById(vo)) {
 				HttpSession session = req.getSession();
 				session.setAttribute("memberVO", vo);
-				System.out.println("세션 저장 성공"+session.getAttribute("memberVO"));
+				System.out.println("세션 저장 성공"+session.getAttribute("memberVO"));				
 			}
 			
 			
