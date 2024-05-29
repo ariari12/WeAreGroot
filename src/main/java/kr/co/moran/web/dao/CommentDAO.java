@@ -87,5 +87,36 @@ public class CommentDAO {
 		ss.close();
 	}
 	
+	//댓글의 댓글 등록
+	public void insertReComment(CommentVO cvo) {
+		SqlSession ss= factory.openSession(true);
+		ss.insert("kr.co.moran.comment.InsertReComment", cvo);
+		ss.close();
+	}
+	
+	//이벤트 댓글조회
+	public List<Map<String, Object>> selectCommentByEid(int eId) {
+		SqlSession ss = factory.openSession(true);
+		List<Map<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentByEid",eId);
+		ss.close();
+		return list;
+	}
+
+	public int InsertCommentByAny(CommentVO cvo) {
+		SqlSession ss = factory.openSession(true);
+		int res = ss.insert("kr.co.moran.comment.InsertCommentByAny", cvo);
+		ss.close();
+		return res;
+	}
+
+	public List<Map<String, Object>> selectCommentByCid(int cId) {
+		SqlSession ss = factory.openSession(true);
+		List<Map<String, Object>> list = ss.selectList("kr.co.moran.comment.SelectCommentByCid", cId);
+		ss.close();
+		return list;
+	}
+	
+	
+	
 	
 }

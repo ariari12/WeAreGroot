@@ -1,14 +1,15 @@
 @charset "UTF-8";
+
 * {
-    color: #222;
-    /* 기본 글 색상 */
-    font-family: "Nanum Gothic", sans-serif;
-    /* 나눔고딕체 적용 */
-    text-decoration: none;
-    /* 밑줄 제거 */
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+	color: #222;
+	/* 기본 글 색상 */
+	font-family: "Nanum Gothic", sans-serif;
+	/* 나눔고딕체 적용 */
+	text-decoration: none;
+	/* 밑줄 제거 */
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
 }
 
 /* ************************************** */
@@ -58,6 +59,7 @@
 	color: #000;
 	font-size: 28px;
 }
+
 /* ********** header.jsp 끝 *********** */
 
 /* ************************************** */
@@ -69,24 +71,26 @@ footer#footer {
 	font-size: 14px;
 }
 
-.buttonArea a{
+.buttonArea a {
 	font-size: 16px;
 	color: #000;
 	text-decoration: none;
 }
 
-.contentWrap{
+.contentWrap {
 	margin-top: 10px;
 	display: flex;
 }
-.contentWrap p{
+
+.contentWrap p {
 	color: #5e5e5e;
-	
+
 }
-.contentWrapRight>h4>span{
+
+.contentWrapRight>h4>span {
 	font-size: 18px;
 	color: rgba(255, 0, 0, 1);
-	
+
 }
 
 /* ********** footer.jsp 끝 *********** */

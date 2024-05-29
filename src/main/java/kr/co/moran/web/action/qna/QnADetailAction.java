@@ -19,7 +19,11 @@ public class QnADetailAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		HttpSession session = req.getSession();
-		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		if((MemberVO)session.getAttribute("memberVO") != null) {
+			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+			req.setAttribute("loginId",memberVO.getMId());
+		}
+		
 		
 		String sbId = req.getParameter("bId");
 		int bId = Integer.parseInt(sbId);
@@ -36,7 +40,7 @@ public class QnADetailAction implements Action {
 		
 		req.setAttribute("boardVO", boardVO);
 		req.setAttribute("commentList", commentList);
-		req.setAttribute("loginId",memberVO.getMId());
+		
 
 		return "jsp/board/qnaDetail.jsp";
 	}

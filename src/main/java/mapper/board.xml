@@ -16,11 +16,29 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img as biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
+		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.m_id= #{mId}
+	</select>
+
+	<!-- 글에 댓글이 몇개 있는지 구하기 -->
+	<select id="SelectCountAllCommentBybId" resultType="hashmap">
+		SELECT
+			c.b_id as bId,
+			COUNT(*) as count
+		FROM COMMENT c
+		JOIN BOARD b ON c.b_id = b.b_id
+		GROUP BY c.b_id
+	</select>
+
+	<!-- 노하우 게시글 총 갯수 -->
+	<select id="SelectTotalCountKH" resultType="int">
+    	SELECT COUNT(*)
+    	FROM BOARD
+    	WHERE b_type = 2 AND b_is_maintain = 0
 	</select>
 
 	<!-- 노하우 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
@@ -36,12 +54,14 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod 
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img as biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
+		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 2 AND b.b_is_maintain = 0
 		ORDER BY b.b_regdate
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
 	<!-- 노하우 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->	
@@ -57,16 +77,25 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod 
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img as biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
+		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 2 AND b.b_is_maintain = 0
 		ORDER BY b.b_view_cnt DESC
+		LIMIT #{limit} OFFSET #{offset}
+	</select>
+	
+	<!-- QnA 게시글 총 갯수 -->
+	<select id="SelectTotalCountQnA" resultType="int">
+    	SELECT COUNT(*)
+    	FROM BOARD
+    	WHERE b_type = 1 AND b_is_maintain = 0
 	</select>
 	
 	<!-- QnA 전체보기(최신순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
-	<select id="SelectAllQnA" resultType="hashmap">
+	<select id="SelectAllQnA" parameterType="hashmap" resultType="hashmap">
 		SELECT 
 			m.m_nick AS nick, 
 			b.b_id AS bId , 
@@ -78,12 +107,14 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod 
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img as biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
+		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 1 AND b.b_is_maintain = 0
 		ORDER BY b.b_regdate DESC
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
 	<!-- QnA 전체보기(인기순) BoardVO 정보와 MemberVO의 닉네임 조인 -->
@@ -99,12 +130,14 @@
 			b.b_like_cnt AS likeCnt , 
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
-			b.b_retention_period AS retentionPeriod 
+			b.b_retention_period AS retentionPeriod,
+			bi.bi_img as biImg
 		FROM BOARD b
-		JOIN MEMBER m
-		ON b.m_id = m.m_id
+		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
+		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 1 AND b.b_is_maintain = 0
 		ORDER BY b.b_view_cnt 
+		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
 	<!-- 글 디테일 -->	
