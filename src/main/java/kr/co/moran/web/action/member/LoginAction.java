@@ -17,13 +17,15 @@ public class LoginAction implements Action {
 		MemberVO vo=dao.selectMemberByEmailAndPassword(email, password);
 		
 		if(vo!=null) {
-			System.out.println("vo 객체 : "+vo);
+			System.out.println("[LoginAction] MemberVO = "+vo);
 			HttpSession session = req.getSession();
 			session.setAttribute("memberVO", vo);
 			System.out.println(session.getAttribute("memberVO"));
 			//회원 로그인 성공
 			System.out.println("로그인 성공");
-			return "index.jsp";
+			return "redirect:main";
+		}else {
+			System.out.println("로그인 실패");
 		}
 		return "jsp/member/loginForm.jsp";
 	}

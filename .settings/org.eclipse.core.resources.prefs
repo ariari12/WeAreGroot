@@ -1,5 +1,15 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=branch 'dev' of https\://github.com/ariari12/WeAreGroot.git
 eclipse.preferences.version=1
-encoding//src/main/webapp/jsp/layout/footer.jsp=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8
+encoding//src/main/webapp/jsp/board/khDetail.jsp=UTF-8
+encoding//src/main/webapp/jsp/board/qnaWriteForm.jsp=UTF-8
+encoding//src/main/webapp/jsp/board/qnalist.jsp=UTF-8
+encoding//src/main/webapp/jsp/member/bak/loginForm1.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/joinForm.jsp=UTF-8
 encoding//src/main/webapp/jsp/member/loginForm.jsp=UTF-8
+encoding//src/main/webapp/jsp/member/myPageForm.jsp=UTF-8
+encoding//src/main/webapp/jsp/member/myPageForm2.jsp=UTF-8
+encoding//src/main/webapp/jsp/product/layout/footer.jsp=UTF-8
 encoding/<project>=UTF-8

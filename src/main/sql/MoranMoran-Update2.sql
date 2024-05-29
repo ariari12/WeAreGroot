@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `MORANMORAN`.`PRODUCT` RESTRICT;
 DROP TABLE IF EXISTS `MORANMORAN`.`CATEGORY` RESTRICT;
 
 -- 배송지
-DROP TABLE IF EXISTS `MORANMORAN`.`ADDRES` RESTRICT;
+DROP TABLE IF EXISTS `MORANMORAN`.`ADDRESS` RESTRICT;
 -- 탈퇴사유
 DROP TABLE IF EXISTS `MORANMORAN`.`LEAVE` RESTRICT;
 -- 회원
@@ -63,10 +63,11 @@ CREATE TABLE `MORANMORAN`.`MEMBER` (
     `m_is_maintain`      INT  NULL, -- 정보상태
     `m_retention_period` DATE NULL, -- 정보보관기간
     `m_birth` DATE NULL, -- 생일
+    `m_gender` VARCHAR(10) NULL, -- 성별
     PRIMARY KEY (`m_id`)
 );
 -- 배송지
-CREATE TABLE `MORANMORAN`.`ADDRES` (
+CREATE TABLE `MORANMORAN`.`ADDRESS` (
     `a_id`      INT  AUTO_INCREMENT, -- 배송지 번호
     `m_id`      INT  NULL, -- 회원번호
     `a_zipcode` VARCHAR(255) NULL, -- 우편번호

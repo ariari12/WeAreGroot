@@ -13,7 +13,7 @@ public class LogoutAction implements Action {
 		if(session != null) {
 			session.invalidate();
 		}
-		return "redirect:index.jsp";
+		return "redirect:main";
 	}
 
 }
