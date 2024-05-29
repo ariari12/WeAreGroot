@@ -8,12 +8,10 @@ import java.util.Map;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.eclipse.tags.shaded.org.apache.xalan.xsltc.compiler.sym;
 
 import kr.co.moran.web.vo.CategoryVO;
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
-import lombok.val;
 
 public class ProductDAO {
 	private SqlSession session;
@@ -36,6 +34,28 @@ public class ProductDAO {
 	
 
 	/* 상품 */
+	// insert
+	// 상품 추가
+	public void addProduct(ProductVO vo) {
+		openSession();
+		int pId = session.insert("kr.co.moran.product.addProduct", vo);
+		session.commit();
+	}
+	// 상품 이미지 추가
+	public void addProductImg(ProductImgVO vo) {
+		openSession();
+		int pId = session.insert("kr.co.moran.product.addProductImg", vo);
+		session.commit();
+	}
+	
+	
+
+	// 마지막에 추가된 상품id 찾기
+	public int lastPId() {
+		openSession();
+		int pId = session.selectOne("kr.co.moran.product.lastPId");
+		return pId;
+	}
 	
 	// 상품 종류 수
 	// 전체 상품 종류
@@ -247,6 +267,9 @@ public class ProductDAO {
 //		dao.pdSelectPopByPId(0, 12).forEach(System.out::println);
 //		dao.pdSelectLatest(0, 12).forEach(System.out::println);
 		
+//		dao.addProduct(new ProductVO(0, 1, "test", 0, "test 중", 0, 0, 0,
+//				Date.valueOf("1111-01-01"), 0, null));
+		
 		
 		// category
 //		dao.ctAdd(null, "test");
@@ -257,7 +280,6 @@ public class ProductDAO {
 //		dao.ctSelectByParentId(0).forEach(System.out::println);
 		
 //		dao.ctDelete(108);
-		
 		dao.closeSession();
 	}
 }

@@ -13,7 +13,6 @@ import kr.co.moran.web.action.product.DeleteAction;
 import kr.co.moran.web.action.product.DetailviewAction;
 import kr.co.moran.web.action.product.ListviewAction;
 import kr.co.moran.web.action.product.ModifyAction;
-import kr.co.moran.web.vo.member.MemberVO;
 
 @SuppressWarnings("serial")
 @WebServlet("/product")

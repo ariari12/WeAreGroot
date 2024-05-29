@@ -3,18 +3,18 @@
  */
 // sweetAlert2
 const sAlert = Swal.mixin({
-  toast: true,
-  position: "center",
-  showConfirmButton: true,
-  timer: 3000,
-  timerProgressBar: true,
-  allowEnterKey: true,
-  allowEscapeKey: true,
-  allowOutsideClick: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
+  	toast: true,
+  	position: "center",
+  	showConfirmButton: true,
+  	timer: 500,
+  	timerProgressBar: true,
+	allowEnterKey: true,
+	allowEscapeKey: true,
+	allowOutsideClick: true,
+	didOpen: (toast) => {
+	    toast.onmouseenter = Swal.stopTimer;
+	    toast.onmouseleave = Swal.resumeTimer;
+	}
 });
 
 let wrong = () => {
@@ -296,41 +296,65 @@ let ajaxReq = (url, data, msg) => {
  */
 let inputCheck = (e) => {
     // 입력된 값이 숫자인지 확인
-    if (numberCheck(e.target.value)) {
-        e.target.value = "0"; // 입력값 초기화
+    if (isNaN(e.target.value)) {
+        viweMsg('숫자를(을) 입력하세요.');
+        e.target.value = "1"; // 입력값 초기화
     }
     // 소수점 제거하여 정수로 만듦
     e.target.value = parseInt(e.target.value);
 }
 
-let numberCheck = (n) => {
+let numberCheck = (tag) => {
+	let n = tag.val();
     // 입력된 값이 숫자인지 확인
     if (isNaN(n)) {
-        alert('숫자를(을) 입력하세요.');
+        viweMsg('숫자를(을) 입력하세요.');
+        tag.focus();
         return true;
     }
+    else if (v != ull && n < 1) {
+        viweMsg('숫자는 1보다 커야 합니다.');
+        tag.focus();
+        return true;
+	}
     return false;
 }
 
-let nullCehck = (n, message) => {
+let nullCehck = (tag, message) => {
+	let n = tag.val();
     if (n == null || n == "") {
-        alert(message + '를(을) 입력하세요.');
+        viweMsg(message + '를(을) 입력하세요.');
+        tag.focus();
         return true;
     }
     return false;
 }
 
 let ctgCheck = () => {
-    let sub = $("#subcategory").val();
-    if(sub == null || sub == "") {
-        let sup = $("#category").val();
-        if(sup == null || sup == "") {
-            alert("카테고리를 선택하세요.");
+    let ctg = $("select#sub-ctg option:selected").val();
+    
+    if(ctg == null || ctg == "") {
+        ctg = $("select#sup-ctg option:selected").val();
+        if(ctg == null || ctg == "") {
+            viweMsg("카테고리를 선택하세요.");
             return true;
         }
         return false;
     }
     return false;
+}
+
+let imgCheck = () => {
+	if ($("#title-img").attr("src") == null 
+		|| $("#title-img").attr("src") == "") {
+    		viweMsg("대표 이미지를 첨부해주세요.");
+    		return false;
+    }
+    else {
+		let imgs = $("#inform-imgs");
+		console.log(imgs)
+		
+	}
 }
 
 let dateCheck = () => {
@@ -340,7 +364,7 @@ let dateCheck = () => {
     // 사용자가 직접 입력한 날짜인지 확인
     let isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(selectedDate);
     if (!isValidDate) {
-        alert("올바른 날짜 형식을 입력하세요 (YYYY-MM-DD).");
+        viweMsg("올바른 날짜 형식을 입력하세요 (YYYY-MM-DD).");
         return; // 날짜 형식이 올바르지 않으면 함수를 종료
     }
 
@@ -349,7 +373,7 @@ let dateCheck = () => {
 
     // 사용자가 선택한 날짜와 현재 날짜를 비교
     if (selectedDate < currentDate) {
-        alert("현재 이후 날짜로만 상품을 등록할 수 있습니다.");
+        viweMsg("현재 이후 날짜로만 상품을 등록할 수 있습니다.");
         return true;
     }
     return false;
@@ -360,8 +384,9 @@ let ctgOptionAdd = (list, selector) => {
     for (const item of list) {
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
-    options += "<option value='null'>선택 안함</option>";
-    
+    if(selector == "select#sub-ctg") {
+		options += "<option value='null'>선택 안함</option>";
+    }
     $(selector).html(options);
 }
 

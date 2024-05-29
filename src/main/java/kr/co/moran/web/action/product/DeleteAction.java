@@ -24,7 +24,7 @@ public class DeleteAction implements Action {
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		String type = req.getParameter("type");
-		String nextUrl = "";
+		String nextUrl = null;
 		dao = new ProductDAO();
 		this.req = req;
 		this.resp = resp;
