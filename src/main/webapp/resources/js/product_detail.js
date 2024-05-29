@@ -105,6 +105,8 @@ let qnaInfo = (no) => {
         	console.log("성공");
             console.log(data);
             
+            console.log(data[0].cqaId);
+            
             qaFormHTML(data);
             
         },

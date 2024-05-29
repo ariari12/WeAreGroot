@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="resources/css/product_detail.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
-<link rel="stylesheet" href="../../resources/css/productQa.css">
+<link rel="stylesheet" href="resources/css/productQa.css">
 <style>
 	.text-wrapper-26 a {
 		text-decoration: none;
