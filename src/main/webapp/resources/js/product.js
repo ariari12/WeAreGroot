@@ -368,3 +368,44 @@ let ctgOptionAdd = (list, selector) => {
 let ctgAjax = () => {
 	ajaxComReq()
 }
+
+
+
+let qaFormHTML = (data) => {
+	'<div class="qa-form">' +
+    '<div class="qa-form-title">' +
+    '<h2>문의</h2>' +
+    '</div>' +
+    '<div class="qa-form-navMenu">' +
+    '<ul class="nav nav-tabs">' +
+    '<li class="allQa nav-item">전체보기</li>' +
+    '<li class="prdQa nav-item">상품</li>' +
+    '<li class="dlvQa nav-item">배송</li>' +
+    '<li class="tibQa nav-item">반품</li>' +
+    '<li class="swQa nav-item">교환</li>' +
+    '<li class="rfdQa nav-item">환불</li>' +
+    '<li class="etcQa nav-item">기타</li>' +
+    '</ul>' +
+    '</div>' +
+    '<div class="qa-form-qaCard">' +
+    '<div class="writerInfo">' +
+    '<span>이름</span>' +
+    '<span> | </span>' +
+    '<span>등록일</span>' +
+    '</div>' +
+    '<div class="qa-question">' +
+    '<div class="qa-question-text">' +
+    'Q' +
+    '</div>' +
+    '<div class="qaContents">' +
+    '문의 내용' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '<div class="pagenation">' +
+    '<button class="btn btn-primary">이전</button>' +
+    '<button class="btn btn-primary">다음</button>' +
+    '</div>' +
+    '</div>';
+   	}
+    

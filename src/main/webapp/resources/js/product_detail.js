@@ -98,12 +98,14 @@ let review = (no) => {
 let qnaInfo = (no) => {
 	$.ajax({
         type: "post",
-        url: "",
-   		data: {"cId" : cId},
+        url: "./product?cmd=detail&no=" + no + "&type=qna",
+   		data: {"no" : no},
         dataType: "json",
         success: function (data) {
         	console.log("성공");
             console.log(data);
+            
+            qaFormHTML(data);
             
         },
         error: (data, status, err) => {

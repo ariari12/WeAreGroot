@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.moran.productqa">
+	
+	<!-- 해당상품 전체문의 -->
+	<select id="selectAllQaByPdId" parameterType="int" resultType="java.util.HashMap">
+		SELECT 
+			pqa.pqa_id as pqaId,
+			pqa.pqa_parent_id as pqaParentId,
+			pqa.m_id as mId,
+			pqa.pqa_contents as contents,
+			pqa.pqa_regdate as regdate,
+			pqa.pqa_type as type,
+			pqa.cqa_id as cqaId,
+			m.m_name as name,
+			cqa.cqa_name as cqaName,
+			pqai.pqai_img as pqaiImg
+		FROM PRODUCT_QA	AS pqa
+		LEFT OUTER JOIN MEMBER AS m
+		ON pqa.m_id = m.m_id
+		LEFT OUTER JOIN CATEGORY_QA as cqa
+		ON pqa.cqa_id = cqa.cqa_id
+		LEFT OUTER JOIN PRODUCT_QA_IMG as pqai
+		ON pqa.pqa_id = pqai.pqa_id
+		WHERE pqa.pd_id = #{pdId}
+	</select>
+	
+	<select id="selectPrdQaByPdIdWithCqaName" parameterType="map">
+		
+	</select>
+	
+	<!-- 배송문의 -->
+	
+</mapper>
