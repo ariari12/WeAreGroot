@@ -16,7 +16,7 @@ $(document).ready(function() {
     $('#addCart').on('click', function() { addCart(); })
 
     // 구매하기 버튼
-    $('#addCart').on('click', function() { addCart(); })
+    $('#order').on('click', function() { order(); })
 })
 
 // STR값을 INT로 바꾸는 함수
@@ -72,15 +72,6 @@ function updatePrice(oper) {
 
 }
 
-// AJAX 로 장바구니에 담는 함수.
-let addCart = () => {
-
-}
-
-// 구매하기로 넘어가는 함수.
-let order = () => {
-
-}
 
 // 리뷰정보 가져오는 ajax
 let review = (no) => {
@@ -123,3 +114,65 @@ let qnaInfo = (no) => {
     });
 }
 
+
+
+// AJAX 로 장바구니에 담는 함수.
+function addCart() {
+	
+	let urlParams = new URLSearchParams(window.location.search);
+	let productId = urlParams.get('no');
+	let cnt = $('#cnt').val();
+	
+	if (parseInt(cnt) > parseInt(quantity)) {
+		Toast.fire({
+			icon: 'error',
+			title: '재고부족\n남은수량 : ' + quantity
+		});
+		return;
+	}
+	
+	$.ajax({
+		url: 'cart?cmd=addProduct',
+		type: 'post',
+		data: {
+			pId: productId,
+			cnt: cnt,
+		},
+		success : function(data) {
+			data = data.trim();
+			
+			if (data == 1) {
+                Toast.fire({
+                    icon: 'success',
+                    title: '장바구니에 상품을 추가하였습니다.'
+                });
+			} else {
+				Toast.fire({
+	                icon: 'error',
+	                title: '장바구니에 상품 추가를 실패하였습니다.'
+                });
+			}	
+		}
+	})
+}
+
+// 구매하기로 넘어가는 함수.
+function order() {
+	let urlParams = new URLSearchParams(window.location.search);
+	let pId = urlParams.get('no');
+	let cnt = $('#cnt').val();
+	window.location.href = './order?cmd=detail&pd_id=' + pId + '&cnt=' + cnt;
+}
+
+// 알림창
+let Toast = Swal.mixin({
+	toast: true,
+	position: 'center-center',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer)
+		toast.addEventListener('mouseleave', Swal.resumeTimer)
+	}
+})
