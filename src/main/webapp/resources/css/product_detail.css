@@ -55,7 +55,7 @@
 
 .admin-btn {
     position: absolute;
-    margin-top: 430px;
+    margin-top: 389px;
     margin-left: 1330px;
 }
 
@@ -241,7 +241,7 @@
 	position: relative;
 	width: 81px;
 	height: 81px;
-	top: 777px;
+    top: 801px;
 	left: 375px;
 	object-fit: cover;
 	margin-right: 11px;
@@ -561,7 +561,6 @@
 
 #info-frame #big-img {
     position: absolute;
-    margin-top: 1200px;
     margin-left: -200px;
     text-align: center;
 }

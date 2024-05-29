@@ -157,11 +157,11 @@ public class AddAction implements Action {
 			JSONArray ctgJsonArray = new JSONArray();
 			
 			// cgtList -> JSON Array 변환
-			for (int i = 0; i < ctgList.size(); i++) {
+			for (CategoryVO ctg : ctgList) {
 				// dao JSON 객체
 				Map<String, Object> subCtg = new HashMap<String, Object>();
-				subCtg.put("cId", ctgList.get(i).getCId());
-				subCtg.put("name", ctgList.get(i).getName());
+				subCtg.put("cId", ctg.getCId());
+				subCtg.put("name", ctg.getName());
 				
 				ctgJsonArray.add(new JSONObject(subCtg));
 			}

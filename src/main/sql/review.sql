@@ -57,10 +57,13 @@ commit;
 insert into REVIEW(m_id, o_id, r_contents, r_regdate, r_score)
 values();
 
+
 select * from REVIEW;
 select * from PRODUCT;
 select * from ORDERS;
 select * from ORDERS where pd_id = 12938;
+
+select * from REVIEW_IMG;
 
 
 
@@ -92,6 +95,49 @@ INSERT INTO REVIEW (m_id, o_id, r_contents, r_regdate, r_score)
 INSERT INTO REVIEW (m_id, o_id, r_contents, r_regdate, r_score)
     VALUES (9, 103, '품질이 좋고, 사용하기 편리합니다. 추천해요.', '2024-05-23', 2);
 
+
+-- REVIEW_IMG inse
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (11, 0, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (12, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (12, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (13, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (13, 1, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (13, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (14, 0, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (15, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (15, 1, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (16, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (16, 1, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (18, 0, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (20, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (20, 1, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (20, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (21, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (21, 1, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (21, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (22, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (22, 1, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (22, 2, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (22, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (23, 0, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (24, 0, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (24, 1, ' ');
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (24, 2, ' ');
+
+INSERT INTO REVIEW_IMG (r_id, ri_no, ri_img) VALUES (25, 0, ' ');
+
+commit;
 
 -- update
 update REVIEW set r_is_maintain = 0 where r_is_maintain is null;
