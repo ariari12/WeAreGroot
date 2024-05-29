@@ -69,12 +69,11 @@ $(function() {
 				dataType: "json",
 				success: function(response) {
 					//					console.log("AJAX 요청 성공");
-
 					for (let i = 0; i < response.length; i++) {
 						let reComn = "<div class=\"reComntBox\"><div><span class=\"memNick\">" + response[i].nick + "</span><span class=\"regDate\">" + response[i].regDate + "</span></div>"
 							+ "<div class=\"commentContents\">" + response[i].contents + "</div></div>";
 						replyForm.prepend(reComn);
-					}
+					}	//db에서 날짜desc순으로 조회했는데 .replyForm 첫 자식요소로 추가해서 웹에서 자동으로 오름차순 정렬됨.
 				},
 				error: function(request, status, error) {
 					console.log("AJAX 요청 실패");

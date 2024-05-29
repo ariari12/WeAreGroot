@@ -30,7 +30,7 @@ public class ReComntListView implements Action {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			
 			for(Map<String, Object> map : list) {
-				System.out.println(map.get("regDate"));
+//				System.out.println(map.get("regDate"));
 				map.put("regDate", sdf.format(map.get("regDate")));
 				JSONObject jObj = new JSONObject(map);
 				jArr.add(jObj);

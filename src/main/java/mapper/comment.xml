@@ -50,7 +50,26 @@
 		WHERE
 			c.e_id = #{eId}
 	</select>
-	
+
+
+	<select id="SelectCommentByCid" parameterType="int" resultType="java.util.HashMap">
+		SELECT
+		c.c_id as cId,
+		c.e_id as eId,
+		c.m_id as mId,
+		m.m_nick as nick,
+		c.c_parent_id as cParentId,
+		c.c_contents as contents,
+		c.c_like_cnt as likeCnt,
+		c.c_regdate as regDate
+		FROM
+		COMMENT AS c
+		INNER JOIN
+		MEMBER AS m ON c.m_id = m.m_id
+		WHERE
+		c.c_parent_id = #{cId}
+		ORDER BY c_regdate DESC  
+	</select>
 	
 	<insert id="InsertCommentByAny" parameterType="kr.co.moran.web.vo.CommentVO">
 		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_contents, c_like_cnt ,c_regdate)
