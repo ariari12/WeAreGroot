@@ -54,7 +54,6 @@
 		}
 		jsonToString = jsonToString.substring(0, jsonToString.length() - 1);
 		jsonToString += "]";
-		System.out.println(jsonToString);
 		
 		%><script>
 			$(() => {
@@ -66,7 +65,6 @@
 		</script><%
 	}
 %>
-
 
 <style>
     body {
@@ -90,6 +88,9 @@
     .text-wrapper-26 a {
     	color: #ffffff;
     }
+    .frame-24 {
+    	width: 450px;
+    }
     
     input, textarea, select {
         text-align: left;
@@ -104,6 +105,7 @@
     input[type=file] {
         border-radius: 0;
         border: none;
+    	margin-left: -49px;
     }
     
     form.product-inform {
@@ -193,6 +195,20 @@
         background-color: #00b267;
         color: #ffffff;
     }
+    
+    .can-btn {
+	    display: inline-block;
+	    left: -19%;
+	    top: 13px;
+	    border: 1px solid red;
+	    color: red;
+	    text-align: center;
+	    line-height: 42px;
+    }
+    .can-btn:hover {
+        background-color: red;
+        color: #ffffff;
+    }
 </style>
 
 <script>
@@ -202,18 +218,22 @@
         $("#wholesal").on('input', (e) => inputCheck(e));
         $("#dsRate").on('input', (e) => inputCheck(e));
 
-        $(".sub-btn").click(() => {
-            if (nullCehck($("#prdName").val(), "식물이름")
+        $("#sub").click(() => {
+            if (nullCehck($("#prdName"), "식물이름")
                 || ctgCheck()
-                || nullCehck($("#fncltyInfo").val(), "식물 정보")
-                || nullCehck($("#watercycleCodeNm").val(), "물주기 정보")
+                || nullCehck($("#fncltyInfo"), "식물 정보")
+                || nullCehck($("#watercycleCodeNm"), "물주기 정보")
             ) {
                 return false;
             }
-            else if (nullCehck($("#price").val(), "가격")
-                || nullCehck($("#quantity").val(), "판매 개수")
-                || nullCehck($("#wholesal").val(), "도매가") 
-                || numberCheck($("#dsRate").val())) {
+            else if (imgCheck) {
+            	return false;
+            }
+            else if (nullCehck($("#price"), "가격")
+                || nullCehck($("#quantity"), "판매 개수")
+                || nullCehck($("#wholesal"), "도매가") 
+                || (numberCheck($("#dsRate"))
+             )) {
                 return false;
             }
             else if(dateCheck()) {
@@ -221,9 +241,7 @@
             }
         });
         
-        $("#category").click(() => {
-        	ctgOptionAdd("", )
-        });
+        $("select#sup-ctg").on("change", () => ctgAjax());
     });
 </script>
 
@@ -236,13 +254,17 @@
 </div>
 
 <%-- navigation --%>
-<div style="z-index: 3; position: relative; margin-top: 418px;">
+<div style="z-index: 3; position: relative; margin-top: 409px;">
 	<jsp:include page="./productNav.jsp"></jsp:include>
 </div>
 
 <%-- contents --%>
 <div id="input-form">
-    <form class="product-inform" action="/submit" method="POST" enctype="multipart/form-data">
+    <form class="product-inform" action="product-upload" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="cmd" value="add" />
+        <input type="hidden" name="type" value="prd" />
+        <input type="hidden" name="prd" value="confirm" />
+        
         <h1>상품 등록</h1>
         <div class="form-group prd-name">
             <label class="prd-desc">상품 이름</label>
@@ -257,7 +279,7 @@
             <br><br>
             <select class="input-form clCodeNm" id="sub-ctg" name="subcategory">
                 <option value="">하위 카테고리 선택 (선택사항)</option>
-                <option value="null">선택 없음</option>
+                <option value="">선택 없음</option>
             </select>
         </div>
 
@@ -301,12 +323,15 @@
             <br>
     
             <div class="form-group">
-                <label>이미지 업로드 선택 (최대 3장 1장 당 파일용량 : 5MB)</label>
+                <label>이미지 업로드(최대 3장 1장 당 파일용량 : 5MB)</label>
                 <div style="margin-bottom: 10px"></div>
                 <div class="image-upload">
-                    <input type="file" name="image1" accept="image/*">
-                    <input type="file" name="image2" accept="image/*">
-                    <input type="file" name="image3" accept="image/*">
+                	<label>대표 이미지 필수</label>
+                	<div id="inform-imgs" style="margin-left: -149px; margin-top: 27px;">
+	                    <input type="file" id="title-img" name="image1" accept="image/*">
+	                    <input type="file" name="image2" accept="image/*">
+	                    <input type="file" name="image3" accept="image/*">
+                	</div>
                 </div>
             </div>
         </div>
@@ -337,7 +362,8 @@
             <input type="date" id="startDate" name="startDate" required>
         </div>
 
-        <button class="sub-btn" type="button">등록</button>
+        <a style="display: block;" class="sub-btn can-btn" href="./product">등록 취소</a>
+        <button class="sub-btn" id="sub" type="submit">등록</button>
     </form>
 </div>
 
