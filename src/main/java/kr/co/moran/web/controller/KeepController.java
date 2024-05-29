@@ -37,13 +37,14 @@ public class KeepController extends HttpServlet {
 //			System.out.println("product memberChekc is null: " + memberCheck);
 		}
 		
+		// 미구현
 		Action action = null;
 		switch (act == null ? "" : act) {
-			case "list": action = new ListviewAction(); break;
-			case "detail": action = new DetailviewAction(); break;
-			case "modify": action = new ModifyAction(); break;
-			case "add": action = new AddAction(); break;
-			case "delete": action = new DeleteAction(); break;
+//			case "list": action = new ListviewAction(); break;
+//			case "detail": action = new DetailviewAction(); break;
+//			case "modify": action = new ModifyAction(); break;
+//			case "add": action = new AddAction(); break;
+//			case "delete": action = new DeleteAction(); break;
 			default: action = new ListviewAction();
 		}
 		

@@ -45,7 +45,21 @@ let msgRedirect = (msg, redUrl) => {
 	window.location = "./" + redUrl;
 }
 
-
+let ajaxComReq = (url) => {
+    $.ajax({
+        type: "post",
+        url: url,
+        dataType: "json",
+        success: function (data) {
+           	return data;
+        },
+        error: (data, status, err) => {
+            console.log("실패");
+            console.log(data);
+            console.log(err);
+        }
+    });
+}
 
 
 
@@ -187,7 +201,7 @@ let productReview = (data) => {
 		
         let score = parseInt(item.score);
         for (let index = 0; index < score; index++) {
-            reviewTable += "<img src='resources/img/product_detail/star.svg' />";
+            reviewTable += "<img src='resources/img/product_detail/star_color.svg' />";
         }
         for (let index = 0; index < 5 - score; index++) {
             reviewTable += "<img src='resources/img/product_detail/star_gray.svg' />";
@@ -226,9 +240,11 @@ let unauthorized = () => {
 }
 
 let subCtgSelects = (list) => {
+	// console.log(list);
+	
     let options = "";
     for (const item of list) {
-		console.log(item);
+		// console.log(item);
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
     options += "<option value='null'>선택 안함</option>";
@@ -271,4 +287,84 @@ let ajaxReq = (url, data, msg) => {
         	console.log(err);
         }
     });
+}
+
+
+
+/**
+ * poduct - createProduct.jsp
+ */
+let inputCheck = (e) => {
+    // 입력된 값이 숫자인지 확인
+    if (numberCheck(e.target.value)) {
+        e.target.value = "0"; // 입력값 초기화
+    }
+    // 소수점 제거하여 정수로 만듦
+    e.target.value = parseInt(e.target.value);
+}
+
+let numberCheck = (n) => {
+    // 입력된 값이 숫자인지 확인
+    if (isNaN(n)) {
+        alert('숫자를(을) 입력하세요.');
+        return true;
+    }
+    return false;
+}
+
+let nullCehck = (n, message) => {
+    if (n == null || n == "") {
+        alert(message + '를(을) 입력하세요.');
+        return true;
+    }
+    return false;
+}
+
+let ctgCheck = () => {
+    let sub = $("#subcategory").val();
+    if(sub == null || sub == "") {
+        let sup = $("#category").val();
+        if(sup == null || sup == "") {
+            alert("카테고리를 선택하세요.");
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+let dateCheck = () => {
+    // 사용자가 선택한 날짜를 가져옴
+    let selectedDate =  $("#startDate").val();
+
+    // 사용자가 직접 입력한 날짜인지 확인
+    let isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(selectedDate);
+    if (!isValidDate) {
+        alert("올바른 날짜 형식을 입력하세요 (YYYY-MM-DD).");
+        return; // 날짜 형식이 올바르지 않으면 함수를 종료
+    }
+
+    // 현재 날짜를 가져옴
+    let currentDate = new Date().toISOString().slice(0, 10);
+
+    // 사용자가 선택한 날짜와 현재 날짜를 비교
+    if (selectedDate < currentDate) {
+        alert("현재 이후 날짜로만 상품을 등록할 수 있습니다.");
+        return true;
+    }
+    return false;
+}
+
+let ctgOptionAdd = (list, selector) => {
+    let options = "";
+    for (const item of list) {
+        options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
+    }
+    options += "<option value='null'>선택 안함</option>";
+    
+    $(selector).html(options);
+}
+
+let ctgAjax = () => {
+	ajaxComReq()
 }

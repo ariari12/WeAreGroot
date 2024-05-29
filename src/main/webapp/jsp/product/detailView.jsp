@@ -136,6 +136,19 @@
 			$("#review-frame").hide();
 			$("#qna-frame").show();
 		});
+		
+		let keepClick = false;
+		$("#keep-btn").click(() => {
+			keepClick = !keepClick;
+			if(keepClick) {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_color.svg");
+				viweMsg("찜 등록 되었습니다.")
+			}
+			else {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_gray.svg");
+				viweMsg("찜 해제 되었습니다.")
+			}
+		});
 	});
 </script>
 
@@ -164,20 +177,23 @@
 		<div class="reviews">
 			<%-- 찜 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/heart.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/heart_color.svg" />
 		        <div class="rv-text">0.0</div>
 		        <div class="rv-text">(123)</div>
 		    </div>
 		    <%-- 상품 후기 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/star.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/star_color.svg" />
 		        <div class="rv-text">${score}</div>
 		        <div class="rv-text">(${cnt})</div>
 		    </div>
 		</div>
 		
-		<div style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
-	        <img style="height: 80px;" src="resources/img/product_detail/heart.svg" />
+		
+		
+		<%-- todo: 찜하기 추가할 것 --%>
+		<div id="keep-btn" style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
+	        <img id="keep-img" style="height: 80px;" src="resources/img/product_detail/heart_gray.svg" />
 	        <span style="
 	        position: absolute;
 		    width: 150px;
@@ -216,10 +232,6 @@
 		    </div>
 		    <% 	} %>
 		</div>
-
-		
-		<%-- todo: 찜하기 추가할 것 --%>
-		
 
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
@@ -293,6 +305,7 @@
 		        </div>
 		    </div>
 		
+	    	<%-- 상품설명 --%>
 		    <div id="info-frame">
 			    <div class="prd-advice">
 			        <img src="resources/img/product_detail/flower.svg" />
@@ -304,15 +317,15 @@
 			    <div id="big-img"></div>
 		    </div>
 		    
+	    	<%-- 상품후기 --%>
 		    <div id="review-frame">
-		    	<%-- 상품후기 추가 --%>
 		    	<div style="height: 1000px; margin-top: 50px;">
 				    <div class="review-container"></div>
 		    	</div>
 		    </div>
 		    
+	    	<%-- 상품문의 추가 --%>
 		    <div id="qna-frame">
-		    	<%-- 상품문의 추가 --%>
 		    	<div style="height: 1000px; margin-top: 50px; font-size: 40px;">
 		    		<h1>상품문의</h1>
 		    	</div>
