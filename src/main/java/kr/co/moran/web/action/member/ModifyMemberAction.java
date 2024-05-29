@@ -17,7 +17,11 @@ public class ModifyMemberAction implements Action {
 		try {
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/html;charset=UTF-8");
-			String mId = req.getParameter("mId");
+			HttpSession session=req.getSession();
+			MemberDAO dao = new MemberDAO();
+			AddressVO avo = new AddressVO();
+			MemberVO vo =  (MemberVO) session.getAttribute("memberVO");
+			int mId = vo.getMId();
 			String name = req.getParameter("name");
 			String nick = req.getParameter("nick");
 			String email = req.getParameter("email");
@@ -27,17 +31,21 @@ public class ModifyMemberAction implements Action {
 			String phone = req.getParameter("phone");
 			String birth = req.getParameter("birth"); 
 			String gender = req.getParameter("gender");
-			MemberDAO dao = new MemberDAO();
-			MemberVO vo = new MemberVO();
-			AddressVO avo = new AddressVO();
+			
+			System.out.println("addr1 = "+addr1);
+			System.out.println("addr2 = "+addr2);
+			System.out.println("zipcode = "+zipcode);
+			
 			
 			// 주소 세팅
 			avo.setAddr1(addr1);
 			avo.setAddr2(addr2);
 			avo.setZipcode(zipcode);
 			
+			System.out.println("[ModifyMemberAction] avo = "+avo);
+			
 			// 회원 세팅
-			vo.setMId(Integer.parseInt(mId));
+			vo.setMId(mId);
 			vo.setName(name);
 			vo.setNick(nick);
 			vo.setEmail(email);								
@@ -52,9 +60,8 @@ public class ModifyMemberAction implements Action {
 			
 			
 			if(dao.modifyMemberWithAddressById(vo)) {
-				HttpSession session = req.getSession();
 				session.setAttribute("memberVO", vo);
-				System.out.println("세션 저장 성공"+session.getAttribute("memberVO"));
+				System.out.println("세션 저장 성공"+session.getAttribute("memberVO"));				
 			}
 			
 			

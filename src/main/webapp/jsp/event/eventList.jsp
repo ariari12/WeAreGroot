@@ -18,7 +18,6 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 <script src="resources/js/event.js"></script>
-
 </head>
 <body>
 
@@ -27,7 +26,7 @@
 			<span class="menuTitle fs-1">이벤트</span>
 		</div>
 		<c:forEach var="eList" items="${eList}">
-			<div class="eventBox">
+			<div class="eventBox col-md-3">
 				<input class="eId" type="hidden" name="eId" value="${eList.eId}"/>
 				<div class="eventThum">
 				<c:choose>

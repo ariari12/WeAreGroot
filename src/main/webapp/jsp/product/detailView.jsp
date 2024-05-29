@@ -31,7 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
-<script src="resources/js/product_detail.js"></script>
+<script src="resources/js/product_detail.js?v=<%=System.currentTimeMillis() %>"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/product_detail.css">
@@ -245,16 +245,16 @@
 		<div id="prdImgs"></div>
 		
 		<div class="prd-pay-opt">
-		    <div class="shop-bak">
+		    <div class="shop-bak" id="addCart">
 		        <div class="btn-text">
-		        	<%-- 장바구니 url 추가 --%>
-		        	<a href="">장바구니 담기</a>
+		        	<%-- AJAX --%>
+		        	장바구니 담기
 	        	</div>
 		    </div>
 		    
 		    <div class="buy-now">
-		        <div class="btn-text">
-		        	<%-- 구매 url 추가 --%>
+		        <div class="btn-text" id="order">
+		        	<%-- AJAX --%>
 		        	<a href="">바로 구매</a>
 				</div>
 		    </div>
@@ -320,6 +320,12 @@
 		</div>
 	</div>
 	<%-- contents end --%>
+	
+	<% // 수량 %>
+	<c:set var="quantity" value="${productVO.quantity}" />
+    <script type="text/javascript">
+        let quantity = "${quantity}";
+    </script>
 </div>
 
 <%-- footer --%>

@@ -1,0 +1,144 @@
+a {
+	text-decoration-line: none;
+	color: #000;
+}
+
+.total-product {
+	font-size: 14px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, auto);
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 0 0;
+}
+
+.amount {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.sub-text {
+    color: #666;
+    font-size: 15px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.amount, .sub_text {
+    text-align: center;
+}
+
+.operator {
+    font-size: 30px;
+}
+
+.cart-text {
+    text-align: left;
+    margin: 100px 0 0 0;
+}
+
+.cart-header {
+    display: flex; 
+    align-items: center; 
+    border-bottom: 1px solid #ddd; 
+    padding: 10px 0;
+}
+
+.cart-th-left {
+    flex: 0 0 45%;
+    text-align: left;
+}
+
+.cart-th-center {
+    flex: 0 0 25%; 
+    text-align: center;
+}
+
+.cart-checkbox {
+    margin-top: 3px;
+}
+
+.cart-item {
+    display: flex; 
+    align-items: center; 
+    border-bottom: 1px solid #ddd; 
+    padding: 10px 0;
+}
+
+
+.cart-item-th-cetner {
+    flex: 0 0 5%; 
+    text-align: center;
+}
+
+.cart-item-th-left {
+    flex: 0 0 45%; 
+    text-align: left;
+}
+
+.product-img {
+    width: 80px;
+    height: 80px;
+    margin: 5px 5px 5px;
+}
+
+.product-name {
+    vertical-align: top; 
+    position: relative; 
+    top: 10px;
+}
+
+.cart-cnt {
+    flex: 0 0 25%; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.product-cnt {
+	background-color: transparent;
+    text-align: center; 
+    width: 50px; 
+    margin: 0 5px;
+    width: 50px;
+    text-align: center;
+    border-width: 0;
+    outline: none;
+}
+
+.cart-actions {
+    border-bottom: 1px solid #ddd; 
+    padding: 15px 20px;
+}
+
+.product-price {
+    flex: 0 0 25%; 
+    text-align: center;
+}
+
+.cart-summary {
+    border-bottom: 1px solid #ddd; 
+    padding: 10px 20px;
+}
+
+.cart-order{
+    border-top: 1px solid #ddd; 
+    padding: 10px 0; 
+    text-align: center;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+
+/* Firefox  */
+input[type='number'] {
+-moz-appearance: textfield;
+}

@@ -38,38 +38,72 @@ public class BoardDAO {
 		
 	}
 	
+//	<!-- 노하우 게시글 총 갯수 -->
+	public int getTotalCountKH() {
+	    SqlSession ss = factory.openSession(true);
+	    int count = ss.selectOne("kr.co.moran.board.SelectTotalCountKH");
+	    ss.close();
+	    return count;
+	}
 	
 //	<!-- 노하우 전체보기(최신순) -->
-	public List<HashMap<String, Object>> selectAllKH(){
+	public List<HashMap<String, Object>> selectAllKH(int offset, int limit){
 		SqlSession ss = factory.openSession(true);
-		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKH");
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("limit", limit);
+		
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKH",params);
 		
 		ss.close();
 		return list;
 	}
 	
 //	<!-- 노하우 전체보기(인기순) -->	
-	public List<HashMap<String, Object>> selectAllKHOrderByViewCntDesc(){
+	public List<HashMap<String, Object>> selectAllKHOrderByViewCntDesc(int offset, int limit){
 		SqlSession ss = factory.openSession(true);
-		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc");
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("limit", limit);
+		
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllKHOrderByViewCntDesc",params);
 		
 		ss.close();
 		return list;
 	}
 	
+//	<!-- QnA 게시글 총 갯수 -->
+	public int getTotalCountQnA() {
+	    SqlSession ss = factory.openSession(true);
+	    int count = ss.selectOne("kr.co.moran.board.SelectTotalCountQnA");
+	    ss.close();
+	    return count;
+	}
+	
 //	<!-- QnA 전체보기(최신순) -->
-	public List<HashMap<String, Object>> selectAllQnA(){
+	public List<HashMap<String, Object>> selectAllQnA(int offset, int limit){
 		SqlSession ss = factory.openSession(true);
-		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnA");
 		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("limit", limit);
+		
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnA",params);
 		ss.close();
 		return list;
 	}
 	
 //	<!-- QnA 전체보기(인기순) -->
-	public List<HashMap<String, Object>> selectAllQnAOrderByViewCntDesc(){
+	public List<HashMap<String, Object>> selectAllQnAOrderByViewCntDesc(int offset, int limit){
 		SqlSession ss = factory.openSession(true);
-		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc");
+		
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", offset);
+		params.put("limit", limit);
+		
+		List<HashMap<String, Object>> list = ss.selectList("kr.co.moran.board.SelectAllQnAOrderByViewCntDesc", params);
 		
 		ss.close();
 		return list;
@@ -179,6 +213,16 @@ public class BoardDAO {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.board.InsertBoardImg", vo);
 		ss.close();
-		
 	}
+	
+//	<!-- 글에 댓글이 몇개 있는지 구하기 -->
+	public List<HashMap<String, Object>> selectCountAllCommentBybId(){
+		SqlSession ss = factory.openSession(true);
+		List<HashMap<String, Object>> hm = ss.selectList("kr.co.moran.board.SelectCountAllCommentBybId");
+		
+		ss.close();
+		return hm;
+	}
+	
+	
 }

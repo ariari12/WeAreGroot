@@ -2,6 +2,7 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
 <configuration>
 	<properties resource="config/db.properties" />
 	<environments default="dev">
@@ -19,7 +20,6 @@
 
 	<mappers>
 		<!-- <mapper resource="mapper/dept.xml"/> -->
-
 		<mapper resource="mapper/member.xml" />
 		<mapper resource="mapper/event.xml" />
 		<mapper resource="mapper/board.xml" />
@@ -28,6 +28,6 @@
 		<mapper resource="mapper/category.xml" />
 		<mapper resource="mapper/keep.xml" />
 		<mapper resource="mapper/review.xml"/>
+		<mapper resource="mapper/cart.xml"/>
 	</mappers>
 </configuration>
-
