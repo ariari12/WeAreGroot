@@ -103,19 +103,12 @@ public class AddAction implements Action {
 		String pId;
 		switch (prd) {
 			case "view": // 등록 페이지 요청
-				// 페이지 리소스 반환
+				// 상위 카테고리 데이터 전달
+				ctgList = dao.ctSelectByParentIdIsNull();
 				req.setAttribute("masterList", ctgList);
+
+				// 페이지 리소스 반환
 				return "jsp/product/createProduct.jsp";
-				
-			case "sub":
-				/*
-				 * 상위 카테고리 데이터 요청
-				 * 상위 카테고리 데이터들을 반환
-				 */
-				
-				// JSON 객체 생성 후 AJAX 응답
-				return ajaxToJsonArray();
-				
 			case "confirm":
 				/*
 				 * 등록 완료 요청

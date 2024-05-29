@@ -109,6 +109,8 @@ ORDER BY pd_id
 LIMIT 0, 12;
 
 
+select * from PRODUCT;
+
 
 
 
