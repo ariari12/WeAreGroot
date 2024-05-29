@@ -2,7 +2,6 @@
 package kr.co.moran.web.action.product;
 
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

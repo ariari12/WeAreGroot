@@ -19,6 +19,7 @@
 	ProductVO v = new ProductDAO().pdSelsctOneByPId( Integer.parseInt(prdId.toString()) );
 %>
 <title><%=v.getName() %></title>
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -30,7 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
-<script src="resources/js/product_detail.js"></script>
+<script src="resources/js/product_detail.js?v=<%=System.currentTimeMillis() %>"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/product_detail.css">
@@ -135,6 +136,19 @@
 			$("#review-frame").hide();
 			$("#qna-frame").show();
 		});
+		
+		let keepClick = false;
+		$("#keep-btn").click(() => {
+			keepClick = !keepClick;
+			if(keepClick) {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_color.svg");
+				viweMsg("찜 등록 되었습니다.")
+			}
+			else {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_gray.svg");
+				viweMsg("찜 해제 되었습니다.")
+			}
+		});
 	});
 </script>
 
@@ -163,20 +177,23 @@
 		<div class="reviews">
 			<%-- 찜 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/heart.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/heart_color.svg" />
 		        <div class="rv-text">0.0</div>
 		        <div class="rv-text">(123)</div>
 		    </div>
 		    <%-- 상품 후기 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/star.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/star_color.svg" />
 		        <div class="rv-text">${score}</div>
 		        <div class="rv-text">(${cnt})</div>
 		    </div>
 		</div>
 		
-		<div style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
-	        <img style="height: 80px;" src="resources/img/product_detail/heart.svg" />
+		
+		
+		<%-- todo: 찜하기 추가할 것 --%>
+		<div id="keep-btn" style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
+	        <img id="keep-img" style="height: 80px;" src="resources/img/product_detail/heart_gray.svg" />
 	        <span style="
 	        position: absolute;
 		    width: 150px;
@@ -216,10 +233,6 @@
 		    <% 	} %>
 		</div>
 
-		
-		<%-- todo: 찜하기 추가할 것 --%>
-		
-
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
 			<div class="admin-btn">
@@ -244,16 +257,16 @@
 		<div id="prdImgs"></div>
 		
 		<div class="prd-pay-opt">
-		    <div class="shop-bak">
+		    <div class="shop-bak" id="addCart">
 		        <div class="btn-text">
-		        	<%-- 장바구니 url 추가 --%>
-		        	<a href="">장바구니 담기</a>
+		        	<%-- AJAX --%>
+		        	장바구니 담기
 	        	</div>
 		    </div>
 		    
 		    <div class="buy-now">
-		        <div class="btn-text">
-		        	<%-- 구매 url 추가 --%>
+		        <div class="btn-text" id="order">
+		        	<%-- AJAX --%>
 		        	<a href="">바로 구매</a>
 				</div>
 		    </div>
@@ -292,6 +305,7 @@
 		        </div>
 		    </div>
 		
+	    	<%-- 상품설명 --%>
 		    <div id="info-frame">
 			    <div class="prd-advice">
 			        <img src="resources/img/product_detail/flower.svg" />
@@ -303,37 +317,15 @@
 			    <div id="big-img"></div>
 		    </div>
 		    
+	    	<%-- 상품후기 --%>
 		    <div id="review-frame">
-		    	<%-- 상품후기 추가 --%>
 		    	<div style="height: 1000px; margin-top: 50px;">
-				    <div class="review-container">
-				        <table id="tabel-1">
-				            <tr>
-				                <td>userone 님</td>
-				                <td>2024-05-24</td>
-				            </tr>
-				            <tr>
-				                <td colspan="2" class="score">
-				                    4
-				                </td>
-				            </tr>
-				            <tr>
-				                <td>
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                    <img class="rv_imgs" src="resources/img/product_detail/flower.svg" alt="">
-				                </td>
-				            </tr>
-				            <tr>
-				                <td colspan="2">좋아요!</td>
-				            </tr>
-				        </table>
-			        </div>
+				    <div class="review-container"></div>
 		    	</div>
 		    </div>
 		    
+	    	<%-- 상품문의 추가 --%>
 		    <div id="qna-frame">
-		    	<%-- 상품문의 추가 --%>
 		    	<div style="height: 1000px; margin-top: 50px; font-size: 40px;">
 		    		<h1>상품문의</h1>
 		    	</div>
@@ -341,6 +333,12 @@
 		</div>
 	</div>
 	<%-- contents end --%>
+	
+	<% // 수량 %>
+	<c:set var="quantity" value="${productVO.quantity}" />
+    <script type="text/javascript">
+        let quantity = "${quantity}";
+    </script>
 </div>
 
 <%-- footer --%>

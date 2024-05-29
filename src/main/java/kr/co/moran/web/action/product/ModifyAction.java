@@ -139,6 +139,7 @@ public class ModifyAction implements Action {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();
