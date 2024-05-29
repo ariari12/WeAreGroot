@@ -90,7 +90,7 @@
 		LEFT JOIN ADDRESS AS a	
 		ON m.m_id = a.m_id
 		WHERE
-			m.m_email = #{email} AND m.m_pw = #{pw}
+			m.m_email = #{email} AND m.m_pw = #{pw} AND m.m_is_maintain = 0
 			
   	</select>
   	
@@ -120,7 +120,7 @@
 			MEMBER AS m
 		ON m.m_id = a.m_id
 		WHERE
-			m.m_email = #{email}
+			m.m_email = #{email} AND m.m_is_maintain = 0
   	</select>
   	
   	<!-- 고쳐야 할것 -->
@@ -173,7 +173,7 @@
 		FROM
 			MEMBER
 		WHERE
-			m_id = #{mId}  	
+			m_id = #{mId} AND m.m_is_maintain = 0
   	</select>
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">

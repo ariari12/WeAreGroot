@@ -21,7 +21,7 @@
 		FROM BOARD b
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
-		WHERE b.m_id= #{mId}
+		WHERE b.m_id= #{mId} AND b.b_is_maintain = 0
 	</select>
 
 	<!-- 글에 댓글이 몇개 있는지 구하기 -->
