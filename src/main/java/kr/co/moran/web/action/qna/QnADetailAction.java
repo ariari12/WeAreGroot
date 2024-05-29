@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.QnA;
+package kr.co.moran.web.action.qna;
 
 import java.util.List;
 

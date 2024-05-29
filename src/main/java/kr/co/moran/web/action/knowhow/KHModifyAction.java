@@ -1,11 +1,12 @@
-package kr.co.moran.web.action.QnA;
+package kr.co.moran.web.action.knowhow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
+import kr.co.moran.web.vo.BoardVO;
 
-public class QnAModifyAction implements Action {
+public class KHModifyAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -19,7 +20,7 @@ public class QnAModifyAction implements Action {
 		dao.modifyKHBybId(bId, title, contents);
 		
 	
-		return "board?cmd=qna";
+		return "board?cmd=kh";
 	}
 
 }

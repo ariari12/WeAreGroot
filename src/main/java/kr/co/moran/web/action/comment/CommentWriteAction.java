@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.Comment;
+package kr.co.moran.web.action.comment;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

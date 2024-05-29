@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.QnA;
+package kr.co.moran.web.action.qna;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.Comment;
+package kr.co.moran.web.action.comment;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.Comment.CommentDeleteAction;
+import kr.co.moran.web.action.comment.CommentDeleteAction;
 import kr.co.moran.web.action.event.EventDetailAction;
 import kr.co.moran.web.action.event.EventListAction;
 

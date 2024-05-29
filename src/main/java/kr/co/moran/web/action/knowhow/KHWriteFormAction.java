@@ -1,15 +1,15 @@
-package kr.co.moran.web.action.QnA;
+package kr.co.moran.web.action.knowhow;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 
-public class QnAWriteFormAction implements Action {
+public class KHWriteFormAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		return "views/qnaWriteForm.jsp";
+		System.out.println("khWriteForm.jsp");
+		return "views/khWriteForm.jsp";
 	}
 
 }

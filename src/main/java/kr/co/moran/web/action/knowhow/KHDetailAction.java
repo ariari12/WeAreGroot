@@ -1,4 +1,4 @@
-package kr.co.moran.web.action.KnowHow;
+package kr.co.moran.web.action.knowhow;
 
 import java.util.List;
 

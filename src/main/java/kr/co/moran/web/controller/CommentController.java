@@ -9,12 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
-import kr.co.moran.web.action.Comment.CommentDeleteAction;
-import kr.co.moran.web.action.Comment.CommentModifyAction;
-import kr.co.moran.web.action.Comment.CommentModifyLikeCntAction;
-import kr.co.moran.web.action.Comment.CommentWriteAction;
-import kr.co.moran.web.action.Comment.CommentWriteAjax;
-import kr.co.moran.web.action.Comment.ReComntListView;
+import kr.co.moran.web.action.comment.CommentDeleteAction;
+import kr.co.moran.web.action.comment.CommentModifyAction;
+import kr.co.moran.web.action.comment.CommentModifyLikeCntAction;
+import kr.co.moran.web.action.comment.CommentWriteAction;
+import kr.co.moran.web.action.comment.CommentWriteAjax;
+import kr.co.moran.web.action.comment.ReComntListView;
 
 @WebServlet("/comment")
 public class CommentController extends HttpServlet{
