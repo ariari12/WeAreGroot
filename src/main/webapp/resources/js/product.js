@@ -46,18 +46,21 @@ let msgRedirect = (msg, redUrl) => {
 }
 
 let ajaxComReq = (url) => {
-    $.ajax({
-        type: "post",
-        url: url,
-        dataType: "json",
-        success: function (data) {
-           	return data;
-        },
-        error: (data, status, err) => {
-            console.log("실패");
-            console.log(data);
-            console.log(err);
-        }
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "post",
+            url: url,
+            dataType: "json",
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (data, status, err) {
+                console.log("실패");
+                console.log(data);
+                console.log(err);
+                reject(err);
+            }
+        });
     });
 }
 
@@ -345,16 +348,22 @@ let ctgCheck = () => {
 }
 
 let imgCheck = () => {
-	if ($("#title-img").attr("src") == null 
-		|| $("#title-img").attr("src") == "") {
-    		viweMsg("대표 이미지를 첨부해주세요.");
-    		return false;
+    if ($("#title-img").val() == null
+        || $("#title-img").val() == "") {
+            viweMsg("대표 이미지를 첨부해주세요.");
+            return false;
     }
     else {
-		let imgs = $("#inform-imgs");
-		console.log(imgs)
-		
-	}
+        let imgs = $("#inform-imgs").children();
+        for(img of imgs) {
+            if(img.files[0].size > (5 *1024 *1024)
+            ) {
+                viweMsg("파일 사이즈는 5MB 이하로 해주세요.");
+                return false;
+            }
+        }
+        console.log(imgs)
+    }
 }
 
 let dateCheck = () => {
@@ -380,6 +389,8 @@ let dateCheck = () => {
 }
 
 let ctgOptionAdd = (list, selector) => {
+	console.log(list);
+	
     let options = "";
     for (const item of list) {
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
@@ -390,6 +401,13 @@ let ctgOptionAdd = (list, selector) => {
     $(selector).html(options);
 }
 
-let ctgAjax = () => {
-	ajaxComReq()
+let ctgAjax = async() => {
+    try {
+        const data = await ajaxComReq(
+			"./product?cmd=add&type=prd&prd=subCtg&cId="
+			 + $("select#sup-ctg option:selected").val());
+        ctgOptionAdd(data.ctgList, "select#sub-ctg");
+    } catch (err) {
+        console.error("하위 카테고리 가져오기 실패:", err);
+    }
 }

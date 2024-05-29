@@ -66,7 +66,6 @@
 	}
 %>
 
-
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -230,7 +229,6 @@
             else if (imgCheck) {
             	return false;
             }
-            }
             else if (nullCehck($("#price"), "가격")
                 || nullCehck($("#quantity"), "판매 개수")
                 || nullCehck($("#wholesal"), "도매가") 
@@ -243,10 +241,7 @@
             }
         });
         
-        $("#sup-ctg").click(() => {
-        	console.log("클릭");
-        	// ctgOptionAdd("");
-        });
+        $("select#sup-ctg").on("change", () => ctgAjax());
     });
 </script>
 

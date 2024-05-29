@@ -109,9 +109,6 @@ public class AddAction implements UploadAction {
 				String name = req.getParameter("name");
 				cParantId = cParantId.equals("") ? null : cParantId;
 				
-				// System.out.println("cParentId: " + cParantId);
-				// System.out.println("name:" + name);
-				
 				dao.ctAdd(cParantId, name);
 
 				// ajax 반환
@@ -124,14 +121,34 @@ public class AddAction implements UploadAction {
 
 	// product
 	private String productAdd(String prd) {
+		String cId;
 		switch (prd) {
 			case "view": // 등록 페이지 요청
 				// 상위 카테고리 데이터 전달
 				ctgList = dao.ctSelectByParentIdIsNull();
+				
+				// 최상위 카테고리가 없는 경우
+				if(ctgList.size() < 1) {
+					System.out.println("카테고리 테이블 레코드가 없습니다.");
+					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.\n카테고리 등록으로 이동합니다.");
+					return "jsp/product/createCategory.jsp";
+				}
 				req.setAttribute("masterList", ctgList);
-
+				
 				// 페이지 리소스 반환
 				return "jsp/product/createProduct.jsp";
+				
+			case "subCtg" :
+				if(mlpReq != null) cId = mlpReq.getParameter("cId");
+				else cId = req.getParameter("cId");
+//				System.out.println("cId: " + cId);
+				
+				// 기본 키 (cId)가 파라미터로 넘어오지 않은 겨우
+				if(cId == null) req.setAttribute("redUrl", "product?cmd=add&type=prd&prd=view");
+				ctgList = dao.ctSelectByParentId(Integer.parseInt(cId));
+				
+				// JSON 객체 생성 후 AJAX 응답
+				return ajaxToJsonArray();
 				
 			case "confirm":
 				/*
@@ -150,7 +167,7 @@ public class AddAction implements UploadAction {
 				System.out.println(subCtg);
 				System.out.println(supCtg);
 				
-				int cId = (subCtg == null || subCtg.equals("") ?
+				int cno = (subCtg == null || subCtg.equals("") ?
 						Integer.parseInt(supCtg) : Integer.parseInt(subCtg) );
 				
 				String name = mlpReq.getParameter("prdName");
@@ -194,12 +211,13 @@ public class AddAction implements UploadAction {
 					+ ", managelevelCodeNm:" + managelevelCodeNm
 					+ " }";
 				
-				System.out.println("--- prd ----");
 				ProductVO productVO = new ProductVO(
-					pId, cId, name, price, description, 
+					pId, cno, name, price, description, 
 					quantity, wholesale, dcRate, 
 					createDate, isMaintain, retetionDate);
-				System.out.println(productVO);
+				
+//				System.out.println("--- prd ----");
+//				System.out.println(productVO);
 				dao.addProduct(productVO);
 				
 				pId = dao.lastPId();
@@ -220,10 +238,10 @@ public class AddAction implements UploadAction {
 					dao.addProductImg(new ProductImgVO(pId, 2, "product_Img/" +img3));
 				}
 				
-				System.out.println("\n--- img ----");
-				System.out.println("img1:product_Img/" + img1);
-				System.out.println("img2:product_Img/" + img2);
-				System.out.println("img3:product_Img/" + img3);
+//				System.out.println("\n--- img ----");
+//				System.out.println("img1:product_Img/" + img1);
+//				System.out.println("img2:product_Img/" + img2);
+//				System.out.println("img3:product_Img/" + img3);
 				
 				req.setAttribute("message", "상품 등록 완료");
 				req.setAttribute("redUrl", "product");
@@ -269,7 +287,6 @@ public class AddAction implements UploadAction {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		System.out.println(jsonObject.toJSONString());
 
 		// 리소스 반환
 		return "ajax";

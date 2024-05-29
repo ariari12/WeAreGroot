@@ -60,7 +60,6 @@ public class ModifyAction implements UploadAction {
 		String type = mlpReq == null ? req.getParameter("type")
 									: mlpReq.getParameter("type");
 		String nextUrl = null;
-		
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
 				String ctg = req.getParameter("ctg");
