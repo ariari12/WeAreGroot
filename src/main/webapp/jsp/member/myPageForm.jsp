@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- jstl function 기능 사용하기 위한 태그라이브러리 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -1407,7 +1409,7 @@ a {
 							<div class="frame-17">
 								<input type="text" id="zipcode" name="zipcode"
 									class="text-wrapper-23"
-									value="${sessionScope.memberVO.addressVO.addr1}"
+									value="${sessionScope.memberVO.addressVO.zipcode}"
 									style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
 							</div>
 							<div class="frame-18">
@@ -1603,15 +1605,23 @@ a {
 					<div class="text-wrapper-28">전체보기&gt;</div>
 				</div>
 
-				<div class="frame-25">
-
-				<c:choose>
+				<div class="frame-25">				
+				<c:choose>				
 					<c:when test="${not empty requestScope.boardList && requestScope.boardList.size() > 0 }">
-						<c:forEach var="i" begin="1" end="5">
+						<c:forEach var="i" begin="0" end="${Math.min(requestScope.boardList.size()-1, 4)}">
 							<div class="frame-36">
 								<div class="text-wrapper-35">${requestScope.boardList.get(i).get("title")}</div>
 								<div class="frame-37">
-									<div class="text-wrapper-36">${requestScope.boardList.get(i).get("contents")}</div>
+									<div class="text-wrapper-36">
+										<c:choose>
+											<c:when test="${requestScope.boardList.get(i).get('contents').length()>10 }">
+												${fn:substring(requestScope.boardList.get(i).get("contents"),0,10)} ......
+											</c:when>
+											<c:otherwise>
+												${requestScope.boardList.get(i).get("contents")}												
+											</c:otherwise>											
+										</c:choose>																				
+									</div>
 								</div>
 								<div class="frame-38">
 									<div class="frame-39">
@@ -1631,11 +1641,11 @@ a {
 												<div class="rectangle-2"></div>
 												<img class="vector-3" src="img/image.svg" />
 											</div>
-											<div class="text-wrapper-38">13</div>
+											<div class="text-wrapper-38">${requestScope.boardList.get(i).get("count")}</div>
 										</div>
 									</div>
 									<div class="frame-39">
-										<div class="text-wrapper-39">${requestScope.boardList.get(i).get("regdate")}</div>
+										<div class="text-wrapper-39">${requestScope.boardList.get(i).get("regDate")}</div>
 										<div class="text-wrapper-39">22:58</div>
 									</div>
 								</div>
