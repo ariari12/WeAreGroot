@@ -34,7 +34,7 @@ public class QnAListAction implements Action {
         
 
         
-        List<HashMap<String, Object>> hs = dao.selectCountAllCommentBybId();
+        List<HashMap<String, Object>> hs = dao.selectCountAllComment();
         
         for (HashMap<String, Object> boardhashmap : boardList) {
         	boardhashmap.put("count", 0);
@@ -44,11 +44,7 @@ public class QnAListAction implements Action {
     			}
     		}
 		}
-
-        
-        System.out.println("boardList : " + boardList);
-        System.out.println("count : " + hs);
-        
+   
         int totalCount = dao.getTotalCountQnA();
         int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
 

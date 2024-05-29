@@ -14,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.moran.web.vo.BoardVO;
 import kr.co.moran.web.vo.CommentVO;
+import kr.co.moran.web.vo.LikeVO;
 
 public class CommentDAO {
 	public SqlSessionFactory factory;
@@ -80,12 +81,39 @@ public class CommentDAO {
 		ss.close();
 	}
 	
-//	<!-- 댓글 좋아요 -->
-	public void modifyCommentLikeCntBycId(int cId) {
+//	<!-- 댓글 좋아요 수 증가 -->
+	public void modifyCommentLikeCntPlusBycId(int cId) {
 		SqlSession ss = factory.openSession(true);
-		ss.update("kr.co.moran.comment.ModifyCommentLikeCntBycId", cId);
+		ss.update("kr.co.moran.comment.ModifyCommentLikeCntPlusBycId", cId);
+		ss.close();
+	}
+	
+//	<!-- 댓글 좋아요 수 감소 -->
+	public void modifyCommentLikeCntMinusBycId(int cId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.comment.ModifyCommentLikeCntMinusBycId", cId);
 		ss.close();
 	}
 	
 	
+	public void insertCommentLikeBycId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.insert("kr.co.moran.comment.InsertCommentLikeBycId", vo);
+		ss.close();
+	}
+	
+	public void deleteCommentLikeBycId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.delete("kr.co.moran.comment.DeleteCommentLikebycid", vo);
+		ss.close();
+	}
+	
+//	게시글 좋아요 여부 확인, 반환된 lvo를 참고하여 좋아요 여부 확인
+	public LikeVO SelectBoardLikeBybIdandmId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		LikeVO lvo = ss.selectOne("kr.co.moran.comment.SelectCommentLikeBybIdandmId", vo);
+		
+		ss.close();
+		return lvo;
+	}
 }

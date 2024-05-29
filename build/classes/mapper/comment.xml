@@ -47,15 +47,36 @@
 		WHERE c_id = #{cId}
 	</update>
 	
-	<!-- 댓글 좋아요 -->
-	<update id="ModifyCommentLikeCntBycId" parameterType="int">
+	<!-- 댓글 좋아요 수 증가-->
+	<update id="ModifyCommentLikeCntPlusBycId" parameterType="int">
 		UPDATE COMMENT
 		SET c_like_cnt = c_like_cnt + 1
 		WHERE c_id = #{cId}
 	</update>
 	
+	<!-- 댓글 좋아요 수 감소-->
+	<update id="ModifyCommentLikeCntMinusBycId" parameterType="int">
+		UPDATE COMMENT
+		SET c_like_cnt = c_like_cnt - 1
+		WHERE c_id = #{cId}
+	</update>
+	
+	<insert id="InsertCommentLikeBycId" parameterType="kr.co.moran.web.vo.LikeVO">
+		INSERT INTO LIKES(m_id, c_id, l_date)
+		VALUES(#{mId}, #{bId}, NOW())
+	</insert>
+	
+	<select id="SelectCommentLikeBybIdandmId" parameterType="kr.co.moran.web.vo.LikeVO" resultType="kr.co.moran.web.vo.LikeVO">
+		SELECT 
+			c_id as cId,
+			m_id as mId 
+		FROM LIKES
+		WHERE c_id = #{cId} AND m_id = #{mId}
+	</select>
+	
 	<!-- 댓글 삭제 -->
-	<delete id="DeleteComment">
-		DELETE FROM COMMENT WHERE c_id = #{cId}
+	<delete id="DeleteComment" parameterType="kr.co.moran.web.vo.LikeVO">
+		DELETE FROM COMMENT 
+		WHERE c_id = #{cId} AND m_id = #{mId}
 	</delete>
 </mapper>
