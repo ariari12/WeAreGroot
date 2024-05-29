@@ -108,6 +108,7 @@ public class MemberDAO {
 	}
 	public boolean modifyMemberWithAddressById(MemberVO vo) {
 		try (SqlSession ss = factory.openSession(true)) {
+			System.out.println("[MemberDAO] "+vo);
 			ss.update("kr.co.moran.web.member.modifyMemberWithAddressById",vo);
 			return true;
 		}catch (Exception e) {
