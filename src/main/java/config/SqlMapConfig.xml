@@ -29,5 +29,6 @@
 		<mapper resource="mapper/keep.xml" />
 		<mapper resource="mapper/review.xml"/>
 		<mapper resource="mapper/cart.xml"/>
+		<mapper resource="mapper/productTest.xml"/>
 	</mappers>
 </configuration>

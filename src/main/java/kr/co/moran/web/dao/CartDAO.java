@@ -10,7 +10,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import kr.co.moran.web.vo.cart.CartVO;
 import kr.co.moran.web.vo.cart.ProductCartVO;
 
 public class CartDAO {
