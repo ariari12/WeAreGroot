@@ -10,8 +10,6 @@ public class OrderDetailAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		
 		String pId = req.getParameter("pd_id");
-		
-		
 		return "/jsp/order/orderTest.jsp";
 	}
 

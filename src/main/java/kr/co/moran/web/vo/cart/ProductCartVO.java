@@ -1,4 +1,4 @@
-package kr.co.moran.web.vo.cartTest;
+package kr.co.moran.web.vo.cart;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

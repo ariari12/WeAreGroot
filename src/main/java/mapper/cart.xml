@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="kr.co.moran.web.cartTest">
+  <mapper namespace="kr.co.moran.web.cart">
   
   	<insert id="insertCart" parameterType="hashmap" >
 		INSERT INTO MEMBER_CART (m_id, pd_id, mc_cnt) VALUE (#{mId}, #{pId}, #{cnt})
@@ -25,7 +25,7 @@
    		SELECT COUNT(1) FROM PRODUCT WHERE pd_id = #{pId} AND pd_quantity >= #{cnt}
    	</select>
   	
-  	<select id="selectCart" parameterType="int" resultType="kr.co.moran.web.vo.cartTest.ProductCartVO">
+  	<select id="selectCart" parameterType="int" resultType="kr.co.moran.web.vo.cart.ProductCartVO">
 	  	SELECT 
 		    A.pd_id as pId, 
 		    A.c_id as cId, 

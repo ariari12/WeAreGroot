@@ -15,12 +15,11 @@
   				<property name="password" value="${password}"/>
   			</dataSource>
   		</environment>
-  	
   	</environments>
   	
   	<mappers>
   		<mapper resource="mapper/member.xml"/>
   		<mapper resource="mapper/productTest.xml"/>
-  		<mapper resource="mapper/cartTest.xml"/>
+  		<mapper resource="mapper/cart.xml"/>
   	</mappers>
   </configuration>
