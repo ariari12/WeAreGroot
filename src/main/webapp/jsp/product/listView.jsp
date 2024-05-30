@@ -43,7 +43,7 @@ a {
     margin-left: 22px;
     height: 35px;
     font-size: 18px;
-    line-height: 8px;
+    line-height: 17px;
     font-weight: 700;
 }
 </style>
@@ -92,7 +92,7 @@ let viewDetails = (no) => {
                 	
                 	<%-- 상품 내리기 --%>
                 	<% 	if(member != null && member.getAdmintype() > 0) { %>
-                	<input id="<%="del-btn" + v.getPId() %>" class="btn btn-danger del-btn" type="button" value="판매 중단" />
+                	<a href="<%="product?&cmd=delete&type=prd&prd="+v.getPId() %>" class="btn btn-danger del-btn">판매 중단</a>
                 	<% 	} %>
                 </div>
                 <div class="prd-tag">

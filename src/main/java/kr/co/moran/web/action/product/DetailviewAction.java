@@ -105,8 +105,9 @@ public class DetailviewAction implements Action {
 				rvImgJsonArray.add(imgVO.getRiImg());
 			}
 			
+			System.out.println(reviewVO.getMId());
 			MemberVO member = memberDAO.selectMemberById(reviewVO.getMId());
-//			System.out.println(member);
+			System.out.println(member);
 			
 			// reviewVO JSON 객체
 			JSONObject reviewJSON = new JSONObject();

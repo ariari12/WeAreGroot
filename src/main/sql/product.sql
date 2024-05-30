@@ -126,6 +126,24 @@ select * from PRODUCT;
 select pd_id from PRODUCT order by 1 desc LIMIT 0, 1;
 
 
+select * from PRODUCT where pd_id = 204880;
+
+select 	pd_id as pId,
+        c_id as cId,
+        pd_name as name,
+        pd_price as price,
+        pd_description as description,
+        pd_quantity as quantity,
+        pd_wholesale as wholesale,
+        pd_dcRate as dcRate,
+        pd_created_at as createDate,
+        pd_is_maintain as isMaintain,
+        pd_retention_period as retetionDate
+from MORANMORAN.PRODUCT
+where pd_is_maintain = 0 and pd_id = 204880;
+
+SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
+
 -- test insert --
 INSERT INTO MORANMORAN.PRODUCT (
     c_id, pd_name, pd_price, pd_description,
@@ -142,16 +160,14 @@ commit;
 
 -- update
 update PRODUCT_IMG set pi_img = 'product_Img/clover.jpg' where pi_no = 1;
-
-
-
+update PRODUCT
+set pd_is_maintain = 1,
+    pd_retention_period = (SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH))
+where pd_id
 
 -- ※ delete --
 delete from ORDERS where pd_id in (13206, 14687, 204838, 13339, 12966,
 204869, 204860, 14697, 12974, 204827);
-
-delete from PRODUCT where pd_id in (1, 204871);
-
 --13206
 --14687
 --204838
@@ -162,6 +178,11 @@ delete from PRODUCT where pd_id in (1, 204871);
 --14697
 --12974
 --204827
+
+
+delete from PRODUCT where pd_id = 204879;
+
+delete from PRODUCT where pd_id in (204881, 204882);
 
 delete from PRODUCT where pd_id = 1;
 

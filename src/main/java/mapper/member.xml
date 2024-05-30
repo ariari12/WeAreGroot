@@ -173,7 +173,7 @@
 		FROM
 			MEMBER
 		WHERE
-			m_id = #{mId} AND m.m_is_maintain = 0
+			m_id = #{mId} AND m_is_maintain = 0
   	</select>
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">

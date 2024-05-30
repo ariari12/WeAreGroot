@@ -88,8 +88,20 @@ public class DeleteAction implements Action {
 	}
 	
 	private String prdDelete() {
-		// TODO Auto-generated method stub
-		return null;
+		String nextUrl = null;
+		String prd = req.getParameter("prd");
+		if(prd != null) {
+			int pId = Integer.parseInt(prd);
+			dao.pdDeleteSet(pId);
+			req.setAttribute("message", "상품이 보관처리 되었습니다.\n"
+					+ "보관처리된 상품은 사용자한테 보이지 않습니다.\n"
+					+ "30일 이내 재등록이 가능합니다.\n"
+					+ "30일이 지나면 보관된 상품정보는 삭제됩니다.");
+			req.setAttribute("redUrl", "product");
+			nextUrl = "jps/product/inform.jsp";
+		}
+
+		return nextUrl;
 	}
 	
 	// AJAX 성공 JSON 응답

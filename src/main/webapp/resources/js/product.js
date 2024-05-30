@@ -6,7 +6,7 @@ const sAlert = Swal.mixin({
   	toast: true,
   	position: "center",
   	showConfirmButton: true,
-  	timer: 500,
+  	timer: 1000,
   	timerProgressBar: true,
 	allowEnterKey: true,
 	allowEscapeKey: true,
@@ -74,7 +74,7 @@ let descConvert = (data, name) => {
 	let textTag = "<div class='prd-text-tag-frame'>"
 	 + "<div class='tag-text'># " + name + "</div></div>";
 	 
-	console.log(data);
+	// console.log(data);
 	 
 	for(key in data) {
 		switch(key){
@@ -194,6 +194,7 @@ let productReview = (data) => {
 	let reviewTable = "";
 	let cnt = 1;
 	for(item of data["reviews"]) {
+		item.nick = item.nick === undefined ? "탈퇴한 회원" : item.nick;
 		
 		reviewTable += "<table id='tabel-" + cnt + "''><tr>"
 			+ "<td style='font-family: &quot;Pretendard Variable-Bold&quot;, Helvetica; width: 200px;'>"
@@ -224,7 +225,7 @@ let productReview = (data) => {
 	
 	let reviewHeight = $(".review-container").height() -2672;
 	reviewHeight = (reviewHeight < -1966 ? -1966 : reviewHeight);
-	console.log(reviewHeight);
+	// console.log(reviewHeight);
 	$("#footer").css("margin-top", reviewHeight + "px");
 }
 

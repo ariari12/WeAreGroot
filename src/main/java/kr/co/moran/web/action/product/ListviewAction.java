@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.ProductVO;
+import kr.co.moran.web.vo.member.MemberVO;
 
 public class ListviewAction implements Action {
 	private static final int PAGE_QUANTITY = 12;
@@ -24,6 +25,7 @@ public class ListviewAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		dao = new ProductDAO();
 		hotPIds = new ArrayList<Integer>();
+		dao.pdAutoDelete();
 		
 		// 페이지 수 가져오기 없을 경우 첫 페이지
 		int currentPage = req.getParameter("page") == null ? 0 
@@ -33,7 +35,6 @@ public class ListviewAction implements Action {
 		int startNum = currentPage * PAGE_QUANTITY;
 //		System.out.println("start: " + startNum);
 				
-		
 		String type = req.getParameter("type");
 		
 		// type에 맞는 상품목록을 가져올 list 선언
@@ -48,6 +49,9 @@ public class ListviewAction implements Action {
 			case "search": 
 				String keyword = req.getParameter("search");
 				prdlist = searchType(startNum, PAGE_QUANTITY, keyword); break;
+			case "save": 
+				prdlist = saveType(req, startNum, PAGE_QUANTITY); break;
+			
 			default: prdlist = noneType(startNum, PAGE_QUANTITY);
 		}
 //		System.out.println(hotPIds);
@@ -59,11 +63,26 @@ public class ListviewAction implements Action {
 		req.setAttribute("hotPIds", hotPIds);
 		
 		dao.closeSession(); // db session 종료
+		
+		if(type != null && type.equals("save"))
+			return "jsp/product/savelist.jsp";
+		
 		return "jsp/product/listView.jsp";
 	}
 	
 	
-	
+	// 보관처리된 상품 리시트 조회 *관리자 용*
+	private List<ProductVO> saveType(HttpServletRequest req, int start, int pageNum) {
+		MemberVO memberVO = (MemberVO)req.getAttribute("memberVO");
+		if(memberVO != null && memberVO.getAdmintype() > 0) {
+			// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+			maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
+			List<ProductVO> prdList = dao.pdSelectPage(start, pageNum);
+			return prdList;
+		}
+		return null;
+	}
+
 	// 타입이 없으면 상품리스트 전체가져오기
 	private List<ProductVO> noneType(int start, int pageNum) {		
 		// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가

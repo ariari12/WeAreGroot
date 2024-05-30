@@ -182,6 +182,7 @@ public class AddAction implements UploadAction {
 				Date retetionDate = null;
 				
 				// product description
+				String category = dao.ctSelectOneByCId(cno).getName();
 				String fncltyInfo = mlpReq.getParameter("fncltyInfo");
 				String speclmanageInfo = mlpReq.getParameter("speclmanageInfo");
 				String adviseInfo = mlpReq.getParameter("adviseInfo");
@@ -202,13 +203,14 @@ public class AddAction implements UploadAction {
 								? "" : managelevelCodeNm);
 				
 				String description = "{ "
-					+ "fncltyInfo:" + fncltyInfo
-					+ ", speclmanageInfo:" + speclmanageInfo
-					+ ", adviseInfo:" + adviseInfo
-					+ ", watercycleCodeNm:" + watercycleCodeNm
-					+ ", advipostngplaceCodeNmseInfo:" + advipostngplaceCodeNmseInfo
-					+ ", managedemanddoCodeNm:" + managedemanddoCodeNm
-					+ ", managelevelCodeNm:" + managelevelCodeNm
+					+ "\"clCodeNm\": \"" + category.replaceAll("\"", "'") + "\""
+					+ ", \"fncltyInfo\": \"" + fncltyInfo.replaceAll("\"", "'") + "\""
+					+ ", \"speclmanageInfo\": \"" + speclmanageInfo.replaceAll("\"", "'") + "\""
+					+ ", \"adviseInfo\": \"" + adviseInfo.replaceAll("\"", "'") + "\""
+					+ ", \"watercycleCodeNm\": \"" + watercycleCodeNm.replaceAll("\"", "'") + "\""
+					+ ", \"advipostngplaceCodeNmseInfo\": \"" + advipostngplaceCodeNmseInfo.replaceAll("\"", "'") + "\""
+					+ ", \"managedemanddoCodeNm\": \"" + managedemanddoCodeNm.replaceAll("\"", "'") + "\""
+					+ ", \"managelevelCodeNm\": \"" + managelevelCodeNm.replaceAll("\"", "'") + "\""
 					+ " }";
 				
 				ProductVO productVO = new ProductVO(
@@ -216,12 +218,12 @@ public class AddAction implements UploadAction {
 					quantity, wholesale, dcRate, 
 					createDate, isMaintain, retetionDate);
 				
-//				System.out.println("--- prd ----");
-//				System.out.println(productVO);
 				dao.addProduct(productVO);
+				pId = productVO.getPId();
+//				System.out.println("pId: " + pId);
+				System.out.println("--- prd ----");
+				System.out.println(productVO);
 				
-				pId = dao.lastPId();
-				System.out.println("pId: " + pId);
 				String img1 = mlpReq.getOriginalFileName("image1");
 				if(img1 != null) {
 					File file1 = mlpReq.getFile("image1");
@@ -238,7 +240,7 @@ public class AddAction implements UploadAction {
 					dao.addProductImg(new ProductImgVO(pId, 2, "product_Img/" +img3));
 				}
 				
-//				System.out.println("\n--- img ----");
+				System.out.println("\n--- img ----");
 //				System.out.println("img1:product_Img/" + img1);
 //				System.out.println("img2:product_Img/" + img2);
 //				System.out.println("img3:product_Img/" + img3);

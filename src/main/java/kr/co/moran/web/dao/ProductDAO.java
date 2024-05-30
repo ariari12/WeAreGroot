@@ -1,6 +1,8 @@
 package kr.co.moran.web.dao;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,23 +40,14 @@ public class ProductDAO {
 	// 상품 추가
 	public void addProduct(ProductVO vo) {
 		openSession();
-		int pId = session.insert("kr.co.moran.product.addProduct", vo);
+		session.insert("kr.co.moran.product.addProduct", vo);
 		session.commit();
 	}
 	// 상품 이미지 추가
 	public void addProductImg(ProductImgVO vo) {
 		openSession();
-		int pId = session.insert("kr.co.moran.product.addProductImg", vo);
+		session.insert("kr.co.moran.product.addProductImg", vo);
 		session.commit();
-	}
-	
-	
-
-	// 마지막에 추가된 상품id 찾기
-	public int lastPId() {
-		openSession();
-		int pId = session.selectOne("kr.co.moran.product.lastPId");
-		return pId;
 	}
 	
 	// 상품 종류 수
@@ -83,6 +76,13 @@ public class ProductDAO {
 	public int pdPopTotal() {
 		openSession();
 		int cnt = session.selectOne("kr.co.moran.product.pdPopTotal");
+		return cnt;
+	}
+	
+	// 보관목록 갯수
+	public int pdSaveCnt() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdSaveCnt");
 		return cnt;
 	}
 	
@@ -158,30 +158,65 @@ public class ProductDAO {
 		return vos;
 	}
 	
-	// 카테고리별 페이지 조회
+	// 인기상품 id 조회
+	public List<Integer> pdSelectPopByPId() {
+		openSession();
+		List<Integer> vos = session.selectList("kr.co.moran.product.pdSelectPopByPId");
+		return vos;
+	}
+
+	// 검색 조회
 	public List<ProductVO> pdSelectBySearch(int start, int pageNum, String keyword) {
 		openSession();
 		Map<String, Object> map = new HashMap<>();
 		map.put("start", start);
 		map.put("pageNum", pageNum);
-		map.put("keyword", keyword);
+		map.put("keyword", "%" + keyword + "%");
 		
         List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySearch", map);
 		return vos;
 	}
-	
-	// 인기상품 id 조회
-	public List<Integer> pdSelectPopByPId() {
+
+	// 보관목록 조회
+	public List<ProductVO> pdSelectBySave(int start, int pageNum) {
 		openSession();
-        List<Integer> vos = session.selectList("kr.co.moran.product.pdSelectPopByPId");
-        return vos;
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("pageNum", pageNum);
+		
+        List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySave", map);
+		return vos;
 	}
 	
 	// update
+	// 삭제기간 설정
+	public void pdDeleteSet(int pId) {
+		openSession();
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("pId", String.valueOf(pId));
+		
+		// 현재 날짜에 30일 더하기
+		LocalDate now = LocalDate.now().plusDays(30);
+		map.put("date", now.toString());
+		
+		session.update("kr.co.moran.product.pdDeleteSet", map);
+		session.commit();
+	}
 	
+	// 상품 재등록
+	public void pdUpdateSet(ProductVO vo) {
+		openSession();
+		session.update("kr.co.moran.product.pdUpdateSet", vo);
+		session.commit();
+	}
 	
 	// delete
-	
+	// 보관기간 지나면 삭제
+	public void pdAutoDelete() {
+		openSession();
+		session.delete("kr.co.moran.product.pdAutoDelete");
+		session.commit();
+	}
 	
 	
 	/* 카테고리 */
@@ -221,7 +256,13 @@ public class ProductDAO {
 		openSession();
 		List<CategoryVO> vos = session.selectList("kr.co.moran.category.ctSelectByCId", cId);
 		return vos;
-	}	
+	}
+	
+	public CategoryVO ctSelectOneByCId(int cId) {
+		openSession();
+		CategoryVO ctg = session.selectOne("ctSelectByCId", cId);
+		return ctg;
+	}
 	
 	
 	// update
@@ -270,6 +311,8 @@ public class ProductDAO {
 //		dao.addProduct(new ProductVO(0, 1, "test", 0, "test 중", 0, 0, 0,
 //				Date.valueOf("1111-01-01"), 0, null));
 		
+//		 dao.pdDeleteSet(204883);
+//		dao.pdAutoDelete();
 		
 		// category
 //		dao.ctAdd(null, "test");
@@ -280,6 +323,16 @@ public class ProductDAO {
 //		dao.ctSelectByParentId(0).forEach(System.out::println);
 		
 //		dao.ctDelete(108);
+		
+		
+		//test quert
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		map.put("start", 0);
+//		map.put("pageNum", 3);
+//		map.put("keyword", "%관목형%");
+//		dao.session.selectList("kr.co.moran.product.pdSelectBySearch", map)
+//			.forEach(System.out::println);
+//		
 		dao.closeSession();
 	}
 }
