@@ -7,51 +7,27 @@
   
   		<select id="selectOrderAllByMid" parameterType="int" resultType="kr.co.moran.web.vo.OrderVO">
    			SELECT 
-   				o_id, 
-   				m_id, 
-   				pd_id, 
-   				o_date, 
-   				o_total, 
-   				o_cnt, 
-   				o_status, 
-   				o_memo, 
-   				o_uuid 
-   			FROM 
-   				ORDERS WHERE m_id = #{mId}
-   		</select>
-   		
-   		<select id="selectOrderByMidAndOid" parameterType="hashmap" resultType="kr.co.moran.web.vo.OrderVO">
-   			SELECT 
-   				o_id, 
-   				m_id, 
-   				pd_id, 
-   				o_date, 
-   				o_total, 
-   				o_cnt, 
-   				o_status, 
-   				o_memo, 
-   				o_uuid 
-   			FROM 
-   				ORDERS WHERE m_id = #{mId} AND o_id = #{oId}
-   		</select>
-   		
-   		  <select id="selectOrderCancleAllByMid" parameterType="int" resultType="kr.co.moran.web.vo.OrderVO">
-   			SELECT 
-   				O.o_id, 
-   				O.m_id, 
-   				O.pd_id, 
-   				O.o_date, 
-   				O.o_total, 
-   				O.o_cnt, 
-   				O.o_status,
-   				O.o_memo, 
-   				O.o_uuid, 
-   				C.oc_id, 
-   				C.oc_reason, 
-   				C.oc_date
+			    O.o_id AS oId, 
+			    O.m_id AS mId, 
+			    O.pd_id AS pdId, 
+			    O.o_date AS date, 
+			    O.o_total AS total,
+			    O.o_cnt AS cnt, 
+			    O.o_status AS status, 
+			    O.o_memo AS memo, 
+			    O.o_uuid AS uuid,
+			    O.o_name AS name,
+			    O.o_phone AS phone,
+			    O.o_zipcode AS zipcode,
+			    O.o_address AS address,
+			    O.o_addrDeatil addressDetail,
+			    P.pd_name AS pdName
 			FROM 
-				ORDER_CANCEL C, ORDERS O
-			WHERE 
-				C.o_id = O.o_id AND m_id = #{mId};
+			    ORDERS O
+			JOIN 
+			    PRODUCT P ON O.pd_id = P.pd_id
+			WHERE
+   				O.m_id = #{mid};
    		</select>
+
   </mapper>
