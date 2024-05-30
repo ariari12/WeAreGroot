@@ -967,7 +967,10 @@ a {
 	  	
 	  	
 
-	  	
+		$(".union-wrapper").click(() => {
+	        let keyword = $("#search").val();
+	        window.location = "./product?cmd=list&type=search&search=" + keyword;
+	    });
 	  	
 		
 	});
@@ -1020,10 +1023,10 @@ a {
 				</div>
 			</div>
 			<div class="frame-6">
-				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
 				<div class="union-wrapper">
 					<img class="union" src="resources/img/member/union.svg" />
 				</div>
+				<input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:-10px; outline: none; border-width: 0; width:380px"/>
 			</div>
 		</div>
 		
@@ -1048,7 +1051,7 @@ a {
 					<input type="email" name="email" id="email"
 						class="frame-11 text-wrapper-21" placeholder="이메일을 입력해주세요 (필수)"
 						required>
-					<button type="button" id="verifyEmailBtn" class="text-wrapper-18">인증번호
+					<button type="button" id="verifyEmailBtn" class="text-wrapper-18" style="background: #00B368">인증번호
 						전송</button>
 				</div>
 			</div>
@@ -1064,7 +1067,7 @@ a {
 				<div>
 					<input type="text" name="emailCode" id="emailCode"
 						class="frame-11 text-wrapper-21" placeholder="인증번호 5자리" required>
-					<button type="button" id="emailCodeBtn" class="text-wrapper-18">인증번호
+					<button type="button" id="emailCodeBtn" class="text-wrapper-18" style="background: #00B368">인증번호
 						확인</button>
 				</div>
 			</div>

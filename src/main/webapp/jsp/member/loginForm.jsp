@@ -10,6 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+.custom{
+	top:100px
+}
 a {  	text-align: center;
 		text-decoration: none; /* 링크의 밑줄 제거 */  
 		color: inherit; /* 링크의 색상 제거 */
@@ -582,10 +585,37 @@ a {  	text-align: center;
 	color: #20202080;
 }
 
+.text-wrapper-15 {
+  position: relative;
+  z-index: 1;
+}
+
+.text-wrapper-15 input[type="text"] {
+  width: 100%;
+  height: 100%;
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  font-family: "Pretendard Variable-Medium", Helvetica;
+  font-weight: 500;
+  color: #202020;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
 
 </style>
 <script>
+
+
+
 $(document).ready(function() {
+	$(".union-wrapper").click(() => {
+        let keyword = $("#search").val();
+        window.location = "./product?cmd=list&type=search&search=" + keyword;
+    });
+	
 	 $("#findPwBtn").click(function() {
 		 var name = $("#name").val();
 		 var email = $("#findEmail").val();
@@ -700,8 +730,8 @@ $(document).ready(function() {
 					<div class="text-wrapper-14">1:1 문의</div>
 				</div>
 			</div>
-			<div class="frame-6">
-				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
+			<div class="frame-6">				
+				<input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:-10px; outline: none; border-width: 0;"/>				
 				<div class="union-wrapper">
 					<img class="union" src="resources/img/member/union.svg" />
 				</div>

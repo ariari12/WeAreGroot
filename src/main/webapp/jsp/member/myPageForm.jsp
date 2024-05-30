@@ -1307,7 +1307,7 @@ a {
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(document).ready(function() {
-		let btn = document.getElementById("zipBtn");
+		let btn = document.getElementById("zipBtn");		
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
 
 		$("#submitBtn").click(function() {
@@ -1320,8 +1320,8 @@ a {
 		});
 
 		
-	});
-
+	});	
+	
 	function openKakaoPostCode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
