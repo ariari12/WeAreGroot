@@ -953,7 +953,7 @@
 				<div class="frame-25">
 					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/member?cmd=myPageForm">마이페이지</a></div></div>
 					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/member?cmd=logoutOk">로그아웃</a></div></div>
-					<div class="frame-26"><div class="text-wrapper-26">장바구니(링크 없음)</div></div>
+					<div class="frame-26"><div class="text-wrapper-26"><a href="/moran/cart">장바구니</a></div></div>
 				</div>
 			</div>				
 		</c:when>

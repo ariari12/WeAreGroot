@@ -1586,29 +1586,32 @@ a {
 					
 					
 				<c:choose>
-					<c:when test="">
-						<div class="frame-29">
-							<div class="frame-30">
-								<div class="frame-31">
-									<div class="rectangle"></div>
-									<div class="frame-32">
-										<div class="text-wrapper-31">상품이름상품이름</div>
-										<div class="frame-33">
-											<div class="text-wrapper-32">0000000000</div>
-											<div class="text-wrapper-32">24/00/00</div>
+					<c:when test="${not empty requestScope.orderList && requestScope.orderList.size() > 0 }">
+						<c:forEach var="i" begin="0" end="${Math.min(requestScope.orderList.size()-1, 4)}">
+							<div class="frame-29">
+								<div class="frame-30">
+									<div class="frame-31">
+										<div class="rectangle"></div>
+										<div class="frame-32">
+											<div class="text-wrapper-31">${requestScope.orderList.get(i).pdName}</div>
+											<div class="frame-33">
+												<div class="text-wrapper-32">${requestScope.orderList.get(i).pdId}</div>
+												<div class="text-wrapper-32">${requestScope.orderList.get(i).date}</div>
+											</div>
+											<div class="text-wrapper-33">${requestScope.orderList.get(i).total}원 / 수량 ${requestScope.orderList.get(i).cnt}개</div>
 										</div>
-										<div class="text-wrapper-33">000,000원 / 수량 00개</div>
 									</div>
 								</div>
+								<div class="frame-34">
+									<div class="text-wrapper-30">배송중</div>
+								</div>
 							</div>
-							<div class="frame-34">
-								<div class="text-wrapper-30">배송중</div>
-							</div>
-						</div>					
+						</c:forEach>
 					</c:when>
+					
 					<c:otherwise>
 						<div class="frame-29">
-							<div class="text-wrapper-35">게시글이 없습니다.</div>
+							<div class="text-wrapper-35">주문 내역이 없습니다</div>
 						</div>
 					</c:otherwise>
 				</c:choose>	

@@ -38,48 +38,65 @@ public class MemberController extends HttpServlet {
 			System.out.println("cmd 값 : " + cmd);
 			resp.sendRedirect("index.jsp"); // 할지 안할지
 			return;
+			//회원 가입 화면으로 이동
 		} else if (cmd.equals("joinForm")) {
 			action = new JoinFormAction();
+			//회원 가입 기능 동작
 		} else if (cmd.equals("joinOk")) {
 			action = new JoinAction();
+			//로그인 화면으로 이동
 		} else if (cmd.equals("loginForm")) {
 			action = new LoginFormAction();
+			//로그인 기능 동작
 		} else if (cmd.equals("loginOk")) {
 			action = new LoginAction();
+			// 로그아웃 기능 동작
 		} else if (cmd.equals("logoutOk")) {
 			action = new LogoutAction();
+			// 이메일 인증 기능 동작
 		} else if (cmd.equals("emailOk")) {
 			action = new EmailAction();
+			// 이메일 코드 비교 기능 동작
 		} else if (cmd.equals("emailCodeOk")) {
 			action = new EmailCodeAction();
+			// 마이페이지 화면 이동
 		} else if (cmd.equals("myPageForm")) {
 			action = new MyPageForm();
+			// 회원정보 수정 기능 동작
 		} else if (cmd.equals("modifyMemberOk")) {
 			action = new ModifyMemberAction();
-		} else if (cmd.equals("deleteMemberOk")) {
+			// 회원탈퇴 기능 동작
+		} else if (cmd.equals("deleteMemberOk")) {			
 			action = new DeleteMemberAction();
+			// 회원 비밀번호 찾기 기능 동작
 		} else if (cmd.equals("findMemberPwOk")) {
 			action = new FindPwMemberAction();
 		}
 
 		url = action.execute(req, resp);
 		System.out.println("url = " + url);
+		// 	url에 "redirect:" 가 붙어있다면 포워드가 아닌 리다이렉트로 동작
 		if (url.startsWith("redirect:")) {
 			redirectUrl = url.substring("redirect:".length());
 			System.out.println("redirectUrl = "+redirectUrl);
 			resp.sendRedirect(redirectUrl);
+			// 가입된 회원의 이메일과 동일할 경우 응답 처리 (jquery)
 		} else if (url.equals("emailDuplicated")) {
 			PrintWriter out = resp.getWriter();
 			out.print(url);
+			// 회원가입 시도한 이메일과 다를 경우 응답 처리 (jquery)
 		} else if (url.equals("verifyEmailMismatch")) {
 			PrintWriter out = resp.getWriter();
 			out.print("verifyEmailMismatch");
+			// 회원가입 시도한 이메일과 같은경우 응답 처리 (jquery)
 		} else if (url.equals("verifyEmailMatch")) {
 			PrintWriter out = resp.getWriter();
 			out.print("verifyEmailMatch");
+			// 회원가입 성공 알림 (jquery)
 		} else if (url.equals("joinSuccess")) {
 			PrintWriter out = resp.getWriter();
 			out.print("success");
+			// 회원정보를 찾을 수 없을 경우 응답 처리 (jquery)
 		}else if (url.equals("emptyMember")) {
 			PrintWriter out = resp.getWriter();
 			out.print("emptyMember");

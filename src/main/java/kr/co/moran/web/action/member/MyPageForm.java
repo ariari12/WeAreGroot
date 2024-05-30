@@ -11,6 +11,7 @@ import kr.co.moran.web.dao.BoardDAO;
 import kr.co.moran.web.dao.OrderDAO;
 import kr.co.moran.web.dao.ReviewDAO;
 import kr.co.moran.web.vo.member.MemberVO;
+import kr.co.moran.web.vo.order.OrderVO;
 
 public class MyPageForm implements Action {
 
@@ -20,15 +21,25 @@ public class MyPageForm implements Action {
 		MemberVO vo= (MemberVO) session.getAttribute("memberVO");
 		int memberId=vo.getMId();
 		/*review, board, 문의*/
+		// 회원이 작성한 게시판 리스트 호출
 		boardList(req, memberId);
-		
-		OrderDAO dao = new OrderDAO();
-		
-		
+		// 회원이 주문한 리스트 호출
+		orderList(req, memberId);
 		
 		return "jsp/member/myPageForm.jsp";
 	}
 
+
+
+	private void orderList(HttpServletRequest req, int memberId) {
+		OrderDAO dao = new OrderDAO();
+		List<OrderVO> orderList =dao.selectOrderAllByMid(memberId);
+		System.out.println(orderList);
+		req.setAttribute("orderList", orderList);
+	}
+
+	
+	
 	//일성이형 게시판글 가져오는 코드
 	private void boardList(HttpServletRequest req, int memberId) {
 		ReviewDAO rdao = new ReviewDAO();

@@ -713,7 +713,7 @@ $(document).ready(function() {
 			<input type="hidden" name="cmd" value="loginOk" />
 			<button type="submit" class="frame-8"><div class="text-wrapper-20">로그인</div></button>
 		</form>
-		<a href="회원가입URL" class="frame-7">
+		<a href="/moran/member?cmd=joinForm" class="frame-7">
 			<div class="text-wrapper-20">회원가입하기</div>
 		</a>
 		<div class="frame-9">
