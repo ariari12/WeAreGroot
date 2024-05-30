@@ -17,7 +17,7 @@
 			b.b_type AS type , 
 			b.b_is_maintain AS isMaintain, 
 			b.b_retention_period AS retentionPeriod,
-			bi.bi_img as biImg,
+			bi.bi_img as biImg
 		FROM BOARD b
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
