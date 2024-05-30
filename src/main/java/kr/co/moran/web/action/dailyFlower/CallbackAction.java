@@ -8,7 +8,7 @@ public class CallbackAction implements Action {
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
-		return "dailyFlower/callback.jsp";
+		return "/jsp/dailyFlower/callback.jsp";
 	}
 
 }
