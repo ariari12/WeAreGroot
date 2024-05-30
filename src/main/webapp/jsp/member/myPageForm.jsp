@@ -1398,7 +1398,7 @@ a {
 					</div>
 				</div>
 				<div class="frame-8">
-					<div class="text-wrapper-4">장바구니</div>
+					<div class="text-wrapper-4"><a href="/moran/cart">장바구니</a></div>
 				</div>
 			</div>
 		</div>
