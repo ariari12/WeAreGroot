@@ -241,7 +241,7 @@ CREATE TABLE `MORANMORAN`.`ORDERS` (
 	`o_cnt`    INT  NULL,     -- 수량
 	`o_status` INT  NULL,      -- 주문상태
 	`o_memo`   VARCHAR(255)  NULL,  -- 주문메모
-	`o_uuid`   VARCHAR(100)  NULL,  -- 주문고유값
+	`o_uuid`   VARCHAR(100)  NOT NULL,  -- 주문고유값
     PRIMARY KEY (`o_id`),
 	FOREIGN KEY (`m_id`) REFERENCES `MORANMORAN`.`MEMBER` (`m_id`) ON DELETE CASCADE,
     FOREIGN KEY (`pd_id`) REFERENCES `MORANMORAN`.`PRODUCT` (`pd_id`) ON DELETE CASCADE

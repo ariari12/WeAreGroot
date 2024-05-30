@@ -2,10 +2,15 @@ package kr.co.moran.web.dao;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import kr.co.moran.web.vo.order.OrderVO;
+
 
 
 public class OrderDAO {
@@ -21,5 +26,17 @@ public class OrderDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// 주문 데이터 조회
+	public List<OrderVO> selectOrderCancleAllByMid(int mId) {
+		List<OrderVO> list = null;
+	    try (SqlSession ss = factory.openSession(true)) {
+	    	list = ss.selectList("selectOrderCancleAllByMid", mId);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return list;
+	}
+	
 	
 }
