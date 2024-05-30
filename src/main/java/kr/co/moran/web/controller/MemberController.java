@@ -13,6 +13,8 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.member.DeleteMemberAction;
 import kr.co.moran.web.action.member.EmailAction;
 import kr.co.moran.web.action.member.EmailCodeAction;
+import kr.co.moran.web.action.member.EmptyMemberAction;
+import kr.co.moran.web.action.member.FindPwMemberAction;
 import kr.co.moran.web.action.member.JoinAction;
 import kr.co.moran.web.action.member.JoinFormAction;
 import kr.co.moran.web.action.member.LoginAction;
@@ -56,6 +58,8 @@ public class MemberController extends HttpServlet {
 			action = new ModifyMemberAction();
 		} else if (cmd.equals("deleteMemberOk")) {
 			action = new DeleteMemberAction();
+		} else if (cmd.equals("findMemberPwOk")) {
+			action = new FindPwMemberAction();
 		}
 
 		url = action.execute(req, resp);
@@ -75,7 +79,10 @@ public class MemberController extends HttpServlet {
 			out.print("verifyEmailMatch");
 		} else if (url.equals("joinSuccess")) {
 			PrintWriter out = resp.getWriter();
-			out.print("success"); //회원가입 성공
+			out.print("success");
+		}else if (url.equals("emptyMember")) {
+			PrintWriter out = resp.getWriter();
+			out.print("emptyMember");
 		} else {
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, resp);
