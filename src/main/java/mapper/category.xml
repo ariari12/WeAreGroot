@@ -35,6 +35,7 @@
 		where c_parent_id = #{c_parent_id}
 	</select>
 
+	<!-- 카테고리 1개 조회 -->
 	<select id="ctSelectByCId" parameterType="int"
 		resultType="kr.co.moran.web.vo.CategoryVO">
 		select c_id as cId, c_name as name,

@@ -42,8 +42,6 @@
 						<input class="btn btn-primary" type="submit" value="등록하기" />
 					</td>
 				</tr>
-				
-				
 			</table>
 		</form>
 	</div>

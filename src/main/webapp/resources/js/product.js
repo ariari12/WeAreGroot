@@ -1,4 +1,3 @@
-
 /**
  * product - common
  */
@@ -7,7 +6,7 @@ const sAlert = Swal.mixin({
   	toast: true,
   	position: "center",
   	showConfirmButton: true,
-  	timer: 500,
+  	timer: 2000,
   	timerProgressBar: true,
 	allowEnterKey: true,
 	allowEscapeKey: true,
@@ -23,8 +22,9 @@ let wrong = () => {
 		title: "잘못된 접근입니다.",
 		text: "상품화면으로 이동합니다.",
 		icon: "error"
-	});
-	window.location = "./product";
+	}).then(() => {
+		window.location = "./product";
+    });
 }
 
 let viweMsg = (msg) => {
@@ -42,8 +42,9 @@ let msgRedirect = (msg, redUrl) => {
 	sAlert.fire({
 		text: msg,
 		icon: "info"
-	});
-	window.location = "./" + redUrl;
+	}).then(() => {
+		window.location = "./" + redUrl;
+    });
 }
 
 let ajaxComReq = (url) => {
@@ -478,5 +479,4 @@ let qaFormHTML = (data) => {
     '</div>';
     console.log(html);
     $('#qa-container').html(html);
-}   	
-    
+}

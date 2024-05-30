@@ -118,6 +118,7 @@
 		$("#qna-frame").hide();
 		
 		$("#btn-plant").click(() => {
+			descConvert(<%=v.getDescription().replace("None", "") %>, '<%=v.getName() %>');
 			$("#info-frame").show();
 			$("#review-frame").hide();
 			$("#qna-frame").hide();
@@ -235,8 +236,8 @@
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
 			<div class="admin-btn">
-	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품수정</a>
-	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=view&no=${prdId}">상품삭제</a>
+	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품정보 수정</a>
+	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=${prdId}">상품 내리기</a>
 			</div>
 		</c:if>
 
@@ -256,18 +257,18 @@
 		<div id="prdImgs"></div>
 		
 		<div class="prd-pay-opt">
-		    <div class="shop-bak" id="addCart">
-		        <div class="btn-text">
-		        	<%-- AJAX --%>
-		        	장바구니 담기
-	        	</div>
+	    	<% Object member = session.getAttribute("memberVO"); 
+	    		if(member == null) { %>
+		    <div class="shop-bak" id="noCart">
+		        <div class="btn-text">장바구니 담기</div>
 		    </div>
-		    
+    		<% 	} else { %>
+		    <div class="shop-bak" id="addCart">
+		        <div class="btn-text">장바구니 담기</div>
+		    </div>
+		    <% 	} %>
 		    <div class="buy-now" id="order">
-		        <div class="btn-text">
-		        	<%-- AJAX --%>
-		        	바로 구매
-				</div>
+		        <div class="btn-text">바로 구매</div>
 		    </div>
 		    
 		    <div>

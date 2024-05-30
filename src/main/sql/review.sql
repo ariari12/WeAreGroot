@@ -142,4 +142,3 @@ commit;
 -- update
 update REVIEW set r_is_maintain = 0 where r_is_maintain is null;
 
-

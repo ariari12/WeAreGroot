@@ -11,6 +11,14 @@
 <link rel="stylesheet" href="resources/css/header.css">
 <script src="resources/js/header.js"></script>
 
+<script>
+	$(() => {
+		$(".search-icon-wrapper").click(() => {
+			let keyword = $("input.search-placeholder").val();
+			window.location = "./product?cmd=list&type=search&search=" + keyword;
+		});
+	});
+</script>
 </head>
 <body>
 		<div class="login-register-bar">
@@ -67,7 +75,7 @@
 					<div class="link-text">
 						<a href="/moran/event">이벤트</a>
 					</div>
-					<div class="notification-dot"></div>
+					<div style="margin-top: -18px; margin-left: 67px;" class="notification-dot"></div>
 				</div>
 				<div class="link-wrapper">
 					<div class="link-text">
@@ -75,11 +83,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="search-bar">
-				<div class="search-placeholder">상품 또는 식물 검색하기</div>
-				<div class="search-icon-wrapper">
-					<img class="search-icon" src="resources/img/union.svg" />
-				</div>
+			<input style="opacity: 1; margin-left: 1300px" size="30" class="search-bar search-placeholder" placeholder="상품 또는 식물 검색하기">
+			<div style="position: relative; left: -124px; top: 3px;" class="search-icon-wrapper">
+				<img class="search-icon" src="resources/img/union.svg" />
 			</div>
 		</div>
 </body>
