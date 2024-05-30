@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.BoardDAO;
+import kr.co.moran.web.dao.OrderDAO;
 import kr.co.moran.web.dao.ReviewDAO;
 import kr.co.moran.web.vo.member.MemberVO;
 
@@ -19,6 +20,17 @@ public class MyPageForm implements Action {
 		MemberVO vo= (MemberVO) session.getAttribute("memberVO");
 		int memberId=vo.getMId();
 		/*review, board, 문의*/
+		boardList(req, memberId);
+		
+		OrderDAO dao = new OrderDAO();
+		
+		
+		
+		return "jsp/member/myPageForm.jsp";
+	}
+
+	//일성이형 게시판글 가져오는 코드
+	private void boardList(HttpServletRequest req, int memberId) {
 		ReviewDAO rdao = new ReviewDAO();
 		BoardDAO bdao = new BoardDAO();
 		System.out.println("bdao 시작");
@@ -44,8 +56,6 @@ public class MyPageForm implements Action {
 		}
 		//후기 추가해야함
 		req.setAttribute("boardList", boardList);
-		
-		return "jsp/member/myPageForm.jsp";
 	}
 
 }
