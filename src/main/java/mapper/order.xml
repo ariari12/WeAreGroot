@@ -20,13 +20,16 @@
 			    O.o_zipcode AS zipcode,
 			    O.o_address AS address,
 			    O.o_addressDetail addressDetail,
-			    P.pd_name AS pdName
+			    P.pd_name AS pdName,
+                PI.pi_img AS img
 			FROM 
 			    ORDERS O
 			JOIN 
 			    PRODUCT P ON O.pd_id = P.pd_id
+            JOIN 
+                PRODUCT_IMG PI ON PI.pd_id = P.pd_id
 			WHERE
-   				O.m_id = #{mId};
+   				O.m_id = #{mId} AND PI.pi_no = 0;
    		</select>
 
 

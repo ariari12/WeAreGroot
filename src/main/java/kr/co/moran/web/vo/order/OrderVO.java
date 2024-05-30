@@ -28,4 +28,7 @@ public class OrderVO {
 	private int ocId;
 	private String ocReason;
 	private String ocData;
+	
+	// IMG
+	private String img;
 }
