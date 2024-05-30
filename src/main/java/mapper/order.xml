@@ -27,7 +27,7 @@
 			JOIN 
 			    PRODUCT P ON O.pd_id = P.pd_id
 			WHERE
-   				O.m_id = #{mid};
+   				O.m_id = #{mId};
    		</select>
 
   </mapper>

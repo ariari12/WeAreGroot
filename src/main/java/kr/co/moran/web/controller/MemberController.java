@@ -13,7 +13,6 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.action.member.DeleteMemberAction;
 import kr.co.moran.web.action.member.EmailAction;
 import kr.co.moran.web.action.member.EmailCodeAction;
-import kr.co.moran.web.action.member.EmptyMemberAction;
 import kr.co.moran.web.action.member.FindPwMemberAction;
 import kr.co.moran.web.action.member.JoinAction;
 import kr.co.moran.web.action.member.JoinFormAction;
@@ -28,7 +27,7 @@ public class MemberController extends HttpServlet {
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");
-
+		
 		String cmd = req.getParameter("cmd");
 		System.out.println("cmd = " + cmd); // 콘솔 확인용
 		String url = "";
@@ -75,6 +74,7 @@ public class MemberController extends HttpServlet {
 
 		url = action.execute(req, resp);
 		System.out.println("url = " + url);
+		
 		// 	url에 "redirect:" 가 붙어있다면 포워드가 아닌 리다이렉트로 동작
 		if (url.startsWith("redirect:")) {
 			redirectUrl = url.substring("redirect:".length());

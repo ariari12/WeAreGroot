@@ -30,12 +30,16 @@ public class MyPageForm implements Action {
 	}
 
 
-
+	//현종이형 주문내역글 가져오는 코드
 	private void orderList(HttpServletRequest req, int memberId) {
 		OrderDAO dao = new OrderDAO();
 		List<OrderVO> orderList =dao.selectOrderAllByMid(memberId);
-		System.out.println(orderList);
-		req.setAttribute("orderList", orderList);
+		if(orderList == null) {
+			System.out.println("주문내역이 없습니다");
+		}else {
+			req.setAttribute("orderList", orderList);
+		}
+		
 	}
 
 	
