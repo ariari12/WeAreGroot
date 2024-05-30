@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Base64.Encoder;
 
 import org.json.simple.JSONObject;
@@ -18,6 +20,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.action.Action;
+import kr.co.moran.web.dao.CartDAO;
 import kr.co.moran.web.dao.OrderDAO;
 import kr.co.moran.web.vo.member.MemberVO;
 import kr.co.moran.web.vo.order.OrderVO;
@@ -63,6 +66,8 @@ public class SuccessAction implements Action {
 			String[] pdId = req.getParameterValues("pd_id");
 			String[] cnt = req.getParameterValues("cnt");
 			
+			String orderCode = req.getParameter("ordercode");
+			
 			String receiverName = req.getParameter("receiverName"); 
 			String receiverPhone = req.getParameter("receiverPhone"); 
 			String zipCode = req.getParameter("zipCode"); 
@@ -70,7 +75,8 @@ public class SuccessAction implements Action {
 			String addressDetail = req.getParameter("addressDetail"); 
 			String deliveryMemo = req.getParameter("deliveryMemo"); 
 			OrderVO vo = null;
-			
+			String[] pIds = new String[pdId.length];
+			Map<String, Object> params = new HashMap<>();			
 			for (int i = 0; i < pdId.length; i++) {
 				try {
 					vo = new OrderVO();
@@ -92,11 +98,17 @@ public class SuccessAction implements Action {
 						return "/jsp/payment/fail.jsp";
 					}
 					System.out.println("[vo] " + result + " : " + vo);
-					
+					pIds[i] = pdId[i];
 				} catch (Exception e) {
 					// 결제 실패
 					return "/jsp/payment/fail.jsp";
 				}
+			}
+			// 장바구니 상품삭제
+			if (orderCode.equals("1")) {
+				params.put("productIds", pIds);
+				params.put("mId", mvo.getMId());
+				new CartDAO().deleteCart(params);
 			}
 			
 		} catch (Exception e) {

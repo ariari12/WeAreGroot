@@ -195,12 +195,15 @@
 			    url += '&addressDetail=' + encodeURI($('#addressDetail').val());
 			    url += '&deliveryMemo=' + encodeURI($('#deliveryMemo').val());
 			    
+			    let params = new URLSearchParams(window.location.search);
+				let orderCode = params.get('ordercode')? 1:0;
+			    
 			    let jsons = {
 			    		amount: amount,
 			    	    orderId: uuid,
 			    	    orderName: '모란모란 꽃상품',
 			    	    customerName: '${memverVO.name}',
-			    	    successUrl: successUrl + url,
+			    	    successUrl: successUrl + url + "&ordercode=" + orderCode,
 			    	    failUrl: failUrl,
 			    	};
 			    
