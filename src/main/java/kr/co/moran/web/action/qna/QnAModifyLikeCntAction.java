@@ -15,6 +15,7 @@ public class QnAModifyLikeCntAction implements Action{
 		MemberVO m = (MemberVO)session.getAttribute("memberVO");
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		int mId = m.getMId();
+		int count = Integer.parseInt(req.getParameter("count"));
 		BoardDAO dao = new BoardDAO();
 		LikeVO vo = new LikeVO();
 		vo.setBId(bId);
@@ -35,6 +36,6 @@ public class QnAModifyLikeCntAction implements Action{
 		}
 		
 
-		return "board?cmd=qnaDetail&bId=" + bId;
+		return "board?cmd=qnaDetail&bId=" + bId + "&count=" + count;
 	}
 }

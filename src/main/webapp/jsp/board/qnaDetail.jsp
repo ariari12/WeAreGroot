@@ -1005,10 +1005,93 @@ a:visited {
 					<img src="./resources/img/board/${boardVO.get('biImg') }"
 						onerror="this.style.display='none'" alt='' />
 				</div>
+
+
 				<svg width="1170" height="1" viewBox="0 0 1170 1" fill="none"
 					xmlns="http://www.w3.org/2000/svg">
 		  <line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4" />
 		  </svg>
+				<!-- 게시글 수정 삭제 및 공감 -->
+				<c:set var="bId" value="${boardVO.get('bId') }"></c:set>
+				<c:set var="count" value="${boardVO.get('count') }"></c:set>
+				<c:choose>
+					<c:when test="${boardVO.get('mId') eq loginId }">
+
+						<!-- 수정 -->
+						<button type="button"
+							onclick="location.href='<c:url value='/board?cmd=qnaModify&bId=${bId}' />'"
+							style="border: 0; background-color: transparent;">
+							<div class="frame-15">
+								<div class="frame-11">
+									<svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+														<path
+											d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+											fill="#E4E4E4" />
+														</svg>
+								</div>
+								<div class="text-wrapper-22">게시글 수정하기</div>
+							</div>
+						</button>
+
+						<!-- 삭제 -->
+						<button type="button"
+							onclick="location.href='<c:url value='/board?cmd=qnaDelete&bId=${bId}' />'"
+							style="border: 0; background-color: transparent;">
+							<div class="frame-15">
+								<div class="frame-11">
+									<svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+										xmlns="http://www.w3.org/2000/svg">
+														<path
+											d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+											fill="#E4E4E4" />
+														</svg>
+								</div>
+								<div class="text-wrapper-22">게시글 삭제하기</div>
+							</div>
+						</button>
+					</c:when>
+
+					<c:when test="${not empty loginId }">
+						<c:choose>
+							<c:when test="${boardLikeResult eq 'ok' }">
+								<button type="button"
+									onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${bId}&likeResult=likeOk&count=${count }' />'"
+									style="border: 0; background-color: transparent;">
+									<div class="frame-15">
+										<div class="frame-11">
+											<svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+														<path
+													d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+													fill="#E4E4E4" />
+														</svg>
+										</div>
+										<div class="text-wrapper-22">게시글 공감하기</div>
+									</div>
+								</button>
+							</c:when>
+							<c:otherwise>
+								<button type="button"
+									onclick="location.href='<c:url value='/board?cmd=qnaModifyLikeCnt&bId=${bId}&likeResult=likeCancel&count=${count }' />'"
+									style="border: 0; background-color: transparent;">
+									<div class="view-3">
+										<div class="frame-11">
+											<svg width="12" height="11" viewBox="0 0 12 11" fill="none"
+												xmlns="http://www.w3.org/2000/svg">
+														<path
+													d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+													fill="#00B368" />
+														</svg>
+										</div>
+										<div class="text-wrapper-22">게시글 공감취소</div>
+									</div>
+								</button>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+				</c:choose>
+				<!-- 게시글 공감 끝 -->
 			</div>
 			<div class="frame-9">
 				<div class="frame-11">
