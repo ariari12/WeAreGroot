@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -42,6 +43,12 @@ public class EventDAO {
 		System.out.println("EventDAO selectEventByEid 실행\n evo : " + evo.toString());
 		ss.close();
 		return evo;
+	}
+
+	public void insertEvent(EventVO evo, int pdId) {
+		
+//		ss.insert("kr.co.moran.web.event.insertEvent",@Param("pdId"));
+		
 	}
 	
 	
