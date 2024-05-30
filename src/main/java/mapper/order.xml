@@ -19,7 +19,7 @@
 			    O.o_phone AS phone,
 			    O.o_zipcode AS zipcode,
 			    O.o_address AS address,
-			    O.o_addrDetail addressDetail,
+			    O.o_addressDetail addressDetail,
 			    P.pd_name AS pdName
 			FROM 
 			    ORDERS O
