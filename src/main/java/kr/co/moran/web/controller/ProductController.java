@@ -13,7 +13,6 @@ import kr.co.moran.web.action.product.DeleteAction;
 import kr.co.moran.web.action.product.DetailviewAction;
 import kr.co.moran.web.action.product.ListviewAction;
 import kr.co.moran.web.action.product.ModifyAction;
-import kr.co.moran.web.vo.member.MemberVO;
 
 @SuppressWarnings("serial")
 @WebServlet("/product")
@@ -32,11 +31,6 @@ public class ProductController extends HttpServlet {
 	private void trigger(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String act = req.getParameter("cmd");
 		// System.out.println(act);
-		
-//		MemberVO memberCheck = (MemberVO)req.getSession().getAttribute("memberVO");
-//		if(memberCheck == null) {
-//			System.out.println("product memberChekc is null: " + memberCheck);
-//		}
 		
 		Action action = null;
 		switch (act == null ? "" : act) {

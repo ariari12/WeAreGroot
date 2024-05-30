@@ -176,7 +176,6 @@ function order() {
 	let cnt = $('#cnt').val();
 	window.location.href = './order?cmd=detail&pd_id=' + pId + '&cnt=' + cnt;
 }
-
 // 알림창
 let Toast = Swal.mixin({
 	toast: true,

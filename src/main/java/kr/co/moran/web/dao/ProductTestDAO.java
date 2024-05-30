@@ -10,12 +10,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import kr.co.moran.web.vo.productTest.ProductVO;
 
+
 public class ProductTestDAO {
 	public SqlSessionFactory factory;
 	public ProductTestDAO() {
 		try {
 			Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
-			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();			
 			factory = builder.build(r);
 			r.close(); //다른 브랜치도 추가
 		} catch (IOException e) {
@@ -26,7 +27,7 @@ public class ProductTestDAO {
 	
 	public ProductVO selectProduct(int pId) {
 	    try (SqlSession ss = factory.openSession(true)) {
-	        return ss.selectOne("selectProductTestGetOne", pId);
+	        return ss.selectOne("selectProduct", pId);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

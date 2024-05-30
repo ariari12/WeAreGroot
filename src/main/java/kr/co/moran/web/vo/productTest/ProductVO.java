@@ -9,19 +9,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductVO {
 	// PRODUCT
-	private int cId;
-	private String createdAt;
-	private int dcrate;
-	private String description;
-	private int id;
-	private int isMaintain;
-	private String name;
-	private int price;
-	private int quantity;
-	private String retentionPeriod;
-	private int wholesale;
+	private int pId;
+	private String pName;
+	private int pPrice;
+	private int pQuantity;
+	private int pWholesale;
+	private int pDcrate;
+	private int pIsMaintain;
 	
 	// PRODUCT_IMG
 	private String img;
-	private int no;
+	
+	// CNT
+	private int cnt;
+	
+	
+	
 }

@@ -4,6 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.co.moran.product">
+	<!-- insert -->
+	<insert id="addProduct" parameterType="kr.co.moran.web.vo.ProductVO" >
+		INSERT INTO PRODUCT (
+		    c_id, pd_name, pd_price, pd_description,
+		    pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
+		    pd_is_maintain, pd_retention_period)
+		VALUES (
+			#{cId}, #{name}, #{price}, #{description},
+			#{quantity}, #{wholesale}, #{dcRate}, #{createDate}, 0, null
+		)
+	</insert>
+	
+	<insert id="addProductImg" parameterType="kr.co.moran.web.vo.ProductImgVO">
+		insert into PRODUCT_IMG (pd_id, pi_no, pi_img)
+		values(#{pId}, #{no}, #{img})
+	</insert>
+
+
+
+	<select id="lastPId" resultType="int">
+		select pd_id from PRODUCT order by 1 desc LIMIT 0, 1
+	</select>
+
 	<!-- product -->
 	<select id="selectAll" resultType="kr.co.moran.web.vo.ProductVO">
 		select 	pd_id pId,
@@ -18,6 +41,7 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
 		from MORANMORAN.PRODUCT
+		where pd_is_maintain = 0
 	</select>
 
 	<select id="selectPage" parameterType="HashMap" resultType="kr.co.moran.web.vo.ProductVO">
@@ -33,6 +57,7 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
 		from MORANMORAN.PRODUCT
+		where pd_is_maintain = 0
 		LIMIT #{start}, #{pageNum}
 	</select>
 
@@ -49,6 +74,7 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
 		from MORANMORAN.PRODUCT
+		where pd_is_maintain = 0
 		where pd_id = #{pd_id}
 	</select>
 	
@@ -56,8 +82,8 @@
 	<select id="pdTotal" resultType="int">
 		select count(*)
 		from MORANMORAN.PRODUCT
+		where pd_is_maintain = 0
 	</select>
-	
 	
 	<!-- 최신순 조회 -->
 	<select id="pdSelectLatest" parameterType="Map" resultType="kr.co.moran.web.vo.ProductVO">
@@ -74,6 +100,7 @@
 		        pd_retention_period as retetionDate
         from MORANMORAN.PRODUCT
         where DATEDIFF(now(), pd_created_at) &lt; 61
+        	and pd_is_maintain = 0
 		ORDER BY createDate desc
 		LIMIT #{start}, #{pageNum}
 	</select>
@@ -83,6 +110,7 @@
 		select count(*)
         from MORANMORAN.PRODUCT
         where DATEDIFF(now(), pd_created_at) &lt; 61
+        	and pd_is_maintain = 0
 	</select>
 	
 	<!-- 카테고리 조회 -->
@@ -99,7 +127,7 @@
 		        pd_is_maintain as isMaintain,
 		        pd_retention_period as retetionDate
         from MORANMORAN.PRODUCT
-        where c_id = #{C_ID}
+        where c_id = #{C_ID} and pd_is_maintain = 0
 		ORDER BY pd_id
 		LIMIT #{start}, #{pageNum}
 	</select>
@@ -108,7 +136,7 @@
 	<select id="pdcategoryTotal" parameterType="int" resultType="int">
 		select count(*)
         from MORANMORAN.PRODUCT
-        where c_id = #{C_ID}
+        where c_id = #{C_ID} and pd_is_maintain = 0
 	</select>
 	
 	
@@ -117,7 +145,7 @@
 	<select id="selectAllImgByPId" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
 		select pd_id as pId, pi_no as no, pi_img as img
 		from MORANMORAN.PRODUCT_IMG
-		where pd_id = #{pd_id}
+		where pd_id = #{pd_id} 
 	</select>
 	
 	<select id="piSelsctBigimgByPid" parameterType="int" resultType="kr.co.moran.web.vo.ProductImgVO">
@@ -152,7 +180,8 @@
 	        select pd_id from (
 		        SELECT pd_id, COUNT(*) as hit
 		        FROM ORDERS
-		        WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		        WHERE pd_id IN (SELECT pd_id FROM PRODUCT
+		    					where pd_is_maintain = 0)
 		        GROUP BY pd_id
 		        ORDER BY hit desc
 		        LIMIT #{start}, #{pageNum}
@@ -165,7 +194,8 @@
 		select pd_id from (
 			SELECT pd_id, COUNT(*) as hit
 			FROM ORDERS
-			WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+			WHERE pd_id IN (SELECT pd_id FROM PRODUCT
+		    				where pd_is_maintain = 0)
 			GROUP BY pd_id
 			ORDER BY hit desc
 			LIMIT 36
@@ -178,9 +208,10 @@
 		from (
 		    SELECT COUNT(*) as hit
 		    FROM ORDERS
-		    WHERE pd_id IN (SELECT pd_id FROM PRODUCT)
+		    WHERE pd_id IN (SELECT pd_id FROM PRODUCT
+		    				where pd_is_maintain = 0)
 		    GROUP BY pd_id
-		) as pop;
+		) as pop
 	</select>
 	
 </mapper>

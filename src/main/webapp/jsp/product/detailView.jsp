@@ -263,10 +263,10 @@
 	        	</div>
 		    </div>
 		    
-		    <div class="buy-now">
-		        <div class="btn-text" id="order">
+		    <div class="buy-now" id="order">
+		        <div class="btn-text">
 		        	<%-- AJAX --%>
-		        	<a href="">바로 구매</a>
+		        	바로 구매
 				</div>
 		    </div>
 		    

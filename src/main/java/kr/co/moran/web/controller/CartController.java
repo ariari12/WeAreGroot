@@ -17,7 +17,7 @@ import kr.co.moran.web.action.cart.DeleteCartAction;
 import kr.co.moran.web.action.cart.CntChange;
 
 @WebServlet("/cart")
-public class CartTestController extends HttpServlet{
+public class CartController extends HttpServlet{
 	private void doProcess(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setContentType("text/html;charset=UTF-8");

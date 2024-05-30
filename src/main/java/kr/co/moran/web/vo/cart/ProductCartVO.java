@@ -25,4 +25,6 @@ public class ProductCartVO {
 	// MEMBER_CART TABLE 
 	private int mId;
 	private int mCnt;
+	
+	int cnt;
 }

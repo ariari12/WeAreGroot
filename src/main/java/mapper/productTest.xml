@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="kr.co.moran.web.vo.productTest">
+	<select id="selectProduct" parameterType="int" resultType="kr.co.moran.web.vo.productTest.ProductVO">
+		SELECT 
+		    A.pd_id as pId, 
+			A.pd_name as pName, 
+			A.pd_price as pPrice, 
+			A.pd_quantity as pQuantity, 
+			A.pd_wholesale as pWholesale, 
+			A.pd_dcrate as pDcrate, 
+			A.pd_is_maintain as pIsMaintain, 
+			B.pi_img as img
+		FROM 
+			PRODUCT A
+		JOIN 
+			PRODUCT_IMG B ON A.pd_id = B.pd_id AND B.pi_no = 0
+		WHERE 
+			A.pd_is_maintain = 0 AND A.pd_id = #{pId}
+		GROUP BY 
+			A.pd_id, 
+		    A.c_id, 
+			A.pd_name, 
+			A.pd_price, 
+			A.pd_quantity, 
+			A.pd_wholesale, 
+			A.pd_dcrate, 
+		    A.pd_is_maintain, 
+			B.pi_img
+	</select>
+	
+</mapper>

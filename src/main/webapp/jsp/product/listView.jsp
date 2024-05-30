@@ -1,3 +1,4 @@
+<%@page import="kr.co.moran.web.vo.member.MemberVO"%>
 <%@page import="java.util.Date"%>
 <%@page import="kr.co.moran.web.dao.ProductDAO"%>
 <%@page import="kr.co.moran.web.vo.ProductVO"%>
@@ -36,6 +37,15 @@ a {
 	text-decoration: none;
 	color: #ffffff;
 }
+.del-btn {
+	idth: 88px;
+    margin-top: 6px;
+    margin-left: 22px;
+    height: 35px;
+    font-size: 18px;
+    line-height: 8px;
+    font-weight: 700;
+}
 </style>
 
 <script>
@@ -57,6 +67,8 @@ let viewDetails = (no) => {
 	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
 	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
 	
+	MemberVO member = (MemberVO)session.getAttribute("memberVO");
+	
 	if(vos.size() < 1) { %>
 	<script>msgRedirect("해당하는 상품이 없습니다.", "product"); </script>
 <%	}
@@ -77,6 +89,11 @@ let viewDetails = (no) => {
                 	<span style="color: red; margin-left: 20px;"><%=v.getDcRate() %>% 할인</span>
                 	<br>
                 	<span><%=String.format("%,d", price) %> 원</span>
+                	
+                	<%-- 상품 내리기 --%>
+                	<% 	if(member != null && member.getAdmintype() > 0) { %>
+                	<input id="<%="del-btn" + v.getPId() %>" class="btn btn-danger del-btn" type="button" value="판매 중단" />
+                	<% 	} %>
                 </div>
                 <div class="prd-tag">
                 <% 	if(hotPIds.contains(v.getPId())) { %>
