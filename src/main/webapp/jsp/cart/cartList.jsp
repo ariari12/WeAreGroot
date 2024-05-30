@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container">
-        <h3 class="cart-text"><a href="./">홈</a>><a href="cart">장바구니</a></h3>
+        <h3 class="cart-text"><a href="./main">홈</a>><a href="cart">장바구니</a></h3>
         <div class="cart-table">
             <div class="cart-header">
                 <div style="flex: 0 0 5%; text-align: center;">
