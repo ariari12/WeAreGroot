@@ -1050,20 +1050,22 @@ a:visited {
             <!-- 글하나 시작지점 -->
             <c:forEach var="boardVO" items="${boardList }">
               <div class="frame-8">
+              <a href="?cmd=qnaDetail&bId=${boardVO.get('bId') }&count=${boardVO.get('count')}">
               <div class="frame-9">
                 <div class="frame-10">
                   <div class="text-wrapper-18">Q.</div>
-                  <div class="text-wrapper-19"><a href="?cmd=qnaDetail&bId=${boardVO.get('bId') }">${boardVO.get('title')}</a></div>
+                  <div class="text-wrapper-19">${boardVO.get('title')}</div>
                 </div>
                 <div class="frame-11">
                   <div class="text-wrapper-20">
-                    <a href="?cmd=qnaDetail&bId=${boardVO.get('bId') }">${boardVO.get('contents')}</a>
+                    ${boardVO.get('contents')}
                   </div>
                   <div class="frame-12">
                     <img class="rectangle" src="./resources/img/board/${boardVO.get('biImg') }" alt="${boardVO.get('biImg') }" onerror="this.src='./resources/img/board/noimg.png'" />
                   </div>
                 </div>
               </div>
+              </a>
               <div class="frame-5">
                 <div class="frame-13">
                   <div class="text-wrapper-21">공감</div>

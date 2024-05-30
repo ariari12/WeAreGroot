@@ -63,7 +63,7 @@
 	
 	<insert id="InsertCommentLikeBycId" parameterType="kr.co.moran.web.vo.LikeVO">
 		INSERT INTO LIKES(m_id, c_id, l_date)
-		VALUES(#{mId}, #{bId}, NOW())
+		VALUES(#{mId}, #{cId}, NOW())
 	</insert>
 	
 	
@@ -84,7 +84,7 @@
 	<!-- 댓글 좋아요 취소 -->
 	<delete id="DeleteCommentLikebycid" parameterType="kr.co.moran.web.vo.LikeVO" >
 		DELETE FROM LIKES
-		WHERE l_id = #{lId} AND m_id = #{mId}
+		WHERE c_id = #{cId} AND m_id = #{mId}
 	</delete>
 	
 </mapper>

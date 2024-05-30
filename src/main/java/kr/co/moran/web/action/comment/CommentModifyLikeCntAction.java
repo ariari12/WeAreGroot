@@ -31,12 +31,12 @@ public class CommentModifyLikeCntAction implements Action{
 		String commentLikeResult = req.getParameter("commentLikeResult");
 		
 		//		만약 좋아요 목록에 cId와 mId가 같은게 없다면
-		if(commentLikeResult .equals("likeOk")) {
+		if(commentLikeResult.equals("likeOk")) {
 			// 좋아요 수 증가 로직
 			dao.modifyCommentLikeCntPlusBycId(bId);
 			// 좋아요 저장 로직
 			dao.insertCommentLikeBycId(vo);
-		}else if(commentLikeResult .equals("likeCancel")) {
+		}else if(commentLikeResult.equals("likeCancel")) {
 			// 좋아요 수 감소 로직
 			dao.modifyCommentLikeCntMinusBycId(bId);
 			//좋아요 삭제 로직

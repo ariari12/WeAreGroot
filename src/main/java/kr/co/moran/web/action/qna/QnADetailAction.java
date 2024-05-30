@@ -23,10 +23,12 @@ public class QnADetailAction implements Action {
 //		bId 가져오기
 		String sbId = req.getParameter("bId");
 		int bId = Integer.parseInt(sbId);
-		
+		int count = Integer.parseInt(req.getParameter("count"));
 		HttpSession session = req.getSession();
+		
 		LikeVO vo = new LikeVO();
 		MemberVO memberVO = new MemberVO();
+		
 		System.out.println("memberVO.getMId : " + memberVO.getMId());
 //		memberVO 세션에서 가져오기(mId 가져오려고) if문 안쓰면 null예외 발생할 수 있음
 		if((MemberVO)session.getAttribute("memberVO") != null) {
@@ -55,8 +57,9 @@ public class QnADetailAction implements Action {
 //		조회수 증가
 		boardDAO.modifyBoardViewCntBybId(bId);
 		
-//		특정 게시글 정보 가져오기
+//		특정 게시글 정보 가져오기 및 댓글 수 삽입
 		HashMap<String, Object> boardVO = boardDAO.selectBoardBybId(bId);
+		boardVO.put("count", count);
 		
 //		해당 게시글의 댓글 목록 가져오기
 		List<HashMap<String, Object>> commentList = commentDAO.selectCommentBybId(bId);
