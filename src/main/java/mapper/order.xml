@@ -4,8 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="kr.co.moran.web.order">
-  
-  		<select id="selectOrderAllByMid" parameterType="int" resultType="kr.co.moran.web.vo.OrderVO">
+  		<select id="selectOrderAllByMid" parameterType="int" resultType="kr.co.moran.web.vo.order.OrderVO">
    			SELECT 
 			    O.o_id AS oId, 
 			    O.m_id AS mId, 
@@ -29,5 +28,41 @@
 			WHERE
    				O.m_id = #{mId};
    		</select>
+
+
+		<insert id="insertOrder" parameterType="kr.co.moran.web.vo.order.OrderVO">
+			INSERT INTO ORDERS
+				(
+					m_id, 
+					pd_id, 
+					o_date, 
+					o_total, 
+					o_cnt, 
+					o_status, 
+					o_uuid, 
+					o_memo, 
+					o_name, 
+					o_phone, 
+					o_zipcode, 
+					o_address, 
+					o_addressDetail
+				)
+			VALUES
+				(
+					#{mId}, 
+					#{pdId}, 
+					NOW(), 
+					#{total}, 
+					#{cnt}, 
+					0, 
+					#{uuid}, 
+					#{memo}, 
+					#{name}, 
+					#{phone}, 
+					#{zipcode}, 
+					#{address}, 
+					#{addressDetail}
+				)
+		</insert>
 
   </mapper>

@@ -49,6 +49,15 @@ public class OrderDAO {
 	    return list;
 	}
 	
+	public int insertOrder(OrderVO vo) {
+		
+	    try (SqlSession ss = factory.openSession(true)) {
+	    	return ss.insert("insertOrder", vo);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return 0;
+	}
 	
 	
 }

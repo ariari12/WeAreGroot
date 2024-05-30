@@ -30,6 +30,7 @@
 		<mapper resource="mapper/review.xml"/>
 		<mapper resource="mapper/cart.xml"/>
 		<mapper resource="mapper/productqa.xml"/>
+		<mapper resource="mapper/order.xml"/>
 		<mapper resource="mapper/productTest.xml"/>
 
 	</mappers>
