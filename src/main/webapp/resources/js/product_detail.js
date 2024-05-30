@@ -104,8 +104,17 @@ let qnaInfo = (no) => {
         success: function (data) {
         	console.log("성공");
             console.log(data);
-            
             console.log(data[0].cqaId);
+            console.log("-----------------------");
+			console.log("타입: " + typeof(data));
+            
+            
+            for(let i=0; i<data.length; i++){
+				console.log(data[i].hasOwnProperty("name"));
+				console.log(data[i].hasOwnProperty("pqaParentId"));
+				console.log("@@@@@@@@@@");
+			}
+            
             
             qaFormHTML(data);
             

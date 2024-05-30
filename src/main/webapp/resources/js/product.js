@@ -370,11 +370,13 @@ let ctgAjax = () => {
 }
 
 
-
+/* 상품문의 */
 let qaFormHTML = (data) => {
+	
+	let html = 
 	'<div class="qa-form">' +
     '<div class="qa-form-title">' +
-    '<h2>문의</h2>' +
+    '<h2>상품문의</h2>' +
     '</div>' +
     '<div class="qa-form-navMenu">' +
     '<ul class="nav nav-tabs">' +
@@ -386,26 +388,38 @@ let qaFormHTML = (data) => {
     '<li class="rfdQa nav-item">환불</li>' +
     '<li class="etcQa nav-item">기타</li>' +
     '</ul>' +
-    '</div>' +
-    '<div class="qa-form-qaCard">' +
-    '<div class="writerInfo">' +
-    '<span>이름</span>' +
-    '<span> | </span>' +
-    '<span>등록일</span>' +
-    '</div>' +
-    '<div class="qa-question">' +
-    '<div class="qa-question-text">' +
-    'Q' +
-    '</div>' +
-    '<div class="qaContents">' +
-    '문의 내용' +
-    '</div>' +
-    '</div>' +
-    '</div>' +
-    '<div class="pagenation">' +
+    '</div>';
+    
+    for(let i=0; i<data.length; i++){
+		html+='<div class="qa-form-qaCard">' +
+	    '<div class="writerInfo">' +
+	    '<span>' + data[i].name +'</span>' +
+	    '<span> | </span>' +
+	    '<span>' + data[i].regdate + '</span>' +
+	    '</div>' +
+	    '<div class="qa-question">' +
+	    '<div class="qa-question-text">';
+	    
+	    if(data[i].hasOwnProperty("pqaParentId")){
+			html+='A';
+		}else{
+			html+='Q';
+		}
+		html+=
+	    '</div>' +
+	    '<div class="qaContents">' +
+	    data[i].contents +
+	    '</div>' +
+	    '</div>' +
+	    '</div>';
+    }
+    html+=
+    '<div class="pagenation">'+
     '<button class="btn btn-primary">이전</button>' +
     '<button class="btn btn-primary">다음</button>' +
     '</div>' +
     '</div>';
-   	}
+    console.log(html);
+    $('#qa-container').html(html);
+}   	
     

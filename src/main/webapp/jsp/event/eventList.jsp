@@ -18,9 +18,11 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 <script src="resources/js/event.js"></script>
+
 </head>
 <body>
 
+	<jsp:include page="../template/header.jsp"></jsp:include>
 	<div class="container" id="eventList">
 		<div class="topArea">
 			<span class="menuTitle fs-1">이벤트</span>
