@@ -1307,16 +1307,21 @@ a {
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	$(document).ready(function() {
-		let btn = document.getElementById("zipBtn");
+		let btn = document.getElementById("zipBtn");		
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
 
 		$("#submitBtn").click(function() {
-			alert("회원정보 수정 완료");
+			Swal.fire({
+	            icon: 'success',                         // Alert 타입
+	            title: '회원정보 수정 완료',         // Alert 제목
+	            text: '오예',  // Alert 내용
+	        });
+			//alert("회원정보 수정 완료");
 		});
 
 		
-	});
-
+	});	
+	
 	function openKakaoPostCode() {
 		new daum.Postcode({
 			oncomplete : function(data) {

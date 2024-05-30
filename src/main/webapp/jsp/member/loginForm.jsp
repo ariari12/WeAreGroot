@@ -10,6 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+.custom{
+	top:100px
+}
 a {  	text-align: center;
 		text-decoration: none; /* 링크의 밑줄 제거 */  
 		color: inherit; /* 링크의 색상 제거 */
@@ -476,8 +479,8 @@ a {  	text-align: center;
 	padding: 20px 148px;
 	position: absolute;
 	top: 548px;
-	left: 760px;
-	background-color: #20202033;
+	left: 760px;	
+	background: #00B368;
 	border: none;
 }
 
@@ -582,10 +585,37 @@ a {  	text-align: center;
 	color: #20202080;
 }
 
+.text-wrapper-15 {
+  position: relative;
+  z-index: 1;
+}
+
+.text-wrapper-15 input[type="text"] {
+  width: 100%;
+  height: 100%;
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  font-family: "Pretendard Variable-Medium", Helvetica;
+  font-weight: 500;
+  color: #202020;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
 
 </style>
 <script>
+
+
+
 $(document).ready(function() {
+	$(".union-wrapper").click(() => {
+        let keyword = $("#search").val();
+        window.location = "./product?cmd=list&type=search&search=" + keyword;
+    });
+	
 	 $("#findPwBtn").click(function() {
 		 var name = $("#name").val();
 		 var email = $("#findEmail").val();
@@ -602,7 +632,16 @@ $(document).ready(function() {
 	       // 서버 응답 처리
 	       console.log(response);
 	       if (response == "emptyMember") {
-	    	   alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
+		        /* Swal.fire({
+		            icon: 'warning',                         // Alert 타입
+		            title: '비밀번호를 찾을 수 없습니다',         // Alert 제목
+		            text: '비밀번호 찾기에 실패했습니다. 다시 시도해주세요.',  // Alert 내용
+		        }, function() {
+		    		   $("#findModal").modal("hide");
+		    		   location.reload();
+		    }); */
+	    	   
+	    	    alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
 	    		   $("#findModal").modal("hide");
 	    		   location.reload();
 	    		 });
@@ -625,10 +664,10 @@ $(document).ready(function() {
 	});
 </script>
 </head>
-<body>
-	<c:if test="${not empty requestScope.notMember}">
+<body>	
+	<%-- <c:if test="${not empty requestScope.notMember}">
 		<script>alert("${requestScope.notMember}");</script>
-	</c:if>
+	</c:if> --%>
 	<div class="div-wrapper">
 		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
@@ -675,7 +714,7 @@ $(document).ready(function() {
 					<div class="text-wrapper-14"><a href="main">홈</a></div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">커뮤니티</div>
+					<div class="text-wrapper-14"><a href="board">커뮤니티</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14"><a href="product?cmd=list">스토어</a></div>
@@ -684,15 +723,15 @@ $(document).ready(function() {
 					<div class="text-wrapper-14">공지</div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">이벤트</div>
+					<div class="text-wrapper-14"><a href="event">이벤트</a></div>
 					<div class="ellipse"></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14">1:1 문의</div>
 				</div>
 			</div>
-			<div class="frame-6">
-				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
+			<div class="frame-6">				
+				<input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:-10px; outline: none; border-width: 0;"/>				
 				<div class="union-wrapper">
 					<img class="union" src="resources/img/member/union.svg" />
 				</div>

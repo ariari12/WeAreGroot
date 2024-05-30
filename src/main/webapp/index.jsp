@@ -7,6 +7,8 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="resources/css/globals.css" />
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
     	a {  	text-align: center;
     			text-decoration: none; /* 링크의 밑줄 제거 */  
@@ -799,6 +801,14 @@
 			  white-space: nowrap;
 			}
     </style>
+  <script>
+	  $(() => {
+		    $(".union-wrapper").click(() => {
+		        let keyword = $("#search").val();
+		        window.location = "./product?cmd=list&type=search&search=" + keyword;
+		    });
+		});
+  </script>
   </head>
   <body>
   <div>
@@ -939,8 +949,9 @@
           <div class="frame-23"><div class="text-wrapper-24">1:1 문의</div></div>
         </div>
         <div class="frame-24">
-          <div class="text-wrapper-25">상품 또는 식물 검색하기</div>
+          
           <div class="union-wrapper"><img class="union" src="resources/img/member/union.svg" /></div>
+          <input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:100px; outline: none; border-width: 0; width:380px"/>
         </div>
       </div>
       
