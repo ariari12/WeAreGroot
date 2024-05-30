@@ -108,18 +108,40 @@ where c_id = 1
 ORDER BY pd_id
 LIMIT 0, 12;
 
+select count(*)
+from MORANMORAN.PRODUCT
+where pd_is_maintain = 0;
+
+select count(*)
+from (
+    SELECT COUNT(*) as hit
+    FROM ORDERS
+    WHERE pd_id IN (SELECT pd_id FROM PRODUCT 
+                    where pd_is_maintain = 0) 
+    GROUP BY pd_id
+) as pop;
 
 select * from PRODUCT;
 
-
+select pd_id from PRODUCT order by 1 desc LIMIT 0, 1;
 
 
 -- test insert --
 INSERT INTO MORANMORAN.PRODUCT (
-    pd_id, c_id, pd_name, pd_price, pd_description,
+    c_id, pd_name, pd_price, pd_description,
     pd_quantity, pd_wholesale, pd_dcrate, pd_created_at,
     pd_is_maintain, pd_retention_period)
-VALUES (1, 1, '몰라', 100, '대충 내용', 100, 100, 10, '2024-05-01', 0, null);
+VALUES (1, '몰라', 100, '대충 내용', 100, 100, 10, '2024-05-01', 0, null);
+
+insert into PRODUCT_IMG (pd_id, pi_no, pi_img)
+values(, , );
+
+insert into PRODUCT_IMG values(204876, 0, 'product_Img/clover.jpg');
+
+commit;
+
+-- update
+update PRODUCT_IMG set pi_img = 'product_Img/clover.jpg' where pi_no = 1;
 
 
 
@@ -127,6 +149,8 @@ VALUES (1, 1, '몰라', 100, '대충 내용', 100, 100, 10, '2024-05-01', 0, nul
 -- ※ delete --
 delete from ORDERS where pd_id in (13206, 14687, 204838, 13339, 12966,
 204869, 204860, 14697, 12974, 204827);
+
+delete from PRODUCT where pd_id in (1, 204871);
 
 --13206
 --14687
@@ -140,4 +164,5 @@ delete from ORDERS where pd_id in (13206, 14687, 204838, 13339, 12966,
 --204827
 
 delete from PRODUCT where pd_id = 1;
+
 

@@ -226,7 +226,7 @@
             ) {
                 return false;
             }
-            else if (imgCheck) {
+            else if (imgCheck()) {
             	return false;
             }
             else if (nullCehck($("#price"), "가격")

@@ -348,22 +348,36 @@ let ctgCheck = () => {
 }
 
 let imgCheck = () => {
-    if ($("#title-img").val() == null
-        || $("#title-img").val() == "") {
+    var fileVal = $("input[type=file]#title-img").val();
+    console.log(fileVal);
+    
+    if (fileVal == null || fileVal == "") {
             viweMsg("대표 이미지를 첨부해주세요.");
-            return false;
+            return true;
     }
-    else {
-        let imgs = $("#inform-imgs").children();
-        for(img of imgs) {
-            if(img.files[0].size > (5 *1024 *1024)
-            ) {
+    
+    let imgs = $("#inform-imgs").children();
+    for(const img of imgs) {
+		console.dir(img);
+		console.log(img.value);
+		
+		if(img.value != null || img.value != "") {
+            if(img.files[0].size > (5 *1024 *1024)) {
                 viweMsg("파일 사이즈는 5MB 이하로 해주세요.");
-                return false;
+                return true;
             }
-        }
-        console.log(imgs)
+            
+            var ext = img.value.split('.').pop().toLowerCase();
+		    console.log(ext);
+	        if($.inArray(ext, ['jpg','jpeg','gif','png']) == -1) {
+	          viweMsg("'jpg,gif,jpeg,png' 파일만 업로드 할수 있습니다.");
+	          return true;
+	        }
+	    }
+        console.log(imgs);
     }
+
+   	return false;
 }
 
 let dateCheck = () => {
