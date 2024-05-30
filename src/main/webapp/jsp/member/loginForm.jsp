@@ -476,8 +476,8 @@ a {  	text-align: center;
 	padding: 20px 148px;
 	position: absolute;
 	top: 548px;
-	left: 760px;
-	background-color: #20202033;
+	left: 760px;	
+	background: #00B368;
 	border: none;
 }
 
@@ -602,7 +602,16 @@ $(document).ready(function() {
 	       // 서버 응답 처리
 	       console.log(response);
 	       if (response == "emptyMember") {
-	    	   alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
+		        /* Swal.fire({
+		            icon: 'warning',                         // Alert 타입
+		            title: '비밀번호를 찾을 수 없습니다',         // Alert 제목
+		            text: '비밀번호 찾기에 실패했습니다. 다시 시도해주세요.',  // Alert 내용
+		        }, function() {
+		    		   $("#findModal").modal("hide");
+		    		   location.reload();
+		    }); */
+	    	   
+	    	    alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
 	    		   $("#findModal").modal("hide");
 	    		   location.reload();
 	    		 });
@@ -625,10 +634,10 @@ $(document).ready(function() {
 	});
 </script>
 </head>
-<body>
-	<c:if test="${not empty requestScope.notMember}">
+<body>	
+	<%-- <c:if test="${not empty requestScope.notMember}">
 		<script>alert("${requestScope.notMember}");</script>
-	</c:if>
+	</c:if> --%>
 	<div class="div-wrapper">
 		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
@@ -675,7 +684,7 @@ $(document).ready(function() {
 					<div class="text-wrapper-14"><a href="main">홈</a></div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">커뮤니티</div>
+					<div class="text-wrapper-14"><a href="board">커뮤니티</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14"><a href="product?cmd=list">스토어</a></div>
@@ -684,7 +693,7 @@ $(document).ready(function() {
 					<div class="text-wrapper-14">공지</div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">이벤트</div>
+					<div class="text-wrapper-14"><a href="event">이벤트</a></div>
 					<div class="ellipse"></div>
 				</div>
 				<div class="frame-5">

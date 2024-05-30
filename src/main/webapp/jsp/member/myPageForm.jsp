@@ -1311,7 +1311,12 @@ a {
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
 
 		$("#submitBtn").click(function() {
-			alert("회원정보 수정 완료");
+			Swal.fire({
+	            icon: 'success',                         // Alert 타입
+	            title: '회원정보 수정 완료',         // Alert 제목
+	            text: '오예',  // Alert 내용
+	        });
+			//alert("회원정보 수정 완료");
 		});
 
 		
