@@ -20,6 +20,18 @@ $(document).ready(function() {
 		}
 	});
 
+	// 주문하기 버튼
+	$('#order-btn').click(function() {
+		let order = 'order?cmd=detail';
+		$('.cart-checkbox:checked').each(function() {
+			let productId = $(this).attr('id').split('-')[1];
+			if (productId != 'all') {
+				let cnt = $('#cnt-' + productId).val();
+				order += '&pd_id=' + productId + '&cnt=' + cnt;
+			}
+		})
+		location.href = order;
+	})
 
 	// 품절버튼
 	$('#soldOutDelete').click(function() {

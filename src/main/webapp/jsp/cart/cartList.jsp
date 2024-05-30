@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="cart-order">
-                <input type="button" class="btn btn-success w-25 mb-3" value="주문하기" style="margin: 10px;">
+                <input type="button" id="order-btn" class="btn btn-success w-25 mb-3" value="주문하기" style="margin: 10px;">
             </div>
         </div>
     </div>
