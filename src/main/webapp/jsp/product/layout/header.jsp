@@ -12,7 +12,7 @@ $(() => {
 </script>
 
 	<div class="header">		
-		<a href="index.jsp"><img  src="resources/img/header.svg"/></a>		
+		<a href="main"><img  src="resources/img/header.svg"/></a>		
 	</div>
       <div class="frame-20">
         <div class="frame-21">
