@@ -753,8 +753,8 @@ a {
 	gap: 10px;
 	padding: 10px;
 	position: relative;
-	background-color: #e4e4e4;
-	border: 1px solid;
+	background-color: #00B368;
+	border: none;
 	border-color: #20202080;
 }
 
@@ -766,11 +766,12 @@ a {
 	margin-right: -41.5px;
 	font-family: "Pretendard Variable-Medium", Helvetica;
 	font-weight: 500;
-	color: #000000;
+	color: #ffffff;
 	font-size: 16px;
 	letter-spacing: 0;
 	line-height: 20px;
 	white-space: nowrap;
+	border: none;
 }
 
 .div-wrapper .frame-19 {
@@ -826,7 +827,7 @@ a {
 	padding: 20px 148px;
 	position: relative;
 	flex: 0 0 auto;
-	background-color: #20202033;
+	background-color: #00B368;
 }
 
 .div-wrapper .text-wrapper-26 {
@@ -1457,7 +1458,7 @@ a {
 						</div>
 					</div>
 					<div class="frame-14">
-						<label for="zipcode" class="text-wrapper-21">우편번호</label>
+						<label for="zipcode" class="text-wrapper-21" >우편번호</label>
 						<div class="frame-16">
 							<div class="frame-17">
 								<input type="text" id="zipcode" name="zipcode"
@@ -1467,7 +1468,7 @@ a {
 							</div>
 							<div class="frame-18">
 								<button type="button" id="zipBtn" class="text-wrapper-24"
-									style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">우편번호
+									style="background: #00B368; width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">우편번호
 									찾기</button>
 							</div>
 						</div>
@@ -1531,7 +1532,7 @@ a {
 					<div class="view-2">
 						<input type="hidden" name="cmd" value="modifyMemberOk" />
 						<button type="submit" id="submitBtn" class="text-wrapper-26"
-							style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경
+							style="background: #00B368;width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경
 							사항 저장하기</button>
 					</div>
 					
@@ -1596,7 +1597,7 @@ a {
 							<div class="frame-29">
 								<div class="frame-30">
 									<div class="frame-31">
-										<div class="rectangle"></div>
+										<div class="rectangle"><img src="${requestScope.orderList.get(i).img}" alt="" width="70px;" height="70px;" /></div>
 										<div class="frame-32">
 											<div class="text-wrapper-31">${requestScope.orderList.get(i).pdName}</div>
 											<div class="frame-33">
