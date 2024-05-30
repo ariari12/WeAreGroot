@@ -30,7 +30,8 @@ $(document).ready(function() {
 				order += '&pd_id=' + productId + '&cnt=' + cnt;
 			}
 		})
-		location.href = order;
+		location.href = order + "&ordercode=1";
+		
 	})
 
 	// 품절버튼

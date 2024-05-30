@@ -62,5 +62,5 @@
   	<update id="changeCart">
 		UPDATE MEMBER_CART SET mc_cnt = #{cnt} WHERE pd_id = #{pId} AND m_id = #{mId}
   	</update>
-  	 
+
   </mapper>
