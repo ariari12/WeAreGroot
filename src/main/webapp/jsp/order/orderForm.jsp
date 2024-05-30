@@ -53,6 +53,7 @@
         <h3>홈>결제하기</h3>
         <div class="row">
         	
+        	<% // 총 상품값, 할인가격, 배달비 변수 %>
         	<c:set var="totalPrice" value="0" />
         	<c:set var="totalDiscount" value="0" />
         	<c:set var="delivery" value="3500" />
@@ -63,7 +64,7 @@
                 <div style="overflow:auto; height:300px;">      
                 <c:forEach var="product" items="${productList}">
                 	<c:if test="${product.getPQuantity() ne 0}">
-		                <div class="order-item d-flex mb-3">
+		                <div class="order-item d-flex mb-3" data-cnt="${product.getCnt()}" data-pid="${product.getPId()}">
 		                    <img src="${product.getImg() }" alt="${product.getPName()}" class="mr-3">
 		                    <div>
 		                        <div>${product.getPName()}</div>
@@ -171,14 +172,35 @@
 			    let successUrl = window.location.origin + "/moran/payment?result=success";
 			    let failUrl = window.location.origin + "/moran/payment?result=fail";
 			    let orderId = new Date().getTime();	
-			    let amount = '${result}';
+			    let amount = Math.floor('${result}');
+			    let uuid = uuidv4();
+			    let cnt = '${product.getCnt()}';
+			    url = '';
+			    
+			    const orderItems = document.querySelectorAll('.order-item');
+			    const cntValues = Array.from(orderItems).map(item => item.getAttribute('data-cnt'));
+			    const pIdValues = Array.from(orderItems).map(item => item.getAttribute('data-pid'));
+			    console.log(cntValues);
+			    console.log(pIdValues);
+			    
+			    
+			    for (let i = 0; i < cntValues.length; i++) {
+			    	url += "&pd_id=" + pIdValues[i] + "&cnt=" + cntValues[i];
+			    }
+			    
+			    url += '&receiverName=' + $('#receiverName').val();
+			    url += '&receiverPhone=' + $('#receiverPhone').val();
+			    url += '&zipCode=' + $('#zipCode').val();
+			    url += '&address=' + encodeURI($('#address').val());
+			    url += '&addressDetail=' + encodeURI($('#addressDetail').val());
+			    url += '&deliveryMemo=' + encodeURI($('#deliveryMemo').val());
 			    
 			    let jsons = {
-			    		amount: Math.floor(amount),
-			    	    orderId: uuidv4(),
+			    		amount: amount,
+			    	    orderId: uuid,
 			    	    orderName: '모란모란 꽃상품',
 			    	    customerName: '${memverVO.name}',
-			    	    successUrl: successUrl,
+			    	    successUrl: successUrl + url,
 			    	    failUrl: failUrl,
 			    	};
 			    

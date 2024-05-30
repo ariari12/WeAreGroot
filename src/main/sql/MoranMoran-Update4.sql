@@ -245,7 +245,7 @@ CREATE TABLE `MORANMORAN`.`ORDERS` (
 	`o_phone`   VARCHAR(100)  NOT NULL,  -- 핸드폰번호
 	`o_zipcode`   VARCHAR(100)  NOT NULL,  -- 우편번호
 	`o_address`   VARCHAR(100)  NOT NULL,  -- 주소
-	`o_addrDeatil`   VARCHAR(100)  NOT NULL,  -- 상세주소
+	`o_addrDetail`   VARCHAR(100)  NOT NULL,  -- 상세주소
 	-- 파이널때 ORDERS DB 새로 만들어야함.
 	-- 지금은 붙어 있지만 주문 정보 주문 테이블 분리.
     PRIMARY KEY (`o_id`),
