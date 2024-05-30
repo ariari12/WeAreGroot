@@ -37,9 +37,8 @@ public class DeleteAction implements Action {
 		}
 		
 		switch (type == null ? "" : type) {
-			case "ctg": nextUrl = ctgDelete();
-				break;
-			case "prd": nextUrl = prdDelete();
+			case "ctg": nextUrl = ctgDelete(); break;
+			case "prd": nextUrl = prdDelete(); break;
 			default: nextUrl = null;
 		}
 		
@@ -93,12 +92,12 @@ public class DeleteAction implements Action {
 		if(prd != null) {
 			int pId = Integer.parseInt(prd);
 			dao.pdDeleteSet(pId);
-			req.setAttribute("message", "상품이 보관처리 되었습니다.\n"
-					+ "보관처리된 상품은 사용자한테 보이지 않습니다.\n"
-					+ "30일 이내 재등록이 가능합니다.\n"
-					+ "30일이 지나면 보관된 상품정보는 삭제됩니다.");
+			req.setAttribute("message", "상품이 보관처리 되었습니다."
+					+ "\\n보관처리된 상품은 사용자한테 보이지 않습니다."
+					+ "\\n30일 이내 재등록이 가능합니다."
+					+ "\\n30일이 지나면 보관된 상품정보는 삭제됩니다.");
 			req.setAttribute("redUrl", "product");
-			nextUrl = "jps/product/inform.jsp";
+			nextUrl = "jsp/product/inform.jsp";
 		}
 
 		return nextUrl;

@@ -23,7 +23,6 @@ public class ReComntListView implements Action {
 		CommentVO cvo = new CommentVO();
 		
 		JSONArray jArr = new JSONArray();
-		
 		if(req.getParameter("cId") != null) {
 			int cId = Integer.parseInt(req.getParameter("cId"));
 			List<Map<String,Object>> list = cdao.selectCommentByCid(cId);

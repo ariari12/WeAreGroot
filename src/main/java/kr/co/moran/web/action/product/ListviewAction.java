@@ -64,20 +64,21 @@ public class ListviewAction implements Action {
 		
 		dao.closeSession(); // db session 종료
 		
-		if(type != null && type.equals("save"))
+		if(type != null && type.equals("save")) {
 			return "jsp/product/savelist.jsp";
-		
+		}
 		return "jsp/product/listView.jsp";
 	}
 	
 	
 	// 보관처리된 상품 리시트 조회 *관리자 용*
 	private List<ProductVO> saveType(HttpServletRequest req, int start, int pageNum) {
-		MemberVO memberVO = (MemberVO)req.getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)req.getSession().getAttribute("memberVO");
 		if(memberVO != null && memberVO.getAdmintype() > 0) {
 			// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
-			maxPage = (int) Math.ceil(dao.pdTotal() / PAGE_QUANTITY);
-			List<ProductVO> prdList = dao.pdSelectPage(start, pageNum);
+			maxPage = (int) Math.ceil(dao.pdSaveCnt() / PAGE_QUANTITY);
+			List<ProductVO> prdList = dao.pdSelectBySave(start, pageNum);
+			hotPIds = null;
 			return prdList;
 		}
 		return null;

@@ -69,11 +69,12 @@ public class ModifyAction implements UploadAction {
 				nextUrl = categoryModify(ctg);
 				
 			case "prd":
-				if(mlpReq == null) return null;
-				String prd = mlpReq.getParameter("prd");
+				String prd = mlpReq == null ? req.getParameter("prd")
+						: mlpReq.getParameter("prd");
+				System.out.println("prd: " + prd);
 				
 				// 파라미터가 넘어오지 않은 경우
-				if(mlpReq == null) return null;
+				if(prd == null) return null;
 				
 				// 각 파라미터에 따른 요청 처리
 				nextUrl = productModify(prd); 
@@ -163,12 +164,14 @@ public class ModifyAction implements UploadAction {
 	// product
 	private String productModify(String prd) {
 		String nextUrl = null;
-		prd = mlpReq.getParameter("prd");
 		switch (prd == null ? "" : prd) {
-			case "":
+			default:
+				req.setAttribute("message", "미완성 기능입니다."
+						+ "\\n차후 업데이트 예정입니다.");
+				req.setAttribute("redUrl", "product?cmd=list&type=save");
+				nextUrl = "jsp/product/inform.jsp";
 				break;
 		}
-		
 		return nextUrl;
 	}
 	

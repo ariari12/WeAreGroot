@@ -25,6 +25,8 @@ public class MemberDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	// 회원가입 페이지에서 입력한 정보를 저장
 	public void insertMember(MemberVO vo) {
 	    try (SqlSession ss = factory.openSession(true)) {
 	    	System.out.println("[MemberDAO] MemberVO = "+vo);
@@ -41,6 +43,7 @@ public class MemberDAO {
 	    }
 	}
 	
+	// 이메일과 패스워드에 해당하는 회원정보 검색 (로그인)
 	public MemberVO selectMemberByEmailAndPassword(String email, String pw) {
 		try (SqlSession ss = factory.openSession(true)) {
 			Map<String, String> map = new HashMap<String, String>();
@@ -60,12 +63,33 @@ public class MemberDAO {
 	    }
 	}
 	
+	//이메일을 통한 회원 검색 (이메일 인증)
 	public MemberVO selectMemberByEmail(String email) {
 		try (SqlSession ss = factory.openSession(true)) {
 			
 			System.out.println("[MemberDAO] email : "+email);			
 			
 			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmail", email);
+		}catch (Exception e) {
+	        // 예외 처리
+			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");
+	        System.out.println("오류 메시지: " + e.getMessage());
+	        System.out.println("예외 클래스: " + e.getClass().getSimpleName());
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+	
+	public MemberVO selectMemberByEmailAndName(String email, String name) {
+		try (SqlSession ss = factory.openSession(true)) {
+			
+			System.out.println("[MemberDAO] email : "+email);
+			System.out.println("[MemberDAO] name : "+name);
+			Map<String, String> map = new HashMap<String, String>();
+			map.put("email", email);
+			map.put("name", name);
+			
+			return ss.selectOne("kr.co.moran.web.member.selectMemberByEmailAndName", map);
 		}catch (Exception e) {
 	        // 예외 처리
 			System.out.println("회원 정보 검색 중 오류가 발생했습니다.");

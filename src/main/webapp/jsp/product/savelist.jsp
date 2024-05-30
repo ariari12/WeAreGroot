@@ -64,15 +64,13 @@ let viewDetails = (no) => {
 <div class="container products">
 <%
 	ProductDAO dao = new ProductDAO();
-	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
-	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
-	
 	MemberVO member = (MemberVO)session.getAttribute("memberVO");
-	
-	if(vos.size() < 1) { %>
-	<script>msgRedirect("해당하는 상품이 없습니다.", "product"); </script>
+
+	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
+	if(vos == null || vos.size() < 1) { %>
+		<script>msgRedirect("해당하는 상품이 없습니다.", "product"); </script>
 <%	}
-	
+	else {
 	int cnt = 0;
 	for(ProductVO v : vos) {
 		int price = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0));
@@ -92,20 +90,8 @@ let viewDetails = (no) => {
                 	
                 	<%-- 상품 내리기 --%>
                 	<% 	if(member != null && member.getAdmintype() > 0) { %>
-                	<a href="<%="product?&cmd=delete&type=prd&prd="+v.getPId() %>" class="btn btn-primary del-btn">다시 등록</a>
+                	<a href="<%="product?cmd=modify&type=prd&prd="+v.getPId() %>" class="btn btn-primary del-btn">다시 등록</a>
                 	<% 	} %>
-                </div>
-                <div class="prd-tag">
-                <% 	if(hotPIds.contains(v.getPId())) { %>
-                    <span class="prd-hot">인기</span>
-                <% } %>
-				<% long differenceInDays = 
-						(long) (System.currentTimeMillis() - v.getCreateDate().getTime())
-							/ (1000 * 60 * 60 * 24);
-                	if(differenceInDays < 60) { %>
-                    <span class="prd-new">신상품</span>
-				<% } %>
-                <span class="prd-tag-gab"> </span>
                 </div>
             </div>
         </div>
@@ -170,6 +156,7 @@ let viewDetails = (no) => {
 		</nav>
 	</div>
 </div>
+<% 	} %>
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">

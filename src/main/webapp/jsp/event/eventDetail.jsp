@@ -16,7 +16,7 @@
 
 </head>
 <body>
-
+	<jsp:include page="../template/header.jsp"></jsp:include>
 	<div class="container" id="eventDetail">
 		<div class="formTitle">
 			<span>이벤트</span>

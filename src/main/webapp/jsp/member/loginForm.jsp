@@ -584,9 +584,51 @@ a {  	text-align: center;
 
 
 </style>
-
+<script>
+$(document).ready(function() {
+	 $("#findPwBtn").click(function() {
+		 var name = $("#name").val();
+		 var email = $("#findEmail").val();
+	   
+	   $.ajax({
+	     type: "POST",
+	     url: "/moran/member",
+	     data: {
+	       cmd: "findMemberPwOk",
+	       name: name,
+	       email: email
+	     },
+	     success: function(response) {
+	       // 서버 응답 처리
+	       console.log(response);
+	       if (response == "emptyMember") {
+	    	   alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
+	    		   $("#findModal").modal("hide");
+	    		   location.reload();
+	    		 });
+	    	   
+	       } else {
+	    	   alert("비밀번호가 이메일로 전송되었습니다.", function() {
+	    		   $("#findModal").modal("hide");
+	    		   location.reload();
+	    		 });	         
+	       }
+	     },
+	     error: function() {
+	    	 alert("비밀번호 찾기 요청에 실패했습니다.", function() {
+	    		  $("#findModal").modal("hide");
+	    		  location.reload();
+	    		});
+	     }
+	   });
+	 });
+	});
+</script>
 </head>
 <body>
+	<c:if test="${not empty requestScope.notMember}">
+		<script>alert("${requestScope.notMember}");</script>
+	</c:if>
 	<div class="div-wrapper">
 		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
@@ -662,14 +704,16 @@ a {  	text-align: center;
 				<input type="password" type="password" name="pw" id="password"
 									placeholder="비밀번호" minlength="6" required>
 			
-			<div class="text-wrapper-18">
-				<a href="아이디비밀번호찾기URL">아이디/비밀번호 찾기</a>
+			<div class="text-wrapper-18">				
+				<button type="button" data-bs-toggle="modal" data-bs-target="#findModal" style= "border: 0; background-color: transparent; color: #20202080;" >
+  						비밀번호 찾기
+				</button>			
 			</div>
 			<div class="text-wrapper-19">아직 모란모란의 회원이 아니라면?</div>
 			<input type="hidden" name="cmd" value="loginOk" />
 			<button type="submit" class="frame-8"><div class="text-wrapper-20">로그인</div></button>
 		</form>
-		<a href="회원가입URL" class="frame-7">
+		<a href="/moran/member?cmd=joinForm" class="frame-7">
 			<div class="text-wrapper-20">회원가입하기</div>
 		</a>
 		<div class="frame-9">
@@ -683,5 +727,31 @@ a {  	text-align: center;
 		<img class="line" src="resources/img/member/line-12.svg" /> <img
 			class="img" src="resources/img/member/line-13.svg" />
 	</div>
+
+<!-- 비밀번호 찾기 모달 -->	
+ <div class="modal fade" id="findModal" tabindex="-1" aria-labelledby="findModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="findModalLabel">아이디 비밀번호 찾기</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     </div>
+     <div class="modal-body">
+       <div class="mb-3">
+         <label for="name" class="form-label">이름</label>
+         <input type="text" class="form-control" id="name" name="name" required>
+       </div>
+		<div class="mb-3">
+		  <label for="findEmail" class="form-label">이메일</label>
+		  <input type="email" class="form-control" id="findEmail" name="findEmail" required>
+		</div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+       <button type="button" class="btn btn-primary" id="findPwBtn">비밀번호 찾기</button>
+     </div>
+   </div>
+ </div>
+</div>
 </body>
 </html>

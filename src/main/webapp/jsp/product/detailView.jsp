@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="resources/css/product_detail.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
-
+<link rel="stylesheet" href="resources/css/productQa.css">
 <style>
 	.text-wrapper-26 a {
 		text-decoration: none;
@@ -152,7 +152,6 @@
 		});
 	});
 </script>
-
 <%-- header --%>
 <div class="div-wrapper" style="z-index: 4; height: 254px; margin-bottom: -444px;">
 	<jsp:include page="layout/header.jsp"></jsp:include>
@@ -327,8 +326,10 @@
 		    
 	    	<%-- 상품문의 추가 --%>
 		    <div id="qna-frame">
-		    	<div style="height: 1000px; margin-top: 50px; font-size: 40px;">
-		    		<h1>상품문의</h1>
+		    	<div style="height: 1000px; margin-top: 50px; width: 1200px; font-size: 40px; position: relative; left: -420px;">
+		    		<div id="qa-container">
+		    		
+		    		</div>
 		    	</div>
 		    </div>
 		</div>

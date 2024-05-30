@@ -27,5 +27,6 @@ public class MemberVO {
 	private AddressVO addressVO; //주소정보
 	private MemberExitVO memberExitVO; //탈퇴 이유
 	
+	
 	//변수명 정보상태, 삭제한 날짜, 관리자 유무 db 칼럼 이름 변경, Date 타입 정하기
 }

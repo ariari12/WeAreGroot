@@ -241,7 +241,13 @@ CREATE TABLE `MORANMORAN`.`ORDERS` (
 	`o_cnt`    INT  NULL,     -- 수량
 	`o_status` INT  NULL,      -- 주문상태
 	`o_memo`   VARCHAR(255)  NULL,  -- 주문메모
-	`o_uuid`   VARCHAR(100)  NULL,  -- 주문고유값
+	`o_name`   VARCHAR(100)  NOT NULL,  -- 이름
+	`o_phone`   VARCHAR(100)  NOT NULL,  -- 핸드폰번호
+	`o_zipcode`   VARCHAR(100)  NOT NULL,  -- 우편번호
+	`o_address`   VARCHAR(100)  NOT NULL,  -- 주소
+	`o_addrDeatil`   VARCHAR(100)  NOT NULL,  -- 상세주소
+	-- 파이널때 ORDERS DB 새로 만들어야함.
+	-- 지금은 붙어 있지만 주문 정보 주문 테이블 분리.
     PRIMARY KEY (`o_id`),
 	FOREIGN KEY (`m_id`) REFERENCES `MORANMORAN`.`MEMBER` (`m_id`) ON DELETE CASCADE,
     FOREIGN KEY (`pd_id`) REFERENCES `MORANMORAN`.`PRODUCT` (`pd_id`) ON DELETE CASCADE

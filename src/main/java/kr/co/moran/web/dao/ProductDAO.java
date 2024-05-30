@@ -324,6 +324,9 @@ public class ProductDAO {
 		
 //		dao.ctDelete(108);
 		
+		dao.pdSelectBySave(0, 10).forEach(System.out::println);
+		System.out.println(dao.pdSaveCnt());
+		
 		
 		//test quert
 //		Map<String, Object> map = new HashMap<String, Object>();

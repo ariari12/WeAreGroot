@@ -64,15 +64,15 @@ let viewDetails = (no) => {
 <div class="container products">
 <%
 	ProductDAO dao = new ProductDAO();
+	MemberVO member = (MemberVO)session.getAttribute("memberVO");
 	List<ProductVO> vos = (List<ProductVO>)request.getAttribute("pdList");
 	List<Integer> hotPIds = (List<Integer>)request.getAttribute("hotPIds");
 	
-	MemberVO member = (MemberVO)session.getAttribute("memberVO");
 	
-	if(vos.size() < 1) { %>
+	if(vos == null || vos.size() < 1) { %>
 	<script>msgRedirect("해당하는 상품이 없습니다.", "product"); </script>
 <%	}
-	
+	else {
 	int cnt = 0;
 	for(ProductVO v : vos) {
 		int price = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0));
@@ -92,7 +92,7 @@ let viewDetails = (no) => {
                 	
                 	<%-- 상품 내리기 --%>
                 	<% 	if(member != null && member.getAdmintype() > 0) { %>
-                	<a href="<%="product?&cmd=delete&type=prd&prd="+v.getPId() %>" class="btn btn-danger del-btn">판매 중단</a>
+                	<a href="<%="product?cmd=delete&type=prd&prd="+v.getPId() %>" class="btn btn-danger del-btn">판매 중단</a>
                 	<% 	} %>
                 </div>
                 <div class="prd-tag">
@@ -170,6 +170,7 @@ let viewDetails = (no) => {
 		</nav>
 	</div>
 </div>
+<% 	} %>
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">

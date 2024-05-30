@@ -80,7 +80,7 @@
         from MORANMORAN.PRODUCT
         where pd_is_maintain = 1
 		ORDER BY pd_is_maintain desc
-		LIMIT #{start}, #{pageNum}		
+		LIMIT #{start}, #{pageNum}
 	</select>
 
 	<!-- 보관처리 목록 갯수 조회 -->

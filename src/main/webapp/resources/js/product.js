@@ -6,7 +6,7 @@ const sAlert = Swal.mixin({
   	toast: true,
   	position: "center",
   	showConfirmButton: true,
-  	timer: 1000,
+  	timer: 2000,
   	timerProgressBar: true,
 	allowEnterKey: true,
 	allowEscapeKey: true,
@@ -22,8 +22,9 @@ let wrong = () => {
 		title: "잘못된 접근입니다.",
 		text: "상품화면으로 이동합니다.",
 		icon: "error"
-	});
-	window.location = "./product";
+	}).then(() => {
+		window.location = "./product";
+    });
 }
 
 let viweMsg = (msg) => {
@@ -41,8 +42,9 @@ let msgRedirect = (msg, redUrl) => {
 	sAlert.fire({
 		text: msg,
 		icon: "info"
-	});
-	window.location = "./" + redUrl;
+	}).then(() => {
+		window.location = "./" + redUrl;
+    });
 }
 
 let ajaxComReq = (url) => {
@@ -74,7 +76,7 @@ let descConvert = (data, name) => {
 	let textTag = "<div class='prd-text-tag-frame'>"
 	 + "<div class='tag-text'># " + name + "</div></div>";
 	 
-	// console.log(data);
+	console.log(data);
 	 
 	for(key in data) {
 		switch(key){
@@ -194,7 +196,6 @@ let productReview = (data) => {
 	let reviewTable = "";
 	let cnt = 1;
 	for(item of data["reviews"]) {
-		item.nick = item.nick === undefined ? "탈퇴한 회원" : item.nick;
 		
 		reviewTable += "<table id='tabel-" + cnt + "''><tr>"
 			+ "<td style='font-family: &quot;Pretendard Variable-Bold&quot;, Helvetica; width: 200px;'>"
@@ -225,7 +226,7 @@ let productReview = (data) => {
 	
 	let reviewHeight = $(".review-container").height() -2672;
 	reviewHeight = (reviewHeight < -1966 ? -1966 : reviewHeight);
-	// console.log(reviewHeight);
+	console.log(reviewHeight);
 	$("#footer").css("margin-top", reviewHeight + "px");
 }
 
@@ -425,4 +426,57 @@ let ctgAjax = async() => {
     } catch (err) {
         console.error("하위 카테고리 가져오기 실패:", err);
     }
+}
+
+/* 상품문의 */
+let qaFormHTML = (data) => {
+	
+	let html = 
+	'<div class="qa-form">' +
+    '<div class="qa-form-title">' +
+    '<h2>상품문의</h2>' +
+    '</div>' +
+    '<div class="qa-form-navMenu">' +
+    '<ul class="nav nav-tabs">' +
+    '<li class="allQa nav-item">전체보기</li>' +
+    '<li class="prdQa nav-item">상품</li>' +
+    '<li class="dlvQa nav-item">배송</li>' +
+    '<li class="tibQa nav-item">반품</li>' +
+    '<li class="swQa nav-item">교환</li>' +
+    '<li class="rfdQa nav-item">환불</li>' +
+    '<li class="etcQa nav-item">기타</li>' +
+    '</ul>' +
+    '</div>';
+    
+    for(let i=0; i<data.length; i++){
+		html+='<div class="qa-form-qaCard">' +
+	    '<div class="writerInfo">' +
+	    '<span>' + data[i].name +'</span>' +
+	    '<span> | </span>' +
+	    '<span>' + data[i].regdate + '</span>' +
+	    '</div>' +
+	    '<div class="qa-question">' +
+	    '<div class="qa-question-text">';
+	    
+	    if(data[i].hasOwnProperty("pqaParentId")){
+			html+='A';
+		}else{
+			html+='Q';
+		}
+		html+=
+	    '</div>' +
+	    '<div class="qaContents">' +
+	    data[i].contents +
+	    '</div>' +
+	    '</div>' +
+	    '</div>';
+    }
+    html+=
+    '<div class="pagenation">'+
+    '<button class="btn btn-primary">이전</button>' +
+    '<button class="btn btn-primary">다음</button>' +
+    '</div>' +
+    '</div>';
+    console.log(html);
+    $('#qa-container').html(html);
 }

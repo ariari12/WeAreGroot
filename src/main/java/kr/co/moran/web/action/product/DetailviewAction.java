@@ -2,6 +2,7 @@
 package kr.co.moran.web.action.product;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,11 +10,14 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.mysql.cj.xdevapi.JsonArray;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.MemberDAO;
 import kr.co.moran.web.dao.ProductDAO;
+import kr.co.moran.web.dao.ProductQaDAO;
 import kr.co.moran.web.dao.ReviewDAO;
 import kr.co.moran.web.vo.ProductImgVO;
 import kr.co.moran.web.vo.ProductVO;
@@ -133,15 +137,25 @@ public class DetailviewAction implements Action {
 		return "ajax";
 	}
 	
+	@SuppressWarnings("unchecked")
 	private String prdQna(int no) {
-		// Map<String, Object> revNums = reviewDAO.gradeAndCntByPdId(no);
-		//revNums.put("result", "ok");
-
-//		try {
-//			resp.getWriter().print(new JSONObject(revNums).toJSONString());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		
+		ProductQaDAO pqaDao = new ProductQaDAO();
+		
+		List<Map<String,Object>> list = pqaDao.selectAllQaByPdId(no);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		JSONArray jArr = new JSONArray();
+		
+		for(Map<String, Object> map : list) {
+			map.put("regdate", sdf.format(map.get("regdate")));
+			JSONObject jObj = new JSONObject(map);
+			jArr.add(jObj);
+		}
+		try {
+			resp.getWriter().print(jArr.toJSONString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		return "ajax";
 	}

@@ -24,7 +24,7 @@ $(() => {
             <div class="text-wrapper-24"><a href="./event">이벤트</a></div>
             <div class="ellipse"></div>
           </div>
-          <div class="frame-23"><div class="text-wrapper-24"><a href="ㄴ">1:1 문의</a></div></div>
+          <div class="frame-23"><div class="text-wrapper-24"><a href="">1:1 문의</a></div></div>
         </div>
         <input class="frame-24" size="50" placeholder="상품 또는 식물 검색하기">
       	<img class="union" src="resources/img/union.svg" />

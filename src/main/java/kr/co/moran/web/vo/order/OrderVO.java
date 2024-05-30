@@ -11,11 +11,18 @@ public class OrderVO {
 	private int oId;
 	private int mId;
 	private int pdId;
-	private String oDate;
-	private int oTotal;
-	private int oCnt;
-	private int oStatus;
-	private String oUuid;
+	private String date;
+	private int total;
+	private int cnt;
+	private int status;
+	private String memo;
+	private String uuid;
+	private String name;
+	private String phone;
+	private int zipcode;
+	private String address;
+	private String addressDetail;
+	private String pdName;
 	
 	// ORDER CANCLE;
 	private int ocId;

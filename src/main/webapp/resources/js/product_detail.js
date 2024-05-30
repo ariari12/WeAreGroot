@@ -101,12 +101,25 @@ let review = (no) => {
 let qnaInfo = (no) => {
 	$.ajax({
         type: "post",
-        url: "",
-   		data: {"cId" : cId},
+        url: "./product?cmd=detail&no=" + no + "&type=qna",
+   		data: {"no" : no},
         dataType: "json",
         success: function (data) {
         	console.log("성공");
             console.log(data);
+            console.log(data[0].cqaId);
+            console.log("-----------------------");
+			console.log("타입: " + typeof(data));
+            
+            
+            for(let i=0; i<data.length; i++){
+				console.log(data[i].hasOwnProperty("name"));
+				console.log(data[i].hasOwnProperty("pqaParentId"));
+				console.log("@@@@@@@@@@");
+			}
+            
+            
+            qaFormHTML(data);
             
         },
         error: (data, status, err) => {
