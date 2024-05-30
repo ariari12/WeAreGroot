@@ -85,6 +85,13 @@ public class ProductDAO {
 		int cnt = session.selectOne("kr.co.moran.product.pdSaveCnt");
 		return cnt;
 	}
+
+	// 품절목록 갯수
+	public int pdSoldOutCnt() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdSoldOutCnt");
+		return cnt;
+	}
 	
 	
 	// 상품 리스트
@@ -187,6 +194,18 @@ public class ProductDAO {
         List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySave", map);
 		return vos;
 	}
+	
+	// 품절목록 조회
+	public List<ProductVO> pdSelectBySoldOut(int start, int pageNum) {
+		openSession();
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("pageNum", pageNum);
+		
+        List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySoldOut", map);
+		return vos;
+	}
+	
 	
 	// update
 	// 삭제기간 설정
