@@ -983,6 +983,10 @@ a:visited {
 	color: black;
 }
 
+.frame-wrapper a{
+	color : white;
+}
+
     </style>
   </head>
   <body>
@@ -1043,7 +1047,9 @@ a:visited {
 		    <div class="text-wrapper-17"><button id="sortViewCntDesc" class="sortButton" value="viewCntDesc">인기순</button></div>
 		    <img class="line" src="img/line-18.svg" />
 		</div>
-          <img class="line-3" src="img/line-17-2.svg" />
+          <svg width="1170" height="1" viewBox="0 0 1170 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+		  <line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4"/>
+		  </svg>
         </div>
         <div class="frame-4">
           <div class="frame-4">
@@ -1096,7 +1102,9 @@ a:visited {
                 </div>
               </div>
             </div>
-            <img class="line-3" src="img/line-25.svg" />
+          <svg width="1170" height="1" viewBox="0 0 1170 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+		  <line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4"/>
+		  </svg>
             </c:forEach>
 
             <!-- 글하나 끝나는지점 -->

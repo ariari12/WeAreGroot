@@ -13,11 +13,12 @@
 			c.c_parent_id as cParentId,
 			c.c_contents as contents, 
 			c.c_like_cnt as likeCnt,
+			c.c_regdate as regDate,
 			m.m_nick as nick
 		FROM COMMENT c
 		JOIN MEMBER m ON c.m_id = m.m_id
-		WHERE b_id = #{bId}
-		ORDER BY c_regdate DESC
+		WHERE c.b_id = #{bId}
+		ORDER BY c.c_regdate DESC
 	</select>
 
 	<!-- 내가 쓴 댓글 목록 -->
@@ -78,7 +79,7 @@
 	<!-- 댓글 삭제 -->
 	<delete id="DeleteComment" parameterType="kr.co.moran.web.vo.LikeVO">
 		DELETE FROM COMMENT 
-		WHERE c_id = #{cId} AND m_id = #{mId}
+		WHERE c_id = #{cId}
 	</delete>
 	
 	<!-- 댓글 좋아요 취소 -->

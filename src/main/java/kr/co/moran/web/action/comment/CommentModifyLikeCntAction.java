@@ -19,7 +19,7 @@ public class CommentModifyLikeCntAction implements Action{
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		int cId = Integer.parseInt(req.getParameter("cId"));
 		int mId = m.getMId();
-		
+		int count = Integer.parseInt(req.getParameter("count"));
 		
 		
 		CommentDAO dao = new CommentDAO();
@@ -33,21 +33,21 @@ public class CommentModifyLikeCntAction implements Action{
 		//		만약 좋아요 목록에 cId와 mId가 같은게 없다면
 		if(commentLikeResult.equals("likeOk")) {
 			// 좋아요 수 증가 로직
-			dao.modifyCommentLikeCntPlusBycId(bId);
+			dao.modifyCommentLikeCntPlusBycId(cId);
 			// 좋아요 저장 로직
 			dao.insertCommentLikeBycId(vo);
 		}else if(commentLikeResult.equals("likeCancel")) {
 			// 좋아요 수 감소 로직
-			dao.modifyCommentLikeCntMinusBycId(bId);
+			dao.modifyCommentLikeCntMinusBycId(cId);
 			//좋아요 삭제 로직
 			dao.deleteCommentLikeBycId(vo);
 		}
 		
 		
 		if(type == 1) {
-			return "/board?cmd=qnaDetail&bId=" + bId;
+			return "/board?cmd=qnaDetail&bId=" + bId + "&count=" + count;
 		}else {
-			return "/board?cmd=khDetail&bId=" + bId;
+			return "/board?cmd=khDetail&bId=" + bId + "&count=" + count;
 		}
 	}
 }

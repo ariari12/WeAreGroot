@@ -6,6 +6,53 @@
 <head>
 <meta charset="utf-8" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+function showEditForm(cId, contents, bId, type) {
+    var formId = 'editForm-' + cId;
+    var existingForm = document.getElementById(formId);
+
+    if (existingForm) {
+        existingForm.style.display = 'block';
+    } else {
+        var formHtml = '<form action="comment" method="post" id="' + formId + '">' +
+                       '<input type="hidden" name="cmd" value="commentModify">' +
+                       '<input type="hidden" name="cId" value="' + cId + '">' +
+                       '<input type="hidden" name="bId" value="' + bId + '">' +
+                       '<input type="hidden" name="type" value="' + type + '">' +
+                       '<textarea name="contents" cols="100" rows="4">' + contents + '</textarea>' +
+                       '<button type="submit">수정</button>' +
+                       '<button type="button" onclick="hideEditForm(\'' + formId + '\')">취소</button>' +
+                       '</form>';
+
+        var commentDiv = document.getElementById('comment-' + cId);
+        var div = document.createElement('div');
+        div.innerHTML = formHtml;
+        commentDiv.appendChild(div);
+    }
+}
+
+function hideEditForm(formId) {
+    var form = document.getElementById(formId);
+    if (form) {
+        form.style.display = 'none';
+    }
+}
+
+</script>
+
+
 <link rel="stylesheet" href="resources/css/globals.css" />
 <style type="text/css">
 :root {
@@ -282,6 +329,7 @@
 	top: 0;
 	left: 0;
 	background-color: #4d4d4d;
+	z-index: 5;
 }
 
 .q-a .frame-3 {
@@ -841,6 +889,10 @@ a:link {
 a:visited {
 	color: black;
 }
+
+.frame-wrapper a {
+	color: white;
+}
 </style>
 </head>
 <body>
@@ -953,7 +1005,10 @@ a:visited {
 					<img src="./resources/img/board/${boardVO.get('biImg') }"
 						onerror="this.style.display='none'" alt='' />
 				</div>
-				<img class="line-2" src="img/line-36.svg" />
+				<svg width="1170" height="1" viewBox="0 0 1170 1" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+		  <line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4" />
+		  </svg>
 			</div>
 			<div class="frame-9">
 				<div class="frame-11">
@@ -961,30 +1016,34 @@ a:visited {
 					<div class="text-wrapper-18">${boardVO.get('count') }개의답변</div>
 				</div>
 				<div class="frame-13">
-					<img class="line-3" src="img/line-36-2.svg" />
+					<svg width="1170" height="1" viewBox="0 0 1170 1" fill="none"
+						xmlns="http://www.w3.org/2000/svg">
+		  <line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4" />
+		  </svg>
 
 					<!-- 답변하나 시작 -->
 					<c:forEach var="commentVO" items="${commentList}">
 						<c:set var="bId" value="${boardVO.get('bId') }"></c:set>
 						<c:set var="type" value="${boardVO.get('type') }"></c:set>
 						<c:set var="cId" value="${commentVO.get('cId') }"></c:set>
+						<c:set var="count" value="${boardVO.get('count') }"></c:set>
 						<c:set var="loginId" value="${loginId }"></c:set>
 						<div class="frame-10">
 							<div class="frame-11">
 								<div class="text-wrapper-19">${commentVO.get('nick') }</div>
 								<div class="text-wrapper-19">${commentVO.get('regDate') }</div>
 							</div>
-							<p class="element">${commentVO.get('contents') }  </p>
+							<p class="element">${commentVO.get('contents') }</p>
 							<div class="frame-14">
 								<div class="text-wrapper-21">공감</div>
 								<div class="frame-14">
 									<div class="frame-11">
 										<svg width="14" height="14" viewBox="0 0 14 14" fill="none"
 											xmlns="http://www.w3.org/2000/svg">
-					<path
+											<path
 												d="M13 6.90909C13 6.30364 12.5091 5.81818 11.9091 5.81818H8.46182L8.98546 3.32545C8.99636 3.27091 9.00182 3.21091 9.00182 3.15091C9.00182 2.92727 8.90909 2.72 8.76182 2.57273L8.18364 2L4.59455 5.58909C4.39273 5.79091 4.27273 6.06364 4.27273 6.36364V11.8182C4.27273 12.1075 4.38766 12.385 4.59225 12.5896C4.79683 12.7942 5.07431 12.9091 5.36364 12.9091H10.2727C10.7255 12.9091 11.1127 12.6364 11.2764 12.2436L12.9236 8.39818C12.9727 8.27273 13 8.14182 13 8V6.90909ZM1 12.9091H3.18182V6.36364H1V12.9091Z"
 												fill="#00B368" />
-					</svg>
+										</svg>
 									</div>
 									<div class="text-wrapper-21">${commentVO.get('likeCnt') }</div>
 								</div>
@@ -994,7 +1053,7 @@ a:visited {
 							<c:choose>
 								<c:when test="${commentVO.get('mId') eq loginId }">
 									<button type="button"
-										onclick="location.href='<c:url value='/comment?cmd=commentDelete&cId=${cId}&bId=${bId}&type=${type}' />'"
+										onclick="location.href='<c:url value='/comment?cmd=commentDelete&cId=${cId}&bId=${bId}&type=${type}&count=${count }' />'"
 										style="border: 0; background-color: transparent;">
 										<div class="frame-15">
 											<div class="frame-11">
@@ -1022,12 +1081,15 @@ a:visited {
 									<c:choose>
 										<c:when test="${commentVO.get('commentLikeResult') eq 'ok' }">
 											<button type="button"
-												onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeOk&type=${type }&bId=${bId }' />'"
+												onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeOk&type=${type }&bId=${bId }&count=${count }' />'"
 												style="border: 0; background-color: transparent;">
 												<div class="frame-15">
 													<div class="frame-11">
-														<svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z" fill="#E4E4E4"/>
+														<svg width="12" height="11" viewBox="0 0 12 11"
+															fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path
+																d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+																fill="#E4E4E4" />
 														</svg>
 													</div>
 													<div class="text-wrapper-22">답변 공감하기</div>
@@ -1036,12 +1098,15 @@ a:visited {
 										</c:when>
 										<c:when test="${commentVO.get('commentLikeResult') eq 'no' }">
 											<button type="button"
-												onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeCancel&type=${type }&bId=${bId }' />'"
+												onclick="location.href='<c:url value='/comment?cmd=commentModifyLikeCnt&cId=${cId}&commentLikeResult=likeCancel&type=${type }&bId=${bId }&count=${count }' />'"
 												style="border: 0; background-color: transparent;">
 												<div class="view-3">
 													<div class="frame-11">
-														<svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-														<path d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z" fill="#00B368"/>
+														<svg width="12" height="11" viewBox="0 0 12 11"
+															fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path
+																d="M12 4.90909C12 4.30364 11.5091 3.81818 10.9091 3.81818H7.46182L7.98546 1.32545C7.99636 1.27091 8.00182 1.21091 8.00182 1.15091C8.00182 0.927273 7.90909 0.72 7.76182 0.572727L7.18364 0L3.59455 3.58909C3.39273 3.79091 3.27273 4.06364 3.27273 4.36364V9.81818C3.27273 10.1075 3.38766 10.385 3.59225 10.5896C3.79683 10.7942 4.07431 10.9091 4.36364 10.9091H9.27273C9.72546 10.9091 10.1127 10.6364 10.2764 10.2436L11.9236 6.39818C11.9727 6.27273 12 6.14182 12 6V4.90909ZM0 10.9091H2.18182V4.36364H0V10.9091Z"
+																fill="#00B368" />
 														</svg>
 													</div>
 													<div class="text-wrapper-22">답변 공감취소</div>
@@ -1052,12 +1117,15 @@ a:visited {
 								</c:when>
 							</c:choose>
 						</div>
-						<img class="line-2" src="img/line-35-2.svg" />
+						<svg width="1170" height="1" viewBox="0 0 1170 1" fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+						<line y1="0.5" x2="1170" y2="0.5" stroke="#E4E4E4" />
+						</svg>
 					</c:forEach>
 					<!-- 답변 하나 끝 -->
 
 					<!-- 페이징 -->
-					<div class="frame-16">
+					<!-- 					<div class="frame-16">
 						<img class="line-4" src="img/line-1.svg" />
 						<div class="frame-17">
 							<img class="frame-18" src="img/frame-30.svg" />
@@ -1074,7 +1142,7 @@ a:visited {
 							</div>
 							<img class="frame-18" src="img/frame-35.svg" />
 						</div>
-					</div>
+					</div> -->
 				</div>
 			</div>
 			<a href="main"><img class="header"
