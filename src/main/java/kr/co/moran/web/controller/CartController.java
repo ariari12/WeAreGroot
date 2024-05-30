@@ -27,7 +27,7 @@ public class CartController extends HttpServlet{
 		String url = "";
 		Action action = null;
 		
-		if (cmd == null || cmd.equals("cartList")) {
+		if (cmd == null || cmd.equals("list")) {
 			action = new CartListAction();
 		} else if(cmd.equals("cartForm")) {
 			action = new CartFormAction();
