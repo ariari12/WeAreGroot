@@ -90,7 +90,7 @@
 		LEFT JOIN ADDRESS AS a	
 		ON m.m_id = a.m_id
 		WHERE
-			m.m_email = #{email} AND m.m_pw = #{pw}
+			m.m_email = #{email} AND m.m_pw = #{pw} AND m.m_is_maintain = 0
 			
   	</select>
   	
@@ -118,9 +118,39 @@
 		    a.a_addr2 AS addr2
 		FROM
 			MEMBER AS m
+		LEFT JOIN ADDRESS AS a
 		ON m.m_id = a.m_id
 		WHERE
-			m.m_email = #{email}
+			m.m_email = #{email} AND m.m_is_maintain = 0
+  	</select>
+  	
+  	<select id="selectMemberByEmailAndName" parameterType="map" resultType="kr.co.moran.web.vo.member.MemberVO">
+  		SELECT
+  			m.m_id AS mId,
+		    m.m_email AS email,
+		    m.m_pw AS pw,
+		    m.m_name AS name,
+		    m.m_profile_img AS profileImg,
+		    m.m_nick AS nick,
+		    m.m_phone AS phone,
+		    m.m_regdate AS regdate,
+		    m.m_logtype AS logtype,
+		    m.m_admintype AS admintype,
+		    m.m_is_maintain AS isMaintain,
+		    m.m_retention_period AS retentionPeriod,
+		    m.m_birth AS birth,
+		    m.m_gender AS gender,
+		    a.a_id AS aId,
+		    a.m_id AS mId,
+		    a.a_zipcode AS zipcode,
+		    a.a_addr1 AS addr1,
+		    a.a_addr2 AS addr2
+		FROM
+			MEMBER AS m
+		LEFT JOIN ADDRESS AS a
+		ON m.m_id = a.m_id
+		WHERE
+			m.m_email = #{email} AND m.m_name = #{name} AND m.m_is_maintain = 0
   	</select>
   	
   	<!-- 고쳐야 할것 -->
@@ -173,7 +203,7 @@
 		FROM
 			MEMBER
 		WHERE
-			m_id = #{mId}  	
+			m_id = #{mId} AND m_is_maintain = 0
   	</select>
   	
   	<update id="modifyMemberWithAddressById" parameterType="kr.co.moran.web.vo.member.MemberVO">

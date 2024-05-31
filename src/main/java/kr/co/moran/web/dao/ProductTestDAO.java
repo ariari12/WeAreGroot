@@ -16,7 +16,7 @@ public class ProductTestDAO {
 	public ProductTestDAO() {
 		try {
 			Reader r = Resources.getResourceAsReader("config/SqlMapConfig.xml");
-			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+			SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();			
 			factory = builder.build(r);
 			r.close(); //다른 브랜치도 추가
 		} catch (IOException e) {

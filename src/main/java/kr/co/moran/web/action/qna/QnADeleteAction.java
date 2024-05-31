@@ -11,6 +11,7 @@ public class QnADeleteAction implements Action {
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		BoardDAO dao = new BoardDAO();
+
 		dao.deleteBoardBybId(bId);
 		
 		return "/board?cmd=qna";

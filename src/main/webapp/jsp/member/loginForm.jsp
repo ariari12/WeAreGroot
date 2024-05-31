@@ -10,6 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
+.custom{
+	top:100px
+}
 a {  	text-align: center;
 		text-decoration: none; /* 링크의 밑줄 제거 */  
 		color: inherit; /* 링크의 색상 제거 */
@@ -476,8 +479,8 @@ a {  	text-align: center;
 	padding: 20px 148px;
 	position: absolute;
 	top: 548px;
-	left: 760px;
-	background-color: #20202033;
+	left: 760px;	
+	background: #00B368;
 	border: none;
 }
 
@@ -582,11 +585,89 @@ a {  	text-align: center;
 	color: #20202080;
 }
 
+.text-wrapper-15 {
+  position: relative;
+  z-index: 1;
+}
+
+.text-wrapper-15 input[type="text"] {
+  width: 100%;
+  height: 100%;
+  padding: 8px 12px;
+  border: none;
+  background-color: transparent;
+  font-family: "Pretendard Variable-Medium", Helvetica;
+  font-weight: 500;
+  color: #202020;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
 
 </style>
+<script>
 
+
+
+$(document).ready(function() {
+	$(".union-wrapper").click(() => {
+        let keyword = $("#search").val();
+        window.location = "./product?cmd=list&type=search&search=" + keyword;
+    });
+	
+	 $("#findPwBtn").click(function() {
+		 var name = $("#name").val();
+		 var email = $("#findEmail").val();
+	   
+	   $.ajax({
+	     type: "POST",
+	     url: "/moran/member",
+	     data: {
+	       cmd: "findMemberPwOk",
+	       name: name,
+	       email: email
+	     },
+	     success: function(response) {
+	       // 서버 응답 처리
+	       console.log(response);
+	       if (response == "emptyMember") {
+		        /* Swal.fire({
+		            icon: 'warning',                         // Alert 타입
+		            title: '비밀번호를 찾을 수 없습니다',         // Alert 제목
+		            text: '비밀번호 찾기에 실패했습니다. 다시 시도해주세요.',  // Alert 내용
+		        }, function() {
+		    		   $("#findModal").modal("hide");
+		    		   location.reload();
+		    }); */
+	    	   
+	    	    alert("비밀번호 찾기에 실패했습니다. 다시 시도해주세요.", function() {
+	    		   $("#findModal").modal("hide");
+	    		   location.reload();
+	    		 });
+	    	   
+	       } else {
+	    	   alert("비밀번호가 이메일로 전송되었습니다.", function() {
+	    		   $("#findModal").modal("hide");
+	    		   location.reload();
+	    		 });	         
+	       }
+	     },
+	     error: function() {
+	    	 alert("비밀번호 찾기 요청에 실패했습니다.", function() {
+	    		  $("#findModal").modal("hide");
+	    		  location.reload();
+	    		});
+	     }
+	   });
+	 });
+	});
+</script>
 </head>
-<body>
+<body>	
+	<%-- <c:if test="${not empty requestScope.notMember}">
+		<script>alert("${requestScope.notMember}");</script>
+	</c:if> --%>
 	<div class="div-wrapper">
 		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
 		<div class="frame">
@@ -633,7 +714,7 @@ a {  	text-align: center;
 					<div class="text-wrapper-14"><a href="main">홈</a></div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">커뮤니티</div>
+					<div class="text-wrapper-14"><a href="board">커뮤니티</a></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14"><a href="product?cmd=list">스토어</a></div>
@@ -642,15 +723,15 @@ a {  	text-align: center;
 					<div class="text-wrapper-14">공지</div>
 				</div>
 				<div class="frame-5">
-					<div class="text-wrapper-14">이벤트</div>
+					<div class="text-wrapper-14"><a href="event">이벤트</a></div>
 					<div class="ellipse"></div>
 				</div>
 				<div class="frame-5">
 					<div class="text-wrapper-14">1:1 문의</div>
 				</div>
 			</div>
-			<div class="frame-6">
-				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
+			<div class="frame-6">				
+				<input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:-10px; outline: none; border-width: 0;"/>				
 				<div class="union-wrapper">
 					<img class="union" src="resources/img/member/union.svg" />
 				</div>
@@ -662,14 +743,16 @@ a {  	text-align: center;
 				<input type="password" type="password" name="pw" id="password"
 									placeholder="비밀번호" minlength="6" required>
 			
-			<div class="text-wrapper-18">
-				<a href="아이디비밀번호찾기URL">아이디/비밀번호 찾기</a>
+			<div class="text-wrapper-18">				
+				<button type="button" data-bs-toggle="modal" data-bs-target="#findModal" style= "border: 0; background-color: transparent; color: #20202080;" >
+  						비밀번호 찾기
+				</button>			
 			</div>
 			<div class="text-wrapper-19">아직 모란모란의 회원이 아니라면?</div>
 			<input type="hidden" name="cmd" value="loginOk" />
 			<button type="submit" class="frame-8"><div class="text-wrapper-20">로그인</div></button>
 		</form>
-		<a href="회원가입URL" class="frame-7">
+		<a href="/moran/member?cmd=joinForm" class="frame-7">
 			<div class="text-wrapper-20">회원가입하기</div>
 		</a>
 		<div class="frame-9">
@@ -683,5 +766,31 @@ a {  	text-align: center;
 		<img class="line" src="resources/img/member/line-12.svg" /> <img
 			class="img" src="resources/img/member/line-13.svg" />
 	</div>
+
+<!-- 비밀번호 찾기 모달 -->	
+ <div class="modal fade" id="findModal" tabindex="-1" aria-labelledby="findModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="findModalLabel">아이디 비밀번호 찾기</h5>
+       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+     </div>
+     <div class="modal-body">
+       <div class="mb-3">
+         <label for="name" class="form-label">이름</label>
+         <input type="text" class="form-control" id="name" name="name" required>
+       </div>
+		<div class="mb-3">
+		  <label for="findEmail" class="form-label">이메일</label>
+		  <input type="email" class="form-control" id="findEmail" name="findEmail" required>
+		</div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+       <button type="button" class="btn btn-primary" id="findPwBtn">비밀번호 찾기</button>
+     </div>
+   </div>
+ </div>
+</div>
 </body>
 </html>

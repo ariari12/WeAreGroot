@@ -21,17 +21,28 @@
 		FROM BOARD b
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
-		WHERE b.m_id= #{mId}
+		WHERE b.m_id= #{mId} AND b.b_is_maintain = 0
 	</select>
 
 	<!-- 글에 댓글이 몇개 있는지 구하기 -->
-	<select id="SelectCountAllCommentBybId" resultType="hashmap">
+	<select id="SelectCountAllComment" resultType="hashmap">
 		SELECT
 			c.b_id as bId,
 			COUNT(*) as count
 		FROM COMMENT c
 		JOIN BOARD b ON c.b_id = b.b_id
 		GROUP BY c.b_id
+	</select>
+
+	<!-- 특정 게시글 댓글 몇개 있는지 구하기 -->
+	<select id="SelectCountAllCommentBybId" parameterType="int" resultType="hashmap">
+		SELECT
+			c.b_id as bId,
+			COUNT(*) as count
+		FROM COMMENT c
+		JOIN BOARD b ON c.b_id = b.b_id
+		GROUP BY c.b_id
+		WHERE b.b_id = #{bId}
 	</select>
 
 	<!-- 노하우 게시글 총 갯수 -->
@@ -83,7 +94,7 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 2 AND b.b_is_maintain = 0
-		ORDER BY b.b_view_cnt DESC
+		ORDER BY b.b_like_cnt DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -136,12 +147,12 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 1 AND b.b_is_maintain = 0
-		ORDER BY b.b_view_cnt 
+		ORDER BY b.b_view_cnt DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
 	<!-- 글 디테일 -->	
-	<select id="SelectBoardBybId" parameterType="kr.co.moran.web.vo.BoardVO" resultType="hashmap">
+	<select id="SelectBoardBybId" parameterType="int" resultType="hashmap">
 		SELECT 
 			m.m_nick AS nick, 
 			b.b_id AS bId , 
@@ -156,8 +167,8 @@
 			b.b_retention_period AS retentionPeriod,
 			bi.bi_img AS biImg
 		FROM BOARD b
+		LEFT JOIN BOARD_IMG bi ON b.b_id = bi.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
-		JOIN BOARD_IMG bi ON b.b_id = bi.b_id
 		WHERE b.b_id = #{bId}
 	</select>
 	
@@ -196,24 +207,46 @@
 	</update>
 	
 	<!-- 좋아요 수 증가 -->
-	<update id="ModifyBoardLikeCntBybId" parameterType="int">
+	<update id="ModifyBoardLikeCntPlusBybId" parameterType="int">
 		UPDATE BOARD
 		SET b_like_cnt = b_like_cnt + 1
 		WHERE b_id = ${bId}
 	</update>
 	
+	<!-- 좋아요 수 감소 -->
+	<update id="ModifyBoardLikeCntMinusBybId" parameterType="int">
+		UPDATE BOARD
+		SET b_like_cnt = b_like_cnt - 1
+		WHERE b_id = ${bId}
+	</update>
+	
 	<!-- 좋아요 버튼 누를 때 테이블 값 추가 b_id나 c_id와 물려야됨 내가 좋아요 누른 글 보기는 조인 두번 해야 함-->
-	<!-- 게시글 좋아요 -->
+	<!-- 게시글 좋아요 추가-->
 	<insert id="InsertBoardLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
 		INSERT INTO LIKES(m_id, b_id, l_date)
 		VALUES(#{mId}, #{bId}, NOW())
 	</insert>
+	
+	<!-- 게시글 좋아요 삭제 -->
+	<delete id="DeleteBoardLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
+		DELETE FROM LIKES
+		WHERE b_id = #{bId} AND m_id = #{mId}
+	</delete>	
 	
 	<!-- 댓글 좋아요 -->
 	<insert id="InsertCommentLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
 		INSERT INTO LIKES(m_id, c_id, l_date)
 		VALUES(#{mId}, #{bId}, NOW())
 	</insert>
+	
+	<!-- 게시글 좋아요 여부 -->
+	<select id="SelectBoardLikeBybIdandmId" parameterType="kr.co.moran.web.vo.LikeVO" resultType="kr.co.moran.web.vo.LikeVO">
+		SELECT 
+			b_id as bId,
+			m_id as mId 
+		FROM LIKES
+		WHERE b_id = #{bId} AND m_id = #{mId}
+	</select>	
 	
 	<!-- 좋아요한 게시글 보기 -->
 	<select id="SelectBoardLikeBymId" parameterType="int" resultType="hashmap">

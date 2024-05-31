@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -805,11 +806,12 @@ a {
 }
 
 </style>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
 	
 
 	$(()=>{
+
 		
 		//유효성 검사 함수
 		function validateForm() {
@@ -817,7 +819,15 @@ a {
 		    if (form.checkValidity() === false) {
 		      event.preventDefault();
 		      event.stopPropagation();
-		      alert("회원가입 양식을 지켜주세요");
+		      
+		        Swal.fire({
+		            icon: 'warning',                         // Alert 타입
+		            title: '회원가입 실패',         // Alert 제목
+		            text: '회원가입 양식을 지켜주세요',  // Alert 내용
+		        });
+		      
+		      
+		      // alert("회원가입 양식을 지켜주세요");
 		      return false;
 		    }
 		    return true;
@@ -842,16 +852,31 @@ a {
                     success : function(data){
                     	data = data.trim();
                     	if (data == "emailDuplicated") {
-                    		alert("이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.");
+            		        Swal.fire({
+            		            icon: 'error',              // Alert 타입
+            		            title: '회원가입 인증 실패',         // Alert 제목
+            		            text: '이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.',  // Alert 내용
+            		        });
+                    		//alert("이미 가입된 이메일입니다. 다른 이메일을 사용해주세요.");
                     		$("#verifyEmailBtn").attr("disabled",false);
                     	}else{
-                    		alert("이메일 인증번호가 전송이 완료되었습니다");                    		                    		
+                    		Swal.fire({
+            		            icon: 'success',              // Alert 타입
+            		            title: '회원가입 인증 성공',         // Alert 제목
+            		            text: '이메일 인증번호가 전송이 완료되었습니다',  // Alert 내용
+            		        });
+                    		//alert("이메일 인증번호가 전송이 완료되었습니다");                    		                    		
                     		$("#verifyEmailBtn").attr("disabled",false);
                     	}                    	                    	
                     	
                     },                    
                     error : function(){
-                        alert("이메일 인증 요청에 실패하였습니다. 다시 시도해주세요")
+                    	Swal.fire({
+        		            icon: 'error',              // Alert 타입
+        		            title: '회원가입 인증 요청 실패',         // Alert 제목
+        		            text: '이메일 인증 요청에 실패하였습니다. 다시 시도해주세요',  // Alert 내용
+        		        });
+                        //alert("이메일 인증 요청에 실패하였습니다. 다시 시도해주세요")
                         $("#verifyEmailBtn").attr("disabled",false);
                     }
                 });
@@ -871,13 +896,28 @@ a {
 					},
 					success : function(data){
 						if(data == "verifyEmailMatch"){
-							alert("인증되었습니다");
+							Swal.fire({
+	        		            icon: 'success',              // Alert 타입
+	        		            title: '이메일 인증 성공',         // Alert 제목
+	        		            text: '인증되었습니다',  // Alert 내용
+	        		        });
+							//alert("인증되었습니다");
 						}else if(data == "verifyEmailMismatch"){
-							alert("이메일 인증번호가 일치하지 않습니다");
+							Swal.fire({
+	        		            icon: 'error',              // Alert 타입
+	        		            title: '이메일 인증 실패',         // Alert 제목
+	        		            text: '이메일 인증번호가 일치하지 않습니다',  // Alert 내용
+	        		        });
+							//alert("이메일 인증번호가 일치하지 않습니다");
 						}
 					},
 					error : function(){
-						alert("이메일 인증번호 요청이 실패하였습니다");
+						Swal.fire({
+        		            icon: 'error',              // Alert 타입
+        		            title: '이메일 인증번호 요청이 실패',         // Alert 제목
+        		            text: '이메일 인증번호 요청이 실패하였습니다',  // Alert 내용
+        		        });
+						//alert("이메일 인증번호 요청이 실패하였습니다");
 					}
 				});
 			}
@@ -898,13 +938,28 @@ a {
 			        console.log(response);
 			        if(response == "success"){		        	
 				        window.location.href="main";
-				        alert("회원가입 성공");
-			        }else{		        	
-				        alert("회원가입 양식을 지켜주세요");
+				        Swal.fire({
+        		            icon: 'success',              // Alert 타입
+        		            title: '회원가입 성공',         // Alert 제목
+        		            text: 'ㅊㅋ',  // Alert 내용
+        		        });
+				        //alert("회원가입 성공");
+			        }else{
+			        	Swal.fire({
+        		            icon: 'warning',              // Alert 타입
+        		            title: '회원가입 양식을 지켜주세요',         // Alert 제목
+        		            text: '좋은말로 할 떄',  // Alert 내용
+        		        });
+				        //alert("회원가입 양식을 지켜주세요");
 			        }		        
 			      },
 			      error : function(){
-						alert("회원가입 요청에 실패하였습니다");
+			    	  Swal.fire({
+      		            icon: 'error',              // Alert 타입
+      		            title: '회원가입 실패',         // Alert 제목
+      		            text: '회원가입 요청에 실패하였습니다',  // Alert 내용
+      		        });
+						//alert("회원가입 요청에 실패하였습니다");
 				}
 			   });
 			}
@@ -912,7 +967,10 @@ a {
 	  	
 	  	
 
-	  	
+		$(".union-wrapper").click(() => {
+	        let keyword = $("#search").val();
+	        window.location = "./product?cmd=list&type=search&search=" + keyword;
+	    });
 	  	
 		
 	});
@@ -921,8 +979,12 @@ a {
 
 </head>
 <body>
+	
 	<div class="div-wrapper">
-		<a href="main"><img class="header" src="resources/img/member/header.svg" /></a>
+		<a class="header" href="main">
+			<img src="resources/img/member/header.svg" />
+		</a>
+		
 		<div class="frame">
 			<div class="div">
 				<div class="frame-2">
@@ -961,10 +1023,10 @@ a {
 				</div>
 			</div>
 			<div class="frame-6">
-				<div class="text-wrapper-15">상품 또는 식물 검색하기</div>
 				<div class="union-wrapper">
 					<img class="union" src="resources/img/member/union.svg" />
 				</div>
+				<input id="search" type="text" placeholder="상품 또는 식물 검색하기" style="z-index: 5; left:50px; top:-10px; outline: none; border-width: 0; width:380px"/>
 			</div>
 		</div>
 		
@@ -989,7 +1051,7 @@ a {
 					<input type="email" name="email" id="email"
 						class="frame-11 text-wrapper-21" placeholder="이메일을 입력해주세요 (필수)"
 						required>
-					<button type="button" id="verifyEmailBtn" class="text-wrapper-18">인증번호
+					<button type="button" id="verifyEmailBtn" class="text-wrapper-18" style="background: #00B368">인증번호
 						전송</button>
 				</div>
 			</div>
@@ -1005,7 +1067,7 @@ a {
 				<div>
 					<input type="text" name="emailCode" id="emailCode"
 						class="frame-11 text-wrapper-21" placeholder="인증번호 5자리" required>
-					<button type="button" id="emailCodeBtn" class="text-wrapper-18">인증번호
+					<button type="button" id="emailCodeBtn" class="text-wrapper-18" style="background: #00B368">인증번호
 						확인</button>
 				</div>
 			</div>

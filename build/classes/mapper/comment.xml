@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE mapper
+	  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.moran.comment">
+
+	<!-- Board의 댓글 목록 -->
+	<select id="SelectCommentBybId" parameterType="int" resultType="hashmap">
+		SELECT 
+			c.c_id as cId, 
+			c.b_id as bId, 
+			c.m_id as mId, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt,
+			c.c_regdate as regDate,
+			m.m_nick as nick
+		FROM COMMENT c
+		JOIN MEMBER m ON c.m_id = m.m_id
+		WHERE c.b_id = #{bId}
+		ORDER BY c.c_regdate DESC
+	</select>
+
+	<!-- 내가 쓴 댓글 목록 -->
+	<select id="SelectCommentBymId" parameterType="int" resultType="hashmap">
+		SELECT
+			c.c_id as cId, 
+			c.b_id as bId, 
+			c.m_id as mId, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt
+		FROM COMMENT c
+		JOIN MEMBER m ON c.m_id = m.m_id
+		WHERE m.m_id = #{mId}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="InsertComment" parameterType="kr.co.moran.web.vo.CommentVO">
+		INSERT INTO COMMENT (b_id, c_contents, c_like_cnt, c_parent_id, c_regdate, m_id) VALUES
+		(#{bId}, #{contents}, 0, NULL, NOW(), #{mId} )
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="ModifyComment" >
+		UPDATE COMMENT
+		SET c_contents = #{contents}
+		WHERE c_id = #{cId}
+	</update>
+	
+	<!-- 댓글 좋아요 수 증가-->
+	<update id="ModifyCommentLikeCntPlusBycId" parameterType="int">
+		UPDATE COMMENT
+		SET c_like_cnt = c_like_cnt + 1
+		WHERE c_id = #{cId}
+	</update>
+	
+	<!-- 댓글 좋아요 수 감소-->
+	<update id="ModifyCommentLikeCntMinusBycId" parameterType="int">
+		UPDATE COMMENT
+		SET c_like_cnt = c_like_cnt - 1
+		WHERE c_id = #{cId}
+	</update>
+	
+	<insert id="InsertCommentLikeBycId" parameterType="kr.co.moran.web.vo.LikeVO">
+		INSERT INTO LIKES(m_id, c_id, l_date)
+		VALUES(#{mId}, #{cId}, NOW())
+	</insert>
+	
+	
+	<select id="SelectCommentLikeBybIdandmId" parameterType="kr.co.moran.web.vo.LikeVO" resultType="kr.co.moran.web.vo.LikeVO">
+		SELECT 
+			c_id as cId,
+			m_id as mId 
+		FROM LIKES
+		WHERE c_id = #{cId} AND m_id = #{mId}
+	</select>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="DeleteComment" parameterType="kr.co.moran.web.vo.LikeVO">
+		DELETE FROM COMMENT 
+		WHERE c_id = #{cId}
+	</delete>
+	
+	<!-- 댓글 좋아요 취소 -->
+	<delete id="DeleteCommentLikebycid" parameterType="kr.co.moran.web.vo.LikeVO" >
+		DELETE FROM LIKES
+		WHERE c_id = #{cId} AND m_id = #{mId}
+	</delete>	
+	
+	<!-- 이벤트 댓글조회 -->
+	<select id="SelectCommentByEid" parameterType="int" resultType="java.util.HashMap">
+		SELECT 
+			c.c_id as cId, 
+			c.e_id as eId, 
+			c.m_id as mId,
+			m.m_nick as nick, 
+			c.c_parent_id as cParentId,
+			c.c_contents as contents, 
+			c.c_like_cnt as likeCnt,
+			c.c_regdate as regDate
+		FROM
+			COMMENT AS c
+		INNER JOIN
+			MEMBER AS m ON c.m_id = m.m_id
+		WHERE
+			c.e_id = #{eId}
+	</select>
+
+
+	<select id="SelectCommentByCid" parameterType="int" resultType="java.util.HashMap">
+		SELECT
+		c.c_id as cId,
+		c.e_id as eId,
+		c.m_id as mId,
+		m.m_nick as nick,
+		c.c_parent_id as cParentId,
+		c.c_contents as contents,
+		c.c_like_cnt as likeCnt,
+		c.c_regdate as regDate
+		FROM
+		COMMENT AS c
+		INNER JOIN
+		MEMBER AS m ON c.m_id = m.m_id
+		WHERE
+		c.c_parent_id = #{cId}
+		ORDER BY c_regdate DESC  
+	</select>
+	
+	<insert id="InsertCommentByAny" parameterType="kr.co.moran.web.vo.CommentVO">
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_contents, c_like_cnt ,c_regdate)
+		VALUES (
+		#{mId},
+		<if test="bId != 0">#{bId}</if>
+		<if test="bId == 0">null</if>,
+		<if test="eId != 0">#{eId}</if>
+		<if test="eId == 0">null</if>,
+		<if test="cParentId != 0">#{cParentId}</if>
+		<if test="cParentId == 0">null</if>,
+		#{contents},
+		0,
+		now()
+		)
+	</insert>
+	
+	<!-- 댓글의 댓글등록 -->
+	<insert id="InsertReComment" parameterType="kr.co.moran.web.vo.CommentVO" >
+		INSERT INTO COMMENT (m_id, b_id, e_id, c_parent_id, c_contents, c_regdate)
+		VALUES (#{mId}, #{bId}, #{eId}, #{cParentId}, #{contents}, now())
+	</insert>
+	
+</mapper>

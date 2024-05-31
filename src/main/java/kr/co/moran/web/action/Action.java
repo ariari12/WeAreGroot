@@ -9,7 +9,5 @@ import jakarta.servlet.http.HttpSession;
 import kr.co.moran.web.vo.member.MemberVO;
 
 public interface Action {
-
 	public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
-
 }

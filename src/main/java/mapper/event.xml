@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-  
 <mapper namespace="kr.co.moran.web.dao.EventDAO">
 
 	<resultMap type="kr.co.moran.web.vo.EventVO" id="eventMap">
-		<result property="eId" column="e_id"/>
-		<result property="title" column="e_title"/>
-		<result property="start" column="e_start"/>
-		<result property="end" column="e_end"/>
-		<result property="writedate" column="e_writedate"/>
-		<collection property="eventImgVO" resultMap="eventImgMap"/>
-		<collection property="memberVO" resultMap="memberMap"/>
+		<result property="eId" column="e_id" />
+		<result property="title" column="e_title" />
+		<result property="start" column="e_start" />
+		<result property="end" column="e_end" />
+		<result property="writedate" column="e_writedate" />
+		<collection property="eventImgVO" resultMap="eventImgMap" />
+		<collection property="memberVO" resultMap="memberMap" />
 	</resultMap>
-	
+
 	<resultMap type="kr.co.moran.web.vo.EventImgVO" id="eventImgMap">
-		<result property="eiImg" column="ei_img"/>
+		<result property="eiImg" column="ei_img" />
 	</resultMap>
 	<resultMap type="kr.co.moran.web.vo.member.MemberVO" id="memberMap">
-		<result property="nick" column="m_nick"/>
+		<result property="nick" column="m_nick" />
 	</resultMap>
-	
+
 	<select id="selectEventList" resultMap="eventMap">
-		SELECT e.e_id, e.e_title, e.e_start, e.e_end,e_writedate, ei.ei_img, m.m_nick
+		SELECT e.e_id, e.e_title, e.e_start, e.e_end,e_writedate, ei.ei_img,
+		m.m_nick
 		FROM EVENT AS e
 		LEFT OUTER JOIN EVENT_IMG AS ei
 		ON e.e_id = ei.e_id
 		LEFT OUTER JOIN MEMBER AS m
 		ON e.m_id = m.m_id
 	</select>
-	
-	<select id="selectEventByEid" parameterType="int" resultType="kr.co.moran.web.vo.EventVO">
-		SELECT 
-			e_id as eId, 
-			m_id as mId, 
-			pd_id as pdId, 
-			e_title as title, 
-			e_contents as contents, 
-			e_writedate as writedate, 
-			e_start start, 
-			e_end as end
+
+	<select id="selectEventByEid" parameterType="int"
+		resultType="kr.co.moran.web.vo.EventVO">
+		SELECT
+		e_id as eId,
+		m_id as mId,
+		pd_id as pdId,
+		e_title as title,
+		e_contents as contents,
+		e_writedate as writedate,
+		e_start start,
+		e_end as end
 		FROM EVENT
 		WHERE e_id = #{eId}
 	</select>
 
-	<select id="selectEventImg" parameterType="int" resultType="kr.co.moran.web.vo.EventImgVO">
-		SELECT 
-			e_id as eId,
-			ei_no as eiNo,
-			ei_img as eiImg
+	<select id="selectEventImg" parameterType="int"
+		resultType="kr.co.moran.web.vo.EventImgVO">
+		SELECT
+		e_id as eId,
+		ei_no as eiNo,
+		ei_img as eiImg
 		FROM EVENT_IMG
-		WHERE e_id = #{eId} 
+		WHERE e_id = #{eId}
 	</select>
 
 </mapper>  

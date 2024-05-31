@@ -1,17 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- jstl function 기능 사용하기 위한 태그라이브러리 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="resources/css/globals.css" />
 <style>
+<style>
+  .modal-title {
+    color: #00b267;
+  }
+  
+  .warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .warning h2 {
+    color: #856404;
+    margin-top: 0;
+  }
+  
+  .modal-body {
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    resize: vertical;
+  }
+  
+  .btn-primary {
+    background-color: #00b267;
+    border-color: #00b267;
+  }
+  
+  .btn-primary:hover {
+    background-color: #008c4d;
+    border-color: #008c4d;
+  }
 
 a {  	
-	text-align: center;
-	text-decoration: none; /* 링크의 밑줄 제거 */  
-	color: inherit; /* 링크의 색상 제거 */
+	text-align: center !important;
+	text-decoration: none !important ; /* 링크의 밑줄 제거 */  
+	color: inherit !important ; /* 링크의 색상 제거 */
 }
  		
 :root {
@@ -736,7 +786,7 @@ a {
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
-	padding: 10px 67px;
+	padding: 10px 71px;
 	position: relative;
 	flex: 0 0 auto;
 	background-color: #ffffff;
@@ -1248,25 +1298,30 @@ a {
 	border-color: #e4e4e4;
 }
 </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-	crossorigin="anonymous"></script>
 <script>
 	$(document).ready(function() {
-		let btn = document.getElementById("zipBtn");
+		let btn = document.getElementById("zipBtn");		
 		btn.onclick = openKakaoPostCode; // openKakaoPostCode함수를 실행
 
 		$("#submitBtn").click(function() {
-			alert("회원정보 수정 완료");
+			Swal.fire({
+	            icon: 'success',                         // Alert 타입
+	            title: '회원정보 수정 완료',         // Alert 제목
+	            text: '오예',  // Alert 내용
+	        });
+			//alert("회원정보 수정 완료");
 		});
-	});
 
+		
+	});	
+	
 	function openKakaoPostCode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -1407,7 +1462,7 @@ a {
 							<div class="frame-17">
 								<input type="text" id="zipcode" name="zipcode"
 									class="text-wrapper-23"
-									value="${sessionScope.memberVO.addressVO.addr1}"
+									value="${sessionScope.memberVO.addressVO.zipcode}"
 									style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">
 							</div>
 							<div class="frame-18">
@@ -1479,14 +1534,43 @@ a {
 							style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">변경
 							사항 저장하기</button>
 					</div>
-					<div>
-						<button 
-							style="width: 100%; height: 100%; border: none; background-color: transparent; padding: 0;">회원탈퇴</button>
-					</div>
+					
 				</div>
 			</form>
-
+			<div>
+				
+				<button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style= "border: 0; background-color: transparent;" >
+  						회원탈퇴
+				</button>
+			</div>
 		</div>
+		
+		<!-- 회원 탈퇴 Modal -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="staticBackdropLabel">회원 탈퇴</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <form action="member" method="post">
+	        <div class="modal-body">
+	          <div class="warning">
+	            <h2>회원탈퇴 시 게시물 관리</h2>
+	            <p>회원탈퇴 후 푸르다마켓 서비스에 입력한 게시물 및 댓글은 삭제되지 않으며, 회원정보 삭제로 인해 작성자 본인을 확인할 수 없으므로 게시물 편집 및 삭제 처리가 원천적으로 불가능 합니다. 게시물 삭제를 원하시는 경우에는 먼저 해당 게시물을 삭제 하신 후, 탈퇴를 신청하시기 바랍니다.</p>
+	          </div>
+	          <label for="reason">탈퇴 사유:</label>
+	          <textarea id="reason" name="reason" rows="4" required></textarea>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	          <input type="hidden" name="cmd" value="deleteMemberOk" />
+	          <button type="submit" class="btn btn-primary">탈퇴하기</button>
+	        </div>
+	      </form>
+	    </div>
+	  </div>
+	</div>
 
 		<div class="frame-22">
 			<div class="frame-23">
@@ -1504,96 +1588,42 @@ a {
 							<div class="text-wrapper-30">주문/배송상태</div>
 						</div>
 					</div>
-					<div class="frame-29">
-						<div class="frame-30">
-							<div class="frame-31">
-								<div class="rectangle"></div>
-								<div class="frame-32">
-									<div class="text-wrapper-31">상품이름상품이름</div>
-									<div class="frame-33">
-										<div class="text-wrapper-32">0000000000</div>
-										<div class="text-wrapper-32">24/00/00</div>
+					
+					
+				<c:choose>
+					<c:when test="${not empty requestScope.orderList && requestScope.orderList.size() > 0 }">
+						<c:forEach var="i" begin="0" end="${Math.min(requestScope.orderList.size()-1, 4)}">
+							<div class="frame-29">
+								<div class="frame-30">
+									<div class="frame-31">
+										<div class="rectangle"></div>
+										<div class="frame-32">
+											<div class="text-wrapper-31">${requestScope.orderList.get(i).pdName}</div>
+											<div class="frame-33">
+												<div class="text-wrapper-32">${requestScope.orderList.get(i).pdId}</div>
+												<div class="text-wrapper-32">${requestScope.orderList.get(i).date}</div>
+											</div>
+											<div class="text-wrapper-33">${requestScope.orderList.get(i).total}원 / 수량 ${requestScope.orderList.get(i).cnt}개</div>
+										</div>
 									</div>
-									<div class="text-wrapper-33">000,000원 / 수량 00개</div>
+								</div>
+								<div class="frame-34">
+									<div class="text-wrapper-30">배송중</div>
 								</div>
 							</div>
+						</c:forEach>
+					</c:when>
+					
+					<c:otherwise>
+						<div class="frame-29">
+							<div class="text-wrapper-35">주문 내역이 없습니다</div>
 						</div>
-						<div class="frame-34">
-							<div class="text-wrapper-30">배송중</div>
-						</div>
-					</div>
-					<div class="frame-29">
-						<div class="frame-30">
-							<div class="frame-31">
-								<div class="rectangle"></div>
-								<div class="frame-32">
-									<div class="text-wrapper-31">상품이름상품이름</div>
-									<div class="frame-33">
-										<div class="text-wrapper-32">0000000000</div>
-										<div class="text-wrapper-32">24/00/00</div>
-									</div>
-									<div class="text-wrapper-33">000,000원 / 수량 00개</div>
-								</div>
-							</div>
-						</div>
-						<div class="frame-34">
-							<div class="text-wrapper-34">주문완료</div>
-						</div>
-					</div>
-					<div class="frame-29">
-						<div class="frame-30">
-							<div class="frame-31">
-								<div class="rectangle"></div>
-								<div class="frame-32">
-									<div class="text-wrapper-31">상품이름상품이름</div>
-									<div class="frame-33">
-										<div class="text-wrapper-32">0000000000</div>
-										<div class="text-wrapper-32">24/00/00</div>
-									</div>
-									<div class="text-wrapper-33">000,000원 / 수량 00개</div>
-								</div>
-							</div>
-						</div>
-						<div class="frame-34">
-							<div class="text-wrapper-30">배송전</div>
-						</div>
-					</div>
-					<div class="frame-29">
-						<div class="frame-30">
-							<div class="frame-31">
-								<div class="rectangle"></div>
-								<div class="frame-32">
-									<div class="text-wrapper-31">상품이름상품이름</div>
-									<div class="frame-33">
-										<div class="text-wrapper-32">0000000000</div>
-										<div class="text-wrapper-32">24/00/00</div>
-									</div>
-									<div class="text-wrapper-33">000,000원 / 수량 00개</div>
-								</div>
-							</div>
-						</div>
-						<div class="frame-34">
-							<div class="text-wrapper-30">배송중</div>
-						</div>
-					</div>
-					<div class="frame-29">
-						<div class="frame-30">
-							<div class="frame-31">
-								<div class="rectangle"></div>
-								<div class="frame-32">
-									<div class="text-wrapper-31">상품이름상품이름</div>
-									<div class="frame-33">
-										<div class="text-wrapper-32">0000000000</div>
-										<div class="text-wrapper-32">24/00/00</div>
-									</div>
-									<div class="text-wrapper-33">000,000원 / 수량 00개</div>
-								</div>
-							</div>
-						</div>
-						<div class="frame-34">
-							<div class="text-wrapper-30">배송중</div>
-						</div>
-					</div>
+					</c:otherwise>
+				</c:choose>	
+					
+					
+					
+					
 
 				</div>
 			</div>
@@ -1603,15 +1633,23 @@ a {
 					<div class="text-wrapper-28">전체보기&gt;</div>
 				</div>
 
-				<div class="frame-25">
-
-				<c:choose>
+				<div class="frame-25">				
+				<c:choose>				
 					<c:when test="${not empty requestScope.boardList && requestScope.boardList.size() > 0 }">
-						<c:forEach var="i" begin="1" end="5">
+						<c:forEach var="i" begin="0" end="${Math.min(requestScope.boardList.size()-1, 4)}">
 							<div class="frame-36">
 								<div class="text-wrapper-35">${requestScope.boardList.get(i).get("title")}</div>
 								<div class="frame-37">
-									<div class="text-wrapper-36">${requestScope.boardList.get(i).get("contents")}</div>
+									<div class="text-wrapper-36">
+										<c:choose>
+											<c:when test="${requestScope.boardList.get(i).get('contents').length()>10 }">
+												${fn:substring(requestScope.boardList.get(i).get("contents"),0,10)} ......
+											</c:when>
+											<c:otherwise>
+												${requestScope.boardList.get(i).get("contents")}												
+											</c:otherwise>											
+										</c:choose>																				
+									</div>
 								</div>
 								<div class="frame-38">
 									<div class="frame-39">
@@ -1631,11 +1669,11 @@ a {
 												<div class="rectangle-2"></div>
 												<img class="vector-3" src="img/image.svg" />
 											</div>
-											<div class="text-wrapper-38">13</div>
+											<div class="text-wrapper-38">${requestScope.boardList.get(i).get("count")}</div>
 										</div>
 									</div>
 									<div class="frame-39">
-										<div class="text-wrapper-39">${requestScope.boardList.get(i).get("regdate")}</div>
+										<div class="text-wrapper-39">${requestScope.boardList.get(i).get("regDate")}</div>
 										<div class="text-wrapper-39">22:58</div>
 									</div>
 								</div>
@@ -1732,7 +1770,6 @@ a {
 					</div>
 				</div>
 			</div>
-		</div>
-		
+		</div>		
 </body>
 </html>

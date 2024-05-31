@@ -31,7 +31,6 @@ $(document).ready(function() {
 			}
 		})
 		location.href = order + "&ordercode=1";
-		
 	})
 
 	// 품절버튼
@@ -40,6 +39,7 @@ $(document).ready(function() {
 		$(".cart-item").each(function() {
 			let qty = $(this).find('.product-price').data('qty');
 			let pId = $(this).find('.product-price').data('pid');
+			
 			if (qty == 0) { pdIds.push(pId); }
 		})
 		deleteProduct(pdIds);

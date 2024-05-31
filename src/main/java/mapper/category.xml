@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="kr.co.moran.category">
 
 	<!-- 상위 카테고리 추가 -->
@@ -14,46 +12,50 @@
 
 	<!-- 전체 카테고리 조회 -->
 	<select id="ctSelectAll" resultType="kr.co.moran.web.vo.CategoryVO">
-		select 	c_id as cId, c_name as name, 
-				c_parent_id as cParentId
+		select c_id as cId, c_name as name,
+		c_parent_id as cParentId
 		from CATEGORY
 	</select>
-		
+
 	<!-- 최상위 카테고리(부모 참조가 없는) 조회 -->
-	<select id="ctSelectByParentIdIsNull" resultType="kr.co.moran.web.vo.CategoryVO">
-		select 	c_id as cId, c_name as name, 
-				c_parent_id as cParentId
+	<select id="ctSelectByParentIdIsNull"
+		resultType="kr.co.moran.web.vo.CategoryVO">
+		select c_id as cId, c_name as name,
+		c_parent_id as cParentId
 		from CATEGORY
 		where c_parent_id is Null
 	</select>
-	
+
 	<!-- 부모 참조키 조회 -->
-	<select id="ctSelectByParentId" parameterType="int" resultType="kr.co.moran.web.vo.CategoryVO">
-		select 	c_id as cId, c_name as name, 
-				c_parent_id as cParentId
+	<select id="ctSelectByParentId" parameterType="int"
+		resultType="kr.co.moran.web.vo.CategoryVO">
+		select c_id as cId, c_name as name,
+		c_parent_id as cParentId
 		from CATEGORY
 		where c_parent_id = #{c_parent_id}
 	</select>
-	
-	<select id="ctSelectByCId" parameterType="int" resultType="kr.co.moran.web.vo.CategoryVO">
-		select 	c_id as cId, c_name as name, 
-				c_parent_id as cParentId
-		from 	CATEGORY
-		where 	c_id = #{c_id}
+
+	<!-- 카테고리 1개 조회 -->
+	<select id="ctSelectByCId" parameterType="int"
+		resultType="kr.co.moran.web.vo.CategoryVO">
+		select c_id as cId, c_name as name,
+		c_parent_id as cParentId
+		from CATEGORY
+		where c_id = #{c_id}
 	</select>
-	
-	
+
+
 	<!-- 카테고리 수정 -->
 	<update id="ctUpdate" parameterType="Map">
-		update 	CATEGORY
-		set 	c_parent_id = #{cParentId}, c_name = #{name}
-		where 	c_id = #{cId}
+		update CATEGORY
+		set c_parent_id = #{cParentId}, c_name = #{name}
+		where c_id = #{cId}
 	</update>
-	
-	
+
+
 	<!-- 카테고리 삭제 -->
 	<delete id="ctDelete" parameterType="int">
 		delete from CATEGORY where c_id = #{c_id}
 	</delete>
-	
+
 </mapper>

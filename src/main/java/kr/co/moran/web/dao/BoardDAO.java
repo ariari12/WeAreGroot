@@ -164,19 +164,34 @@ public class BoardDAO {
 		ss.close();
 	}
 	
-//	<!-- 좋아요 수 증가 -->
-	public void modifyBoardLikeCntBybId(int bId) {
+//	<!-- 게시글 좋아요 수 증가 -->
+	public void modifyBoardLikeCntPlusBybId(int bId) {
 		SqlSession ss = factory.openSession(true);
-		ss.update("kr.co.moran.board.ModifyBoardLikeCntBybId", bId);
+		ss.update("kr.co.moran.board.ModifyBoardLikeCntPlusBybId", bId);
 		
 		ss.close();
 	}
 	
-//	<!-- 게시글 좋아요 -->
+//	<!-- 게시글 좋아요 수 감소 -->
+	public void modifyBoardLikeCntMinusBybId(int bId) {
+		SqlSession ss = factory.openSession(true);
+		ss.update("kr.co.moran.board.ModifyBoardLikeCntMinusBybId", bId);
+		
+		ss.close();
+	}
+	
+//	<!-- 게시글 좋아요 추가 -->
 	public void insertBoardLikeBybId(LikeVO vo) {
 		SqlSession ss = factory.openSession(true);
 		ss.insert("kr.co.moran.board.InsertBoardLikeBybId", vo);
 		
+		ss.close();
+	}
+	
+//	<!-- 게시글 좋아요 삭제 -->
+	public void deleteBoardLikebyBid(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		ss.delete("kr.co.moran.board.DeleteBoardLikeBybId",vo);
 		ss.close();
 	}
 	
@@ -186,6 +201,15 @@ public class BoardDAO {
 		ss.insert("kr.co.moran.board.InsertCommentLikeBybId", vo);
 		
 		ss.close();
+	}
+	
+//	게시글 좋아요 여부 확인, 반환된 lvo를 참고하여 좋아요 여부 확인
+	public LikeVO SelectBoardLikeBybIdandmId(LikeVO vo) {
+		SqlSession ss = factory.openSession(true);
+		LikeVO lvo = ss.selectOne("kr.co.moran.board.SelectBoardLikeBybIdandmId", vo);
+		
+		ss.close();
+		return lvo;
 	}
 	
 //	<!-- 좋아요한 게시글 보기 -->
@@ -216,13 +240,21 @@ public class BoardDAO {
 	}
 	
 //	<!-- 글에 댓글이 몇개 있는지 구하기 -->
-	public List<HashMap<String, Object>> selectCountAllCommentBybId(){
+	public List<HashMap<String, Object>> selectCountAllComment(){
 		SqlSession ss = factory.openSession(true);
-		List<HashMap<String, Object>> hm = ss.selectList("kr.co.moran.board.SelectCountAllCommentBybId");
+		List<HashMap<String, Object>> hm = ss.selectList("kr.co.moran.board.SelectCountAllComment");
 		
 		ss.close();
 		return hm;
 	}
 	
+	/* 특정 게시글 댓글 몇개 있는지 구하기 */
+	public HashMap<String, Object> selectCountAllCommentBybId(int bId){
+		SqlSession ss = factory.openSession(true);
+		HashMap<String, Object> hm = ss.selectOne("kr.co.moran.board.SelectCountAllComment", bId);
+		
+		ss.close();
+		return hm;
+	}
 	
 }

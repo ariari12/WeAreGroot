@@ -8,22 +8,44 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.oreilly.servlet.MultipartRequest;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import kr.co.moran.web.action.Action;
+import kr.co.moran.web.action.UploadAction;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.CategoryVO;
 import kr.co.moran.web.vo.member.MemberVO;
 
-public class ModifyAction implements Action {
+public class ModifyAction implements UploadAction {
 	
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	private MultipartRequest mlpReq;
 	private ProductDAO dao;
 	private List<CategoryVO> ctgList;
+	
+	public ModifyAction() {
+		dao = new ProductDAO();
+		ctgList = new ArrayList<CategoryVO>();
+	}
 
 	@Override
 	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		String nextUrl = common(null, req, resp);
+		dao.closeSession(); // db session 종료
+		return nextUrl;
+	}
+	
+	@Override
+	public String fileExecute(MultipartRequest mlp, HttpServletRequest req, HttpServletResponse resp) {
+		String nextUrl = common(mlp, req, resp);
+		dao.closeSession(); // db session 종료
+		return nextUrl;
+	}
+	
+	// common process
+	private String common(MultipartRequest mlp, HttpServletRequest req, HttpServletResponse resp) {
 		// admin이 아닌 사용자가 접근 시 예외처리
 		MemberVO adminCheck = (MemberVO)req.getSession().getAttribute("memberVO");
 //		System.out.println("modify: " + adminCheck);
@@ -31,40 +53,41 @@ public class ModifyAction implements Action {
 			return "jsp/product/unauthorized.jsp";
 		}
 
+		this.mlpReq = mlp;
 		this.req = req;
 		this.resp = resp;
 		
-		String type = req.getParameter("type");
-		dao = new ProductDAO();
-		ctgList = new ArrayList<CategoryVO>();
-		String nextUrl = "";
-		
+		String type = mlpReq == null ? req.getParameter("type")
+									: mlpReq.getParameter("type");
+		String nextUrl = null;
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
 				String ctg = req.getParameter("ctg");
 				
 				// 파라미터가 넘어오지 않은 경우
-				if(ctg == null) {
-					return null;
-				}
+				if(ctg == null) return null;
+				nextUrl = categoryModify(ctg);
+				
+			case "prd":
+				String prd = mlpReq == null ? req.getParameter("prd")
+						: mlpReq.getParameter("prd");
+				System.out.println("prd: " + prd);
+				
+				// 파라미터가 넘어오지 않은 경우
+				if(prd == null) return null;
 				
 				// 각 파라미터에 따른 요청 처리
-				nextUrl = categoryModify(ctg); 
-				
-				break;
-			case "prd": // prd: product
+				nextUrl = productModify(prd); 
 				break;
 			default: // type 파라미터가 넘어오지 않은 경우
 		}
-		
-		dao.closeSession(); // db session 종료
 		return nextUrl;
 	}
+	
 	
 	// category
 	private String categoryModify(String ctg) {
 		String cId;
-		MemberVO adminCheck;
 		switch (ctg) {
 			case "view":
 				/*
@@ -137,8 +160,22 @@ public class ModifyAction implements Action {
 				return null;
 		}
 	}
+
+	// product
+	private String productModify(String prd) {
+		String nextUrl = null;
+		switch (prd == null ? "" : prd) {
+			default:
+				req.setAttribute("message", "미완성 기능입니다."
+						+ "\\n차후 업데이트 예정입니다.");
+				req.setAttribute("redUrl", "product?cmd=list&type=save");
+				nextUrl = "jsp/product/inform.jsp";
+				break;
+		}
+		return nextUrl;
+	}
 	
-	
+	@SuppressWarnings("unchecked")
 	private String ajaxToJsonArray() {
 		// AJAX 반환 JSON 객체 생성
 		JSONObject jsonObject = new JSONObject();

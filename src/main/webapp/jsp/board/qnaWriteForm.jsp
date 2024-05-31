@@ -25,7 +25,7 @@
 				</tr>
 				
 				<tr>
-					<th>내용</th>
+					<th>내용</th> 
 					<td>
 						<textarea name="contents" id="contents" cols="30" rows="10"></textarea>
 					</td>

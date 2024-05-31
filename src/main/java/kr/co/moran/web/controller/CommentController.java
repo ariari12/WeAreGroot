@@ -13,6 +13,9 @@ import kr.co.moran.web.action.comment.CommentDeleteAction;
 import kr.co.moran.web.action.comment.CommentModifyAction;
 import kr.co.moran.web.action.comment.CommentModifyLikeCntAction;
 import kr.co.moran.web.action.comment.CommentWriteAction;
+import kr.co.moran.web.action.comment.CommentWriteAjax;
+import kr.co.moran.web.action.comment.ReComntListView;
+
 
 @WebServlet("/comment")
 public class CommentController extends HttpServlet{
@@ -33,7 +36,7 @@ public class CommentController extends HttpServlet{
 		String cmd = req.getParameter("cmd");
 		String url = "";
 		Action action = null;
-		
+		System.out.println("comment컨트롤러");
 		if(cmd.equals("commentWrite")){
 			action = new CommentWriteAction();
 		}else if(cmd.equals("commentModify")) {
@@ -42,11 +45,21 @@ public class CommentController extends HttpServlet{
 			action = new CommentDeleteAction();
 		}else if(cmd.equals("commentModifyLikeCnt")) {
 			action = new CommentModifyLikeCntAction();
+		}else if(cmd.equals("cmntWrite")) {
+			action = new CommentWriteAjax();
+			action.execute(req, resp);
+			return;
+		}else if(cmd.equals("reComntListView")) {
+			action = new ReComntListView();
+			String res = action.execute(req, resp);
+			resp.getWriter().print(res);
+			return;
 		}
 		
-		url = action.execute(req, resp);
 		
-		RequestDispatcher rd = req.getRequestDispatcher(url);
-		rd.forward(req, resp);
+		 url = action.execute(req, resp);
+		 
+		 RequestDispatcher rd = req.getRequestDispatcher(url); rd.forward(req, resp);
+		 
 	}
 }

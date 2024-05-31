@@ -12,8 +12,11 @@ $(document).ready(function() {
     // 추가 버튼을 클릭했다면
     $('#plus').on('click', function() { updatePrice('+'); })
 
-    // 카트 추가하기
+    // 세션 정보가 있을 때 카트 추가하기
     $('#addCart').on('click', function() { addCart(); })
+    
+    // 세션 정보가 없을 때 카트 추가하기
+    $('#noCart').on('click', function() { noCart(); })
 
     // 구매하기 버튼
     $('#order').on('click', function() { order(); })
@@ -98,12 +101,25 @@ let review = (no) => {
 let qnaInfo = (no) => {
 	$.ajax({
         type: "post",
-        url: "",
-   		data: {"cId" : cId},
+        url: "./product?cmd=detail&no=" + no + "&type=qna",
+   		data: {"no" : no},
         dataType: "json",
         success: function (data) {
         	console.log("성공");
             console.log(data);
+            console.log(data[0].cqaId);
+            console.log("-----------------------");
+			console.log("타입: " + typeof(data));
+            
+            
+            for(let i=0; i<data.length; i++){
+				console.log(data[i].hasOwnProperty("name"));
+				console.log(data[i].hasOwnProperty("pqaParentId"));
+				console.log("@@@@@@@@@@");
+			}
+            
+            
+            qaFormHTML(data);
             
         },
         error: (data, status, err) => {
@@ -114,11 +130,13 @@ let qnaInfo = (no) => {
     });
 }
 
+function noCart() {
+	viweMsg("장바구니는 로그인한 회원만 사용할 수 있습니다.");
+}
 
 
 // AJAX 로 장바구니에 담는 함수.
 function addCart() {
-	
 	let urlParams = new URLSearchParams(window.location.search);
 	let productId = urlParams.get('no');
 	let cnt = $('#cnt').val();
@@ -163,6 +181,8 @@ function order() {
 	let cnt = $('#cnt').val();
 	window.location.href = './order?cmd=detail&pd_id=' + pId + '&cnt=' + cnt;
 }
+
+
 // 알림창
 let Toast = Swal.mixin({
 	toast: true,

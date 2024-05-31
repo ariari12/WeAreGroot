@@ -3,18 +3,18 @@
  */
 // sweetAlert2
 const sAlert = Swal.mixin({
-  toast: true,
-  position: "center",
-  showConfirmButton: true,
-  timer: 3000,
-  timerProgressBar: true,
-  allowEnterKey: true,
-  allowEscapeKey: true,
-  allowOutsideClick: true,
-  didOpen: (toast) => {
-    toast.onmouseenter = Swal.stopTimer;
-    toast.onmouseleave = Swal.resumeTimer;
-  }
+  	toast: true,
+  	position: "center",
+  	showConfirmButton: true,
+  	timer: 2000,
+  	timerProgressBar: true,
+	allowEnterKey: true,
+	allowEscapeKey: true,
+	allowOutsideClick: true,
+	didOpen: (toast) => {
+	    toast.onmouseenter = Swal.stopTimer;
+	    toast.onmouseleave = Swal.resumeTimer;
+	}
 });
 
 let wrong = () => {
@@ -22,8 +22,9 @@ let wrong = () => {
 		title: "잘못된 접근입니다.",
 		text: "상품화면으로 이동합니다.",
 		icon: "error"
-	});
-	window.location = "./product";
+	}).then(() => {
+		window.location = "./product";
+    });
 }
 
 let viweMsg = (msg) => {
@@ -41,11 +42,29 @@ let msgRedirect = (msg, redUrl) => {
 	sAlert.fire({
 		text: msg,
 		icon: "info"
-	});
-	window.location = "./" + redUrl;
+	}).then(() => {
+		window.location = "./" + redUrl;
+    });
 }
 
-
+let ajaxComReq = (url) => {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            type: "post",
+            url: url,
+            dataType: "json",
+            success: function (data) {
+                resolve(data);
+            },
+            error: function (data, status, err) {
+                console.log("실패");
+                console.log(data);
+                console.log(err);
+                reject(err);
+            }
+        });
+    });
+}
 
 
 
@@ -177,23 +196,17 @@ let productReview = (data) => {
 	let reviewTable = "";
 	let cnt = 1;
 	for(item of data["reviews"]) {
-		// console.log(item);
-		
-		// console.log(item.nick);
-		// console.log(item.regDate);
-		// console.log(item.score);
-		// console.log(item.imgs);
-		// console.log(item.contents);
 		
 		reviewTable += "<table id='tabel-" + cnt + "''><tr>"
-			+ "<td style='width: 200px;'>" + item.nick + " 님</td>"
+			+ "<td style='font-family: &quot;Pretendard Variable-Bold&quot;, Helvetica; width: 200px;'>"
+			 + item.nick + " 님</td>"
 			+ "<td>작성일: " + item.regDate + "</td></tr>"
 			+ "<tr><td colspan='2' class='score'>"
 			+ "<span>" + item.score  + "점 </span>";
 		
         let score = parseInt(item.score);
         for (let index = 0; index < score; index++) {
-            reviewTable += "<img src='resources/img/product_detail/star.svg' />";
+            reviewTable += "<img src='resources/img/product_detail/star_color.svg' />";
         }
         for (let index = 0; index < 5 - score; index++) {
             reviewTable += "<img src='resources/img/product_detail/star_gray.svg' />";
@@ -205,14 +218,14 @@ let productReview = (data) => {
 			reviewTable += "<img class='rv_imgs' src='" + img + "' />";
 		}
 		
-		reviewTable += "</td></tr><tr><td colspan='2'>" + item.contents + "</td></tr>";
+		reviewTable += "</td></tr><tr><td style='line-height: 32px;'  colspan='2'>" + item.contents + "</td></tr>";
 		cnt++;
 	}
 	
 	$(".review-container").html(reviewTable);
 	
 	let reviewHeight = $(".review-container").height() -2672;
-	reviewHeight = (reviewHeight < -1967 ? -1967 : reviewHeight);
+	reviewHeight = (reviewHeight < -1966 ? -1966 : reviewHeight);
 	console.log(reviewHeight);
 	$("#footer").css("margin-top", reviewHeight + "px");
 }
@@ -232,9 +245,11 @@ let unauthorized = () => {
 }
 
 let subCtgSelects = (list) => {
+	// console.log(list);
+	
     let options = "";
     for (const item of list) {
-		console.log(item);
+		// console.log(item);
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
     options += "<option value='null'>선택 안함</option>";
@@ -277,4 +292,191 @@ let ajaxReq = (url, data, msg) => {
         	console.log(err);
         }
     });
+}
+
+
+
+/**
+ * poduct - createProduct.jsp
+ */
+let inputCheck = (e) => {
+    // 입력된 값이 숫자인지 확인
+    if (isNaN(e.target.value)) {
+        viweMsg('숫자를(을) 입력하세요.');
+        e.target.value = "1"; // 입력값 초기화
+    }
+    // 소수점 제거하여 정수로 만듦
+    e.target.value = parseInt(e.target.value);
+}
+
+let numberCheck = (tag) => {
+	let n = tag.val();
+    // 입력된 값이 숫자인지 확인
+    if (isNaN(n)) {
+        viweMsg('숫자를(을) 입력하세요.');
+        tag.focus();
+        return true;
+    }
+    else if (v != ull && n < 1) {
+        viweMsg('숫자는 1보다 커야 합니다.');
+        tag.focus();
+        return true;
+	}
+    return false;
+}
+
+let nullCehck = (tag, message) => {
+	let n = tag.val();
+    if (n == null || n == "") {
+        viweMsg(message + '를(을) 입력하세요.');
+        tag.focus();
+        return true;
+    }
+    return false;
+}
+
+let ctgCheck = () => {
+    let ctg = $("select#sub-ctg option:selected").val();
+    
+    if(ctg == null || ctg == "") {
+        ctg = $("select#sup-ctg option:selected").val();
+        if(ctg == null || ctg == "") {
+            viweMsg("카테고리를 선택하세요.");
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+let imgCheck = () => {
+    var fileVal = $("input[type=file]#title-img").val();
+    console.log(fileVal);
+    
+    if (fileVal == null || fileVal == "") {
+            viweMsg("대표 이미지를 첨부해주세요.");
+            return true;
+    }
+    
+    let imgs = $("#inform-imgs").children();
+    for(const img of imgs) {
+		console.dir(img);
+		console.log(img.value);
+		
+		if(img.value != null || img.value != "") {
+            if(img.files[0].size > (5 *1024 *1024)) {
+                viweMsg("파일 사이즈는 5MB 이하로 해주세요.");
+                return true;
+            }
+            
+            var ext = img.value.split('.').pop().toLowerCase();
+		    console.log(ext);
+	        if($.inArray(ext, ['jpg','jpeg','gif','png']) == -1) {
+	          viweMsg("'jpg,gif,jpeg,png' 파일만 업로드 할수 있습니다.");
+	          return true;
+	        }
+	    }
+        console.log(imgs);
+    }
+
+   	return false;
+}
+
+let dateCheck = () => {
+    // 사용자가 선택한 날짜를 가져옴
+    let selectedDate =  $("#startDate").val();
+
+    // 사용자가 직접 입력한 날짜인지 확인
+    let isValidDate = /^\d{4}-\d{2}-\d{2}$/.test(selectedDate);
+    if (!isValidDate) {
+        viweMsg("올바른 날짜 형식을 입력하세요 (YYYY-MM-DD).");
+        return; // 날짜 형식이 올바르지 않으면 함수를 종료
+    }
+
+    // 현재 날짜를 가져옴
+    let currentDate = new Date().toISOString().slice(0, 10);
+
+    // 사용자가 선택한 날짜와 현재 날짜를 비교
+    if (selectedDate < currentDate) {
+        viweMsg("현재 이후 날짜로만 상품을 등록할 수 있습니다.");
+        return true;
+    }
+    return false;
+}
+
+let ctgOptionAdd = (list, selector) => {
+	console.log(list);
+	
+    let options = "";
+    for (const item of list) {
+        options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
+    }
+    if(selector == "select#sub-ctg") {
+		options += "<option value='null'>선택 안함</option>";
+    }
+    $(selector).html(options);
+}
+
+let ctgAjax = async() => {
+    try {
+        const data = await ajaxComReq(
+			"./product?cmd=add&type=prd&prd=subCtg&cId="
+			 + $("select#sup-ctg option:selected").val());
+        ctgOptionAdd(data.ctgList, "select#sub-ctg");
+    } catch (err) {
+        console.error("하위 카테고리 가져오기 실패:", err);
+    }
+}
+
+/* 상품문의 */
+let qaFormHTML = (data) => {
+	
+	let html = 
+	'<div class="qa-form">' +
+    '<div class="qa-form-title">' +
+    '<h2>상품문의</h2>' +
+    '</div>' +
+    '<div class="qa-form-navMenu">' +
+    '<ul class="nav nav-tabs">' +
+    '<li class="allQa nav-item">전체보기</li>' +
+    '<li class="prdQa nav-item">상품</li>' +
+    '<li class="dlvQa nav-item">배송</li>' +
+    '<li class="tibQa nav-item">반품</li>' +
+    '<li class="swQa nav-item">교환</li>' +
+    '<li class="rfdQa nav-item">환불</li>' +
+    '<li class="etcQa nav-item">기타</li>' +
+    '</ul>' +
+    '</div>';
+    
+    for(let i=0; i<data.length; i++){
+		html+='<div class="qa-form-qaCard">' +
+	    '<div class="writerInfo">' +
+	    '<span>' + data[i].name +'</span>' +
+	    '<span> | </span>' +
+	    '<span>' + data[i].regdate + '</span>' +
+	    '</div>' +
+	    '<div class="qa-question">' +
+	    '<div class="qa-question-text">';
+	    
+	    if(data[i].hasOwnProperty("pqaParentId")){
+			html+='A';
+		}else{
+			html+='Q';
+		}
+		html+=
+	    '</div>' +
+	    '<div class="qaContents">' +
+	    data[i].contents +
+	    '</div>' +
+	    '</div>' +
+	    '</div>';
+    }
+    html+=
+    '<div class="pagenation">'+
+    '<button class="btn btn-primary">이전</button>' +
+    '<button class="btn btn-primary">다음</button>' +
+    '</div>' +
+    '</div>';
+    console.log(html);
+    $('#qa-container').html(html);
 }
