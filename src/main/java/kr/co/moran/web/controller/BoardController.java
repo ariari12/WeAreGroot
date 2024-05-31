@@ -96,10 +96,6 @@ public class BoardController extends HttpServlet{
 		else if(cmd.equals("khWrite")) {
 			action = new KHWriteFormAction();
 		}
-		//노하우 작성확인
-		else if(cmd.equals("khWriteOk")) {
-			action = new KHWriteAction();
-		}
 		//노하우 상세보기
 		else if(cmd.equals("khDetail")){
 			action = new KHDetailAction();

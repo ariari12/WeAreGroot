@@ -33,6 +33,18 @@ public class KHListAction implements Action {
         	boardList = dao.selectAllKH(offset,PAGE_SIZE);
         }
         
+        List<HashMap<String, Object>> hs = dao.selectCountAllComment();
+        
+        for (HashMap<String, Object> boardhashmap : boardList) {
+        	boardhashmap.put("count", 0);
+            for (HashMap<String, Object> commentcounthashmap : hs) {
+    			if(boardhashmap.get("bId").equals(commentcounthashmap.get("bId"))){
+    				boardhashmap.put("count", commentcounthashmap.get("count"));
+    			}
+    		}
+		}
+        
+        
         int totalCount = dao.getTotalCountKH();
         int totalPages = (int) Math.ceil((double) totalCount / PAGE_SIZE);
 
