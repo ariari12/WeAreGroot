@@ -447,6 +447,7 @@
 			  top: 0;
 			  left: 0;
 			  background-color: #4d4d4d;
+			  z-index: 5;
 }
 
 .div-wrapper .frame-8 {
@@ -933,6 +934,9 @@ a:visited {
 	color: black;
 }
 
+.frame-wrapper a{
+	color : white;
+}
 	</style>
   </head>
   <body>
