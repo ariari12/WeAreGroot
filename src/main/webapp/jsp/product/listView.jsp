@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="kr.co.moran.web.vo.member.MemberVO"%>
 <%@page import="java.util.Date"%>
 <%@page import="kr.co.moran.web.dao.ProductDAO"%>
@@ -172,7 +171,6 @@ let viewDetails = (no) => {
 	</div>
 </div>
 <% 	} %>
-
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">

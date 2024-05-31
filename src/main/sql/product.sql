@@ -142,6 +142,22 @@ select 	pd_id as pId,
 from MORANMORAN.PRODUCT
 where pd_is_maintain = 0 and pd_id = 204880;
 
+select 	pd_id as pId,
+        c_id as cId,
+        pd_name as name,
+        pd_price as price,
+        pd_description as description,
+        pd_quantity as quantity,
+        pd_wholesale as wholesale,
+        pd_dcRate as dcRate,
+        pd_created_at as createDate,
+        pd_is_maintain as isMaintain,
+        pd_retention_period as retetionDate
+from MORANMORAN.PRODUCT
+where pd_is_maintain = 1
+order by pd_retention_period desc
+;
+
 SELECT DATE_ADD(NOW(), INTERVAL 1 MONTH);
 
 -- test insert --

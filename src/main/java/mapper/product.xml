@@ -79,7 +79,7 @@
 		        pd_retention_period as retetionDate
         from MORANMORAN.PRODUCT
         where pd_is_maintain = 1
-		ORDER BY pd_is_maintain desc
+		ORDER BY pd_retention_period desc
 		LIMIT #{start}, #{pageNum}
 	</select>
 
@@ -88,6 +88,32 @@
 		select count(*)
         from MORANMORAN.PRODUCT
         where pd_is_maintain = 1
+	</select>
+
+	<!-- 품절 목록 조회 -->
+	<select id="pdSelectBySoldOut" parameterType="map" resultType="kr.co.moran.web.vo.ProductVO">
+		select 	pd_id as pId,
+		        c_id as cId,
+		        pd_name as name,
+		        pd_price as price,
+		        pd_description as description,
+		        pd_quantity as quantity,
+		        pd_wholesale as wholesale,
+		        pd_dcRate as dcRate,
+		        pd_created_at as createDate,
+		        pd_is_maintain as isMaintain,
+		        pd_retention_period as retetionDate
+        from MORANMORAN.PRODUCT
+        where pd_quantity = 0
+		ORDER BY pd_retention_period desc
+		LIMIT #{start}, #{pageNum}
+	</select>
+
+	<!-- 품절 목록 갯수 조회 -->
+	<select id="pdSoldOutCnt" resultType="int">
+		select count(*)
+        from MORANMORAN.PRODUCT
+        where pd_quantity = 0
 	</select>
 
 	<!-- 상품 목록 조회  -->
