@@ -45,17 +45,6 @@
 		WHERE b.b_id = #{bId}
 	</select>
 
-	<!-- 특정 게시글 댓글 몇개 있는지 구하기 -->
-	<select id="SelectCountAllCommentBybId" parameterType="int" resultType="hashmap">
-		SELECT
-			c.b_id as bId,
-			COUNT(*) as count
-		FROM COMMENT c
-		JOIN BOARD b ON c.b_id = b.b_id
-		GROUP BY c.b_id
-		WHERE b.b_id = #{bId}
-	</select>
-
 	<!-- 노하우 게시글 총 갯수 -->
 	<select id="SelectTotalCountKH" resultType="int">
     	SELECT COUNT(*)
