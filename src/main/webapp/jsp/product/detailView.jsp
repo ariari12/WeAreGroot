@@ -17,7 +17,7 @@
 <meta charset="UTF-8">
 <% 
 	Object prdId = request.getParameter("no"); 
-	ProductVO v = new ProductDAO().pdSelsctOneByPId( Integer.parseInt(prdId.toString()) );
+	ProductVO v = (ProductVO)request.getAttribute("pdList");
 %>
 <title><%=v.getName() %></title>
 
