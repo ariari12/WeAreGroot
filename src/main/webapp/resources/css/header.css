@@ -84,6 +84,11 @@
 }
 
 /* 검색 바 */
+/* 검색 바 */
+.search-wrapper{
+    position: absolute;
+    margin-left: 70%;
+}
 .search-bar {
   display: flex;
   align-items: center;
@@ -91,20 +96,22 @@
   border-radius: 20px;
   border: 1px solid #00b267;
   padding: 8px 12px;
+  
 }
 
 .search-placeholder {
   font-family: "Pretendard Variable-Medium", Helvetica;
-  font-weight: 500;
+  font-weight: 800;
   color: #202020;
-  opacity: 0.2;
   font-size: 16px;
   margin-right: 12px;
 }
 
 .search-icon-wrapper {
-  width: 24px;
-  height: 24px;
+	width: 24px;
+	height: 24px;
+	margin-top: -11%;
+	margin-left: 82%;
 }
 
 .search-icon {
