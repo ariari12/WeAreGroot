@@ -51,7 +51,7 @@ public class MyPageForm implements Action {
 		System.out.println("bdao 시작");
 		List<HashMap<String, Object>> boardList =bdao.selectAllBoardBymId(memberId);
 		
-        List<HashMap<String, Object>> hs = bdao.selectCountAllCommentBybId();
+        List<HashMap<String, Object>> hs = bdao.selectCountAllComment();
 		
 
 		
