@@ -27,6 +27,21 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 
+<style>
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
+	.text-wrapper-26 a {
+		text-decoration: none;
+		color: #ffffff;
+	}
+	.div-wrapper .frame-23 a {
+		text-decoration: none;
+		color: #202020;
+	}
+</style>
+
 </head>
 <body>
 <%
@@ -60,7 +75,7 @@
 	                if(data.ctgList == null) {
 	                	console.log("ctgList is null");
 	                	$("select#subCtg")
-	                		.html("<option value='null'>카테고리 없음</option>");
+	                		.html("<option value=''>카테고리 없음</option>");
 	                }
 	                else {
 	                	subCtgSelects(data.ctgList);
@@ -113,9 +128,10 @@
     </div>
     <div class="cate-block">
        	<span style="color: orange; margin-left: 31px;">※ 선택 안할 시 상위 카테고리로 지정됩니다.</span>
+        <br /><br />
         <span class="cate-label">하위 카테고리 선택</span>
         <select name="subCtg" id="subCtg">
-            <option value='null'>카테고리 없음</option>
+            <option value=''>카테고리 없음</option>
         </select>
     </div>
 	</div>
