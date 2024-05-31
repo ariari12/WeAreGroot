@@ -19,6 +19,7 @@
 	ProductVO v = (ProductVO)request.getAttribute("pdList");
 %>
 <title><%=v.getName() %></title>
+
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
@@ -30,13 +31,13 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
-<script src="resources/js/product_detail.js"></script>
+<script src="resources/js/product_detail.js?v=<%=System.currentTimeMillis() %>"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/product_detail.css">
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
-
+<link rel="stylesheet" href="resources/css/productQa.css">
 <style>
 	.text-wrapper-26 a {
 		text-decoration: none;
@@ -58,9 +59,10 @@
         border: 1px solid #ccc;
         padding: 15px;
         border-radius: 5px;
-        max-width: 600px;
-        margin: auto;
+        max-width: 1000px;
+    	margin: 27px 0 10px -342px;
         background-color: #f9f9f9;
+        font-size: 22px;
     }
     .review-container table {
         width: 100%;
@@ -73,6 +75,9 @@
     }
     .review-container th {
         background-color: #f0f0f0;
+    }
+    .review-container .reg-date {
+    	margin-right: 10px;
     }
 
     .rv_imgs {
@@ -113,6 +118,7 @@
 		$("#qna-frame").hide();
 		
 		$("#btn-plant").click(() => {
+			descConvert(<%=v.getDescription().replace("None", "") %>, '<%=v.getName() %>');
 			$("#info-frame").show();
 			$("#review-frame").hide();
 			$("#qna-frame").hide();
@@ -131,9 +137,21 @@
 			$("#review-frame").hide();
 			$("#qna-frame").show();
 		});
+		
+		let keepClick = false;
+		$("#keep-btn").click(() => {
+			keepClick = !keepClick;
+			if(keepClick) {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_color.svg");
+				viweMsg("찜 등록 되었습니다.")
+			}
+			else {
+				$("#keep-img").attr("src", "resources/img/product_detail/heart_gray.svg");
+				viweMsg("찜 해제 되었습니다.")
+			}
+		});
 	});
 </script>
-
 <%-- header --%>
 <div class="div-wrapper" style="z-index: 4; height: 254px; margin-bottom: -444px;">
 	<jsp:include page="layout/header.jsp"></jsp:include>
@@ -153,28 +171,37 @@
 
 		<div class="prd-title-liner"></div>
 		<div class="ctg-label">
-		    <div class="ctg-text" id="category">카테고리</div>
+		    <div class="ctg-text" id="category"></div>
 		</div>
 				
 		<div class="reviews">
 			<%-- 찜 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/heart.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/heart_color.svg" />
 		        <div class="rv-text">0.0</div>
 		        <div class="rv-text">(123)</div>
 		    </div>
 		    <%-- 상품 후기 --%>
 		    <div class="reviews-score">
-		        <img class="rv-img-star" src="resources/img/product_detail/star.svg" />
+		        <img class="rv-img-star" src="resources/img/product_detail/star_color.svg" />
 		        <div class="rv-text">${score}</div>
 		        <div class="rv-text">(${cnt})</div>
 		    </div>
 		</div>
 		
-		<div style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
-	        <img style="height: 80px;" src="resources/img/product_detail/heart.svg" />
-	        <span style="position: absolute; width: 150px; font-size: 28px;
-				margin-top: 10px; margin-left: 1px; font-weight: bold;">
+		
+		
+		<%-- todo: 찜하기 추가할 것 --%>
+		<div id="keep-btn" style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
+	        <img id="keep-img" style="height: 80px;" src="resources/img/product_detail/heart_gray.svg" />
+	        <span style="
+	        position: absolute;
+		    width: 150px;
+		    font-size: 37px;
+		    font-family: 'Pretendard Variable-Bold', Helvetica;
+		    margin-top: 20px;
+		    margin-left: 1px;
+		    font-weight: bold;">
 				찜
 			</span>
 		</div>
@@ -206,15 +233,11 @@
 		    <% 	} %>
 		</div>
 
-		
-		<%-- todo: 찜하기 추가할 것 --%>
-		
-
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
 			<div class="admin-btn">
-	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품수정</a>
-	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=view&no=${prdId}">상품삭제</a>
+	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품정보 수정</a>
+	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=${prdId}">상품 내리기</a>
 			</div>
 		</c:if>
 
@@ -222,7 +245,7 @@
 		<div id="prd-text-tag"></div>
 		
 		<div style="position: absolute; margin-top: 36px; margin-left: 16px;">
-		    <%  int amount = (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
+		    <%  int amount = v.getPrice() - (int)(v.getPrice() * (v.getDcRate() / 100.0)); %>
 		    <%-- 할인 후 가격 --%>
 		    <div class="prd-dc-amount" id="price"><%=String.format("%,d", amount) %></div>
 		    <div class="prd-won">원</div>
@@ -234,18 +257,18 @@
 		<div id="prdImgs"></div>
 		
 		<div class="prd-pay-opt">
-		    <div class="shop-bak">
-		        <div class="btn-text">
-		        	<%-- 장바구니 url 추가 --%>
-		        	<a href="">장바구니 담기</a>
-	        	</div>
+	    	<% Object member = session.getAttribute("memberVO"); 
+	    		if(member == null) { %>
+		    <div class="shop-bak" id="noCart">
+		        <div class="btn-text">장바구니 담기</div>
 		    </div>
-		    
-		    <div class="buy-now">
-		        <div class="btn-text">
-		        	<%-- 구매 url 추가 --%>
-		        	<a href="">바로 구매</a>
-				</div>
+    		<% 	} else { %>
+		    <div class="shop-bak" id="addCart">
+		        <div class="btn-text">장바구니 담기</div>
+		    </div>
+		    <% 	} %>
+		    <div class="buy-now" id="order">
+		        <div class="btn-text">바로 구매</div>
 		    </div>
 		    
 		    <div>
@@ -282,6 +305,7 @@
 		        </div>
 		    </div>
 		
+	    	<%-- 상품설명 --%>
 		    <div id="info-frame">
 			    <div class="prd-advice">
 			        <img src="resources/img/product_detail/flower.svg" />
@@ -293,26 +317,34 @@
 			    <div id="big-img"></div>
 		    </div>
 		    
+	    	<%-- 상품후기 --%>
 		    <div id="review-frame">
-		    	<%-- 상품후기 추가 --%>
-		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
-		    		<h1>상품후기</h1>
+		    	<div style="height: 1000px; margin-top: 50px;">
+				    <div class="review-container"></div>
 		    	</div>
 		    </div>
 		    
+	    	<%-- 상품문의 추가 --%>
 		    <div id="qna-frame">
-		    	<%-- 상품문의 추가 --%>
-		    	<div style="height: 1000px; margin-top: 200px; font-size: 40px;">
-		    		<h1>상품문의</h1>
+		    	<div style="height: 1000px; margin-top: 50px; width: 1200px; font-size: 40px; position: relative; left: -420px;">
+		    		<div id="qa-container">
+		    		
+		    		</div>
 		    	</div>
 		    </div>
 		</div>
 	</div>
 	<%-- contents end --%>
+	
+	<% // 수량 %>
+	<c:set var="quantity" value="${productVO.quantity}" />
+    <script type="text/javascript">
+        let quantity = "${quantity}";
+    </script>
 </div>
 
 <%-- footer --%>
-<div class="div-wrapper" style="z-index: 1; height: 476px;">
+<div class="div-wrapper" id="footer" style="z-index: 1; margin-top: -300px;">
 	<jsp:include page="layout/footer.jsp"></jsp:include>	
 </div>
 </body>

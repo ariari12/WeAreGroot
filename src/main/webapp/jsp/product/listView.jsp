@@ -171,6 +171,7 @@ let viewDetails = (no) => {
 	</div>
 </div>
 <% 	} %>
+
 <%-- product container end --%>
 
 <div class="div-wrapper" style="height: 0px; margin-top: -1350px;">

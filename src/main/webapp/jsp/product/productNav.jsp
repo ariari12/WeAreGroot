@@ -86,7 +86,7 @@ $(() => {
     	<div class="products-container">
 	        <div class="nav-subtitle">
 	        	<a style="text-decoration: none; font-family: 'Pretendard Variable-Bold', Helvetica; font-weight: bold;
-    			color: #ff000a; font-size: 20px;" href="?cmd=list&type=sold">품절상품 목록 보기</a>
+    			color: #ff000a; font-size: 20px;" href="?cmd=list&type=save">품절상품 목록 보기</a>
 	       	</div>
        	</div>
 </c:if>
