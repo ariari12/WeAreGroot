@@ -21,6 +21,11 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
 	
     <style>
+    	a {
+    		text-decoration-line: none;
+    		color: #000;
+    	}
+    
         .order-summary {
             background-color: #f8f9fa;
             padding: 20px;
@@ -50,7 +55,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h3>홈>결제하기</h3>
+        <h3><a href="./main">홈</a>>결제하기</h3>
         <div class="row">
         	
         	<% // 총 상품값, 할인가격, 배달비 변수 %>

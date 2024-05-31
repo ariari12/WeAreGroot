@@ -72,9 +72,18 @@ public class DetailviewAction implements Action {
 		// 상품정보 가져오기
 		ProductVO productVOs = productDAO.pdSelsctOneByPId(pId);
 		List<Integer> popPIdList = productDAO.pdSelectPopByPId();
-//		System.out.println(v);
+		System.out.println(productVOs);
 		if(productVOs == null) { // 상품 정보가 없을 경우
-			return null;
+			
+			// admin인 경우 보관목록도 가져옴
+			MemberVO memberVO = (MemberVO)req.getSession().getAttribute("memberVO");
+			if(memberVO != null && memberVO.getAdmintype() > 0) {
+				productVOs = productDAO.selectByPIdAdmin(pId);
+				System.out.println(productVOs);
+			}
+			else {
+				return null;
+			}
 		}
 		List<ProductImgVO> imgs = productDAO.piSelsctByPId(pId);
 		

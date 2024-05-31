@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<c:forEach var="vo" items="${cartVO }">
+<c:forEach var="vo" items="${cartVO }"> 
 		            <div class="cart-item" id="cart-item">
 		                <div class="cart-item-th-cetner">
 		                	<% // 재고가 남아있다면 checkbox를 생성 %>

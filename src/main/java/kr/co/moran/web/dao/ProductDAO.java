@@ -105,6 +105,13 @@ public class ProductDAO {
 		return v;
 	}
 	
+	// 상품 1개 조회 *관리자 용*
+	public ProductVO selectByPIdAdmin(int pId) {
+		openSession();
+		ProductVO v = session.selectOne("kr.co.moran.product.selectByPIdAdmin", pId);
+		return v;
+	}
+	
 	// 전체 이미지 조회
 	public List<ProductImgVO> piSelsctByPId(int pId) {
 		openSession();
