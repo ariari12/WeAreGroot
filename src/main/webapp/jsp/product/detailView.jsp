@@ -189,7 +189,6 @@
 		</div>
 		
 		
-		
 		<%-- todo: 찜하기 추가할 것 --%>
 		<div id="keep-btn" style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
 	        <img id="keep-img" style="height: 80px;" src="resources/img/product_detail/heart_gray.svg" />
@@ -235,8 +234,8 @@
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
 			<div class="admin-btn">
-	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품정보 수정</a>
-	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=${prdId}">상품 내리기</a>
+	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=<%=v.getPId() %>">상품정보 수정</a>
+	        	<a class="btn btn-danger" href="<%="?cmd=delete&type=prd&prd=" + v.getPId() %>">상품 내리기</a>
 			</div>
 		</c:if>
 
