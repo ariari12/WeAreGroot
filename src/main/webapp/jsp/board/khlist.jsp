@@ -933,6 +933,10 @@ a:link {
 a:visited {
 	color: black;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'dev' of https://github.com/ariari12/WeAreGroot.git
 .frame-wrapper a{
 	color : white;
 }
