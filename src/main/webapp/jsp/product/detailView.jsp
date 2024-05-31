@@ -38,20 +38,19 @@
 <link rel="stylesheet" href="resources/css/globals.css">
 
 <style>
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
 	.text-wrapper-26 a {
 		text-decoration: none;
 		color: #ffffff;
 	}
-	
 	.div-wrapper .frame-23 a {
 		text-decoration: none;
 		color: #202020;
 	}
 	
-	a {
-		text-decoration: none;
-		color: #202020;
-	}
 
 	/* 상품 후기 */	
     .review-container {

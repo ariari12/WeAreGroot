@@ -59,6 +59,8 @@ public class ModifyAction implements UploadAction {
 		
 		String type = mlpReq == null ? req.getParameter("type")
 									: mlpReq.getParameter("type");
+		System.out.println("type: " + type);
+		
 		String nextUrl = null;
 		switch (type == null ? "" : type) {
 			case "ctg": // ctg: category
@@ -67,7 +69,8 @@ public class ModifyAction implements UploadAction {
 				// 파라미터가 넘어오지 않은 경우
 				if(ctg == null) return null;
 				nextUrl = categoryModify(ctg);
-				
+				break;
+			
 			case "prd":
 				String prd = mlpReq == null ? req.getParameter("prd")
 						: mlpReq.getParameter("prd");
@@ -144,14 +147,17 @@ public class ModifyAction implements UploadAction {
 				System.out.println("cParentId: " + cParantId);
 				System.out.println("name:" + name);
 				
-				if(cId != null) {
-					dao.ctUpdate(
-						Integer.parseInt(cId), cParantId, name);
+				if((cId != null && (cParantId == null || cParantId.equals("")
+					|| cParantId.equals("null")))
+				) {
+					dao.ctUpdate(Integer.parseInt(cId), null, name);
 				}
-				else {
-					dao.ctUpdate(
-							Integer.parseInt(cId), cParantId, name);
+				else if(cId == null || cId.equals("")) {
+					req.setAttribute("message", "카테고리를 찾을 수 없습니다.");
+					req.setAttribute("redUrl", "product?cmd=modify&type=ctg&ctg=view");
+					return "jsp/product/inform.jsp";
 				}
+				else dao.ctUpdate(Integer.parseInt(cId), cParantId, name);
 
 				// ajax 반환
 				return ajaxToJsonOk("product");
