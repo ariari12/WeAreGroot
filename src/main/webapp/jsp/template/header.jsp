@@ -53,7 +53,7 @@
 			<div class="navbar-links">
 				<div class="link-wrapper">
 					<div class="link-text">
-						<a href="/moran/index">홈</a>
+						<a href="/moran/main">홈</a>
 					</div>
 				</div>
 				<div class="link-wrapper">

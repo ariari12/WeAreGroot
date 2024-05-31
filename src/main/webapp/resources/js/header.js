@@ -21,5 +21,10 @@ $(function(){
 	$('.myBag').on('click', function(){
 		window.location.href = "/moran/cart?cmd=list";
 	})
+	$('.header-logo').on('click', function(){
+		
+		window.location.href = "/moran/main";
+	});
+	
 	
 })
