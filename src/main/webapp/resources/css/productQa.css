@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+.qa-form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.qa-form .qa-form-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.qa-form .qa-form-navMenu {
+    margin-bottom: 20px;
+}
+
+.qa-form .qa-form-navMenu ul>li{
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+	font-size: 24px;
+}
+
+
+.qa-form .qa-form-qaCard {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    height: 150px;
+}
+
+.qa-form .writerInfo {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.qa-form .qa-question {
+    display: flex;
+    align-items: center;
+}
+
+.qa-form .qa-question-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(0, 168, 0); /* 질문 텍스트 색상 */
+    margin-right: 10px;
+}
+
+.qa-form .qaContents {
+    font-size: 16px;
+    color: #333;
+}
+
+.qa-form .pagenation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.qa-form .btn-primary {
+    background-color: rgb(0, 168, 0); /* 버튼 배경색 */
+    color: #fff; /* 버튼 텍스트 색상 */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.qa-form .btn-primary:hover {
+    background-color: rgb(49, 231, 29); /* 버튼 호버 배경색 */
+}

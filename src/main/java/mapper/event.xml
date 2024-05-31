@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="kr.co.moran.web.dao.EventDAO">
+<mapper namespace="kr.co.moran.web.event">
 
 	<resultMap type="kr.co.moran.web.vo.EventVO" id="eventMap">
 		<result property="eId" column="e_id" />
@@ -55,5 +55,10 @@
 		FROM EVENT_IMG
 		WHERE e_id = #{eId}
 	</select>
+	
+	<insert id="kr.co.moran.web.event.insertEvent" parameterType="Map">
+		INSERT INTO EVENT ()
+	</insert>
+	
 
 </mapper>  

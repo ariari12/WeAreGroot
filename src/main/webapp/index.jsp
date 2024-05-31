@@ -814,12 +814,16 @@
   <div>
 
 </div>
-    <div class="div-wrapper">
-    
+    <div class="div-wrapper">       
       <div class="overlap-group">
-        <p class="text-wrapper">신규가입 최대 30% 할인 이벤트 진행 중!</p>
+        <p class="text-wrapper">신규가입 최대 30% 할인 이벤트 진행 중!</p>       
         <img class="group" src="resources/img/member/group-2.png" />
-        <div class="frame"><div class="div">회원가입 바로가기</div></div>
+        
+        <div class="frame">
+        	<a href="/moran/member?cmd=joinForm">
+        		<div class="div">회원가입 바로가기</div>
+        	</a>        	
+       </div>
       </div>
       <div class="did-you-know-wrapper">
         <p class="did-you-know">
