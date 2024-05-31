@@ -1,6 +1,6 @@
 package kr.co.moran.web.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import kr.co.moran.web.vo.member.MemberVO;
 import lombok.AllArgsConstructor;
