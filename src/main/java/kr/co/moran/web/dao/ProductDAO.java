@@ -343,15 +343,15 @@ public class ProductDAO {
 		// category
 //		dao.ctAdd(null, "test");
 		
-//		dao.ctUpdate(101, null, null);
+		dao.ctUpdate(101, null, "직립-1");
 		
 //		dao.selectAll().forEach(System.out::println);
 //		dao.ctSelectByParentId(0).forEach(System.out::println);
 		
 //		dao.ctDelete(108);
 		
-		dao.pdSelectBySave(0, 10).forEach(System.out::println);
-		System.out.println(dao.pdSaveCnt());
+//		dao.pdSelectBySave(0, 10).forEach(System.out::println);
+//		System.out.println(dao.pdSaveCnt());
 		
 		
 		//test quert

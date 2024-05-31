@@ -48,6 +48,7 @@ public class DeleteAction implements Action {
 
 	private String ctgDelete() {
 		String ctg = req.getParameter("ctg");
+		System.out.println("ctg: " + ctg);
 		switch (ctg == null ? "" : ctg) {
 			case "view": 
 				/*
@@ -71,15 +72,20 @@ public class DeleteAction implements Action {
 			case "del": // 카테고리 삭제
 				String cId = req.getParameter("cId");
 				String cParentId = req.getParameter("cParentId");
-				if(cParentId == null && cId == null) {
+				
+				System.out.println("cId: " + cId);
+				System.out.println("cParentId: " + cParentId);
+				
+				if((cParentId == null || cParentId.equals(""))
+						&& (cId == null || cId.equals(""))
+				) {
 					req.setAttribute("message", "존재하지 않는 카테고리입니다.");
 					req.setAttribute("redUrl", "product");
 					return "jsp/product/inform.jsp";
 				}
-				if(cId == null) {					
-					dao.ctDelete(Integer.parseInt(cParentId));
-				}
+				if(cId == null || cId.equals("")) dao.ctDelete(Integer.parseInt(cParentId));
 				else dao.ctDelete(Integer.parseInt(cId));
+				
 				return ajaxToJsonOk("product");
 				
 			default: return null;

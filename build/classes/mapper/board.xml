@@ -71,7 +71,7 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 2 AND b.b_is_maintain = 0
-		ORDER BY b.b_regdate DESC
+		ORDER BY b.b_id DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -124,7 +124,7 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 1 AND b.b_is_maintain = 0
-		ORDER BY b.b_regdate DESC
+		ORDER BY b.b_id DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	

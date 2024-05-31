@@ -27,6 +27,15 @@
 <link rel="stylesheet" href="resources/css/globals.css">
 
 <style>
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
+	.text-wrapper-26 a {
+		text-decoration: none;
+		color: #ffffff;
+	}
+
     .category-con {
         border: 3px solid rgb(173, 173, 173);
 	    width: 900px;
@@ -91,6 +100,8 @@
 
 <%
 	MemberVO member = (MemberVO)session.getAttribute("memberVO");
+	System.out.println(member);
+
 	if(member == null || member.getAdmintype() < 1) {
 		request.getRequestDispatcher("unauthorized.jsp").forward(request, response);
 	}
