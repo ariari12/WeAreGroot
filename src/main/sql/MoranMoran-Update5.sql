@@ -102,6 +102,7 @@ CREATE TABLE `MORANMORAN`.`PRODUCT` (
     `pd_quantity`         INT  NULL, -- 재고량
     `pd_wholesale`        INT  NULL, -- 상품 도매가
     `pd_dcrate`           INT  NULL, -- 상품 할인률
+    `pd_created_at`       DATE NULL, -- 상품 등록일
     `pd_is_maintain`      INT  NULL, -- 정보상태
     `pd_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`pd_id`),
@@ -151,13 +152,13 @@ CREATE TABLE `MORANMORAN`.`PRODUCT_QA` (
     `pqa_parent_id`        INT  NULL, -- 문의 부모 번호
     `m_id`                 INT  NULL, -- 회원번호
     `pd_id`                INT  NULL, -- 상품번호
-    `pqa_title`            VARCHAR(255) NULL, -- 제목
+--    `pqa_title`            VARCHAR(255) NULL, -- 제목
     `pqa_contents`         VARCHAR(255) NULL, -- 내용
     `pqa_regdate`          DATE NULL, -- 작성일
     `pqa_type`             INT  NULL, -- 문의 타입
     `cqa_id`               INT  NULL, -- 문의 구분 번호
     `pqa_is_maintain`      INT  NULL, -- 정보상태
-    `pqa_retention_period` DATE NULL, -- 정보보관기간    
+    `pqa_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`pqa_id`),
     FOREIGN KEY (`m_id`) REFERENCES `MORANMORAN`.`MEMBER` (`m_id`) ON DELETE CASCADE,
     FOREIGN KEY (`pd_id`) REFERENCES `MORANMORAN`.`PRODUCT` (`pd_id`) ON DELETE CASCADE,
@@ -180,6 +181,7 @@ CREATE TABLE `MORANMORAN`.`BOARD` (
     `b_regdate`          DATE NULL, -- 작성일
     `b_view_cnt`         INT  NULL, -- 조회수
     `b_like_cnt`         INT  NULL, -- 좋아요 수
+    `b_type`             INT  NULL,
     `b_is_maintain`      INT  NULL, -- 정보상태
     `b_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`b_id`),
@@ -231,6 +233,7 @@ CREATE TABLE `MORANMORAN`.`MEMBER_CART` (
     FOREIGN KEY (`m_id`) REFERENCES `MORANMORAN`.`MEMBER` (`m_id`) ON DELETE CASCADE,
     FOREIGN KEY (`pd_id`) REFERENCES `MORANMORAN`.`PRODUCT` (`pd_id`) ON DELETE CASCADE
 );
+
 -- 주문
 CREATE TABLE `MORANMORAN`.`ORDERS` (
 	`o_id`     INT  AUTO_INCREMENT, -- 주문번호
@@ -241,6 +244,7 @@ CREATE TABLE `MORANMORAN`.`ORDERS` (
 	`o_cnt`    INT  NULL,     -- 수량
 	`o_status` INT  NULL,      -- 주문상태
 	`o_memo`   VARCHAR(255)  NULL,  -- 주문메모
+    `o_uuid`   VARCHAR(100)  NOT NULL,
 	`o_name`   VARCHAR(100)  NOT NULL,  -- 이름
 	`o_phone`   VARCHAR(100)  NOT NULL,  -- 핸드폰번호
 	`o_zipcode`   VARCHAR(100)  NOT NULL,  -- 우편번호
@@ -266,7 +270,7 @@ CREATE TABLE `MORANMORAN`.`REVIEW` (
     `r_id`               INT  AUTO_INCREMENT, -- 리뷰 번호
     `m_id`               INT  NULL, -- 회원번호
     `o_id`              INT  NULL, -- 상품번호
-    `r_title`            VARCHAR(255) NULL, -- 제목
+--    `r_title`            VARCHAR(255) NULL, -- 제목
     `r_contents`         VARCHAR(255) NULL, -- 내용
     `r_regdate`          DATE NULL, -- 작성일자
     `r_score`            INT  NULL, -- 평점
