@@ -26,13 +26,13 @@
 				<c:choose>
 					<c:when test="${not empty sessionScope.memberVO}">
 						<div class="link-wrapper">
-							<div class="link-text">내정보</div>
+							<div class="link-text myInfo">마이페이지</div>
 						</div>
 						<div class="link-wrapper logout">
 							<div class="link-text">로그아웃</div>
 						</div>
 						<div class="link-wrapper">
-							<div class="link-text">장바구니</div>
+							<div class="link-text myBag">장바구니</div>
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -53,7 +53,7 @@
 			<div class="navbar-links">
 				<div class="link-wrapper">
 					<div class="link-text">
-						<a href="/moran/index">홈</a>
+						<a href="/moran/main">홈</a>
 					</div>
 				</div>
 				<div class="link-wrapper">
@@ -83,9 +83,11 @@
 					</div>
 				</div>
 			</div>
-			<input style="opacity: 1; margin-left: 1300px" size="30" class="search-bar search-placeholder" placeholder="상품 또는 식물 검색하기">
-			<div style="position: relative; left: -124px; top: 3px;" class="search-icon-wrapper">
-				<img class="search-icon" src="resources/img/union.svg" />
+			<div class="search-wrapper">
+				<input type="text" class="search-bar search-placeholder" placeholder="상품 또는 식물 검색하기">
+				<div class="search-icon-wrapper">
+					<img class="search-icon" src="resources/img/union.svg" />
+				</div>
 			</div>
 		</div>
 </body>

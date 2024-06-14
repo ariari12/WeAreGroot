@@ -1,0 +1,23 @@
+# version: '3'
+
+services:
+  mysql01:
+    image: mysql
+    networks:
+      - Moran-net
+    container_name: Moran-Mysql
+    volumes:
+      - dbfile:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tigerlion2401$
+      MYSQL_DATABASE: MORANMORAN
+      MYSQL_USER: scott
+      MYSQL_PASSWORD: tiger
+      TZ: Asia/Seoul
+    ports:
+    - "3306:3306"
+networks:
+  Moran-net:
+volumes:
+  dbfile:

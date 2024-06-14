@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.ZoneId"%>
 <%@page import="java.util.Date"%>
@@ -32,7 +31,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
-<script src="resources/js/product_detail.js?v=<%=System.currentTimeMillis() %>"></script>
+<!-- ?v=<%=System.currentTimeMillis() %>" -->
+<script src="resources/js/product_detail.js"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
 <link rel="stylesheet" href="resources/css/product_detail.css">
@@ -40,20 +40,19 @@
 <link rel="stylesheet" href="resources/css/globals.css">
 <link rel="stylesheet" href="resources/css/productQa.css">
 <style>
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
 	.text-wrapper-26 a {
 		text-decoration: none;
 		color: #ffffff;
 	}
-	
 	.div-wrapper .frame-23 a {
 		text-decoration: none;
 		color: #202020;
 	}
 	
-	a {
-		text-decoration: none;
-		color: #202020;
-	}
 
 	/* 상품 후기 */	
     .review-container {
@@ -191,7 +190,6 @@
 		</div>
 		
 		
-		
 		<%-- todo: 찜하기 추가할 것 --%>
 		<div id="keep-btn" style="z-index: 5; position: absolute; margin-top: 458px; margin-left: 1300px;">
 	        <img id="keep-img" style="height: 80px;" src="resources/img/product_detail/heart_gray.svg" />
@@ -237,8 +235,8 @@
 		<%-- 상품 수정 및 삭제 버튼 : 관리자 용 --%>
 		<c:if test="${admintype > 0}">
 			<div class="admin-btn">
-	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=${prdId}">상품정보 수정</a>
-	        	<a class="btn btn-danger" href="?cmd=delete&type=prd&prd=${prdId}">상품 내리기</a>
+	        	<a class="btn btn-warning" href="?cmd=modify&type=prd&prd=view&no=<%=v.getPId() %>">상품정보 수정</a>
+	        	<a class="btn btn-danger" href="<%="?cmd=delete&type=prd&prd=" + v.getPId() %>">상품 내리기</a>
 			</div>
 		</c:if>
 

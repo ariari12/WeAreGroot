@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="kr.co.moran.web.vo.member.MemberVO"%>
 <%@page import="java.util.Date"%>
 <%@page import="kr.co.moran.web.dao.ProductDAO"%>

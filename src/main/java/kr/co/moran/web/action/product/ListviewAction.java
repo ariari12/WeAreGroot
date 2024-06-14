@@ -51,6 +51,8 @@ public class ListviewAction implements Action {
 				prdlist = searchType(startNum, PAGE_QUANTITY, keyword); break;
 			case "save": 
 				prdlist = saveType(req, startNum, PAGE_QUANTITY); break;
+			case "sold-out": 
+				prdlist = soldOutType(req, startNum, PAGE_QUANTITY); break;
 			
 			default: prdlist = noneType(startNum, PAGE_QUANTITY);
 		}
@@ -64,13 +66,30 @@ public class ListviewAction implements Action {
 		
 		dao.closeSession(); // db session 종료
 		
-		if(type != null && type.equals("save")) {
+		if(type != null && 
+			(type.equals("save") || type.equals("sold-out"))
+		) {
 			return "jsp/product/savelist.jsp";
 		}
 		return "jsp/product/listView.jsp";
 	}
 	
 	
+	// 품절 목록 조회
+	private List<ProductVO> soldOutType(HttpServletRequest req, int start, int pageNum) {
+		MemberVO memberVO = (MemberVO)req.getSession().getAttribute("memberVO");
+		if(memberVO != null && memberVO.getAdmintype() > 0) {
+			// 전체 상품 종류 갯수 / 1페이지 당 상품 종류 수, 나머지가 1이상 이면 1페이지 증가
+			maxPage = (int) Math.ceil(dao.pdSoldOutCnt() / PAGE_QUANTITY);
+			List<ProductVO> prdList = dao.pdSelectBySoldOut(start, pageNum);
+			hotPIds = null;
+			return prdList;
+		}
+		
+		return null;
+	}
+
+
 	// 보관처리된 상품 리시트 조회 *관리자 용*
 	private List<ProductVO> saveType(HttpServletRequest req, int start, int pageNum) {
 		MemberVO memberVO = (MemberVO)req.getSession().getAttribute("memberVO");

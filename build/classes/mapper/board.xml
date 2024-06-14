@@ -33,7 +33,7 @@
 		JOIN BOARD b ON c.b_id = b.b_id
 		GROUP BY c.b_id
 	</select>
-
+	
 	<!-- 특정 게시글 댓글 몇개 있는지 구하기 -->
 	<select id="SelectCountAllCommentBybId" parameterType="int" resultType="hashmap">
 		SELECT
@@ -71,7 +71,7 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 2 AND b.b_is_maintain = 0
-		ORDER BY b.b_regdate
+		ORDER BY b.b_id DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -124,7 +124,7 @@
 		LEFT JOIN BOARD_IMG bi ON bi.b_id = b.b_id
 		JOIN MEMBER m ON b.m_id = m.m_id
 		WHERE b.b_type = 1 AND b.b_is_maintain = 0
-		ORDER BY b.b_regdate DESC
+		ORDER BY b.b_id DESC
 		LIMIT #{limit} OFFSET #{offset}
 	</select>
 	
@@ -221,6 +221,7 @@
 	</update>
 	
 	<!-- 좋아요 버튼 누를 때 테이블 값 추가 b_id나 c_id와 물려야됨 내가 좋아요 누른 글 보기는 조인 두번 해야 함-->
+	
 	<!-- 게시글 좋아요 추가-->
 	<insert id="InsertBoardLikeBybId" parameterType="kr.co.moran.web.vo.LikeVO">
 		INSERT INTO LIKES(m_id, b_id, l_date)

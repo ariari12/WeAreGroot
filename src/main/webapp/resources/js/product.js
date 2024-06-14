@@ -252,8 +252,6 @@ let subCtgSelects = (list) => {
 		// console.log(item);
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
-    options += "<option value='null'>선택 안함</option>";
-    
     // console.log(options);
     $("select#subCtg").html(options);
 }
@@ -412,7 +410,7 @@ let ctgOptionAdd = (list, selector) => {
         options += "<option value='"+ item.cId +"'>"+ item.name +"</option>";
     }
     if(selector == "select#sub-ctg") {
-		options += "<option value='null'>선택 안함</option>";
+		options += "<option value=''>선택 안함</option>";
     }
     $(selector).html(options);
 }

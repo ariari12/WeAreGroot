@@ -27,6 +27,21 @@
 <link rel="stylesheet" href="resources/css/style.css">
 <link rel="stylesheet" href="resources/css/globals.css">
 
+<style>
+	a {
+		text-decoration: none;
+		color: #202020;
+	}
+	.text-wrapper-26 a {
+		text-decoration: none;
+		color: #ffffff;
+	}
+	.div-wrapper .frame-23 a {
+		text-decoration: none;
+		color: #202020;
+	}
+</style>
+
 </head>
 <body>
 <%
@@ -59,7 +74,7 @@
 	                if(data.ctgList == null) {
 	                	console.log("ctgList is null");
 	                	$("select#subCtg")
-	                		.html("<option value='null'>카테고리 없음</option>");
+	                		.html("<option value=''>카테고리 없음</option>");
 	                }
 	                else {
 	                	subCtgSelects(data.ctgList);
@@ -78,7 +93,7 @@
 
 	        let cId = $("select#subCtg").val();
 	        // subCtg 값이 null이면 masterCtg의 값을 사용
-	        if (cId === null || cId === "null") {
+	        if (cId === null || cId === "null" || cId == "") {
 	            cId = $("select#masterCtg").val();
 	        }
 	        let cParentId = $("select#cParentId option:selected").val();

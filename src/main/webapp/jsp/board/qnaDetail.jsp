@@ -1098,6 +1098,19 @@ a:visited {
 					<div class="text-wrapper-17">A.</div>
 					<div class="text-wrapper-18">${boardVO.get('count') }개의답변</div>
 				</div>
+				        <c:choose>
+        <c:when test="${not empty loginId }">
+        <form action="comment" method="get">
+	        <input type="hidden" name="cmd" value="commentWrite">
+	        <input type="hidden" name="bId" value="${boardVO.get('bId')}">
+	        <input type="hidden" name="mId" value="${loginId}">
+	        <input type="hidden" name="type" value="${boardVO.get('type')}">
+	        <input type="hidden" name="count" value="${boardVO.get('count') }">
+	        <textarea name="contents" id="contents" cols="150" rows="10"></textarea>
+	        <div class="text-wrapper-22"><button type="submit">댓글작성</button></div>
+    	</form>
+    	</c:when>        
+        </c:choose>
 				<div class="frame-13">
 					<svg width="1170" height="1" viewBox="0 0 1170 1" fill="none"
 						xmlns="http://www.w3.org/2000/svg">

@@ -22,6 +22,7 @@ public class CommentWriteAction implements Action{
 		int bId = Integer.parseInt(req.getParameter("bId"));
 		int mId = memberVO.getMId();
 		int type = Integer.parseInt(req.getParameter("type"));
+		int count = Integer.parseInt(req.getParameter("count"));
 		String contents = req.getParameter("contents");
 		
 		vo.setBId(bId);
@@ -30,10 +31,11 @@ public class CommentWriteAction implements Action{
 	
 		
 		dao.insertComment(vo);
+		count++;
 		if(type == 1) {
-			return "/board?cmd=qnaDetail&bId=" + bId;
+			return "/board?cmd=qnaDetail&bId=" + bId + "&count=" + count;
 		}else {
-			return "/board?cmd=khDetail&bId=" + bId;
+			return "/board?cmd=khDetail&bId=" + bId + "&count=" + count;
 		}
 		
 	}

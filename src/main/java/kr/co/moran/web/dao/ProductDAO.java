@@ -85,6 +85,13 @@ public class ProductDAO {
 		int cnt = session.selectOne("kr.co.moran.product.pdSaveCnt");
 		return cnt;
 	}
+
+	// 품절목록 갯수
+	public int pdSoldOutCnt() {
+		openSession();
+		int cnt = session.selectOne("kr.co.moran.product.pdSoldOutCnt");
+		return cnt;
+	}
 	
 	
 	// 상품 리스트
@@ -194,6 +201,18 @@ public class ProductDAO {
         List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySave", map);
 		return vos;
 	}
+	
+	// 품절목록 조회
+	public List<ProductVO> pdSelectBySoldOut(int start, int pageNum) {
+		openSession();
+		Map<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("pageNum", pageNum);
+		
+        List<ProductVO> vos = session.selectList("kr.co.moran.product.pdSelectBySoldOut", map);
+		return vos;
+	}
+	
 	
 	// update
 	// 삭제기간 설정
@@ -324,15 +343,15 @@ public class ProductDAO {
 		// category
 //		dao.ctAdd(null, "test");
 		
-//		dao.ctUpdate(101, null, null);
+		dao.ctUpdate(101, null, "직립-1");
 		
 //		dao.selectAll().forEach(System.out::println);
 //		dao.ctSelectByParentId(0).forEach(System.out::println);
 		
 //		dao.ctDelete(108);
 		
-		dao.pdSelectBySave(0, 10).forEach(System.out::println);
-		System.out.println(dao.pdSaveCnt());
+//		dao.pdSelectBySave(0, 10).forEach(System.out::println);
+//		System.out.println(dao.pdSaveCnt());
 		
 		
 		//test quert

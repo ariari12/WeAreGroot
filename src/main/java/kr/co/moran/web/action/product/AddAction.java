@@ -130,7 +130,7 @@ public class AddAction implements UploadAction {
 				// 최상위 카테고리가 없는 경우
 				if(ctgList.size() < 1) {
 					System.out.println("카테고리 테이블 레코드가 없습니다.");
-					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.\n카테고리 등록으로 이동합니다.");
+					req.setAttribute("message", "등록된 최상위 카테고리가 없습니다.\\n카테고리 등록으로 이동합니다.");
 					return "jsp/product/createCategory.jsp";
 				}
 				req.setAttribute("masterList", ctgList);
