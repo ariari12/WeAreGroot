@@ -31,7 +31,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="resources/js/product.js"></script>
-<!-- ?v=<%=System.currentTimeMillis() %>" -->
 <script src="resources/js/product_detail.js"></script>
 
 <link rel="stylesheet" href="resources/css/product.css">
