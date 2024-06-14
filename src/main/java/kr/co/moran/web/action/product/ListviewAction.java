@@ -13,7 +13,6 @@ import kr.co.moran.web.action.Action;
 import kr.co.moran.web.dao.ProductDAO;
 import kr.co.moran.web.vo.ProductVO;
 import kr.co.moran.web.vo.member.MemberVO;
-import oracle.net.aso.m;
 
 public class ListviewAction implements Action {
 	private static final int PAGE_QUANTITY = 12;

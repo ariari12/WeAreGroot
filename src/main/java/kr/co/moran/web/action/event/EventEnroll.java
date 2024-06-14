@@ -32,8 +32,8 @@ public class EventEnroll implements Action{
 			
 			evo.setTitle(title);
 			evo.setContents(contetns);
-			evo.setStart(start);
-			evo.setEnd(end);
+			evo.setStart(new java.sql.Date(start.getTime()));
+			evo.setEnd(new java.sql.Date(end.getTime()));
 			evo.setMemberVO((MemberVO)session.getAttribute("memberVO"));
 			EventDAO edao = new EventDAO();
 			
