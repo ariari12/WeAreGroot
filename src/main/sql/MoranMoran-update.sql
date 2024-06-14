@@ -39,14 +39,14 @@ DROP TABLE IF EXISTS `MORANMORAN`.`PRODUCT` RESTRICT;
 DROP TABLE IF EXISTS `MORANMORAN`.`CATEGORY` RESTRICT;
 
 -- 배송지
-DROP TABLE IF EXISTS `MORANMORAN`.`ADDRESS` RESTRICT;
+DROP TABLE IF EXISTS `MORANMORAN`.`ADDRES` RESTRICT;
 -- 탈퇴사유
 DROP TABLE IF EXISTS `MORANMORAN`.`LEAVE` RESTRICT;
 -- 회원
 DROP TABLE IF EXISTS `MORANMORAN`.`MEMBER` RESTRICT;
 
 -- 내 스키마
-CREATE SCHEMA `MORANMORAN`;
+-- CREATE SCHEMA `MORANMORAN`;
 
 -- 회원
 CREATE TABLE `MORANMORAN`.`MEMBER` (
@@ -63,11 +63,10 @@ CREATE TABLE `MORANMORAN`.`MEMBER` (
     `m_is_maintain`      INT  NULL, -- 정보상태
     `m_retention_period` DATE NULL, -- 정보보관기간
     `m_birth` DATE NULL, -- 생일
-    `m_gender` VARCHAR(10) NULL, -- 성별
     PRIMARY KEY (`m_id`)
 );
 -- 배송지
-CREATE TABLE `MORANMORAN`.`ADDRESS` (
+CREATE TABLE `MORANMORAN`.`ADDRES` (
     `a_id`      INT  AUTO_INCREMENT, -- 배송지 번호
     `m_id`      INT  NULL, -- 회원번호
     `a_zipcode` VARCHAR(255) NULL, -- 우편번호
@@ -102,6 +101,7 @@ CREATE TABLE `MORANMORAN`.`PRODUCT` (
     `pd_quantity`         INT  NULL, -- 재고량
     `pd_wholesale`        INT  NULL, -- 상품 도매가
     `pd_dcrate`           INT  NULL, -- 상품 할인률
+    `pd_created_at`         DATE NULL, -- 상품 등록일
     `pd_is_maintain`      INT  NULL, -- 정보상태
     `pd_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`pd_id`),
@@ -180,6 +180,7 @@ CREATE TABLE `MORANMORAN`.`BOARD` (
     `b_regdate`          DATE NULL, -- 작성일
     `b_view_cnt`         INT  NULL, -- 조회수
     `b_like_cnt`         INT  NULL, -- 좋아요 수
+    `b_type`             INT  NULL, -- 
     `b_is_maintain`      INT  NULL, -- 정보상태
     `b_retention_period` DATE NULL, -- 정보보관기간
     PRIMARY KEY (`b_id`),
